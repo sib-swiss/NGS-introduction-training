@@ -170,6 +170,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../precourse/" class="md-nav__link">
+      Precourse preparations
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../../course_schedule/" class="md-nav__link">
       Course schedule
     </a>
@@ -183,14 +195,14 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
     
-    <label class="md-nav__link" for="nav-3">
+    <label class="md-nav__link" for="nav-4">
       Day 1
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Day 1" data-md-level="1">
-      <label class="md-nav__title" for="nav-3">
+      <label class="md-nav__title" for="nav-4">
         <span class="md-nav__icon md-icon"></span>
         Day 1
       </label>
@@ -271,14 +283,14 @@
 
   <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
     
-    <label class="md-nav__link" for="nav-4">
+    <label class="md-nav__link" for="nav-5">
       Day 2
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Day 2" data-md-level="1">
-      <label class="md-nav__title" for="nav-4">
+      <label class="md-nav__title" for="nav-5">
         <span class="md-nav__icon md-icon"></span>
         Day 2
       </label>
@@ -514,7 +526,7 @@
 <p>There are two different projects you can choose from:</p>
 <ol>
 <li>Evaluate two aligners to align short-read RNA-seq data</li>
-<li>Evaluate two aligners to align long-read genomic data</li>
+<li>Perform a quality control and align long-read RNA-seq data</li>
 </ol>
 <h2 id="roles-organisation">Roles &amp; organisation</h2>
 <p>For both projects, there are three important components:</p>
@@ -552,17 +564,17 @@ hisat2 <span class="se">\</span>
 &gt; &lt;alignment_file.bam&gt;
 </code></pre></div>
 </details>
-<details class="hint"><summary>Hint</summary><p>Have a look at IGV on a particular gene, e.g. Nbr1</p>
+<details class="hint"><summary>Spliced alignments</summary><p>Have a look at IGV on a particular gene, e.g. Nbr1</p>
 </details>
 <h3 id="project-2-long-read-genome-sequencing">Project 2: Long-read genome sequencing</h3>
-<p>https://github.com/Magdoll/cDNA_Cupcake/wiki/Best-practice-for-aligning-Iso-Seq-to-reference-genome:-minimap2,-deSALT,-GMAP,-STAR,-BLAT#refstar
-https://www.ncbi.nlm.nih.gov/sra/?term=SRR5286960</p>
-<p>compare hisat2 and minimap2</p>
+<p>https://github.com/Magdoll/cDNA_Cupcake/wiki/Best-practice-for-aligning-Iso-Seq-to-reference-genome:-minimap2,-deSALT,-GMAP,-STAR,-BLAT#refstar</p>
+<p>https://www.ncbi.nlm.nih.gov/sra/?term=SRR5286960</p>
 <ul>
+<li>Do a quality control with <code>fastqc</code></li>
 <li>Have a look at the quality report. What are the average read lengths?</li>
 <li>What is the average read quality? What kind of accuracy would you expect?</li>
-<li>Is there a difference in computational speed?</li>
-<li>What are the differences in alignment rates?</li>
+<li>Do also a QC with <code>NanoPlot</code>. Spot any differences?</li>
+<li>Check out the options <code>-x</code> and <code>-G</code> of <code>minimap2</code>. Are the defaults appropriate?</li>
 </ul>
                 
               
