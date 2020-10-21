@@ -1,5 +1,7 @@
 ## Material
 
+[:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/file_types.pdf){: .md-button }
+
 File definition websites:
 
 * [FASTQ (wikipedia)](https://en.wikipedia.org/wiki/FASTQ_format)

@@ -1,5 +1,7 @@
 ## Material
 
+[:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/read_alignment.pdf){: .md-button }
+
 * Unix command line [E-utilities documentation](https://www.ncbi.nlm.nih.gov/books/NBK179288/)
 * `bowtie2` [manual](http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#command-line)
 
