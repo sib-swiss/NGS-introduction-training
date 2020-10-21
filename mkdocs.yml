@@ -1,6 +1,7 @@
 site_name: NGS - Quality control, Alignment, Visualisation
 nav:
     - Home: index.md
+    - Precourse preparations: precourse.md
     - Course schedule: course_schedule.md
     - Day 1:
       - Introduction: day1/intro.md

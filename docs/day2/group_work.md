@@ -8,7 +8,7 @@ The last part of this course will be project-based-learning. This means that you
 There are two different projects you can choose from:
 
 1. Evaluate two aligners to align short-read RNA-seq data
-2. Evaluate two aligners to align long-read genomic data
+2. Perform a quality control and align long-read RNA-seq data
 
 ## Roles & organisation
 
@@ -55,20 +55,19 @@ Compare the two aligners. In particular, you could try answering the following q
     | samtools sort \
     | samtools view -bh \
     > <alignment_file.bam>
-
     ```
 
-??? hint
+??? hint "Spliced alignments"
     Have a look at IGV on a particular gene, e.g. Nbr1
 
 ### Project 2: Long-read genome sequencing
 
 https://github.com/Magdoll/cDNA_Cupcake/wiki/Best-practice-for-aligning-Iso-Seq-to-reference-genome:-minimap2,-deSALT,-GMAP,-STAR,-BLAT#refstar
+
 https://www.ncbi.nlm.nih.gov/sra/?term=SRR5286960
 
-compare hisat2 and minimap2
-
+* Do a quality control with `fastqc`
 * Have a look at the quality report. What are the average read lengths?
 * What is the average read quality? What kind of accuracy would you expect?
-* Is there a difference in computational speed?
-* What are the differences in alignment rates?
+* Do also a QC with `NanoPlot`. Spot any differences?
+* Check out the options `-x` and `-G` of `minimap2`. Are the defaults appropriate?

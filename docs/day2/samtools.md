@@ -84,7 +84,7 @@ Filtering against unmapped reads (leaving only mapped reads) with `samtools view
 samtools view -bh -F 0x4 SRR519926.sorted.bam > SRR519926.sorted.mapped.bam
 ```
 
-**Exercise:** Write a command that outputs only the unmapped reads (so the opposite of the example). How many reads are in there? Is that the same to what we expect based on the output of `samtools flagstat`?
+**Exercise:** Write a command that outputs only the unmapped reads (so the opposite of the example). How many reads are in there? Is that the same as what we expect based on the output of `samtools flagstat`?
 
 !!! tip "Tip"
     Check out the `-f` and `-c` options of `samtools view`
@@ -142,7 +142,7 @@ my_alignment_command \
 !!! note "The use of `-`"
     In the modern versions of samtools, the use of `-` is not needed for most cases, so without an input file it reads from stdin. However, if you're not sure, it's better to be safe than sorry.
 
-**Exercise:** Write a script that maps the reads with bowtie2, sorts them, takes only the mapped reads, and outputs them as a BAM file with a header.
+**Exercise:** Write a script that maps the reads with bowtie2 (see chapter 2 of [read alignment](../day1/read_alignment.md)), sorts them, takes only the mapped reads, and outputs them as a BAM file with a header.
 
 ??? done "Answer"
     ```

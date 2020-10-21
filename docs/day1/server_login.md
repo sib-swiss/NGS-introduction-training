@@ -1,21 +1,5 @@
 ## Material
 
-### Setup
-
-We will be mainly working on an Amazon Web Services ([AWS](https://aws.amazon.com/]))  Elastic Cloud (EC2) server. Our Ubuntu server behaves like a 'normal' remote server, and can be approached through `ssh` with a username, key and IP address. All participants will be granted access to a personal home directory.
-
-Before the course, make sure you can comfortably work on a remote server. This means that you can approach it through the shell, modify scripts and transfer files:
-
-=== "mac OS/Linux"
-    * SSH and scripting: [Atom](https://atom.io/) with packages like: `platform-ide-terminal` and `remote-edit-ni`
-    * Transferring files: [FileZilla](https://filezilla-project.org/)
-    * [Integrative Genomics Viewer (IGV)](http://software.broadinstitute.org/software/igv/)
-
-=== "Windows"
-    * SSH and scripting: [MobaXterm](https://mobaxterm.mobatek.net/ "get MobaXterm") and [Notepad++](https://notepad-plus-plus.org/downloads/)
-    * Transferring files: [FileZilla](https://filezilla-project.org/)
-    * [Integrative Genomics Viewer (IGV)](http://software.broadinstitute.org/software/igv/)
-
 ### Working on the cloud server
 
 !!! warning "Great power comes with great responsibility"
@@ -44,10 +28,10 @@ ssh -i path/to/key/key_[USERNAME].pem [USERNAME]@[AWS_IP]
 
 To directly initiate and modify scripts on the remote server you can use plugins:
 
-* Notepadd++: NppFTP
-* Atom: remote-edit-ni
+* Notepadd++: `NppFTP`
+* Atom: `remote-edit-ni`
 
-With the following details:
+Setup the connection to the server with the following details:
 
 * protocol: sftp
 * username: your username
@@ -104,16 +88,14 @@ In `/home` you'll find a directory for all users with an account. Write all user
 
 ??? done "Answer"
     ```sh
-    cd /home
-    ls > ~/usernames.txt
+    ls /home > ~/usernames.txt
     ```
 
 The command `wc -l` counts the number of lines, and can read from stdin. Make a one-liner with a pipe `|` symbol to find out how many users have an account on this server.
 
 ??? done "Answer"
     ```sh
-    cd /home
-    ls | wc -l
+    ls /home | wc -l
     ```
 
 #### Variables
@@ -150,6 +132,9 @@ Another, more basic, program to prevent the 'hangup signal' is `nohup`. Use it l
 ```sh
 nohup [YOUR COMMAND] &
 ```
+
+!!! note
+    Don't forget the `&` after the command. This symbol let's the process run in the background.
 
 So, for running e.g. a shell script this would be:
 

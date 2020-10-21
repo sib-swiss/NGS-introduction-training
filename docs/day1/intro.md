@@ -1,5 +1,5 @@
 ## Expectations
 
-Use the poll at the #poll channel to let us know your expectations of this course. 
+>:fontawesome-regular-clock: 5 minutes
 
-## Get to know each other
+Use the poll at the #poll channel to let us know your expectations of this course.
