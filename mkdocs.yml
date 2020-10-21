@@ -20,8 +20,8 @@ theme:
   icon:
     logo: fontawesome/solid/dna
   favicon: assets/images/dna-svgrepo-com.svg
-  palette:
-    primary: teal
+  # palette:
+  #   primary: teal
 
 markdown_extensions:
   - abbr
@@ -41,3 +41,6 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
+
+extra_css:
+  - stylesheets/extra.css

@@ -1,5 +1,9 @@
 # NGS - Quality control, Alignment, Visualisation
 
+<figure>
+  <img src="../../assets/images/SIB_LogoQ_GBv.svg" width="150"/>
+</figure>
+
 ## Learning outcomes
 
 After this course, you will be able to:
