@@ -1,1 +1,1 @@
-# NGS-introduction-training-
+# NGS-introduction-training
