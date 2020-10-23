@@ -1,6 +1,9 @@
 
 The last part of this course will consist of project-based-learning. This means that you will work in groups on a single question. We will split up into groups of five people.
 
+!!! note "If online"
+    If the course takes place online, we will use break-out rooms to communicate within groups. Please stay in the break-out room during the day, also if you are working individually. 
+
 ## Roles & organisation
 
 Project based learning is about learning by doing, but also about *peer instruction*. This means that you will be both a learner and a teacher. There will be differences in levels among participants, but because of that, some will learn efficiently from people that have just learned, and others will teach and increase their understanding.
@@ -123,6 +126,7 @@ It is Oxford Nanopore Technology sequencing data of amplicons of the gene CACNA1
     Generate (and run) a shell script to run the modules `flair.py correct`, `flair.py collapse` and `flair.py quantify`. To do this, carefully follow the manual at https://github.com/BrooksLabUCSC/flair. Structure and document your script(s), so you can easily re-run the analysis.
 
     Files you will need are:
+
     * Reference genome (chromosome 12 only): `/data/references/GRCh38.p13.chr12.fa`
     * GTF: `/data/references/Homo_sapiens.GRCh38.100.gtf`
     * Reads manifest: `/data/reads/lrrnaseq/batch_combined/reads_manifest.tsv`
