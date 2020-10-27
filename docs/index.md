@@ -3,10 +3,9 @@
 ## Material
 
 * This website
-* [Zoom meeting](myzoommeeting.com)
+* Zoom meeting (through mail)
+* Google doc (through mail)
 * [slack channel](https://join.slack.com/t/ngsqualitycon-c8g5456/shared_invite/zt-hwth7xrb-vYpga8sUye_7Ij9x6OkyKA)
-* [Google doc](docs.google)
-
 
 ## Learning outcomes
 
