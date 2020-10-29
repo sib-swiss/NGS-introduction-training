@@ -21,8 +21,11 @@ theme:
   icon:
     logo: fontawesome/solid/dna
   favicon: assets/images/dna-svgrepo-com.svg
-  # palette:
-  #   primary: teal
+
+# Repository
+repo_name: sib-swiss/NGS-introduction-training
+repo_url: https://github.com/sib-swiss/NGS-introduction-training
+edit_uri: ""
 
 markdown_extensions:
   - abbr
