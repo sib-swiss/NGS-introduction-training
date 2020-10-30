@@ -558,7 +558,7 @@
 </blockquote>
 <p><strong>Exercise:</strong> Check out the statistics of the E. coli alignment by using <code>samtools flagstat</code>. Find the documentation <a href="http://www.htslib.org/doc/samtools-flagstat.html">here</a>. Anything that draws your attention?</p>
 <details class="done"><summary>Answer</summary><p>Code:
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/ecoli/mapping_output/
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/ecoli/alignment_output/
 samtools flagstat SRR519926.sam
 </code></pre></div></p>
 <p>resulting in:</p>
@@ -593,7 +593,7 @@ samtools flagstat SRR519926.sam
 </div>
 <details class="done"><summary>Answer</summary><p><div class="highlight"><pre><span></span><code>samtools view -bh SRR519926.sam &gt; SRR519926.bam
 </code></pre></div>
-By using <code>ls -lh</code>, you can find out that <code>SRR519926.sam</code> has a size of 223 Mb, while <code>SRR519926.bam</code> is only 66 Mb.  </p>
+By using <code>ls -lh</code>, you can find out that <code>SRR519926.sam</code> has a size of 223 Mb, while <code>SRR519926.bam</code> is only 67 Mb.  </p>
 </details>
 <p>To look up specific alignments, it is convenient to have your alignment file indexed. An indexing can be compared to a kind of &lsquo;phonebook&rsquo; of your sequence alignment file. Indexing can be done with <code>samtools</code> as well, but it first needs to be sorted on coordinate (i.e. the alignment location). You can do it like this:</p>
 <div class="highlight"><pre><span></span><code>samtools sort SRR519926.bam &gt; SRR519926.sorted.bam
@@ -621,7 +621,7 @@ samtools index SRR519926.sorted.bam
 <p>Counting like this:
 <div class="highlight"><pre><span></span><code>samtools view -c SRR519926.sorted.unmapped.bam
 </code></pre></div>
-This corresponds to the output of <code>samtools flagstat</code> (529562 - 526159 = 3403)</p>
+This should correspond to the output of <code>samtools flagstat</code> (529562 - 526159 = 3403)</p>
 </details>
 <p><code>samtools view</code> also enables you to filter alignments in a specific region. This can be convenient if you don&rsquo;t want to work with huge alignment files and if you&rsquo;re only interested in alignments in a particular region. Region filtering only works for sorted and indexed alignment files.</p>
 <p><strong>Exercise:</strong> Filter our sorted and indexed BAM file for the region between 2000 and 2500 kb, and output it as a BAM file with a header.</p>
@@ -636,7 +636,8 @@ grep <span class="s2">&quot;&gt;&quot;</span> ecoli-strK12-MG1655.fasta
 </code></pre></div>
 <p>The part after the first space in the title is cut off for the alignment reference. So the code for specifying a region would be: <code>U00096.3:START-END</code></p>
 </div>
-<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code>samtools view -bh SRR519926.sorted.bam U00096.3:2000000-2500000 &gt; SRR519926.sorted.region.bam
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code>cd ~/ecoli/alignment_output
+samtools view -bh SRR519926.sorted.bam U00096.3:2000000-2500000 &gt; SRR519926.sorted.region.bam
 </code></pre></div>
 </details>
 <h3 id="4-redirection">4. Redirection</h3>
@@ -656,9 +657,9 @@ grep <span class="s2">&quot;&gt;&quot;</span> ecoli-strK12-MG1655.fasta
 <p><strong>Exercise:</strong> Write a script that maps the reads with bowtie2 (see chapter 2 of <a href="../../day1/read_alignment/">read alignment</a>), sorts them, takes only the mapped reads, and outputs them as a BAM file with a header.</p>
 <details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code>##!/usr/bin/env bash
 
-TRIMMED_DIR=/home/training/ecoli/trimmed_data
-REFERENCE_DIR=/home/training/ecoli/ref_genome/
-MAPPED_DIR=/home/training/ecoli/mapping_output
+TRIMMED_DIR=~/ecoli/trimmed_data
+REFERENCE_DIR=~/ecoli/ref_genome
+ALIGNED_DIR=~/ecoli/alignment_output
 
 bowtie2 \
 -x $REFERENCE_DIR/ecoli-strK12-MG1655.fasta \
@@ -666,7 +667,7 @@ bowtie2 \
 -2 $TRIMMED_DIR/paired_trimmed_SRR519926_2.fastq \
 | samtools sort - \
 | samtools view -F 0x4 -bh - \
-&gt; $MAPPED_DIR/SRR519926.sorted.mapped.frompipe.bam
+&gt; $ALIGNED_DIR/SRR519926.sorted.mapped.frompipe.bam
 </code></pre></div>
 </details>
                 
