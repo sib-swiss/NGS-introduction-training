@@ -13,7 +13,7 @@
 ??? done "Answer"
     Code:
     ```sh
-    cd ~/ecoli/mapping_output/
+    cd ~/ecoli/alignment_output/
     samtools flagstat SRR519926.sam
     ```
 
@@ -58,7 +58,7 @@ The command `samtools view` is very versatile. It takes an alignment file and wr
     ```sh
     samtools view -bh SRR519926.sam > SRR519926.bam
     ```
-    By using `ls -lh`, you can find out that `SRR519926.sam` has a size of 223 Mb, while `SRR519926.bam` is only 66 Mb.  
+    By using `ls -lh`, you can find out that `SRR519926.sam` has a size of 223 Mb, while `SRR519926.bam` is only 67 Mb.  
 
 To look up specific alignments, it is convenient to have your alignment file indexed. An indexing can be compared to a kind of 'phonebook' of your sequence alignment file. Indexing can be done with `samtools` as well, but it first needs to be sorted on coordinate (i.e. the alignment location). You can do it like this:
 
@@ -99,7 +99,7 @@ samtools view -bh -F 0x4 SRR519926.sorted.bam > SRR519926.sorted.mapped.bam
     ```sh
     samtools view -c SRR519926.sorted.unmapped.bam
     ```
-    This corresponds to the output of `samtools flagstat` (529562 - 526159 = 3403)
+    This should correspond to the output of `samtools flagstat` (529562 - 526159 = 3403)
 
 `samtools view` also enables you to filter alignments in a specific region. This can be convenient if you don't want to work with huge alignment files and if you're only interested in alignments in a particular region. Region filtering only works for sorted and indexed alignment files.
 
@@ -123,6 +123,7 @@ samtools view -bh -F 0x4 SRR519926.sorted.bam > SRR519926.sorted.mapped.bam
 
 ??? done "Answer"
     ```
+    cd ~/ecoli/alignment_output
     samtools view -bh SRR519926.sorted.bam U00096.3:2000000-2500000 > SRR519926.sorted.region.bam
     ```
 
@@ -148,9 +149,9 @@ my_alignment_command \
     ```
     ##!/usr/bin/env bash
 
-    TRIMMED_DIR=/home/training/ecoli/trimmed_data
-    REFERENCE_DIR=/home/training/ecoli/ref_genome/
-    MAPPED_DIR=/home/training/ecoli/mapping_output
+    TRIMMED_DIR=~/ecoli/trimmed_data
+    REFERENCE_DIR=~/ecoli/ref_genome
+    ALIGNED_DIR=~/ecoli/alignment_output
 
     bowtie2 \
     -x $REFERENCE_DIR/ecoli-strK12-MG1655.fasta \
@@ -158,5 +159,5 @@ my_alignment_command \
     -2 $TRIMMED_DIR/paired_trimmed_SRR519926_2.fastq \
     | samtools sort - \
     | samtools view -F 0x4 -bh - \
-    > $MAPPED_DIR/SRR519926.sorted.mapped.frompipe.bam
+    > $ALIGNED_DIR/SRR519926.sorted.mapped.frompipe.bam
     ```

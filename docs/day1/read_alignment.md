@@ -16,7 +16,7 @@
 Retrieve the reference sequence using `esearch` and `efetch`:
 
 ```sh
-REFERENCE_DIR=/home/training/ecoli/ref_genome/
+REFERENCE_DIR=~/ecoli/ref_genome/
 
 mkdir $REFERENCE_DIR
 cd $REFERENCE_DIR
@@ -54,15 +54,17 @@ esearch -db nuccore -query 'U00096' \
 ```sh
 ##!/usr/bin/env bash
 
-TRIMMED_DIR=/home/training/ecoli/trimmed_data
-REFERENCE_DIR=/home/training/ecoli/ref_genome/
-MAPPED_DIR=/home/training/ecoli/mapping_output
+TRIMMED_DIR=~/ecoli/trimmed_data
+REFERENCE_DIR=~/ecoli/ref_genome/
+ALIGNED_DIR=~/ecoli/alignment_output
 
-mkdir $MAPPED_DIR
+mkdir $ALIGNED_DIR
 
 bowtie2 \
 -x $REFERENCE_DIR/ecoli-strK12-MG1655.fasta \
 -1 $TRIMMED_DIR/paired_trimmed_SRR519926_1.fastq \
 -2 $TRIMMED_DIR/paired_trimmed_SRR519926_2.fastq \
-> $MAPPED_DIR/SRR519926.sam
+> $ALIGNED_DIR/SRR519926.sam
 ```
+
+We'll go deeper into alignment statistics tomorrow, but `bowtie2` writes already some statistics to stdout. General alignment rates seem okay, but there are quite some non-concordant alignments. That doesn't sound good. Check out the explanation about concordance at the [bowtie2 manual](http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#concordant-pairs-match-pair-expectations-discordant-pairs-dont). Can you guess what the reason could be?

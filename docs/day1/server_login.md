@@ -2,13 +2,33 @@
 
 ### Working on the cloud server
 
+In this part we will set up your computer to work on the remote AWS server. You have received an e-mail shortly before the workshop with a key, username and IP address to login on a cloud server. Before you do this part, you should have installed FileZilla, Atom if you're on Linux/Mac OS and MobaXterm if you're on Windows.
+
 !!! warning "Great power comes with great responsibility"
     The cloud server is a temporary instance for this workshop only. Although the computational resources should be more than enough, **it's a basic Ubuntu server, and there are no hard limits on memory or CPU usage.**
     Take therefore into account that great power comes with great responsibility. Overloading it can result in a reboot, cancelling all running calculations.
 
-### Visualisation of results
+### Video tutorials
 
-Many results come in an image (e.g. `.png`, `.jpg`) or `html` format. These can not be viewed directly from the server. Therefore, transfer them to your local PC first (with e.g. [FileZilla](https://filezilla-project.org/) or `scp`), or mount the server with `sshfs` (more info [here](https://www.digitalocean.com/community/tutorials/how-to-use-sshfs-to-mount-remote-file-systems-over-ssh)).
+Below you can find video tutorials to set up FileZilla, atom and MobaXterm to edit and/or transfer remote files.
+
+#### Atom
+
+Atom is a versatile text editor for all major operating systems. For this course, it's the recommended script editor for Linux and Mac OS users. With the third-party package `ftp-remote-edit`, you can remotely edit scripts. The video tutorial explains how to set it up.
+
+<iframe src="https://player.vimeo.com/video/473838666" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+
+#### FileZilla
+
+Many results come in an image (e.g. `.png`, `.jpg`) or `html` format. These can not be viewed directly from the server. Also, for this course, files loaded in IGV need to be on your local computer. You can easily transfer files between your local PC and the remote host with [FileZilla](https://filezilla-project.org/). The video tutorial explains how to set it up.
+
+<iframe src="https://player.vimeo.com/video/473838726" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+
+#### MobaXterm
+
+MobaXterm is an SSH client for Windows. Use this to connect to the remote host and edit remote scripts if you're on Windows. The video tutorial explains how to set it up.
+
+<iframe src="https://player.vimeo.com/video/473838657" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
 ## Exercises
 
@@ -17,27 +37,55 @@ Many results come in an image (e.g. `.png`, `.jpg`) or `html` format. These can 
 >:fontawesome-regular-clock: 30 minutes
 
 #### Login to AWS EC2 remote server
-You will receive an e-mail shortly before the workshop with a key, username and IP address to login on a cloud server.
-Login like this:
+
+Use the video tutorials and the information below to log in and set up a remote script editor.
+
+On Linux/Mac OS open a terminal and login like this:
 
 ```sh
 ssh -i path/to/key/key_[USERNAME].pem [USERNAME]@[AWS_IP]
 ```
 
+!!! warning
+    change `path/to/key` to the actual path where you have put the key file.
+
+!!! note "For Windows users"
+    If you are using MobaXterm on windows, you will automatically login to the remote server once you've started the SSH session. Follow the [video tutorial on MobaXterm](#mobaxterm) to set up an SSH session.
+
 #### Setup your favourite editor to work remotely
 
 To directly initiate and modify scripts on the remote server you can use plugins:
 
-* Notepadd++: `NppFTP`
-* Atom: `remote-edit-ni`
+* Script editor of MobaXterm
+* Atom: `ftp-remote-edit`
 
-Setup the connection to the server with the following details:
+In general, setup the connection to the server with the following details:
 
 * protocol: sftp
 * username: your username
 * hostname: server IP
 * port: 22
 * authentication/logon type: path to private key file
+
+Tutorials are found above at the [Video tutorials](#video-tutorials) chapter.
+
+#### Initiate conda
+
+To make use of the pre-installed software with conda, we need to initiate it first. Login to the server and run:
+
+```sh
+/opt/anaconda3/bin/conda init
+exec bash
+```
+
+To load the environment with the required software packages, run:
+
+```sh
+conda activate ngs
+```
+
+!!! note "Activating the environment"
+    You will need to activate the ngs environment each time you login.
 
 ### 2. A UNIX command line interface (CLI) refresher
 
@@ -47,7 +95,7 @@ Most bioinformatics software are UNIX based and are executed through the CLI. Wh
 
 #### Make a new directory
 
-Make a directory called `reads` in your home directory, and make it your current directory.
+Login to the server and use the command line to make a directory called `reads` in your home directory, and make it your current directory.
 
 ??? done "Answer"
     ```sh

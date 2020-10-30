@@ -12,11 +12,11 @@
 
 >:fontawesome-regular-clock: 30 minutes
 
-**Exercise:** Create a directory called `ecoli` in your home directory and make the directory your current directory
+**Exercise:** Create a directory called `ecoli` in your home directory and make the directory your current directory.
 
 ??? done "Answer"
     ```sh
-    cd /home/training
+    cd ~
     mkdir ecoli
     cd ecoli
     ```
@@ -42,15 +42,16 @@ Check out the dataset at [SRA](https://www.ncbi.nlm.nih.gov/sra/?term=SRR519926)
 
     D. 400596
 
-Make a directory `reads` and download the reads from the SRA database using `fastq-dump` from [SRA-Tools](https://ncbi.github.io/sra-tools/) into the `reads` directory:
+Make a directory `reads` in `~/ecoli` and download the reads from the SRA database using `prefetch` and `fasterq-dump` from [SRA-Tools](https://ncbi.github.io/sra-tools/) into the `reads` directory:
 
 ```sh
 mkdir reads
 cd reads
-fastq-dump --split-files SRR519926
+prefetch SRR519926
+fasterq-dump --split-files SRR519926
 ```
 
-**Exercise:** Check whether the download was successful by counting the number of reads in the fastq files.
+**Exercise:** Check whether the download was successful by counting the number of reads in the fastq files and compare it to the SRA entry.
 
 !!! tip "Tip"
     A read in a fastq file consists of four lines (more on that at [file types](../day2/file_types.md)). Use Google to figure out how to count the number of reads in a fastq file.
@@ -104,13 +105,13 @@ Trimmomatic syntax is rather complicated and different from most tools. Refer to
 ```sh
 ##!/usr/bin/env bash
 
-TRIMMOMATIC_DIR=/usr/share/Trimmomatic-0.36
 TRIMMED_DIR=~/ecoli/trimmed_data
 READS_DIR=~/ecoli/reads
+ADAPTERS=/opt/miniconda3/pkgs/trimmomatic-0.39-1/share/trimmomatic/adapters/TruSeq3-PE.fa
 
 mkdir $TRIMMED_DIR
 
-java -jar trimmomatic \
+trimmomatic \
 PE \
 -threads 1 \
 -phred33 \
@@ -120,7 +121,7 @@ $TRIMMED_DIR/paired_trimmed_SRR519926_1.fastq \
 $TRIMMED_DIR/unpaired_trimmed_SRR519926_1.fastq \
 $TRIMMED_DIR/paired_trimmed_SRR519926_2.fastq \
 $TRIMMED_DIR/unpaired_trimmed_SRR519926_2.fastq \
-ILLUMINACLIP:$TRIMMOMATIC_DIR/adapters/TruSeq3-PE.fa:2:30:10 \
+ILLUMINACLIP:$ADAPTERS:2:30:10 \
 SLIDINGWINDOW:4:5 \
 LEADING:5 \
 TRAILING:5 \
@@ -142,7 +143,7 @@ MINLEN:25
     Running `fastqc`:
     ```
     cd ~/ecoli/trimmed_data
-    fastqc paired_trimmed*.fastqc
+    fastqc paired_trimmed*.fastq
     ```
 
     A. Yes, low quality 3' end, per sequence quality and adapter sequences have improved.

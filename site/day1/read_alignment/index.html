@@ -531,7 +531,7 @@
 <p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg></span> 10 minutes</p>
 </blockquote>
 <p>Retrieve the reference sequence using <code>esearch</code> and <code>efetch</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="nv">REFERENCE_DIR</span><span class="o">=</span>/home/training/ecoli/ref_genome/
+<div class="highlight"><pre><span></span><code><span class="nv">REFERENCE_DIR</span><span class="o">=</span>~/ecoli/ref_genome/
 
 mkdir <span class="nv">$REFERENCE_DIR</span>
 <span class="nb">cd</span> <span class="nv">$REFERENCE_DIR</span>
@@ -560,18 +560,19 @@ esearch -db nuccore -query <span class="s1">&#39;U00096&#39;</span> <span class=
 <p><strong>Exercise:</strong> Try to understand what the script below does, and run it.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">##!/usr/bin/env bash</span>
 
-<span class="nv">TRIMMED_DIR</span><span class="o">=</span>/home/training/ecoli/trimmed_data
-<span class="nv">REFERENCE_DIR</span><span class="o">=</span>/home/training/ecoli/ref_genome/
-<span class="nv">MAPPED_DIR</span><span class="o">=</span>/home/training/ecoli/mapping_output
+<span class="nv">TRIMMED_DIR</span><span class="o">=</span>~/ecoli/trimmed_data
+<span class="nv">REFERENCE_DIR</span><span class="o">=</span>~/ecoli/ref_genome/
+<span class="nv">ALIGNED_DIR</span><span class="o">=</span>~/ecoli/alignment_output
 
-mkdir <span class="nv">$MAPPED_DIR</span>
+mkdir <span class="nv">$ALIGNED_DIR</span>
 
 bowtie2 <span class="se">\</span>
 -x <span class="nv">$REFERENCE_DIR</span>/ecoli-strK12-MG1655.fasta <span class="se">\</span>
 -1 <span class="nv">$TRIMMED_DIR</span>/paired_trimmed_SRR519926_1.fastq <span class="se">\</span>
 -2 <span class="nv">$TRIMMED_DIR</span>/paired_trimmed_SRR519926_2.fastq <span class="se">\</span>
-&gt; <span class="nv">$MAPPED_DIR</span>/SRR519926.sam
+&gt; <span class="nv">$ALIGNED_DIR</span>/SRR519926.sam
 </code></pre></div>
+<p>We&rsquo;ll go deeper into alignment statistics tomorrow, but <code>bowtie2</code> writes already some statistics to stdout. General alignment rates seem okay, but there are quite some non-concordant alignments. That doesn&rsquo;t sound good. Check out the explanation about concordance at the <a href="http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#concordant-pairs-match-pair-expectations-discordant-pairs-dont">bowtie2 manual</a>. Can you guess what the reason could be?</p>
                 
               
               

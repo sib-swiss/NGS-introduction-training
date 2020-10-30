@@ -10,7 +10,7 @@ We will be mainly working on an Amazon Web Services ([AWS](https://aws.amazon.co
 Before the course, make sure you can comfortably work on a remote server. This means that you can approach it through the shell, modify scripts and transfer files. We can recommend `atom` for Linux and Mac, and `Notepad ++` in combination with MobaXterm for Windows. We will be visualising our results with IGV. Therefore, install in your computer:
 
 === "mac OS/Linux"
-    * SSH and scripting: [Atom](https://atom.io/) with packages like: [`terminus`](https://atom.io/packages/terminus) and [`remote-editor`](https://atom.io/packages/remote-editor)
+    * SSH and scripting: [Atom](https://atom.io/) with packages like: [`terminus`](https://atom.io/packages/terminus) and [`ftp-remote-edit`](https://atom.io/packages/ftp-remote-edit)
     * Transferring files: [FileZilla](https://filezilla-project.org/)
     * [Integrative Genomics Viewer (IGV)](http://software.broadinstitute.org/software/igv/)
 

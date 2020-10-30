@@ -545,8 +545,8 @@
 <blockquote>
 <p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg></span> 30 minutes</p>
 </blockquote>
-<p><strong>Exercise:</strong> Create a directory called <code>ecoli</code> in your home directory and make the directory your current directory</p>
-<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="nb">cd</span> /home/training
+<p><strong>Exercise:</strong> Create a directory called <code>ecoli</code> in your home directory and make the directory your current directory.</p>
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~
 mkdir ecoli
 <span class="nb">cd</span> ecoli
 </code></pre></div>
@@ -562,12 +562,13 @@ mkdir ecoli
 <p>C. 2 x 252 bp</p>
 <p>D. 400596</p>
 </details>
-<p>Make a directory <code>reads</code> and download the reads from the SRA database using <code>fastq-dump</code> from <a href="https://ncbi.github.io/sra-tools/">SRA-Tools</a> into the <code>reads</code> directory:</p>
+<p>Make a directory <code>reads</code> in <code>~/ecoli</code> and download the reads from the SRA database using <code>prefetch</code> and <code>fasterq-dump</code> from <a href="https://ncbi.github.io/sra-tools/">SRA-Tools</a> into the <code>reads</code> directory:</p>
 <div class="highlight"><pre><span></span><code>mkdir reads
 <span class="nb">cd</span> reads
-fastq-dump --split-files SRR519926
+prefetch SRR519926
+fasterq-dump --split-files SRR519926
 </code></pre></div>
-<p><strong>Exercise:</strong> Check whether the download was successful by counting the number of reads in the fastq files.</p>
+<p><strong>Exercise:</strong> Check whether the download was successful by counting the number of reads in the fastq files and compare it to the SRA entry.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>A read in a fastq file consists of four lines (more on that at <a href="../../day2/file_types/">file types</a>). Use Google to figure out how to count the number of reads in a fastq file.</p>
@@ -610,13 +611,13 @@ fastq-dump --split-files SRR519926
 <p><strong>Exercise:</strong> The script below will trim the sequence reads in a sensible manner. Execute the script to trim the data:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">##!/usr/bin/env bash</span>
 
-<span class="nv">TRIMMOMATIC_DIR</span><span class="o">=</span>/usr/share/Trimmomatic-0.36
 <span class="nv">TRIMMED_DIR</span><span class="o">=</span>~/ecoli/trimmed_data
 <span class="nv">READS_DIR</span><span class="o">=</span>~/ecoli/reads
+<span class="nv">ADAPTERS</span><span class="o">=</span>/opt/miniconda3/pkgs/trimmomatic-0.39-1/share/trimmomatic/adapters/TruSeq3-PE.fa
 
 mkdir <span class="nv">$TRIMMED_DIR</span>
 
-java -jar trimmomatic <span class="se">\</span>
+trimmomatic <span class="se">\</span>
 PE <span class="se">\</span>
 -threads <span class="m">1</span> <span class="se">\</span>
 -phred33 <span class="se">\</span>
@@ -626,7 +627,7 @@ PE <span class="se">\</span>
 <span class="nv">$TRIMMED_DIR</span>/unpaired_trimmed_SRR519926_1.fastq <span class="se">\</span>
 <span class="nv">$TRIMMED_DIR</span>/paired_trimmed_SRR519926_2.fastq <span class="se">\</span>
 <span class="nv">$TRIMMED_DIR</span>/unpaired_trimmed_SRR519926_2.fastq <span class="se">\</span>
-ILLUMINACLIP:<span class="nv">$TRIMMOMATIC_DIR</span>/adapters/TruSeq3-PE.fa:2:30:10 <span class="se">\</span>
+ILLUMINACLIP:<span class="nv">$ADAPTERS</span>:2:30:10 <span class="se">\</span>
 SLIDINGWINDOW:4:5 <span class="se">\</span>
 LEADING:5 <span class="se">\</span>
 TRAILING:5 <span class="se">\</span>
@@ -642,7 +643,7 @@ MINLEN:25
 <p><strong>C.</strong> There are more unpaired forward reads compared to reverse reads. Does this make sense?</p>
 <details class="done"><summary>Answers</summary><p>Running <code>fastqc</code>:
 <div class="highlight"><pre><span></span><code>cd ~/ecoli/trimmed_data
-fastqc paired_trimmed*.fastqc
+fastqc paired_trimmed*.fastq
 </code></pre></div></p>
 <p>A. Yes, low quality 3&rsquo; end, per sequence quality and adapter sequences have improved.</p>
 <p>B. 264781</p>
