@@ -641,6 +641,9 @@
 <p>In this project you will be working with data from:</p>
 <p>Singhania A, Graham CM, Gabryšová L, Moreira-Teixeira L, Stavropoulos E, Pitt JM, et al (2019). <em>Transcriptional profiling unveils type I and II interferon networks in blood and tissues across diseases</em>. Nat Commun. 10:1–21. <a href="https://doi.org/10.1038/s41467-019-10601-6">https://doi.org/10.1038/s41467-019-10601-6</a></p>
 <p>Here&rsquo;s the <a href="https://www.ncbi.nlm.nih.gov/bioproject/PRJNA490485">BioProject page</a>.</p>
+<p>Download the mouse reference genome like this:</p>
+<div class="highlight"><pre><span></span><code>ftp://ftp.ensembl.org/pub/release-101/fasta/mus_musculus/dna/Mus_musculus.GRCm38.dna.primary_assembly.fa.gz
+</code></pre></div>
 <h3 id="tasks">Tasks:</h3>
 <ul>
 <li>Check out the BioProject, and download two samples that interest you.</li>
@@ -685,6 +688,10 @@ hisat2 <span class="se">\</span>
 </code></pre></div>
 </div>
 <div class="admonition hint">
+<p class="admonition-title">More resources</p>
+<p>Need e.g. a gtf file? Here&rsquo;s the <a href="http://www.ensembl.org/Mus_musculus/Info/Index">ensembl page</a></p>
+</div>
+<div class="admonition hint">
 <p class="admonition-title">Spliced alignments</p>
 <p>Have a look at IGV on a particular gene, e.g. Nbr1</p>
 </div>
@@ -703,6 +710,9 @@ https://genelab-data.ndc.nasa.gov/genelab/static/media/dataset/GLDS-251_rna-seq_
 <p class="admonition-title">Use of <code>-O</code></p>
 <p>The name of the file is very long we use the option <code>-O</code> here to give it a shorter name.</p>
 </div>
+<p>Download the reference genome sequence like this:</p>
+<div class="highlight"><pre><span></span><code>wget ftp://ftp.ensemblgenomes.org/pub/plants/release-48/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz
+</code></pre></div>
 <h3 id="tasks_1">Tasks:</h3>
 <ul>
 <li>Check out the BioProject, and download two samples that interest you.</li>
@@ -740,12 +750,19 @@ hisat2 <span class="se">\</span>
 &gt; &lt;alignment_file.bam&gt;
 </code></pre></div>
 </div>
+<div class="admonition hint">
+<p class="admonition-title">More resources</p>
+<p>Need e.g. a gtf file? Here&rsquo;s the <a href="https://plants.ensembl.org/Arabidopsis_thaliana/Info/Index">ensembl page</a></p>
+</div>
 <h2 id="project-3-long-read-genome-sequencing"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M208 0c-29.9 0-54.7 20.5-61.8 48.2-.8 0-1.4-.2-2.2-.2-35.3 0-64 28.7-64 64 0 4.8.6 9.5 1.7 14C52.5 138 32 166.6 32 200c0 12.6 3.2 24.3 8.3 34.9C16.3 248.7 0 274.3 0 304c0 33.3 20.4 61.9 49.4 73.9-.9 4.6-1.4 9.3-1.4 14.1 0 39.8 32.2 72 72 72 4.1 0 8.1-.5 12-1.2 9.6 28.5 36.2 49.2 68 49.2 39.8 0 72-32.2 72-72V64c0-35.3-28.7-64-64-64zm368 304c0-29.7-16.3-55.3-40.3-69.1 5.2-10.6 8.3-22.3 8.3-34.9 0-33.4-20.5-62-49.7-74 1-4.5 1.7-9.2 1.7-14 0-35.3-28.7-64-64-64-.8 0-1.5.2-2.2.2C422.7 20.5 397.9 0 368 0c-35.3 0-64 28.6-64 64v376c0 39.8 32.2 72 72 72 31.8 0 58.4-20.7 68-49.2 3.9.7 7.9 1.2 12 1.2 39.8 0 72-32.2 72-72 0-4.8-.5-9.5-1.4-14.1 29-12 49.4-40.6 49.4-73.9z"/></svg></span> Project 3: Long-read genome sequencing</h2>
 <p><strong>Aim</strong>: Align long reads from RNA-seq data to a reference genome.</p>
 <p>In this project, you will be working with data from:</p>
 <p>Clark, M. B. et al (2020). <em>Long-read sequencing reveals the complex splicing profile of the psychiatric risk gene CACNA1C in human brain</em>. Molecular Psychiatry, 25(1), 37–47. <a href="https://doi.org/10.1038/s41380-019-0583-1">https://doi.org/10.1038/s41380-019-0583-1</a>.</p>
 <p>Here you can find the <a href="https://www.ncbi.nlm.nih.gov/bioproject/PRJEB34660">BioProject page</a>.</p>
 <p>It is Oxford Nanopore Technology sequencing data of amplicons of the gene CACNA1C. It is primarily used to discover new splice variants. In this project, we will align a few of the samples to the reference genome, and assess the quality of reads and the alignment.</p>
+<p>Download the human reference genome like this:</p>
+<div class="highlight"><pre><span></span><code>wget ftp://ftp.ensembl.org/pub/release-101/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
+</code></pre></div>
 <h3 id="tasks_2">Tasks:</h3>
 <ul>
 <li>Check out the BioProject, and download two samples that interest you.</li>
@@ -784,6 +801,10 @@ fastq-dump --gzip <span class="o">[</span>SRR number<span class="o">]</span>
 <div class="admonition hint">
 <p class="admonition-title">Comparing <code>fastqc</code> and <code>Nanoplot</code></p>
 <p>For comparing <code>fastqc</code> and <code>NanoPlot</code>, check out this <a href="https://gigabaseorgigabyte.wordpress.com/2017/06/26/averaging-basecall-quality-scores-the-right-way/">blog</a> of the author of NanoPlot, and this <a href="https://github.com/wdecoster/NanoPlot/issues/191">thread</a>.</p>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">More resources</p>
+<p>Need e.g. a gtf file? Here&rsquo;s the <a href="https://www.ensembl.org/Homo_sapiens/Info/Index">ensembl page</a></p>
 </div>
 <div class="admonition hint">
 <p class="admonition-title">Running FLAIR</p>
