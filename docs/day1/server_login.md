@@ -40,34 +40,42 @@ MobaXterm is an SSH client for Windows. Use this to connect to the remote host a
 
 Use the video tutorials and the information below to log in and set up a remote script editor.
 
-On Linux/Mac OS open a terminal and login like this:
+=== "mac OS/Linux"
 
-```sh
-ssh -i path/to/key/key_[USERNAME].pem [USERNAME]@[AWS_IP]
-```
+    Open a terminal and login like this:
 
-!!! warning
-    change `path/to/key` to the actual path where you have put the key file.
+    ```sh
+    ssh -i path/to/key/key_[USERNAME].pem [USERNAME]@[AWS_IP]
+    ```
 
-!!! note "For Windows users"
+    !!! warning
+        change `path/to/key` to the actual path where you have put the key file.
+
+    #### Setup your favourite editor to work remotely
+
+    To directly initiate and modify scripts on the remote server you can use the Atom plugin `ftp-remote-edit`
+
+    In general, setup the connection to the server with the following details:
+
+    * protocol: sftp
+    * username: your username
+    * hostname: server IP
+    * port: 22
+    * authentication/logon type: path to private key file
+
+    Tutorials are found above in the [video tutorial to set up Atom](#Atom).
+
+
+=== "Windows"
     If you are using MobaXterm on windows, you will automatically login to the remote server once you've started the SSH session. Follow the [video tutorial on MobaXterm](#mobaxterm) to set up an SSH session.
 
-#### Setup your favourite editor to work remotely
+    These are the general settings you should take into account:
 
-To directly initiate and modify scripts on the remote server you can use plugins:
-
-* Script editor of MobaXterm
-* Atom: `ftp-remote-edit`
-
-In general, setup the connection to the server with the following details:
-
-* protocol: sftp
-* username: your username
-* hostname: server IP
-* port: 22
-* authentication/logon type: path to private key file
-
-Tutorials are found above at the [Video tutorials](#video-tutorials) chapter.
+    * protocol: sftp
+    * username: your username
+    * hostname: server IP
+    * port: 22
+    * authentication/logon type: path to private key file
 
 #### Initiate conda
 
