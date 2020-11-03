@@ -82,7 +82,7 @@ Use the video tutorials and the information below to log in and set up a remote 
 To make use of the pre-installed software with conda, we need to initiate it first. Login to the server and run:
 
 ```sh
-/opt/anaconda3/bin/conda init
+/opt/miniconda3/bin/conda init
 exec bash
 ```
 
