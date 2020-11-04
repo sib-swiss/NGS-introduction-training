@@ -42,13 +42,13 @@ Check out the dataset at [SRA](https://www.ncbi.nlm.nih.gov/sra/?term=SRR519926)
 
     D. 400596
 
-Make a directory `reads` in `~/ecoli` and download the reads from the SRA database using `prefetch` and `fasterq-dump` from [SRA-Tools](https://ncbi.github.io/sra-tools/) into the `reads` directory:
+Make a directory `reads` in `~/ecoli` and download the reads from the SRA database using `prefetch` and `fastq-dump` from [SRA-Tools](https://ncbi.github.io/sra-tools/) into the `reads` directory:
 
 ```sh
 mkdir reads
 cd reads
 prefetch SRR519926
-fasterq-dump --split-files SRR519926
+fastq-dump --split-files SRR519926
 ```
 
 **Exercise:** Check whether the download was successful by counting the number of reads in the fastq files and compare it to the SRA entry.

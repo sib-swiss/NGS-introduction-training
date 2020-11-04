@@ -140,7 +140,7 @@ Can you use this file as an executable script?
 
 #### Redirection: `>` and `|`
 
-In `/home` you'll find a directory for all users with an account. Write all usernames to a file called `usernames.txt`.
+In `/home` all users have a directory which is named by their username. Write all usernames to a file called `usernames.txt`.
 
 ??? done "Answer"
     ```sh

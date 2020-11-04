@@ -562,11 +562,11 @@ mkdir ecoli
 <p>C. 2 x 252 bp</p>
 <p>D. 400596</p>
 </details>
-<p>Make a directory <code>reads</code> in <code>~/ecoli</code> and download the reads from the SRA database using <code>prefetch</code> and <code>fasterq-dump</code> from <a href="https://ncbi.github.io/sra-tools/">SRA-Tools</a> into the <code>reads</code> directory:</p>
+<p>Make a directory <code>reads</code> in <code>~/ecoli</code> and download the reads from the SRA database using <code>prefetch</code> and <code>fastq-dump</code> from <a href="https://ncbi.github.io/sra-tools/">SRA-Tools</a> into the <code>reads</code> directory:</p>
 <div class="highlight"><pre><span></span><code>mkdir reads
 <span class="nb">cd</span> reads
 prefetch SRR519926
-fasterq-dump --split-files SRR519926
+fastq-dump --split-files SRR519926
 </code></pre></div>
 <p><strong>Exercise:</strong> Check whether the download was successful by counting the number of reads in the fastq files and compare it to the SRA entry.</p>
 <div class="admonition tip">
