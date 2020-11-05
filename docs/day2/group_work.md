@@ -189,14 +189,28 @@ wget ftp://ftp.ensembl.org/pub/release-101/fasta/homo_sapiens/dna/Homo_sapiens.G
     fastq-dump --gzip [SRR number]
     ```
 
-!!! hint "Intron sizes"
-    Check out the the intron sizes of CACNA1C in e.g. IGV or UCSC genome browser. How does that relate to the parameter `-G`?
-
 !!! hint "Accuracy from quality scores"
     Find the equation to calculate error probability from quality score on [Wikipedia](https://en.wikipedia.org/wiki/Phred_quality_score).
 
 !!! hint "Comparing `fastqc` and `Nanoplot`"
     For comparing `fastqc` and `NanoPlot`, check out this [blog](https://gigabaseorgigabyte.wordpress.com/2017/06/26/averaging-basecall-quality-scores-the-right-way/) of the author of NanoPlot, and this [thread](https://github.com/wdecoster/NanoPlot/issues/191).
+
+!!! hint "Running `minimap2`"
+    Here's an example command for `minimap2`:
+
+    ```sh
+    minimap2 \
+    -a \
+    -x [PARAMETER] \
+    -G [PARAMETER] \
+    [REFERENCE].fa \
+    [FASTQFILE].fastq.gz \
+    | samtools sort \
+    | samtools view -bh > [OUTPUT].bam
+    ```
+
+!!! hint "Intron sizes"
+    Check out the the intron sizes of CACNA1C in e.g. IGV or UCSC genome browser. How does that relate to the parameter `-G`?
 
 !!! hint "More resources"
     Need e.g. a gtf file? Here's the [ensembl page](https://www.ensembl.org/Homo_sapiens/Info/Index)
@@ -209,7 +223,6 @@ wget ftp://ftp.ensembl.org/pub/release-101/fasta/homo_sapiens/dna/Homo_sapiens.G
     ```sh
     cd
     git clone https://github.com/BrooksLabUCSC/flair.git
-    conda activate flair_env
     ```
 
     After that, generate a FLAIR working directory and convert your `.bam` alignment file to `bed12` format.

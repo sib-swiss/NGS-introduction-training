@@ -84,6 +84,12 @@ Filtering against unmapped reads (leaving only mapped reads) with `samtools view
 samtools view -bh -F 0x4 SRR519926.sorted.bam > SRR519926.sorted.mapped.bam
 ```
 
+or:
+
+```sh
+samtools view -bh -F 4 SRR519926.sorted.bam > SRR519926.sorted.mapped.bam
+```
+
 **Exercise:** Write a command that outputs only the unmapped reads (so the opposite of the example). How many reads are in there? Is that the same as what we expect based on the output of `samtools flagstat`?
 
 !!! tip "Tip"

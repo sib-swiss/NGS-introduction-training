@@ -136,7 +136,15 @@ Can you use this file as an executable script?
     -rw-r--r--  1 geertvangeest  staff  0 Sep 21 13:38 new_file.txt
     ```
 
-    In any of the user, group or other permissions, there is no `x` for execute. This means it is not executable
+    In any of the user, group or other permissions, there is no `x` for execute. This means it is not executable.
+
+    If you want to make a file executable:
+
+    ```sh
+    chmod u+x new_file.txt
+    ```
+
+    More on `chmod` and file permissions [here](https://www.howtogeek.com/437958/how-to-use-the-chmod-command-on-linux/).
 
 #### Redirection: `>` and `|`
 
