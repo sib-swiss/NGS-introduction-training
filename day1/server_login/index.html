@@ -860,7 +860,11 @@ touch new_file.txt
 <p>This will give you something like:</p>
 <div class="highlight"><pre><span></span><code>-rw-r--r--  1 geertvangeest  staff  0 Sep 21 13:38 new_file.txt
 </code></pre></div>
-<p>In any of the user, group or other permissions, there is no <code>x</code> for execute. This means it is not executable</p>
+<p>In any of the user, group or other permissions, there is no <code>x</code> for execute. This means it is not executable.</p>
+<p>If you want to make a file executable:</p>
+<div class="highlight"><pre><span></span><code>chmod u+x new_file.txt
+</code></pre></div>
+<p>More on <code>chmod</code> and file permissions <a href="https://www.howtogeek.com/437958/how-to-use-the-chmod-command-on-linux/">here</a>.</p>
 </details>
 <h4 id="redirection-and">Redirection: <code>&gt;</code> and <code>|</code></h4>
 <p>In <code>/home</code> all users have a directory which is named by their username. Write all usernames to a file called <code>usernames.txt</code>.</p>

@@ -787,16 +787,29 @@ fastq-dump --gzip <span class="o">[</span>SRR number<span class="o">]</span>
 </code></pre></div>
 </div>
 <div class="admonition hint">
-<p class="admonition-title">Intron sizes</p>
-<p>Check out the the intron sizes of CACNA1C in e.g. IGV or UCSC genome browser. How does that relate to the parameter <code>-G</code>?</p>
-</div>
-<div class="admonition hint">
 <p class="admonition-title">Accuracy from quality scores</p>
 <p>Find the equation to calculate error probability from quality score on <a href="https://en.wikipedia.org/wiki/Phred_quality_score">Wikipedia</a>.</p>
 </div>
 <div class="admonition hint">
 <p class="admonition-title">Comparing <code>fastqc</code> and <code>Nanoplot</code></p>
 <p>For comparing <code>fastqc</code> and <code>NanoPlot</code>, check out this <a href="https://gigabaseorgigabyte.wordpress.com/2017/06/26/averaging-basecall-quality-scores-the-right-way/">blog</a> of the author of NanoPlot, and this <a href="https://github.com/wdecoster/NanoPlot/issues/191">thread</a>.</p>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Running <code>minimap2</code></p>
+<p>Here&rsquo;s an example command for <code>minimap2</code>:</p>
+<div class="highlight"><pre><span></span><code>minimap2 <span class="se">\</span>
+-a <span class="se">\</span>
+-x <span class="o">[</span>PARAMETER<span class="o">]</span> <span class="se">\</span>
+-G <span class="o">[</span>PARAMETER<span class="o">]</span> <span class="se">\</span>
+<span class="o">[</span>REFERENCE<span class="o">]</span>.fa <span class="se">\</span>
+<span class="o">[</span>FASTQFILE<span class="o">]</span>.fastq.gz <span class="se">\</span>
+<span class="p">|</span> samtools sort <span class="se">\</span>
+<span class="p">|</span> samtools view -bh &gt; <span class="o">[</span>OUTPUT<span class="o">]</span>.bam
+</code></pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Intron sizes</p>
+<p>Check out the the intron sizes of CACNA1C in e.g. IGV or UCSC genome browser. How does that relate to the parameter <code>-G</code>?</p>
 </div>
 <div class="admonition hint">
 <p class="admonition-title">More resources</p>
@@ -808,7 +821,6 @@ fastq-dump --gzip <span class="o">[</span>SRR number<span class="o">]</span>
 <p>To use FLAIR first clone the git repository, and activate the (pre-configured) conda environment:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span>
 git clone https://github.com/BrooksLabUCSC/flair.git
-conda activate flair_env
 </code></pre></div>
 <p>After that, generate a FLAIR working directory and convert your <code>.bam</code> alignment file to <code>bed12</code> format.</p>
 <div class="highlight"><pre><span></span><code>mkdir ~/flair_output
