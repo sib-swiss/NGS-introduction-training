@@ -677,11 +677,24 @@ fastq-dump --split-files --gzip <span class="o">[</span>SRR number<span class="o
 
 hisat2 <span class="se">\</span>
 -x &lt;index_basename&gt; <span class="se">\</span>
--1 &lt;mate1.fastq.gz&gt; <span class="se">\</span>
--2 &lt;mate2.fastq.gz&gt; <span class="se">\</span>
+-1 &lt;foward_reads.fastq.gz&gt; <span class="se">\</span>
+-2 &lt;reverse_reads.fastq.gz&gt; <span class="se">\</span>
 -p &lt;threads&gt; <span class="se">\</span>
 <span class="p">|</span> samtools sort <span class="se">\</span>
 <span class="p">|</span> samtools view -bh <span class="se">\</span>
+&gt; &lt;alignment_file.bam&gt;
+</code></pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Example code <code>bwa mem</code></p>
+<div class="highlight"><pre><span></span><code>bwa index &lt;reference_sequence_fasta&gt;
+
+bwa mem \
+&lt;index_basename&gt; \
+&lt;forward_reads.fastq.gz&gt; \
+&lt;reverse_reads.fastq.gz&gt; \
+| samtools sort \
+| samtools view -bh \
 &gt; &lt;alignment_file.bam&gt;
 </code></pre></div>
 </div>
