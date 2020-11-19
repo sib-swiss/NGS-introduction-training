@@ -9,10 +9,13 @@ The exercises below are partly based on [this tutorial](https://github.com/griff
 Index the alignment that was filtered for the region between 2000 and 2500 kb:
 
 ```sh
-cd ~/ecoli/alignment_output
+cd ~/workdir/alignment_output
 samtools index SRR519926.sorted.region.bam
 ```
- Download it together with it's index file (`SRR519926.sorted.region.bam.bai`) and the reference genome (`ecoli-strK12-MG1655.fasta`) to your desktop.
+Download it together with it's index file (`SRR519926.sorted.region.bam.bai`) and the reference genome (`ecoli-strK12-MG1655.fasta`) to your desktop.
+
+!!! note "If working with Docker"
+    If you are working with Docker, you can find the files in the working directory that you mounted to the docker container (with the `-v` option).
 
 * Load the genome (`.fasta`) into IGV: **Genomes > Load Genome from File...**
 * Load the alignment file (`.bam`): **File > Load from File...**
@@ -93,7 +96,7 @@ Click on the coverage track where the SNP is:
   <img src="../../assets/images/per_base.png" width="300"/>
 </figure>
 
-**Exercise:** What is the sequence coverage for that base? And the percentage C?
+**Exercise:** What is the sequence coverage for that base? And the percentage T?
 
 ??? done "Answer"
     The coverage is 62, and 25 reads (40%) T.

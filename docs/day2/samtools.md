@@ -13,7 +13,7 @@
 ??? done "Answer"
     Code:
     ```sh
-    cd ~/ecoli/alignment_output/
+    cd ~/workdir/alignment_output/
     samtools flagstat SRR519926.sam
     ```
 
@@ -115,7 +115,7 @@ samtools view -bh -F 4 SRR519926.sorted.bam > SRR519926.sorted.mapped.bam
     Our E. coli genome has only one chromosome, because only one line starts with `>` in the fasta file
 
     ```sh
-    cd ~/ecoli/ref_genome
+    cd ~/workdir/ref_genome
     grep ">" ecoli-strK12-MG1655.fasta
     ```
 
@@ -129,7 +129,7 @@ samtools view -bh -F 4 SRR519926.sorted.bam > SRR519926.sorted.mapped.bam
 
 ??? done "Answer"
     ```
-    cd ~/ecoli/alignment_output
+    cd ~/workdir/alignment_output
     samtools view -bh SRR519926.sorted.bam U00096.3:2000000-2500000 > SRR519926.sorted.region.bam
     ```
 
@@ -155,9 +155,9 @@ my_alignment_command \
     ```
     ##!/usr/bin/env bash
 
-    TRIMMED_DIR=~/ecoli/trimmed_data
-    REFERENCE_DIR=~/ecoli/ref_genome
-    ALIGNED_DIR=~/ecoli/alignment_output
+    TRIMMED_DIR=~/workdir/trimmed_data
+    REFERENCE_DIR=~/workdir/ref_genome
+    ALIGNED_DIR=~/workdir/alignment_output
 
     bowtie2 \
     -x $REFERENCE_DIR/ecoli-strK12-MG1655.fasta \

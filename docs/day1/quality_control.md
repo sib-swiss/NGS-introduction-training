@@ -12,13 +12,16 @@
 
 >:fontawesome-regular-clock: 30 minutes
 
-**Exercise:** Create a directory called `ecoli` in your home directory and make the directory your current directory.
+**Exercise:** Create a directory called `workdir` in your home directory and make the directory your current directory.
+
+!!! note "If working with Docker"
+    If you have mounted your local directory to `/root/workdir`, this directory should already exist.
 
 ??? done "Answer"
     ```sh
     cd ~
-    mkdir ecoli
-    cd ecoli
+    mkdir workdir
+    cd workdir
     ```
 
 Check out the dataset at [SRA](https://www.ncbi.nlm.nih.gov/sra/?term=SRR519926).
@@ -42,7 +45,7 @@ Check out the dataset at [SRA](https://www.ncbi.nlm.nih.gov/sra/?term=SRR519926)
 
     D. 400596
 
-Make a directory `reads` in `~/ecoli` and download the reads from the SRA database using `prefetch` and `fastq-dump` from [SRA-Tools](https://ncbi.github.io/sra-tools/) into the `reads` directory:
+Make a directory `reads` in `~/workdir` and download the reads from the SRA database using `prefetch` and `fastq-dump` from [SRA-Tools](https://ncbi.github.io/sra-tools/) into the `reads` directory:
 
 ```sh
 mkdir reads
@@ -100,33 +103,63 @@ We will use [trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic) for tr
 
 Trimmomatic syntax is rather complicated and different from most tools. Refer to the [manual](http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf) if you want to go deeper into this.
 
-**Exercise:** The script below will trim the sequence reads in a sensible manner. Execute the script to trim the data:
+**Exercise:** The script below will trim the sequence reads in a sensible manner. Execute the script to trim the data (note that the script is slightly different if you're working in the docker container):
 
-```sh
-##!/usr/bin/env bash
+=== "AWS"
 
-TRIMMED_DIR=~/ecoli/trimmed_data
-READS_DIR=~/ecoli/reads
-ADAPTERS=/opt/miniconda3/pkgs/trimmomatic-0.39-1/share/trimmomatic/adapters/TruSeq3-PE.fa
+    ```sh
+    ##!/usr/bin/env bash
 
-mkdir $TRIMMED_DIR
+    TRIMMED_DIR=~/workdir/trimmed_data
+    READS_DIR=~/workdir/reads
+    ADAPTERS=/opt/miniconda3/pkgs/trimmomatic-0.39-1/share/trimmomatic/adapters/TruSeq3-PE.fa
 
-trimmomatic \
-PE \
--threads 1 \
--phred33 \
-$READS_DIR/SRR519926_1.fastq \
-$READS_DIR/SRR519926_2.fastq \
-$TRIMMED_DIR/paired_trimmed_SRR519926_1.fastq \
-$TRIMMED_DIR/unpaired_trimmed_SRR519926_1.fastq \
-$TRIMMED_DIR/paired_trimmed_SRR519926_2.fastq \
-$TRIMMED_DIR/unpaired_trimmed_SRR519926_2.fastq \
-ILLUMINACLIP:$ADAPTERS:2:30:10 \
-SLIDINGWINDOW:4:5 \
-LEADING:5 \
-TRAILING:5 \
-MINLEN:25
-```
+    mkdir $TRIMMED_DIR
+
+    trimmomatic \
+    PE \
+    -threads 1 \
+    -phred33 \
+    $READS_DIR/SRR519926_1.fastq \
+    $READS_DIR/SRR519926_2.fastq \
+    $TRIMMED_DIR/paired_trimmed_SRR519926_1.fastq \
+    $TRIMMED_DIR/unpaired_trimmed_SRR519926_1.fastq \
+    $TRIMMED_DIR/paired_trimmed_SRR519926_2.fastq \
+    $TRIMMED_DIR/unpaired_trimmed_SRR519926_2.fastq \
+    ILLUMINACLIP:$ADAPTERS:2:30:10 \
+    SLIDINGWINDOW:4:5 \
+    LEADING:5 \
+    TRAILING:5 \
+    MINLEN:25
+    ```
+
+=== "Docker"
+
+    ```sh
+    ##!/usr/bin/env bash
+
+    TRIMMED_DIR=~/workdir/trimmed_data
+    READS_DIR=~/workdir/reads
+    ADAPTERS=/opt/conda/pkgs/trimmomatic-0.39-1/share/trimmomatic/adapters/TruSeq3-PE.fa
+
+    mkdir $TRIMMED_DIR
+
+    trimmomatic \
+    PE \
+    -threads 1 \
+    -phred33 \
+    $READS_DIR/SRR519926_1.fastq \
+    $READS_DIR/SRR519926_2.fastq \
+    $TRIMMED_DIR/paired_trimmed_SRR519926_1.fastq \
+    $TRIMMED_DIR/unpaired_trimmed_SRR519926_1.fastq \
+    $TRIMMED_DIR/paired_trimmed_SRR519926_2.fastq \
+    $TRIMMED_DIR/unpaired_trimmed_SRR519926_2.fastq \
+    ILLUMINACLIP:$ADAPTERS:2:30:10 \
+    SLIDINGWINDOW:4:5 \
+    LEADING:5 \
+    TRAILING:5 \
+    MINLEN:25
+    ```
 
 !!! note "The use of `\`"
     In the script above you see that we're using `\` at the end of many lines. We use it to tell bash to ignore the newlines. If we would not do it, the `trimmomatic` command would become a very long line, and the script would become very difficult to read. It is in general good practice to put every option of a long command on a newline in your script and use `\` to ignore the newlines when executing.
@@ -142,7 +175,7 @@ MINLEN:25
 ??? done "Answers"
     Running `fastqc`:
     ```
-    cd ~/ecoli/trimmed_data
+    cd ~/workdir/trimmed_data
     fastqc paired_trimmed*.fastq
     ```
 

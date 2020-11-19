@@ -1,6 +1,9 @@
 
 The last part of this course will consist of project-based-learning. This means that you will work in groups on a single question. We will split up into groups of five people.
 
+!!! note "If working with Docker"
+    If you are working with Docker, I assume you are working independently and therefore can not work in a group. However, you can test your skills with these real biological datasets. Realize that the datasets and calculations are (much) bigger compared to the exercises, so check if your computer is up for it. You'll probably need around 4 cores, 16G of RAM and 50G of harddisk. 
+
 !!! note "If online"
     If the course takes place online, we will use break-out rooms to communicate within groups. Please stay in the break-out room during the day, also if you are working individually.
 
@@ -62,9 +65,22 @@ ftp://ftp.ensembl.org/pub/release-101/fasta/mus_musculus/dna/Mus_musculus.GRCm38
 
     hisat2 \
     -x <index_basename> \
-    -1 <mate1.fastq.gz> \
-    -2 <mate2.fastq.gz> \
+    -1 <foward_reads.fastq.gz> \
+    -2 <reverse_reads.fastq.gz> \
     -p <threads> \
+    | samtools sort \
+    | samtools view -bh \
+    > <alignment_file.bam>
+    ```
+
+!!! hint "Example code `bwa mem`"
+    ```
+    bwa index <reference_sequence_fasta>
+
+    bwa mem \
+    <index_basename> \
+    <forward_reads.fastq.gz> \
+    <reverse_reads.fastq.gz> \
     | samtools sort \
     | samtools view -bh \
     > <alignment_file.bam>
