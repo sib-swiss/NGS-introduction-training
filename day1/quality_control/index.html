@@ -268,7 +268,7 @@
 
   <li class="md-nav__item">
     <a href="../server_login/" class="md-nav__link">
-      Server login
+      Setup + UNIX refresher
     </a>
   </li>
 
@@ -545,10 +545,14 @@
 <blockquote>
 <p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg></span> 30 minutes</p>
 </blockquote>
-<p><strong>Exercise:</strong> Create a directory called <code>ecoli</code> in your home directory and make the directory your current directory.</p>
+<p><strong>Exercise:</strong> Create a directory called <code>workdir</code> in your home directory and make the directory your current directory.</p>
+<div class="admonition note">
+<p class="admonition-title">If working with Docker</p>
+<p>If you have mounted your local directory to <code>/root/workdir</code>, this directory should already exist.</p>
+</div>
 <details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~
-mkdir ecoli
-<span class="nb">cd</span> ecoli
+mkdir workdir
+<span class="nb">cd</span> workdir
 </code></pre></div>
 </details>
 <p>Check out the dataset at <a href="https://www.ncbi.nlm.nih.gov/sra/?term=SRR519926">SRA</a>.</p>
@@ -562,7 +566,7 @@ mkdir ecoli
 <p>C. 2 x 252 bp</p>
 <p>D. 400596</p>
 </details>
-<p>Make a directory <code>reads</code> in <code>~/ecoli</code> and download the reads from the SRA database using <code>prefetch</code> and <code>fastq-dump</code> from <a href="https://ncbi.github.io/sra-tools/">SRA-Tools</a> into the <code>reads</code> directory:</p>
+<p>Make a directory <code>reads</code> in <code>~/workdir</code> and download the reads from the SRA database using <code>prefetch</code> and <code>fastq-dump</code> from <a href="https://ncbi.github.io/sra-tools/">SRA-Tools</a> into the <code>reads</code> directory:</p>
 <div class="highlight"><pre><span></span><code>mkdir reads
 <span class="nb">cd</span> reads
 prefetch SRR519926
@@ -608,11 +612,12 @@ fastq-dump --split-files SRR519926
 </blockquote>
 <p>We will use <a href="http://www.usadellab.org/cms/?page=trimmomatic">trimmomatic</a> for trimming low quality and spurious bases from our reads. For paired-end data it generates four different trimmed <code>fastq</code> files. If one of the paired-end reads doesn&rsquo;t meet the quality thresholds, it will be discarded, but the other read might be kept. Therefore, trimmomatic outputs contains files with unpaired reads as well. Usually those files are very small compared to the paired reads, and are often ignored for downstream analyses.</p>
 <p>Trimmomatic syntax is rather complicated and different from most tools. Refer to the <a href="http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf">manual</a> if you want to go deeper into this.</p>
-<p><strong>Exercise:</strong> The script below will trim the sequence reads in a sensible manner. Execute the script to trim the data:</p>
+<p><strong>Exercise:</strong> The script below will trim the sequence reads in a sensible manner. Execute the script to trim the data (note that the script is slightly different if you&rsquo;re working in the docker container):</p>
+<div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">AWS</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="c1">##!/usr/bin/env bash</span>
 
-<span class="nv">TRIMMED_DIR</span><span class="o">=</span>~/ecoli/trimmed_data
-<span class="nv">READS_DIR</span><span class="o">=</span>~/ecoli/reads
+<span class="nv">TRIMMED_DIR</span><span class="o">=</span>~/workdir/trimmed_data
+<span class="nv">READS_DIR</span><span class="o">=</span>~/workdir/reads
 <span class="nv">ADAPTERS</span><span class="o">=</span>/opt/miniconda3/pkgs/trimmomatic-0.39-1/share/trimmomatic/adapters/TruSeq3-PE.fa
 
 mkdir <span class="nv">$TRIMMED_DIR</span>
@@ -633,6 +638,34 @@ LEADING:5 <span class="se">\</span>
 TRAILING:5 <span class="se">\</span>
 MINLEN:25
 </code></pre></div>
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Docker</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="c1">##!/usr/bin/env bash</span>
+
+<span class="nv">TRIMMED_DIR</span><span class="o">=</span>~/workdir/trimmed_data
+<span class="nv">READS_DIR</span><span class="o">=</span>~/workdir/reads
+<span class="nv">ADAPTERS</span><span class="o">=</span>/opt/conda/pkgs/trimmomatic-0.39-1/share/trimmomatic/adapters/TruSeq3-PE.fa
+
+mkdir <span class="nv">$TRIMMED_DIR</span>
+
+trimmomatic <span class="se">\</span>
+PE <span class="se">\</span>
+-threads <span class="m">1</span> <span class="se">\</span>
+-phred33 <span class="se">\</span>
+<span class="nv">$READS_DIR</span>/SRR519926_1.fastq <span class="se">\</span>
+<span class="nv">$READS_DIR</span>/SRR519926_2.fastq <span class="se">\</span>
+<span class="nv">$TRIMMED_DIR</span>/paired_trimmed_SRR519926_1.fastq <span class="se">\</span>
+<span class="nv">$TRIMMED_DIR</span>/unpaired_trimmed_SRR519926_1.fastq <span class="se">\</span>
+<span class="nv">$TRIMMED_DIR</span>/paired_trimmed_SRR519926_2.fastq <span class="se">\</span>
+<span class="nv">$TRIMMED_DIR</span>/unpaired_trimmed_SRR519926_2.fastq <span class="se">\</span>
+ILLUMINACLIP:<span class="nv">$ADAPTERS</span>:2:30:10 <span class="se">\</span>
+SLIDINGWINDOW:4:5 <span class="se">\</span>
+LEADING:5 <span class="se">\</span>
+TRAILING:5 <span class="se">\</span>
+MINLEN:25
+</code></pre></div>
+</div>
+</div>
 <div class="admonition note">
 <p class="admonition-title">The use of <code>\</code></p>
 <p>In the script above you see that we&rsquo;re using <code>\</code> at the end of many lines. We use it to tell bash to ignore the newlines. If we would not do it, the <code>trimmomatic</code> command would become a very long line, and the script would become very difficult to read. It is in general good practice to put every option of a long command on a newline in your script and use <code>\</code> to ignore the newlines when executing.</p>
@@ -642,7 +675,7 @@ MINLEN:25
 <p><strong>B.</strong> How many reads do we have left?</p>
 <p><strong>C.</strong> There are more unpaired forward reads compared to reverse reads. Does this make sense?</p>
 <details class="done"><summary>Answers</summary><p>Running <code>fastqc</code>:
-<div class="highlight"><pre><span></span><code>cd ~/ecoli/trimmed_data
+<div class="highlight"><pre><span></span><code>cd ~/workdir/trimmed_data
 fastqc paired_trimmed*.fastq
 </code></pre></div></p>
 <p>A. Yes, low quality 3&rsquo; end, per sequence quality and adapter sequences have improved.</p>
@@ -676,7 +709,7 @@ fastqc paired_trimmed*.fastq
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Server login
+                Setup + UNIX refresher
               </div>
             </div>
           </a>

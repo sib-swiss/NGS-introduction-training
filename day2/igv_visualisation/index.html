@@ -266,7 +266,7 @@
 
   <li class="md-nav__item">
     <a href="../../day1/server_login/" class="md-nav__link">
-      Server login
+      Setup + UNIX refresher
     </a>
   </li>
 
@@ -524,10 +524,14 @@
 <h2 id="exercises">Exercises</h2>
 <h3 id="1-a-first-glance-the-e-coli-dataset">1. A first glance: the E. coli dataset</h3>
 <p>Index the alignment that was filtered for the region between 2000 and 2500 kb:</p>
-<p><div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/ecoli/alignment_output
+<p><div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir/alignment_output
 samtools index SRR519926.sorted.region.bam
 </code></pre></div>
- Download it together with it&rsquo;s index file (<code>SRR519926.sorted.region.bam.bai</code>) and the reference genome (<code>ecoli-strK12-MG1655.fasta</code>) to your desktop.</p>
+Download it together with it&rsquo;s index file (<code>SRR519926.sorted.region.bam.bai</code>) and the reference genome (<code>ecoli-strK12-MG1655.fasta</code>) to your desktop.</p>
+<div class="admonition note">
+<p class="admonition-title">If working with Docker</p>
+<p>If you are working with Docker, you can find the files in the working directory that you mounted to the docker container (with the <code>-v</code> option).</p>
+</div>
 <ul>
 <li>Load the genome (<code>.fasta</code>) into IGV: <strong>Genomes &gt; Load Genome from File&hellip;</strong></li>
 <li>Load the alignment file (<code>.bam</code>): <strong>File &gt; Load from File&hellip;</strong></li>
