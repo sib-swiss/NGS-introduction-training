@@ -54,6 +54,12 @@ In this part we will set up your computer to work on the remote AWS server or wi
 
     Instructions to install docker [here](https://docs.docker.com/get-docker/). Note that you will need administrator rights, and that if you are using Windows, you need the latest version of Windows 10.
 
+    #### Set up docker container
+
+    In the video below there's a tutorial on how to set up a docker container for this course.
+
+    <iframe src="https://player.vimeo.com/video/481620477" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+
 ## Exercises
 
 ### 1. First login
@@ -85,7 +91,7 @@ In this part we will set up your computer to work on the remote AWS server or wi
     * port: 22
     * authentication/logon type: path to private key file
 
-    Tutorials are found above in the [video tutorial to set up Atom](#Atom).
+    Tutorials are found above in the [video tutorial to set up Atom](https://player.vimeo.com/video/473838666).
 
     #### Initiate conda
 
@@ -111,7 +117,7 @@ In this part we will set up your computer to work on the remote AWS server or wi
 
     Use the video tutorials and the information below to log in and set up a remote script editor.
 
-    If you are using MobaXterm on windows, you will automatically login to the remote server once you've started the SSH session. Follow the [video tutorial on MobaXterm](#mobaxterm) to set up an SSH session.
+    If you are using MobaXterm on windows, you will automatically login to the remote server once you've started the SSH session. Follow the [video tutorial on MobaXterm](https://player.vimeo.com/video/473838657) to set up an SSH session.
 
     These are the general settings you should take into account:
 
@@ -142,6 +148,8 @@ In this part we will set up your computer to work on the remote AWS server or wi
 === "Docker"
 
     Docker can be used to run an entire isolated environment in a container. This means that we can run the software with all its dependencies required for this course locally in your computer. Independent of your operating system.
+
+    Use the [video tutorial](https://player.vimeo.com/video/481620477) in combination with the commands below to set up the Docker container.
 
     A command to run the environment required for this course looks like this (in a terminal or powershell):
 
@@ -174,7 +182,9 @@ In this part we will set up your computer to work on the remote AWS server or wi
 
     You can exit the shell with `exit`.
 
-    After exiting, restarting including the made changes would be:
+    #### Restarting the container
+
+    After exiting, you can restart the container.
 
     Find the container name:
 
@@ -188,12 +198,6 @@ In this part we will set up your computer to work on the remote AWS server or wi
     docker start adoring_bell
     docker attach adoring_bell
     ```
-
-    Or with the Dashboard:
-
-    * Go to **Containers/Apps**
-    * Find your container and press the **Start** button ("Play" symbol)
-    * Press the CLI button
 
     If you have additional installations, and you want to keep them, you can save the image with:
 
@@ -218,21 +222,29 @@ Most bioinformatics software are UNIX based and are executed through the CLI. Wh
 
 #### Make a new directory
 
-Login to the server and use the command line to make a directory called `scripts` in your home directory, and make it your current directory.
+Login to the server and use the command line to make a directory called `workdir`.
 
 !!! note "If working with Docker"
-    If your are working with docker you are a root user. This means that your "home" directory is the root directory, i.e. `/root`, and not `/home/username`.
+    If your are working with docker you are a root user. This means that your "home" directory is the root directory, i.e. `/root`, and not `/home/username`. If you have mounted your local directory to `/root/workdir`, this directory should already exist.
 
 ??? done "Answer"
     ```sh
     cd
+    mkdir workdir
+    ```
+
+Make a directory `scripts` within `~/workdir` and make it your current directory.
+
+??? done "Answer"
+    ```sh
+    cd workdir
     mkdir scripts
     cd scripts
     ```
 
 #### File permissions
 
-Generate an empty script in your newly made directory like this:
+Generate an empty script in your newly made directory `~/workdir/scripts` like this:
 
 ```sh
 touch new_script.sh
