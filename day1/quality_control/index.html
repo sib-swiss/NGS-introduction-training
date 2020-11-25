@@ -546,16 +546,6 @@
 <blockquote>
 <p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg></span> 30 minutes</p>
 </blockquote>
-<p><strong>Exercise:</strong> Create a directory called <code>workdir</code> in your home directory and make the directory your current directory.</p>
-<div class="admonition note">
-<p class="admonition-title">If working with Docker</p>
-<p>If you have mounted your local directory to <code>/root/workdir</code>, this directory should already exist.</p>
-</div>
-<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~
-mkdir workdir
-<span class="nb">cd</span> workdir
-</code></pre></div>
-</details>
 <p>Check out the dataset at <a href="https://www.ncbi.nlm.nih.gov/sra/?term=SRR519926">SRA</a>.</p>
 <p><strong>Exercise:</strong> Browse around the SRA entry and answer these questions:</p>
 <p><strong>A.</strong> Is the dataset paired-end or single end?</p>
@@ -568,7 +558,8 @@ mkdir workdir
 <p>D. 400596</p>
 </details>
 <p>Make a directory <code>reads</code> in <code>~/workdir</code> and download the reads from the SRA database using <code>prefetch</code> and <code>fastq-dump</code> from <a href="https://ncbi.github.io/sra-tools/">SRA-Tools</a> into the <code>reads</code> directory:</p>
-<div class="highlight"><pre><span></span><code>mkdir reads
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir
+mkdir reads
 <span class="nb">cd</span> reads
 prefetch SRR519926
 fastq-dump --split-files SRR519926
