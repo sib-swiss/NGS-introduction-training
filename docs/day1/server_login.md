@@ -1,220 +1,150 @@
-## Material
+## Learning outcomes
 
-In this part we will set up your computer to work on the remote AWS server or with Docker (choose **Docker** if you are doing this course independently).
+!!! note
+    You might already be able to do some or all of these learning outcomes. If so, you can go through the corresponding exercises quickly. The general aim of this chapter is to work comfortably on a remote server by using the command line.
 
-=== "mac OS/Linux"
+**After having completed this chapter you will be able to:**
 
-    You have received an e-mail shortly before the workshop with a key, username and IP address to login on a cloud server. Before you do this part, you should have installed FileZilla and Atom.
+* Use the command line to:
+    * Make a directory
+    * Change file permissions to 'executable'
+    * Run a `bash` script
+    * Pipe data from and to a file or other executable
+* Program a loop in `bash`
 
-    !!! warning "Great power comes with great responsibility"
-        The cloud server is a temporary instance for this workshop only. Although the computational resources should be more than enough, **it's a basic Ubuntu server, and there are no hard limits on memory or CPU usage.**
-        Take therefore into account that great power comes with great responsibility. Overloading it can result in a reboot, cancelling all running calculations.
+!!! info "Choose your platform"
+    In this part we will show you how to access the cloud server, or setup your computer to do the exercises with conda or with Docker.
 
-    ### Video tutorials
+    If you are doing the course **with a teacher**, you will have to login to the remote server. Therefore choose:
 
-    Below you can find video tutorials to set up FileZilla and atom to edit and/or transfer remote files.
+    * Cloud notebook
 
-    #### Atom
+    If you are doing this course **independently** (i.e. without a teacher) choose either:
 
-    Atom is a versatile text editor for all major operating systems. For this course, it's the recommended script editor for Linux and Mac OS users. With the third-party package `ftp-remote-edit`, you can remotely edit scripts. The video tutorial explains how to set it up.
+    * conda
+    * Docker
 
-    <iframe src="https://player.vimeo.com/video/473838666" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+=== "Cloud notebook"
 
-    #### FileZilla
+    If you are participating in this course with a teacher, you have received a link and a password. Copy-paste the link (including the port, e.g.: `http://12.345.678.91:10002`) in your browser. This should result in the following page:
 
-    Many results come in an image (e.g. `.png`, `.jpg`) or `html` format. These can not be viewed directly from the server. Also, for this course, files loaded in IGV need to be on your local computer. You can easily transfer files between your local PC and the remote host with [FileZilla](https://filezilla-project.org/). The video tutorial explains how to set it up.
+    <figure>
+      <img src="../../assets/images/jupyter_login_page.png" width="300"/>
+    </figure>
 
-    <iframe src="https://player.vimeo.com/video/473838726" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    Type your password, and proceed to the notebook home page. This page contains all the files in your working directory (if there are any). Most of the exercises will be executed through the command line. Here's a video that explains how to use JupyterLab to use a terminal and work with scripts:
 
-=== "Windows"
+    <iframe src="https://player.vimeo.com/video/524970007" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
 
-    You have received an e-mail shortly before the workshop with a key, username and IP address to login on a cloud server. Before you do this part, you should have installed FileZilla and MobaXterm.
+    If you rather read, here's written explanation how to work with JupyterLab. First, let's open the terminal. Find it at **New > Terminal**:
 
-    !!! warning "Great power comes with great responsibility"
-        The cloud server is a temporary instance for this workshop only. Although the computational resources should be more than enough, **it's a basic Ubuntu server, and there are no hard limits on memory or CPU usage.**
-        Take therefore into account that great power comes with great responsibility. Overloading it can result in a reboot, cancelling all running calculations.
+    <figure>
+      <img src="../../assets/images/jupyter_choose_terminal.png" width="500"/>
+    </figure>
 
-    ### Video tutorials
+    For a.o. efficiency and reproducibility it makes sense to execute your commands from a script. You can generate and edit scripts with **New > Text File**:
 
-    Below you can find video tutorials to set up FileZilla, atom and MobaXterm to edit and/or transfer remote files.
+    <figure>
+      <img src="../../assets/images/jupyter_choose_text.png" width="500"/>
+    </figure>
 
-    #### MobaXterm
+    Once you have opened a script you can change the code highlighting. This is convenient for writing the code. The text editor will automatically change the highlighting based on the file extension (e.g. `.py` extension will result in python syntax highlighting). You can change or set the syntax highlighting by clicking the button on the bottom of the page. We will be using mainly shell scripting in this course, so here's an example for adjusting it to shell syntax highlighting:
 
-    MobaXterm is an SSH client for Windows. Use this to connect to the remote host and edit remote scripts if you're on Windows. The video tutorial explains how to set it up.
+    <figure>
+      <img src="../../assets/images/jupyter_change_highlighting.png" width="300"/>
+    </figure>
 
-    <iframe src="https://player.vimeo.com/video/473838657" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-
-    #### FileZilla
-
-    Many results come in an image (e.g. `.png`, `.jpg`) or `html` format. These can not be viewed directly from the server. Also, for this course, files loaded in IGV need to be on your local computer. You can easily transfer files between your local PC and the remote host with [FileZilla](https://filezilla-project.org/). The video tutorial explains how to set it up.
-
-    <iframe src="https://player.vimeo.com/video/473838726" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-
-=== "Docker"
-
-    Instructions to install docker [here](https://docs.docker.com/get-docker/). Note that you will need administrator rights, and that if you are using Windows, you need the latest version of Windows 10.
-
-    #### Set up docker container
-
-    In the video below there's a tutorial on how to set up a docker container for this course.
-
-    <iframe src="https://player.vimeo.com/video/481620477" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-
-## Exercises
-
-### 1. First login
-
-=== "mac OS/Linux"
-
-    #### Login to AWS EC2 remote server
-
-    Use the video tutorials and the information below to log in and set up a remote script editor.
-
-    Open a terminal and login like this:
-
-    ```sh
-    ssh -i path/to/key/key_[USERNAME].pem [USERNAME]@[AWS_IP]
-    ```
-
-    !!! warning
-        change `path/to/key` to the actual path where you have put the key file.
-
-    #### Setup your favourite editor to work remotely
-
-    To directly initiate and modify scripts on the remote server you can use the Atom plugin `ftp-remote-edit`
-
-    In general, setup the connection to the server with the following details:
-
-    * protocol: sftp
-    * username: your username
-    * hostname: server IP
-    * port: 22
-    * authentication/logon type: path to private key file
-
-    Tutorials are found above in the [video tutorial to set up Atom](https://player.vimeo.com/video/473838666).
-
-    #### Initiate conda
-
-    To make use of the pre-installed software with conda, we need to initiate it first. Login to the server and run:
-
-    ```sh
-    /opt/miniconda3/bin/conda init
-    exec bash
-    ```
-
-    To load the environment with the required software packages, run:
-
-    ```sh
-    conda activate ngs
-    ```
-
-    !!! note "Activating the environment"
-        You will need to activate the ngs environment each time you login.
-
-=== "Windows"
-
-    #### Login to AWS EC2 remote server
-
-    Use the video tutorials and the information below to log in and set up a remote script editor.
-
-    If you are using MobaXterm on windows, you will automatically login to the remote server once you've started the SSH session. Follow the [video tutorial on MobaXterm](https://player.vimeo.com/video/473838657) to set up an SSH session.
-
-    These are the general settings you should take into account:
-
-    * protocol: sftp
-    * username: your username
-    * hostname: server IP
-    * port: 22
-    * authentication/logon type: path to private key file
-
-    #### Initiate conda
-
-    To make use of the pre-installed software with conda, we need to initiate it first. Login to the server and run:
-
-    ```sh
-    /opt/miniconda3/bin/conda init
-    exec bash
-    ```
-
-    To load the environment with the required software packages, run:
-
-    ```sh
-    conda activate ngs
-    ```
-
-    !!! note "Activating the environment"
-        You will need to activate the ngs environment each time you login.
 
 === "Docker"
+
+    ## Material
+
+    * Instructions to [install docker](https://docs.docker.com/get-docker/)
+    * Instructions to [set up to container](https://player.vimeo.com/video/481620477)
+
+    ## Exercises
+
+    ### First login
 
     Docker can be used to run an entire isolated environment in a container. This means that we can run the software with all its dependencies required for this course locally in your computer. Independent of your operating system.
 
-    Use the [video tutorial](https://player.vimeo.com/video/481620477) in combination with the commands below to set up the Docker container.
+    In the video below there's a tutorial on how to set up a docker container for this course. Note that you will need administrator rights, and that if you are using Windows, you need the latest version of Windows 10.
 
-    A command to run the environment required for this course looks like this (in a terminal or powershell):
+    <iframe src="https://player.vimeo.com/video/481620477" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
-    === "Mac OS/Linux terminal"
-        ```sh
-        docker run \
-        -v /full/path/to/local/workdir:/root/workdir \
-        -i -t \
-        geertvangeest/ngs-intro \
-        /bin/bash
-        ```
+    The command to run the environment required for this course looks like this (in a terminal):
 
-    === "Windows powershell"
-        ```powershell
-        docker run `
-        -v C:\Users\myusername:/root/workdir `
-        -i -t `
-        geertvangeest/ngs-intro `
-        /bin/bash
-        ```
+    !!! warning "Modify the script"
+        Modify the path after `-v` to the working directory on your computer before running it.
 
-    The option `-v` mounts a local directory in your computer to the directory `/root/workdir` in the docker container. In that way, you have files available both in the container and on your computer. Use this directory on your computer to e.g. edit scripts and visualise data with IGV. Change the first path to a path on your computer that you want to use as a working directory.
+      ```sh
+      docker run \
+      --rm \
+      -e JUPYTER_ENABLE_LAB=yes \
+      -v /path/to/local/workdir:/home/jovyan \
+      -p 8888:8888 \
+      geertvangeest/ngs-introduction-jupyter:2021.5 \
+      start-notebook.sh
+      ```
+
+    If this command has run successfully, you will find a link and token in the console, e.g.:
+
+    ```sh
+    http://127.0.0.1:8888/?token=4be8d916e89afad166923de5ce5th1s1san3xamp13
+    ```
+
+    Copy this URL into your browser, and you will be able to use the jupyter notebook.
+
+    The option `-v` mounts a local directory in your computer to the directory `/home/jovyan` in the docker container ('jovyan' is the default user for jupyter containers). In that way, you have files available both in the container and on your computer. Use this directory on your computer to e.g. visualise data with IGV. Change the first path to a path on your computer that you want to use as a working directory.
 
     !!! note "Don't mount directly in the home dir"
         Don't directly mount your local directory to the home directory (`/root`). This will lead to unexpected behaviour.
 
-    The options `-i` and `-t` let's you approach the container interactively. Meaning that you can use the shell.
 
-    The last bit, `geertvangeest/ngs-intro` is the image we are going to load into the container. The image contains all the information about software and dependencies needed for this course. When you run this command for the first time it will download the image. Once it's on your computer, it will start immediately.
+    The part `geertvangeest/ngs-introduction-jupyter:2021.5` is the image we are going to load into the container. The image contains all the information about software and dependencies needed for this course. When you run this command for the first time it will download the image. Once it's on your computer, it will start immediately.
 
-    You can exit the shell with `exit`.
 
-    #### Restarting the container
+=== "conda"
 
-    After exiting, you can restart the container.
+    If you have a conda installation on your local computer, you can install the required software using conda.
 
-    Find the container name:
+    You can build the environment from [ngs-introduction.yml](../assets/yaml/ngs-introduction.yml)
 
-    ```sh
-    docker container ls -a
-    ```
-
-    The name is e.g. `adoring_bell`. To restart run:
+    Generate the conda environment like this:
 
     ```sh
-    docker start adoring_bell
-    docker attach adoring_bell
+    conda env create --name ngs-introduction -f ngs-introduction.yml
     ```
 
-    If you have additional installations, and you want to keep them, you can save the image with:
+    !!! note "The `yaml` file probably only works for Linux systems"
+        If you want to use the conda environment on a different OS, use:
+
+        ```sh
+        conda create -n ngs-introduction python=3.8
+
+        conda activate ngs-introduction
+
+        conda install -y -c bioconda \
+        samtools \
+        bwa \
+        fastqc \
+        sra-tools \
+        cutadapt \
+        bowtie2 \
+        hisat2 \
+        subread \
+        entrez-direct
+        ```
+
+    This will create the conda environment `ngs-introduction`
+
+    Activate it like so:
 
     ```sh
-    docker commit adoring_bell my-image
+    conda activate ngs-introduction
     ```
 
-    #### Use conda
-
-    If you are in the container with shell, you can load the environment with the required software packages:
-
-    ```sh
-    conda activate ngs
-    ```
-
-    !!! note "Activating the environment"
-        You will need to activate the ngs environment each time you login.
+    After successful installation and activating the environment all the software required to do the exercises should be available.
 
 ### 2. A UNIX command line interface (CLI) refresher
 

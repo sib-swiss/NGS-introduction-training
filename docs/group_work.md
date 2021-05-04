@@ -2,7 +2,7 @@
 The last part of this course will consist of project-based-learning. This means that you will work in groups on a single question. We will split up into groups of five people.
 
 !!! note "If working with Docker"
-    If you are working with Docker, I assume you are working independently and therefore can not work in a group. However, you can test your skills with these real biological datasets. Realize that the datasets and calculations are (much) bigger compared to the exercises, so check if your computer is up for it. You'll probably need around 4 cores, 16G of RAM and 50G of harddisk. 
+    If you are working with Docker, I assume you are working independently and therefore can not work in a group. However, you can test your skills with these real biological datasets. Realize that the datasets and calculations are (much) bigger compared to the exercises, so check if your computer is up for it. You'll probably need around 4 cores, 16G of RAM and 50G of harddisk.
 
 !!! note "If online"
     If the course takes place online, we will use break-out rooms to communicate within groups. Please stay in the break-out room during the day, also if you are working individually.
@@ -15,84 +15,7 @@ Each project has **tasks** and **questions**. By performing the tasks, you shoul
 
 In the afternoon of day 2, you will divide the initial tasks, and start on the project. On day 3, you can work on the project in the morning and in the first part of the afternoon. We will conclude the projects with a **10-minute presentation** of each group.
 
-## :fontawesome-solid-disease: Project 1: Short-read RNA-seq of mice.
-
-**Aim:** Compare `hisat2` (splice-aware) with `bwa mem` (splice unaware) while aligning a mouse RNA-seq dataset.
-
-In this project you will be working with data from:
-
-Singhania A, Graham CM, Gabryšová L, Moreira-Teixeira L, Stavropoulos E, Pitt JM, et al (2019). *Transcriptional profiling unveils type I and II interferon networks in blood and tissues across diseases*. Nat Commun. 10:1–21. [https://doi.org/10.1038/s41467-019-10601-6](https://doi.org/10.1038/s41467-019-10601-6)
-
-Here's the [BioProject page](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA490485).
-
-Download the mouse reference genome like this:
-
-```sh
-ftp://ftp.ensembl.org/pub/release-101/fasta/mus_musculus/dna/Mus_musculus.GRCm38.dna.primary_assembly.fa.gz
-```
-
-### Tasks:
-
-* Check out the BioProject, and download two samples that interest you.
-* Do a QC on the data with `fastqc`
-* Check which options to use, and run `bwa-mem`
-* Check which options to use, and run `hisat2`
-* Evaluate the alignment quality (e.g. alignment rates, mapping quality)
-* Compare the bam files of the two aligners in IGV
-* Compare different samples in read quality, alignment rates, depth, etc.
-* Run `featurecounts` on both alignments
-* Compare the count matrices in `R` or `python`
-
-### Questions:
-
-* What are the alignment rates?
-* How do the aligners handle splicing?
-* How are spliced alignments stored in the SAM file?
-* Do you see differences in soft clipping?
-* What would be the effect of the aligner if you would be measuring gene expression? (To investigate this you'll need to run e.g. [featureCounts](http://bioinf.wehi.edu.au/featureCounts/)).
-
-!!! hint "Downloading from SRA"
-    ```sh
-    prefetch [SRR number]
-    fastq-dump --split-files --gzip [SRR number]
-    ```
-
-!!! hint "Example code hisat2"
-    Everything in between `<>` should be replaced with specific arguments
-
-    ```sh
-    hisat2-build <reference_sequence_fasta> <index_basename>
-
-    hisat2 \
-    -x <index_basename> \
-    -1 <foward_reads.fastq.gz> \
-    -2 <reverse_reads.fastq.gz> \
-    -p <threads> \
-    | samtools sort \
-    | samtools view -bh \
-    > <alignment_file.bam>
-    ```
-
-!!! hint "Example code `bwa mem`"
-    ```
-    bwa index <reference_sequence_fasta>
-
-    bwa mem \
-    <index_basename> \
-    <forward_reads.fastq.gz> \
-    <reverse_reads.fastq.gz> \
-    | samtools sort \
-    | samtools view -bh \
-    > <alignment_file.bam>
-    ```
-
-!!! hint "More resources"
-    Need e.g. a gtf file? Here's the [ensembl page](http://www.ensembl.org/Mus_musculus/Info/Index)
-
-!!! hint "Spliced alignments"
-    Have a look at IGV on a particular gene, e.g. Nbr1
-
-## :fontawesome-solid-seedling: Project 2: Short-read RNA-seq data of *Arabidopsis thaliana* grown in space
+## :fontawesome-solid-seedling: Project 1: Short-read RNA-seq data of *Arabidopsis thaliana* grown in space
 
 **Aim:** Compare `hisat2` (splice-aware) with `bowtie2` (splice unaware) while aligning an Arabidopsis RNA-seq dataset.
 
@@ -160,7 +83,7 @@ wget ftp://ftp.ensemblgenomes.org/pub/plants/release-48/fasta/arabidopsis_thalia
     Need e.g. a gtf file? Here's the [ensembl page](https://plants.ensembl.org/Arabidopsis_thaliana/Info/Index)
 
 
-## :fontawesome-solid-brain: Project 3: Long-read genome sequencing
+## :fontawesome-solid-brain: Project 2: Long-read genome sequencing
 
 **Aim**: Align long reads from RNA-seq data to a reference genome.
 

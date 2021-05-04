@@ -8,13 +8,13 @@ nav:
       - Sequencing technologies: day1/sequencing_technologies.md
       - Setup + UNIX refresher: day1/server_login.md
       - Quality control: day1/quality_control.md
-      - Read alignment: day1/read_alignment.md
     - Day 2:
+      - Read alignment: day2/read_alignment.md
       - File types: day2/file_types.md
       - Samtools: day2/samtools.md
-      - IGV and visualisation: day2/igv_visualisation.md
-      - Group work - organisation: day2/group_work.md
-    - Day 3: day3.md
+    - Day 3:
+      - IGV and visualisation: day3/igv_visualisation.md
+    - Group work: group_work.md
 
 theme:
   name: material
@@ -42,6 +42,7 @@ markdown_extensions:
   - attr_list
   - pymdownx.tabbed
   - pymdownx.details
+  - pymdownx.keys
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg

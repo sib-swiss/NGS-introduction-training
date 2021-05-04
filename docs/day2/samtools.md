@@ -20,17 +20,17 @@
     resulting in:
 
     ```
-    529562 + 0 in total (QC-passed reads + QC-failed reads)
+    631808 + 0 in total (QC-passed reads + QC-failed reads)
     0 + 0 secondary
     0 + 0 supplementary
     0 + 0 duplicates
-    526159 + 0 mapped (99.36% : N/A)
-    529562 + 0 paired in sequencing
-    264781 + 0 read1
-    264781 + 0 read2
-    203576 + 0 properly paired (38.44% : N/A)
-    523484 + 0 with itself and mate mapped
-    2675 + 0 singletons (0.51% : N/A)
+    627753 + 0 mapped (99.36% : N/A)
+    631808 + 0 paired in sequencing
+    315904 + 0 read1
+    315904 + 0 read2
+    302430 + 0 properly paired (47.87% : N/A)
+    624508 + 0 with itself and mate mapped
+    3245 + 0 singletons (0.51% : N/A)
     0 + 0 with mate mapped to a different chr
     0 + 0 with mate mapped to a different chr (mapQ>=5)
     ```
@@ -105,7 +105,7 @@ samtools view -bh -F 4 SRR519926.sorted.bam > SRR519926.sorted.mapped.bam
     ```sh
     samtools view -c SRR519926.sorted.unmapped.bam
     ```
-    This should correspond to the output of `samtools flagstat` (529562 - 526159 = 3403)
+    This should correspond to the output of `samtools flagstat` (631808 - 627753 = 4055)
 
 `samtools view` also enables you to filter alignments in a specific region. This can be convenient if you don't want to work with huge alignment files and if you're only interested in alignments in a particular region. Region filtering only works for sorted and indexed alignment files.
 
@@ -149,7 +149,7 @@ my_alignment_command \
 !!! note "The use of `-`"
     In the modern versions of samtools, the use of `-` is not needed for most cases, so without an input file it reads from stdin. However, if you're not sure, it's better to be safe than sorry.
 
-**Exercise:** Write a script that maps the reads with bowtie2 (see chapter 2 of [read alignment](../day1/read_alignment.md)), sorts them, takes only the mapped reads, and outputs them as a BAM file with a header.
+**Exercise:** Write a script that maps the reads with bowtie2 (see chapter 2 of [read alignment](../day2/read_alignment.md)), sorts them, takes only the mapped reads, and outputs them as a BAM file with a header.
 
 ??? done "Answer"
     ```

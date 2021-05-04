@@ -47,6 +47,14 @@ Check out the dataset at [SRA](https://www.ncbi.nlm.nih.gov/sra/?term=SRR519926)
 
 Make a directory `reads` in `~/workdir` and download the reads from the SRA database using `prefetch` and `fastq-dump` from [SRA-Tools](https://ncbi.github.io/sra-tools/) into the `reads` directory:
 
+!!! note "Running `sra-tools` for the first time"
+    If you run `sra-tools` for the first time, you have to set a config file. We'll be just using a minimal file for now. To do that run:
+
+    ```sh
+    vdb-config --interactive
+    ```
+    When the GUI pops up, press the key ++x++. The config file will be created in `~/.ncbi/user-settings.mkfg`.
+
 ```sh
 mkdir reads
 cd reads
@@ -97,72 +105,64 @@ fastq-dump --split-files SRR519926
 
 ### 3. Trim the reads
 
->:fontawesome-regular-clock: 20 minutes
+We will use [cutadapt](https://cutadapt.readthedocs.io/en/stable/index.html) for trimming adapters and low quality bases from our reads. The most used adapters for Illumina are TruSeq adapters. To run `cutadapt` you need to specify the adapter sequences with options `-a` (or `--adapter`) and `-A`. A reference for the adapter sequences can be found [here](https://support.illumina.com/bulletins/2016/12/what-sequences-do-i-use-for-adapter-trimming.html).
 
-We will use [trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic) for trimming low quality and spurious bases from our reads. For paired-end data it generates four different trimmed `fastq` files. If one of the paired-end reads doesn't meet the quality thresholds, it will be discarded, but the other read might be kept. Therefore, trimmomatic outputs contains files with unpaired reads as well. Usually those files are very small compared to the paired reads, and are often ignored for downstream analyses.
+**Exercise:** The script below will trim the sequence reads. However, some parts are missing. We want to:
 
-Trimmomatic syntax is rather complicated and different from most tools. Refer to the [manual](http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf) if you want to go deeper into this.
+* trim the reads based on a base quality of 10 both on the 3' and 5' end of the reads,
+* keep only reads with a read length not shorter than 25 base pairs.
 
-**Exercise:** The script below will trim the sequence reads in a sensible manner. Execute the script to trim the data (note that the script is slightly different if you're working in the docker container):
+Fill in the missing options and execute the script to trim the data.
 
-=== "AWS"
-
+!!! hint
+    Check out the helper of `cutadapt` with:
     ```sh
-    ##!/usr/bin/env bash
-
-    TRIMMED_DIR=~/workdir/trimmed_data
-    READS_DIR=~/workdir/reads
-    ADAPTERS=/opt/miniconda3/pkgs/trimmomatic-0.39-1/share/trimmomatic/adapters/TruSeq3-PE.fa
-
-    mkdir $TRIMMED_DIR
-
-    trimmomatic \
-    PE \
-    -threads 1 \
-    -phred33 \
-    $READS_DIR/SRR519926_1.fastq \
-    $READS_DIR/SRR519926_2.fastq \
-    $TRIMMED_DIR/paired_trimmed_SRR519926_1.fastq \
-    $TRIMMED_DIR/unpaired_trimmed_SRR519926_1.fastq \
-    $TRIMMED_DIR/paired_trimmed_SRR519926_2.fastq \
-    $TRIMMED_DIR/unpaired_trimmed_SRR519926_2.fastq \
-    ILLUMINACLIP:$ADAPTERS:2:30:10 \
-    SLIDINGWINDOW:4:5 \
-    LEADING:5 \
-    TRAILING:5 \
-    MINLEN:25
+    cutadapt --help
     ```
 
-=== "Docker"
+```sh
+##!/usr/bin/env bash
+
+TRIMMED_DIR=trimmed_data
+READS_DIR=reads
+
+mkdir $TRIMMED_DIR
+
+cutadapt \
+--adapter AGATCGGAAGAGCACACGTCTGAACTCCAGTCA \
+-A AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT \
+[QUALITY CUTOFF OPTION] \
+[MINIMUM LENGTH OPTION] \
+--output $TRIMMED_DIR/paired_trimmed_SRR519926_1.fastq \
+--paired-output $TRIMMED_DIR/paired_trimmed_SRR519926_2.fastq \
+$READS_DIR/SRR519926_1.fastq \
+$READS_DIR/SRR519926_2.fastq
+```
+
+??? done "Answer"
+    Your script should look like this:
 
     ```sh
     ##!/usr/bin/env bash
 
-    TRIMMED_DIR=~/workdir/trimmed_data
-    READS_DIR=~/workdir/reads
-    ADAPTERS=/opt/conda/pkgs/trimmomatic-0.39-1/share/trimmomatic/adapters/TruSeq3-PE.fa
+    TRIMMED_DIR=trimmed_data
+    READS_DIR=reads
 
     mkdir $TRIMMED_DIR
 
-    trimmomatic \
-    PE \
-    -threads 1 \
-    -phred33 \
+    cutadapt \
+    --adapter AGATCGGAAGAGCACACGTCTGAACTCCAGTCA \
+    -A AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT \
+    --quality-cutoff 10,10 \
+    --minimum-length 25 \
+    --output $TRIMMED_DIR/paired_trimmed_SRR519926_1.fastq \
+    --paired-output  $TRIMMED_DIR/paired_trimmed_SRR519926_2.fastq \
     $READS_DIR/SRR519926_1.fastq \
-    $READS_DIR/SRR519926_2.fastq \
-    $TRIMMED_DIR/paired_trimmed_SRR519926_1.fastq \
-    $TRIMMED_DIR/unpaired_trimmed_SRR519926_1.fastq \
-    $TRIMMED_DIR/paired_trimmed_SRR519926_2.fastq \
-    $TRIMMED_DIR/unpaired_trimmed_SRR519926_2.fastq \
-    ILLUMINACLIP:$ADAPTERS:2:30:10 \
-    SLIDINGWINDOW:4:5 \
-    LEADING:5 \
-    TRAILING:5 \
-    MINLEN:25
+    $READS_DIR/SRR519926_2.fastq
     ```
 
 !!! note "The use of `\`"
-    In the script above you see that we're using `\` at the end of many lines. We use it to tell bash to ignore the newlines. If we would not do it, the `trimmomatic` command would become a very long line, and the script would become very difficult to read. It is in general good practice to put every option of a long command on a newline in your script and use `\` to ignore the newlines when executing.
+    In the script above you see that we're using `\` at the end of many lines. We use it to tell bash to ignore the newlines. If we would not do it, the `cutadapt` command would become a very long line, and the script would become very difficult to read. It is in general good practice to put every option of a long command on a newline in your script and use `\` to ignore the newlines when executing.
 
 **Exercise:** Run `fastqc` on the trimmed fastq files and answer these questions:
 
@@ -170,7 +170,6 @@ Trimmomatic syntax is rather complicated and different from most tools. Refer to
 
 **B.** How many reads do we have left?
 
-**C.** There are more unpaired forward reads compared to reverse reads. Does this make sense?
 
 ??? done "Answers"
     Running `fastqc`:
@@ -181,6 +180,4 @@ Trimmomatic syntax is rather complicated and different from most tools. Refer to
 
     A. Yes, low quality 3' end, per sequence quality and adapter sequences have improved.
 
-    B. 264781
-
-    C. Again, [Google to the rescue](https://www.biostars.org/p/325174/#325193)
+    B. 315904
