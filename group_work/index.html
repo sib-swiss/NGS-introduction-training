@@ -473,6 +473,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#working-directories" class="md-nav__link">
+    Working directories
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#project-1-short-read-rna-seq-data-of-arabidopsis-thaliana-grown-in-space" class="md-nav__link">
      Project 1: Short-read RNA-seq data of Arabidopsis thaliana grown in space
   </a>
@@ -564,6 +571,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#working-directories" class="md-nav__link">
+    Working directories
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#project-1-short-read-rna-seq-data-of-arabidopsis-thaliana-grown-in-space" class="md-nav__link">
      Project 1: Short-read RNA-seq data of Arabidopsis thaliana grown in space
   </a>
@@ -645,6 +659,17 @@
 <p>Project based learning is about learning by doing, but also about <em>peer instruction</em>. This means that you will be both a learner and a teacher. There will be differences in levels among participants, but because of that, some will learn efficiently from people that have just learned, and others will teach and increase their understanding.</p>
 <p>Each project has <strong>tasks</strong> and <strong>questions</strong>. By performing the tasks, you should be able to answer the questions. At the start of the project, make sure that each of you gets a task assigned. You should consider the tasks and questions as a guidance. If interesting questions pop up during the project, you are <strong>encouraged</strong> to work on those. Also, you don&rsquo;t have to perform all the tasks and answer all the questions.</p>
 <p>In the afternoon of day 2, you will divide the initial tasks, and start on the project. On day 3, you can work on the project in the morning and in the first part of the afternoon. We will conclude the projects with a <strong>10-minute presentation</strong> of each group.</p>
+<h2 id="working-directories">Working directories</h2>
+<p>Each group has access to a shared working directory. It is mounted in the root directory (<code>/</code>). Make a soft link in your home directory:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~
+ln -s /group_work/&lt;group name&gt; ./
+</code></pre></div>
+
+<p>Now you can find your group directory at <code>~/&lt;group name&gt;</code>. Use this as much as possible.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not remove the soft link with <code>rm -r</code>, this will delete the entire source directory. If you want to remove only the softlink, use <code>rm</code> (without <code>-r</code>), or <code>unlink</code>. More info <a href="https://linuxize.com/post/how-to-remove-symbolic-links-in-linux/">here</a>.</p>
+</div>
 <h2 id="project-1-short-read-rna-seq-data-of-arabidopsis-thaliana-grown-in-space"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M64 96H0c0 123.7 100.3 224 224 224v144c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V320C288 196.3 187.7 96 64 96zm384-64c-84.2 0-157.4 46.5-195.7 115.2 27.7 30.2 48.2 66.9 59 107.6C424 243.1 512 147.9 512 32h-64z"/></svg></span> Project 1: Short-read RNA-seq data of <em>Arabidopsis thaliana</em> grown in space</h2>
 <p><strong>Aim:</strong> Compare <code>hisat2</code> (splice-aware) with <code>bowtie2</code> (splice unaware) while aligning an Arabidopsis RNA-seq dataset.</p>
 <p>The analysis of this dataset is reported in this paper:</p>
@@ -663,19 +688,26 @@ https://genelab-data.ndc.nasa.gov/genelab/static/media/dataset/GLDS-251_rna-seq_
 </div>
 <p>Download the reference genome sequence like this:</p>
 <div class="highlight"><pre><span></span><code>wget ftp://ftp.ensemblgenomes.org/pub/plants/release-48/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz
+gunzip Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz
+</code></pre></div>
+
+<p>You can download the gtf like this:</p>
+<div class="highlight"><pre><span></span><code>wget https://ngs-introduction-training.s3.eu-central-1.amazonaws.com/Araport11_GTF_genes_transposons.Mar202021.noChr.gtf.gz
+gunzip Araport11_GTF_genes_transposons.Mar202021.noChr.gtf.gz
 </code></pre></div>
 
 <h3 id="tasks">Tasks:</h3>
 <ul>
-<li>Check out the BioProject, and download two samples that interest you.</li>
+<li>Check out the project page, and download one or two samples that interest you (download both the forward and reverse reads from the same sample).</li>
 <li>Do a QC on the data with <code>fastqc</code></li>
-<li>Check which options to use, and run <code>bwa-mem</code></li>
-<li>Check which options to use, and run <code>hisat2</code></li>
+<li>Trim adapters and low quality bases with <code>cutadapt</code> (the adapter sequences are the same as in the exercises).</li>
+<li>Check which options to use, and align with <code>bowtie2</code></li>
+<li>Check which options to use, and align with <code>hisat2</code></li>
 <li>Evaluate the alignment quality (e.g. alignment rates, mapping quality)</li>
-<li>Compare the bam files of the two aligners in IGV</li>
+<li>Compare the bam files of the two aligners in IGV. For this, download only a part of the bam file (e.g. the region <code>1:22145-42561</code>).</li>
 <li>Compare different samples in read quality, alignment rates, depth, etc.</li>
-<li>Run <code>featurecounts</code> on both alignments</li>
-<li>Compare the count matrices in <code>R</code> or <code>python</code></li>
+<li>Run <code>featureCounts</code> on both alignments</li>
+<li>Compare the count matrices in <code>R</code> or <code>python</code> (Rstudio server is running on the same machine. Approach it with your credentials and username <code>rstudio</code>)</li>
 </ul>
 <h3 id="questions">Questions:</h3>
 <ul>
@@ -686,6 +718,48 @@ https://genelab-data.ndc.nasa.gov/genelab/static/media/dataset/GLDS-251_rna-seq_
 <li>What would be the effect of the aligner if you would be measuring gene expression? (To investigate this you&rsquo;ll need to run e.g. <a href="http://bioinf.wehi.edu.au/featureCounts/">featureCounts</a>).</li>
 </ul>
 <div class="admonition hint">
+<p class="admonition-title">Run your processes on multiple cores!</p>
+<p>We are now doing computations on a full genome, with full transcriptomic data. This is quite a bit more than we have used during the exercises. Therefore, computations take longer. However, most tools support parallel processing, in which you can specify how many cores you want to use to run in parallel. Your environment contains <strong>four</strong> cores, so this is also the maximum number of processes you can specify. Below you can find the options used in each command to specify multi-core processing.</p>
+<table>
+<thead>
+<tr>
+<th>command</th>
+<th>option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bowtie2-build</code></td>
+<td><code>--threads</code></td>
+</tr>
+<tr>
+<td><code>hisat2-build</code></td>
+<td><code>--threads</code></td>
+</tr>
+<tr>
+<td><code>fastqc</code></td>
+<td><code>--threads</code></td>
+</tr>
+<tr>
+<td><code>cutadapt</code></td>
+<td><code>--cores</code></td>
+</tr>
+<tr>
+<td><code>bowtie2</code></td>
+<td><code>--threads</code></td>
+</tr>
+<tr>
+<td><code>hisat2</code></td>
+<td><code>--threads</code></td>
+</tr>
+<tr>
+<td><code>featureCounts</code></td>
+<td><code>-T</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition hint">
 <p class="admonition-title">Example code hisat2</p>
 <p>Everything in between <code>&lt;&gt;</code> should be replaced with specific arguments</p>
 <div class="highlight"><pre><span></span><code>hisat2-build &lt;reference_sequence_fasta&gt; &lt;index_basename&gt;
@@ -694,7 +768,7 @@ hisat2 <span class="se">\</span>
 -x &lt;index_basename&gt; <span class="se">\</span>
 -1 &lt;mate1.fastq.gz&gt; <span class="se">\</span>
 -2 &lt;mate2.fastq.gz&gt; <span class="se">\</span>
--p &lt;threads&gt; <span class="se">\</span>
+--threads &lt;threads&gt; <span class="se">\</span>
 <span class="p">|</span> samtools sort <span class="se">\</span>
 <span class="p">|</span> samtools view -bh <span class="se">\</span>
 &gt; &lt;alignment_file.bam&gt;
