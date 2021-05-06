@@ -178,6 +178,6 @@ $READS_DIR/SRR519926_2.fastq
     fastqc paired_trimmed*.fastq
     ```
 
-    A. Yes, low quality 3' end, per sequence quality and adapter sequences have improved.
+    A. Yes, low quality 3' end, per sequence quality and adapter sequences have improved. 
 
     B. 315904

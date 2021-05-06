@@ -15,6 +15,20 @@ Each project has **tasks** and **questions**. By performing the tasks, you shoul
 
 In the afternoon of day 2, you will divide the initial tasks, and start on the project. On day 3, you can work on the project in the morning and in the first part of the afternoon. We will conclude the projects with a **10-minute presentation** of each group.
 
+## Working directories
+
+Each group has access to a shared working directory. It is mounted in the root directory (`/`). Make a soft link in your home directory:
+
+```sh
+cd ~
+ln -s /group_work/<group name> ./
+```
+
+Now you can find your group directory at `~/<group name>`. Use this as much as possible.
+
+!!! warning
+    Do not remove the soft link with `rm -r`, this will delete the entire source directory. If you want to remove only the softlink, use `rm` (without `-r`), or `unlink`. More info [here](https://linuxize.com/post/how-to-remove-symbolic-links-in-linux/).
+
 ## :fontawesome-solid-seedling: Project 1: Short-read RNA-seq data of *Arabidopsis thaliana* grown in space
 
 **Aim:** Compare `hisat2` (splice-aware) with `bowtie2` (splice unaware) while aligning an Arabidopsis RNA-seq dataset.
@@ -41,19 +55,28 @@ Download the reference genome sequence like this:
 
 ```sh
 wget ftp://ftp.ensemblgenomes.org/pub/plants/release-48/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz
+gunzip Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz
+```
+
+You can download the gtf like this:
+
+```sh
+wget https://ngs-introduction-training.s3.eu-central-1.amazonaws.com/Araport11_GTF_genes_transposons.Mar202021.noChr.gtf.gz
+gunzip Araport11_GTF_genes_transposons.Mar202021.noChr.gtf.gz
 ```
 
 ### Tasks:
 
-* Check out the BioProject, and download two samples that interest you.
+* Check out the project page, and download one or two samples that interest you (download both the forward and reverse reads from the same sample).
 * Do a QC on the data with `fastqc`
-* Check which options to use, and run `bwa-mem`
-* Check which options to use, and run `hisat2`
+* Trim adapters and low quality bases with `cutadapt` (the adapter sequences are the same as in the exercises).
+* Check which options to use, and align with `bowtie2`
+* Check which options to use, and align with `hisat2`
 * Evaluate the alignment quality (e.g. alignment rates, mapping quality)
-* Compare the bam files of the two aligners in IGV
+* Compare the bam files of the two aligners in IGV. For this, download only a part of the bam file (e.g. the region `1:22145-42561`).
 * Compare different samples in read quality, alignment rates, depth, etc.
-* Run `featurecounts` on both alignments
-* Compare the count matrices in `R` or `python`
+* Run `featureCounts` on both alignments
+* Compare the count matrices in `R` or `python` (Rstudio server is running on the same machine. Approach it with your credentials and username `rstudio`)
 
 ### Questions:
 
@@ -62,6 +85,19 @@ wget ftp://ftp.ensemblgenomes.org/pub/plants/release-48/fasta/arabidopsis_thalia
 * How are spliced alignments stored in the SAM file?
 * Do you see differences in soft clipping?
 * What would be the effect of the aligner if you would be measuring gene expression? (To investigate this you'll need to run e.g. [featureCounts](http://bioinf.wehi.edu.au/featureCounts/)).
+
+!!! hint "Run your processes on multiple cores!"
+    We are now doing computations on a full genome, with full transcriptomic data. This is quite a bit more than we have used during the exercises. Therefore, computations take longer. However, most tools support parallel processing, in which you can specify how many cores you want to use to run in parallel. Your environment contains **four** cores, so this is also the maximum number of processes you can specify. Below you can find the options used in each command to specify multi-core processing.
+
+    | command       	| option    	|
+    |---------------	|-----------	|
+    | `bowtie2-build` 	| `--threads` 	|
+    | `hisat2-build`  	| `--threads` 	|
+    | `fastqc`       	| `--threads` 	|
+    | `cutadapt`      	| `--cores`   	|
+    | `bowtie2`       	| `--threads` 	|
+    | `hisat2`        	| `--threads` 	|
+    | `featureCounts`  	| `-T`        	|
 
 !!! hint "Example code hisat2"
     Everything in between `<>` should be replaced with specific arguments
@@ -73,7 +109,7 @@ wget ftp://ftp.ensemblgenomes.org/pub/plants/release-48/fasta/arabidopsis_thalia
     -x <index_basename> \
     -1 <mate1.fastq.gz> \
     -2 <mate2.fastq.gz> \
-    -p <threads> \
+    --threads <threads> \
     | samtools sort \
     | samtools view -bh \
     > <alignment_file.bam>
