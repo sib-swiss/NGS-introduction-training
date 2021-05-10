@@ -63,8 +63,8 @@ Sequence reads were aligned to version GRCh37 of the human reference genome. We 
 
 The BAM files containing these reads for the cancer cell line and the matched normal are:
 
-* [`HCC1143.normal.21.19M-20M.bam`](https://xfer.genome.wustl.edu/gxfer1/project/gms/testdata/bams/hcc1143/HCC1143.normal.21.19M-20M.bam)
-* [`HCC1143.normal.21.19M-20M.bam.bai`](https://xfer.genome.wustl.edu/gxfer1/project/gms/testdata/bams/hcc1143/HCC1143.normal.21.19M-20M.bam.bai)
+* [`HCC1143.normal.21.19M-20M.bam`](https://ngs-introduction-training.s3.eu-central-1.amazonaws.com/HCC1143.normal.21.19M-20M.bam)
+* [`HCC1143.normal.21.19M-20M.bam.bai`](https://ngs-introduction-training.s3.eu-central-1.amazonaws.com/HCC1143.normal.21.19M-20M.bam.bai)
 
 A lot of model-organism genomes are built-in IGV. Select the human genome version hg19 from the drop down menu:
 
