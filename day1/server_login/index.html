@@ -354,11 +354,11 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-a-unix-command-line-interface-cli-refresher" class="md-nav__link">
-    2. A UNIX command line interface (CLI) refresher
+  <a href="#a-unix-command-line-interface-cli-refresher" class="md-nav__link">
+    A UNIX command line interface (CLI) refresher
   </a>
   
-    <nav class="md-nav" aria-label="2. A UNIX command line interface (CLI) refresher">
+    <nav class="md-nav" aria-label="A UNIX command line interface (CLI) refresher">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -398,13 +398,6 @@
         
       </ul>
     </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-detaching-a-job" class="md-nav__link">
-    3. Detaching a job
-  </a>
   
 </li>
         
@@ -616,11 +609,11 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-a-unix-command-line-interface-cli-refresher" class="md-nav__link">
-    2. A UNIX command line interface (CLI) refresher
+  <a href="#a-unix-command-line-interface-cli-refresher" class="md-nav__link">
+    A UNIX command line interface (CLI) refresher
   </a>
   
-    <nav class="md-nav" aria-label="2. A UNIX command line interface (CLI) refresher">
+    <nav class="md-nav" aria-label="A UNIX command line interface (CLI) refresher">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -660,13 +653,6 @@
         
       </ul>
     </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-detaching-a-job" class="md-nav__link">
-    3. Detaching a job
-  </a>
   
 </li>
         
@@ -799,7 +785,8 @@ cutadapt <span class="se">\</span>
 bowtie2 <span class="se">\</span>
 hisat2 <span class="se">\</span>
 subread <span class="se">\</span>
-entrez-direct
+entrez-direct <span class="se">\</span>
+minimap2
 </code></pre></div>
 
 </div>
@@ -809,16 +796,19 @@ entrez-direct
 </code></pre></div>
 
 <p>After successful installation and activating the environment all the software required to do the exercises should be available.</p>
+<div class="admonition note">
+<p class="admonition-title">If you are doing project 2 (long reads)</p>
+<p>If you are doing the project 2 as part of the course, you will need to install <code>NanoPlot</code> as well, using <code>pip</code>:</p>
+<div class="highlight"><pre><span></span><code>pip install NanoPlot
+</code></pre></div>
+
 </div>
 </div>
-<h3 id="2-a-unix-command-line-interface-cli-refresher">2. A UNIX command line interface (CLI) refresher</h3>
+</div>
+<h3 id="a-unix-command-line-interface-cli-refresher">A UNIX command line interface (CLI) refresher</h3>
 <p>Most bioinformatics software are UNIX based and are executed through the CLI. When working with NGS data, it is therefore convenient to improve your knowledge on UNIX. For this course, we need basic understanding of UNIX CLI, so here are some exercises to refresh your memory.</p>
 <h4 id="make-a-new-directory">Make a new directory</h4>
 <p>Login to the server and use the command line to make a directory called <code>workdir</code>.</p>
-<div class="admonition note">
-<p class="admonition-title">If working with Docker</p>
-<p>If your are working with docker you are a root user. This means that your &ldquo;home&rdquo; directory is the root directory, i.e. <code>/root</code>, and not <code>/home/username</code>. If you have mounted your local directory to <code>/root/workdir</code>, this directory should already exist.</p>
-</div>
 <details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="nb">cd</span>
 mkdir workdir
 </code></pre></div>
@@ -910,41 +900,6 @@ wc -l <span class="nv">$FILE</span>
 <span class="nb">cd</span> /
 ls <span class="p">|</span> wc -l
 </code></pre></div></p>
-</details>
-<h3 id="3-detaching-a-job">3. Detaching a job</h3>
-<p>On this server, there is no job scheduler, so everything is run directly from the command line. That means that if a process is running, the command line will be busy, and the job will be killed upon logout. To circumvent this, there are several methods to &lsquo;detach&rsquo; the screen or prevent a &lsquo;hangup signal&rsquo; of a job runnig in the background that will terminate your running job.
-The software <code>screen</code> or <code>tmux</code> can be used to detach your screen, and all messages to stderr or stdout (if not redirected) will be printed to the (detached) console. Use those if you&rsquo;re comfortable with them.</p>
-<p>Another, more basic, program to prevent the &lsquo;hangup signal&rsquo; is <code>nohup</code>. Use it like so:</p>
-<div class="highlight"><pre><span></span><code>nohup <span class="o">[</span>YOUR COMMAND<span class="o">]</span> <span class="p">&amp;</span>
-</code></pre></div>
-
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Don&rsquo;t forget the <code>&amp;</code> after the command. This symbol let&rsquo;s the process run in the background.</p>
-</div>
-<p>So, for running e.g. a shell script this would be:</p>
-<div class="highlight"><pre><span></span><code>nohup script.sh <span class="p">&amp;</span>
-</code></pre></div>
-
-<p>Anything written to stdout or stderr will be written to the file <code>nohup.out</code> in your current working directory.</p>
-<div class="admonition warning">
-<p class="admonition-title">Don&rsquo;t change your script while running</p>
-<p><code>nohup</code> runs through your script line-by-line and reads it from disk. If you change your script while running it, it will run the new lines.</p>
-</div>
-<p>Generate a script that waits for 120 seconds (use <code>sleep</code>) and prints <code>I'm done!</code> to stdout if it&rsquo;s done.</p>
-<details class="done"><summary>Answer</summary><p>Script called <code>wait.sh</code>:
-<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
-sleep <span class="m">120</span>
-<span class="nb">echo</span> <span class="s2">&quot;I&#39;m done!&quot;</span>
-</code></pre></div></p>
-</details>
-<p>Run this script in the background without a hangup signal (so, by using <code>nohup</code>), logout, and login again, and see if it&rsquo;s still running with <code>ps x</code>.</p>
-<details class="done"><summary>Answer</summary><p><div class="highlight"><pre><span></span><code>nohup wait.sh <span class="p">&amp;</span>
-</code></pre></div>
-Remember the PID, logout and login (within 120 seconds.. )</p>
-<div class="highlight"><pre><span></span><code>ps x
-</code></pre></div>
-
 </details>
                 
               

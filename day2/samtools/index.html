@@ -419,29 +419,29 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-alignment-statistics" class="md-nav__link">
-    1. Alignment statistics
+  <a href="#alignment-statistics" class="md-nav__link">
+    Alignment statistics
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-compression-sorting-and-indexing" class="md-nav__link">
-    2. Compression, sorting and indexing
+  <a href="#compression-sorting-and-indexing" class="md-nav__link">
+    Compression, sorting and indexing
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-filtering" class="md-nav__link">
-    3. Filtering
+  <a href="#filtering" class="md-nav__link">
+    Filtering
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-redirection" class="md-nav__link">
-    4. Redirection
+  <a href="#redirection" class="md-nav__link">
+    Redirection
   </a>
   
 </li>
@@ -561,29 +561,29 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-alignment-statistics" class="md-nav__link">
-    1. Alignment statistics
+  <a href="#alignment-statistics" class="md-nav__link">
+    Alignment statistics
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-compression-sorting-and-indexing" class="md-nav__link">
-    2. Compression, sorting and indexing
+  <a href="#compression-sorting-and-indexing" class="md-nav__link">
+    Compression, sorting and indexing
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-filtering" class="md-nav__link">
-    3. Filtering
+  <a href="#filtering" class="md-nav__link">
+    Filtering
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-redirection" class="md-nav__link">
-    4. Redirection
+  <a href="#redirection" class="md-nav__link">
+    Redirection
   </a>
   
 </li>
@@ -613,10 +613,7 @@
 <li><code>samtools</code> <a href="http://www.htslib.org/doc/samtools.html">documentation</a></li>
 </ul>
 <h2 id="exercises">Exercises</h2>
-<h3 id="1-alignment-statistics">1. Alignment statistics</h3>
-<blockquote>
-<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg></span> 10 minutes</p>
-</blockquote>
+<h3 id="alignment-statistics">Alignment statistics</h3>
 <p><strong>Exercise:</strong> Check out the statistics of the E. coli alignment by using <code>samtools flagstat</code>. Find the documentation <a href="http://www.htslib.org/doc/samtools-flagstat.html">here</a>. Anything that draws your attention?</p>
 <details class="done"><summary>Answer</summary><p>Code:
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir/alignment_output/
@@ -644,10 +641,7 @@ samtools flagstat SRR519926.sam
 
 <p>Now look at <code>insert size average</code> and <code>insert size standard deviation</code>. You can see the standard deviation is higher than the average, suggesting a wide distribution.</p>
 </details>
-<h3 id="2-compression-sorting-and-indexing">2. Compression, sorting and indexing</h3>
-<blockquote>
-<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg></span> 20 minutes</p>
-</blockquote>
+<h3 id="compression-sorting-and-indexing">Compression, sorting and indexing</h3>
 <p>The command <code>samtools view</code> is very versatile. It takes an alignment file and writes a filtered or processed alignment to the output. You can for example use it to compress your SAM file into a BAM file. Let&rsquo;s start with that.</p>
 <p><strong>Exercise</strong>: compress our SAM file into a BAM file and include the header in the output. For this, use the <code>-b</code> and <code>-h</code> options. Find the required documentation <a href="http://www.htslib.org/doc/samtools-view.html">here</a>. How much was the disk space reduced by compressing the file?</p>
 <div class="admonition tip">
@@ -663,10 +657,7 @@ By using <code>ls -lh</code>, you can find out that <code>SRR519926.sam</code> h
 samtools index SRR519926.sorted.bam
 </code></pre></div>
 
-<h3 id="3-filtering">3. Filtering</h3>
-<blockquote>
-<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg></span> 30 minutes</p>
-</blockquote>
+<h3 id="filtering">Filtering</h3>
 <p>With <code>samtools view</code> you can easily filter your alignment file based on flags. One thing that might be sensible to do at some point is to filter out unmapped reads.</p>
 <p><strong>Exercise:</strong> Check out the flag that you would need to filter for mapped reads. It&rsquo;s at page 7 of the <a href="https://samtools.github.io/hts-specs/SAMv1.pdf">SAM documentation</a>.</p>
 <details class="done"><summary>Answer</summary><p>You will need the 0x4 flag.</p>
@@ -712,10 +703,7 @@ samtools view -bh SRR519926.sorted.bam U00096.3:2000000-2500000 &gt; SRR519926.s
 </code></pre></div>
 
 </details>
-<h3 id="4-redirection">4. Redirection</h3>
-<blockquote>
-<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg></span> 20 minutes</p>
-</blockquote>
+<h3 id="redirection">Redirection</h3>
 <p>Samtools is easy to use in a pipe. In this case you can replace the input file with a <code>-</code>. For example, you can sort and compress the output of your alignment software in a pipe like this:</p>
 <div class="highlight"><pre><span></span><code>my_alignment_command <span class="se">\</span>
 <span class="p">|</span> samtools sort - <span class="se">\</span>

@@ -598,15 +598,12 @@
 <p><a class="md-button" href="../../assets/pdf/quality_control.pdf"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"/></svg></span> Download the presentation</a></p>
 <ul>
 <li><code>fastqc</code> command line <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/INSTALL.txt">documentation</a></li>
-<li><code>trimmomatic</code> <a href="http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf">manual</a></li>
+<li><code>cutadapt</code> <a href="https://cutadapt.readthedocs.io/en/stable/">manual</a></li>
 <li>Unix command line <a href="https://www.ncbi.nlm.nih.gov/books/NBK179288/">E-utilities documentation</a></li>
 </ul>
 <h2 id="exercises">Exercises</h2>
 <h3 id="1-download-and-evaluate-an-e-coli-dataset">1. Download and evaluate an E. coli dataset</h3>
-<blockquote>
-<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg></span> 30 minutes</p>
-</blockquote>
-<p><strong>Exercise:</strong> Create a directory called <code>workdir</code> in your home directory and make the directory your current directory.</p>
+<p><strong>Exercise:</strong> If you haven&rsquo;t already done so, create a directory called <code>workdir</code> in your home directory and make the directory your current directory.</p>
 <div class="admonition note">
 <p class="admonition-title">If working with Docker</p>
 <p>If you have mounted your local directory to <code>/root/workdir</code>, this directory should already exist.</p>
@@ -657,9 +654,6 @@ fastq-dump --split-files SRR519926
 
 </details>
 <h3 id="2-run-fastqc">2. Run fastqc</h3>
-<blockquote>
-<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg></span> 20 minutes</p>
-</blockquote>
 <p><strong>Exercise:</strong> Run fastqc on the fastq files.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -741,7 +735,7 @@ cutadapt <span class="se">\</span>
 <div class="highlight"><pre><span></span><code>cd ~/workdir/trimmed_data
 fastqc paired_trimmed*.fastq
 </code></pre></div></p>
-<p>A. Yes, low quality 3&rsquo; end, per sequence quality and adapter sequences have improved. </p>
+<p>A. Yes, low quality 3&rsquo; end, per sequence quality and adapter sequences have improved.</p>
 <p>B. 315904</p>
 </details>
                 
