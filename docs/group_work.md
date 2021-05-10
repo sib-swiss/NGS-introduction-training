@@ -146,7 +146,6 @@ wget ftp://ftp.ensembl.org/pub/release-101/fasta/homo_sapiens/dna/Homo_sapiens.G
 * Figure how you should set parameters `-x` and `-G`
 * Evaluate the alignment quality (e.g. alignment rates, mapping quality)
 * Compare different samples in read quality, alignment rates, depth, etc.
-* **Bonus** see if you can identify different splice variants using [FLAIR](https://github.com/BrooksLabUCSC/flair) (see hints below).
 
 ### Questions:
 
@@ -157,6 +156,7 @@ wget ftp://ftp.ensembl.org/pub/release-101/fasta/homo_sapiens/dna/Homo_sapiens.G
 * You might consider using `-x map-ont` or `-x splice`. Do you see differences in the alignment in e.g. IGV?
 * How are spliced alignments stored in the SAM file with the different settings of `-x`?
 * How deep is the gene sequenced?
+* Do you already see evidence for splice variants in the alignments?
 
 !!! hint "Downloading from SRA"
     ```sh
@@ -189,31 +189,3 @@ wget ftp://ftp.ensembl.org/pub/release-101/fasta/homo_sapiens/dna/Homo_sapiens.G
 
 !!! hint "More resources"
     Need e.g. a gtf file? Here's the [ensembl page](https://www.ensembl.org/Homo_sapiens/Info/Index)
-
-!!! hint "Running FLAIR"
-    FLAIR is a set of python scripts that can be used to identify and quantify (new) isoforms based on alignment files of long-read sequencing data. You can basically follow the pipeline as described [here](https://github.com/BrooksLabUCSC/flair).
-
-    To use FLAIR first clone the git repository, and activate the (pre-configured) conda environment:
-
-    ```sh
-    cd
-    git clone https://github.com/BrooksLabUCSC/flair.git
-    ```
-
-    After that, generate a FLAIR working directory and convert your `.bam` alignment file to `bed12` format.
-
-    ```sh
-    mkdir ~/flair_output
-
-    python3 ~/flair/bin/bam2Bed12.py \
-    -i alignment.bam \
-    > alignment.bed12
-    ```
-
-    Generate (and run) a shell script to run the modules `flair.py correct`, `flair.py collapse` and `flair.py quantify`. To do this, carefully follow the manual at https://github.com/BrooksLabUCSC/flair. Structure and document your script(s), so you can easily re-run the analysis.
-
-    Files you will need are:
-
-    * Reference genome (chromosome 12 only): `/data/references/GRCh38.p13.chr12.fa`
-    * GTF: `/data/references/Homo_sapiens.GRCh38.100.gtf`
-    * Reads manifest: `/data/reads/lrrnaseq/batch_combined/reads_manifest.tsv`
