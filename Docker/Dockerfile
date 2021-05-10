@@ -24,4 +24,7 @@ cutadapt=3.4 \
 bowtie2=2.4.2 \
 hisat2=2.2.1 \
 subread=2.0.1 \
-entrez-direct=13.9
+entrez-direct=13.9 \
+minimap2=2.18
+
+RUN pip install NanoPlot
