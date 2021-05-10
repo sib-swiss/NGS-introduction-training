@@ -798,7 +798,6 @@ hisat2 <span class="se">\</span>
 <li>Figure how you should set parameters <code>-x</code> and <code>-G</code></li>
 <li>Evaluate the alignment quality (e.g. alignment rates, mapping quality)</li>
 <li>Compare different samples in read quality, alignment rates, depth, etc.</li>
-<li><strong>Bonus</strong> see if you can identify different splice variants using <a href="https://github.com/BrooksLabUCSC/flair">FLAIR</a> (see hints below).</li>
 </ul>
 <h3 id="questions_1">Questions:</h3>
 <ul>
@@ -809,6 +808,7 @@ hisat2 <span class="se">\</span>
 <li>You might consider using <code>-x map-ont</code> or <code>-x splice</code>. Do you see differences in the alignment in e.g. IGV?</li>
 <li>How are spliced alignments stored in the SAM file with the different settings of <code>-x</code>?</li>
 <li>How deep is the gene sequenced?</li>
+<li>Do you already see evidence for splice variants in the alignments?</li>
 </ul>
 <div class="admonition hint">
 <p class="admonition-title">Downloading from SRA</p>
@@ -846,30 +846,6 @@ fastq-dump --gzip <span class="o">[</span>SRR number<span class="o">]</span>
 <div class="admonition hint">
 <p class="admonition-title">More resources</p>
 <p>Need e.g. a gtf file? Here&rsquo;s the <a href="https://www.ensembl.org/Homo_sapiens/Info/Index">ensembl page</a></p>
-</div>
-<div class="admonition hint">
-<p class="admonition-title">Running FLAIR</p>
-<p>FLAIR is a set of python scripts that can be used to identify and quantify (new) isoforms based on alignment files of long-read sequencing data. You can basically follow the pipeline as described <a href="https://github.com/BrooksLabUCSC/flair">here</a>.</p>
-<p>To use FLAIR first clone the git repository, and activate the (pre-configured) conda environment:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span>
-git clone https://github.com/BrooksLabUCSC/flair.git
-</code></pre></div>
-
-<p>After that, generate a FLAIR working directory and convert your <code>.bam</code> alignment file to <code>bed12</code> format.</p>
-<div class="highlight"><pre><span></span><code>mkdir ~/flair_output
-
-python3 ~/flair/bin/bam2Bed12.py <span class="se">\</span>
--i alignment.bam <span class="se">\</span>
-&gt; alignment.bed12
-</code></pre></div>
-
-<p>Generate (and run) a shell script to run the modules <code>flair.py correct</code>, <code>flair.py collapse</code> and <code>flair.py quantify</code>. To do this, carefully follow the manual at https://github.com/BrooksLabUCSC/flair. Structure and document your script(s), so you can easily re-run the analysis.</p>
-<p>Files you will need are:</p>
-<ul>
-<li>Reference genome (chromosome 12 only): <code>/data/references/GRCh38.p13.chr12.fa</code></li>
-<li>GTF: <code>/data/references/Homo_sapiens.GRCh38.100.gtf</code></li>
-<li>Reads manifest: <code>/data/reads/lrrnaseq/batch_combined/reads_manifest.tsv</code></li>
-</ul>
 </div>
                 
               
