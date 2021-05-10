@@ -13,7 +13,7 @@ Project based learning is about learning by doing, but also about *peer instruct
 
 Each project has **tasks** and **questions**. By performing the tasks, you should be able to answer the questions. At the start of the project, make sure that each of you gets a task assigned. You should consider the tasks and questions as a guidance. If interesting questions pop up during the project, you are **encouraged** to work on those. Also, you don't have to perform all the tasks and answer all the questions.
 
-In the afternoon of day 2, you will divide the initial tasks, and start on the project. On day 3, you can work on the project in the morning and in the first part of the afternoon. We will conclude the projects with a **10-minute presentation** of each group.
+In the afternoon of day 1, you will start on the project. On day 3, you can work on the project in the morning and in the first part of the afternoon. We will conclude the projects with a **10-minute presentation** of each group.
 
 ## Working directories
 
@@ -24,7 +24,7 @@ cd ~
 ln -s /group_work/<group name> ./
 ```
 
-Now you can find your group directory at `~/<group name>`. Use this as much as possible.
+Now you can find your group directory at `~/<group name>`. Use this to share files.
 
 !!! warning
     Do not remove the soft link with `rm -r`, this will delete the entire source directory. If you want to remove only the softlink, use `rm` (without `-r`), or `unlink`. More info [here](https://linuxize.com/post/how-to-remove-symbolic-links-in-linux/).
@@ -82,7 +82,7 @@ gunzip Araport11_GTF_genes_transposons.Mar202021.noChr.gtf.gz
 
 * What are the alignment rates?
 * How do the aligners handle splicing?
-* How are spliced alignments stored in the SAM file?
+* How are spliced alignments stored in the SAM file? (have a look at the CIGAR string)
 * Do you see differences in soft clipping?
 * What would be the effect of the aligner if you would be measuring gene expression? (To investigate this you'll need to run e.g. [featureCounts](http://bioinf.wehi.edu.au/featureCounts/)).
 
@@ -114,10 +114,6 @@ gunzip Araport11_GTF_genes_transposons.Mar202021.noChr.gtf.gz
     | samtools view -bh \
     > <alignment_file.bam>
     ```
-
-!!! hint "More resources"
-    Need e.g. a gtf file? Here's the [ensembl page](https://plants.ensembl.org/Arabidopsis_thaliana/Info/Index)
-
 
 ## :fontawesome-solid-brain: Project 2: Long-read genome sequencing
 

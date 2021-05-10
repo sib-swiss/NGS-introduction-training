@@ -3,16 +3,14 @@
 [:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/quality_control.pdf){: .md-button }
 
 * `fastqc` command line [documentation](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/INSTALL.txt)
-* `trimmomatic` [manual](http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf)
+* `cutadapt` [manual](https://cutadapt.readthedocs.io/en/stable/)
 * Unix command line [E-utilities documentation](https://www.ncbi.nlm.nih.gov/books/NBK179288/)
 
 ## Exercises
 
 ### 1. Download and evaluate an E. coli dataset
 
->:fontawesome-regular-clock: 30 minutes
-
-**Exercise:** Create a directory called `workdir` in your home directory and make the directory your current directory.
+**Exercise:** If you haven't already done so, create a directory called `workdir` in your home directory and make the directory your current directory.
 
 !!! note "If working with Docker"
     If you have mounted your local directory to `/root/workdir`, this directory should already exist.
@@ -79,8 +77,6 @@ fastq-dump --split-files SRR519926
     ```
 
 ### 2. Run fastqc
-
->:fontawesome-regular-clock: 20 minutes
 
 **Exercise:** Run fastqc on the fastq files.
 
@@ -178,6 +174,6 @@ $READS_DIR/SRR519926_2.fastq
     fastqc paired_trimmed*.fastq
     ```
 
-    A. Yes, low quality 3' end, per sequence quality and adapter sequences have improved. 
+    A. Yes, low quality 3' end, per sequence quality and adapter sequences have improved.
 
     B. 315904

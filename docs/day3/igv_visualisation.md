@@ -4,7 +4,7 @@ The exercises below are partly based on [this tutorial](https://github.com/griff
 
 ## Exercises
 
-### 1. A first glance: the E. coli dataset
+### A first glance: the *E. coli* dataset
 
 Index the alignment that was filtered for the region between 2000 and 2500 kb:
 
@@ -53,7 +53,7 @@ Modify the popup text behaviour by clicking on the yellow balloon to **Show Deta
 
 Colour the alignment by pair orientation by right clicking on the reads, and click **Color alignments by > read strand**.
 
-### 2. HCC1143 data set
+### HCC1143 data set
 
 For this part, we will be using publicly available Illumina sequence data generated for the
 HCC1143 cell line. The HCC1143 cell line was generated from a 52 year old caucasian

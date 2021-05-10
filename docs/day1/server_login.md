@@ -133,7 +133,8 @@
         bowtie2 \
         hisat2 \
         subread \
-        entrez-direct
+        entrez-direct \
+        minimap2
         ```
 
     This will create the conda environment `ngs-introduction`
@@ -146,16 +147,20 @@
 
     After successful installation and activating the environment all the software required to do the exercises should be available.
 
-### 2. A UNIX command line interface (CLI) refresher
+    !!! note "If you are doing project 2 (long reads)"
+        If you are doing the project 2 as part of the course, you will need to install `NanoPlot` as well, using `pip`:
+
+        ```sh
+        pip install NanoPlot
+        ```
+
+### A UNIX command line interface (CLI) refresher
 
 Most bioinformatics software are UNIX based and are executed through the CLI. When working with NGS data, it is therefore convenient to improve your knowledge on UNIX. For this course, we need basic understanding of UNIX CLI, so here are some exercises to refresh your memory.
 
 #### Make a new directory
 
 Login to the server and use the command line to make a directory called `workdir`.
-
-!!! note "If working with Docker"
-    If your are working with docker you are a root user. This means that your "home" directory is the root directory, i.e. `/root`, and not `/home/username`. If you have mounted your local directory to `/root/workdir`, this directory should already exist.
 
 ??? done "Answer"
     ```sh
@@ -288,51 +293,4 @@ Make a shell script that automatically counts the number of system directories a
     #!/usr/bin/env bash
     cd /
     ls | wc -l
-    ```
-
-### 3. Detaching a job
-
-On this server, there is no job scheduler, so everything is run directly from the command line. That means that if a process is running, the command line will be busy, and the job will be killed upon logout. To circumvent this, there are several methods to 'detach' the screen or prevent a 'hangup signal' of a job runnig in the background that will terminate your running job.
-The software `screen` or `tmux` can be used to detach your screen, and all messages to stderr or stdout (if not redirected) will be printed to the (detached) console. Use those if you're comfortable with them.
-
-Another, more basic, program to prevent the 'hangup signal' is `nohup`. Use it like so:
-
-```sh
-nohup [YOUR COMMAND] &
-```
-
-!!! note
-    Don't forget the `&` after the command. This symbol let's the process run in the background.
-
-So, for running e.g. a shell script this would be:
-
-```sh
-nohup script.sh &
-```
-
-Anything written to stdout or stderr will be written to the file `nohup.out` in your current working directory.
-
-!!! warning "Don't change your script while running"
-    `nohup` runs through your script line-by-line and reads it from disk. If you change your script while running it, it will run the new lines.
-
-Generate a script that waits for 120 seconds (use `sleep`) and prints `I'm done!` to stdout if it's done.
-
-??? done "Answer"
-    Script called `wait.sh`:
-    ```sh
-    #!/usr/bin/env bash
-    sleep 120
-    echo "I'm done!"
-    ```
-
-Run this script in the background without a hangup signal (so, by using `nohup`), logout, and login again, and see if it's still running with `ps x`.
-
-??? done "Answer"
-    ```sh
-    nohup wait.sh &
-    ```
-    Remember the PID, logout and login (within 120 seconds.. )
-
-    ```sh
-    ps x
     ```

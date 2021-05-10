@@ -9,9 +9,7 @@
 
 
 
-### 1. Prepare the reference sequence
-
->:fontawesome-regular-clock: 10 minutes
+### Prepare the reference sequence
 
 Retrieve the reference sequence using `esearch` and `efetch`:
 
@@ -32,9 +30,7 @@ esearch -db nuccore -query 'U00096' \
     bowtie2-build ecoli-strK12-MG1655.fasta ecoli-strK12-MG1655.fasta
     ```
 
-### 2. Align the reads with bowtie2
-
->:fontawesome-regular-clock: 20 minutes
+Align the reads with `bowtie2`
 
 **Exercise:** Check out the bowtie2 manual [here](http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#command-line). We are going to align the sequences in paired-end mode. What are the options we'll minimally need?
 

@@ -4,9 +4,7 @@
 
 ## Exercises
 
-### 1. Alignment statistics
-
->:fontawesome-regular-clock: 10 minutes
+### Alignment statistics
 
 **Exercise:** Check out the statistics of the E. coli alignment by using `samtools flagstat`. Find the documentation [here](http://www.htslib.org/doc/samtools-flagstat.html). Anything that draws your attention?
 
@@ -43,9 +41,7 @@
 
     Now look at `insert size average` and `insert size standard deviation`. You can see the standard deviation is higher than the average, suggesting a wide distribution.
 
-### 2. Compression, sorting and indexing
-
->:fontawesome-regular-clock: 20 minutes
+### Compression, sorting and indexing
 
 The command `samtools view` is very versatile. It takes an alignment file and writes a filtered or processed alignment to the output. You can for example use it to compress your SAM file into a BAM file. Let's start with that.
 
@@ -67,9 +63,7 @@ samtools sort SRR519926.bam > SRR519926.sorted.bam
 samtools index SRR519926.sorted.bam
 ```
 
-### 3. Filtering
-
->:fontawesome-regular-clock: 30 minutes
+### Filtering
 
 With `samtools view` you can easily filter your alignment file based on flags. One thing that might be sensible to do at some point is to filter out unmapped reads.
 
@@ -133,9 +127,7 @@ samtools view -bh -F 4 SRR519926.sorted.bam > SRR519926.sorted.mapped.bam
     samtools view -bh SRR519926.sorted.bam U00096.3:2000000-2500000 > SRR519926.sorted.region.bam
     ```
 
-### 4. Redirection
-
->:fontawesome-regular-clock: 20 minutes
+### Redirection
 
 Samtools is easy to use in a pipe. In this case you can replace the input file with a `-`. For example, you can sort and compress the output of your alignment software in a pipe like this:
 
