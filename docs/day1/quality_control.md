@@ -8,7 +8,7 @@
 
 ## Exercises
 
-### 1. Download and evaluate an E. coli dataset
+### Download and evaluate an E. coli dataset
 
 **Exercise:** If you haven't already done so, create a directory called `workdir` in your home directory and make the directory your current directory.
 
@@ -76,7 +76,7 @@ fastq-dump --split-files SRR519926
     echo $(cat SRR519926_2.fastq | wc -l)/4 | bc
     ```
 
-### 2. Run fastqc
+### Run fastqc
 
 **Exercise:** Run fastqc on the fastq files.
 
@@ -99,7 +99,7 @@ fastq-dump --split-files SRR519926
 
     We can probably fix most of these issues by trimming.
 
-### 3. Trim the reads
+### Trim the reads
 
 We will use [cutadapt](https://cutadapt.readthedocs.io/en/stable/index.html) for trimming adapters and low quality bases from our reads. The most used adapters for Illumina are TruSeq adapters. To run `cutadapt` you need to specify the adapter sequences with options `-a` (or `--adapter`) and `-A`. A reference for the adapter sequences can be found [here](https://support.illumina.com/bulletins/2016/12/what-sequences-do-i-use-for-adapter-trimming.html).
 
