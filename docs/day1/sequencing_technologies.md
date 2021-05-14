@@ -1,4 +1,13 @@
 
+## Learning outcomes
+
+**After having completed this chapter you will be able to:**
+
+- Describe the major applications of next generation sequencing
+- Reproduce the most frequently used sequencing methods
+- Describe the major steps taken during library preparation for Illumina sequencing
+- Explain why the length of the sequencing reads of Illumina sequencing are limited
+- Describe the general methods used for Oxford Nanopore Sequencing and PacBio sequencing
 
 ## Material
 
