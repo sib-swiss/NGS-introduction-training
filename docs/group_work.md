@@ -128,6 +128,13 @@ gunzip Araport11_GTF_genes_transposons.Mar202021.noChr.gtf.gz
     <bowtie2_alignment.bam> <hisat2_alignment.bam>
     ```
 
+!!! hint "Reading in the count data in R"
+    You can read in the count data table, and compare the log2 counts of the two aligners like this:
+
+    ```r
+    cts <- read.delim('project_work/project3/counts/counts.txt', comment.char = '#')
+    plot(log2(cts$..alignments.SRR7822040.chr5.bt2.bam), log2(cts$..alignments.SRR7822040.chr5.hs2.bam))
+    ```
 
 ## :fontawesome-solid-brain: Project 2: Long-read genome sequencing
 
