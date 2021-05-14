@@ -11,7 +11,7 @@ The last part of this course will consist of project-based-learning. This means 
 
 Project based learning is about learning by doing, but also about *peer instruction*. This means that you will be both a learner and a teacher. There will be differences in levels among participants, but because of that, some will learn efficiently from people that have just learned, and others will teach and increase their understanding.
 
-Each project has **tasks** and **questions**. By performing the tasks, you should be able to answer the questions. At the start of the project, make sure that each of you gets a task assigned. You should consider the tasks and questions as a guidance. If interesting questions pop up during the project, you are **encouraged** to work on those. Also, you don't have to perform all the tasks and answer all the questions.
+Each project has **tasks** and **questions**. By performing the tasks, you should be able to answer the questions. You should consider the tasks and questions as a guidance. If interesting questions pop up during the project, you are **encouraged** to work on those. Also, you don't have to perform all the tasks and answer all the questions.
 
 In the afternoon of day 1, you will start on the project. On day 3, you can work on the project in the morning and in the first part of the afternoon. We will conclude the projects with a **10-minute presentation** of each group.
 
@@ -99,21 +99,35 @@ gunzip Araport11_GTF_genes_transposons.Mar202021.noChr.gtf.gz
     | `hisat2`        	| `--threads` 	|
     | `featureCounts`  	| `-T`        	|
 
-!!! hint "Example code hisat2"
-    Everything in between `<>` should be replaced with specific arguments
+!!! hint "Example code `hisat2` and `featureCounts`"
+    Everything in between `<>` should be replaced with specific arguments.
+
+    Here's an example for `hisat2`:
 
     ```sh
     hisat2-build <reference_sequence_fasta> <index_basename>
 
     hisat2 \
     -x <index_basename> \
-    -1 <mate1.fastq.gz> \
-    -2 <mate2.fastq.gz> \
-    --threads <threads> \
+    -1 <foward_reads.fastq.gz> \
+    -2 <reverse_reads.fastq.gz> \
+    -p <threads> \
     | samtools sort \
     | samtools view -bh \
     > <alignment_file.bam>
     ```
+
+    Example code `featureCounts`:
+
+    ```sh
+    featureCounts \
+    -p \
+    -T 2 \
+    -a <annotations.gtf> \
+    -o <output.counts.txt> \
+    <bowtie2_alignment.bam> <hisat2_alignment.bam>
+    ```
+
 
 ## :fontawesome-solid-brain: Project 2: Long-read genome sequencing
 
@@ -185,3 +199,109 @@ wget ftp://ftp.ensembl.org/pub/release-101/fasta/homo_sapiens/dna/Homo_sapiens.G
 
 !!! hint "More resources"
     Need e.g. a gtf file? Here's the [ensembl page](https://www.ensembl.org/Homo_sapiens/Info/Index)
+
+## :fontawesome-solid-disease: Project 3: Short-read RNA-seq of mice.
+
+**Aim:** Compare `hisat2` (splice-aware) with `bowtie2` (splice unaware) while aligning a mouse RNA-seq dataset.
+
+In this project you will be working with data from:
+
+Singhania A, Graham CM, Gabryšová L, Moreira-Teixeira L, Stavropoulos E, Pitt JM, et al (2019). *Transcriptional profiling unveils type I and II interferon networks in blood and tissues across diseases*. Nat Commun. 10:1–21. [https://doi.org/10.1038/s41467-019-10601-6](https://doi.org/10.1038/s41467-019-10601-6)
+
+Here's the [BioProject page](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA490485). We'll be working with a single sample of this project found [here](https://www.ncbi.nlm.nih.gov/sra/?term=SRR7822040). Since the mouse genome is rather large, we have prepared reads for you that originate from chromosome 5. Use those for the project. Download them like this:
+
+```sh
+wget https://ngs-introduction-training.s3.eu-central-1.amazonaws.com/project3/SRR7822040.chr5_R1.fastq.gz
+wget https://ngs-introduction-training.s3.eu-central-1.amazonaws.com/project3/SRR7822040.chr5_R2.fastq.gz
+```
+
+Download the mouse reference of chromosome 5 like this:
+
+```sh
+wget https://ngs-introduction-training.s3.eu-central-1.amazonaws.com/project3/Mus_musculus.GRCm38.dna.primary_assembly.chr5.fa.gz
+gunzip Mus_musculus.GRCm38.dna.primary_assembly.chr5.fa.gz
+```
+
+And download the gtf file for chromosome 5 like this:
+
+```sh
+wget https://ngs-introduction-training.s3.eu-central-1.amazonaws.com/project3/Mus_musculus.GRCm38.102.chr5.gtf.gz
+gunzip Mus_musculus.GRCm38.102.chr5.gtf.gz
+```
+
+### Tasks:
+
+* Check out the project page, and download one or two samples that interest you (download both the forward and reverse reads from the same sample).
+* Do a QC on the data with `fastqc`
+* Trim adapters and low quality bases with `cutadapt` (the adapter sequences are the same as in the exercises).
+* Check which options to use, and align with `bowtie2`
+* Check which options to use, and align with `hisat2`
+* Evaluate the alignment quality (e.g. alignment rates, mapping quality)
+* Compare the bam files of the two aligners in IGV. For this, download only a part of the bam file (e.g. the region `5:32592000-32999545`).
+* Compare different samples in read quality, alignment rates, depth, etc.
+* Run `featureCounts` on both alignments
+* Compare the count matrices in `R` or `python` (Rstudio server is running on the same machine. Approach it with your credentials and username `rstudio`)
+
+### Questions:
+
+* Check the description at the SRA sample page. What kind of sample is this?
+* How does the quality of the reads look? Anything special about the overrepresented sequences? (Hint: [blast](https://blast.ncbi.nlm.nih.gov/) some overrepresented sequences, and see what they are)
+* Did trimming improve the QC results? What could be the cause of the warnings/errors in the `fastqc` reports?
+* What are the alignment rates?
+* How do the aligners handle splicing?
+* How are spliced alignments stored in the SAM file?
+* Do you see differences in soft clipping?
+* What would be the effect of the aligner if you would be measuring gene expression? (To investigate this you'll need to run e.g. [featureCounts](http://bioinf.wehi.edu.au/featureCounts/)).
+
+!!! hint "Run your processes on multiple cores!"
+    We are now doing computations on a full genome, with full transcriptomic data. This is quite a bit more than we have used during the exercises. Therefore, computations take longer. However, most tools support parallel processing, in which you can specify how many cores you want to use to run in parallel. Your environment contains **four** cores, so this is also the maximum number of processes you can specify. Below you can find the options used in each command to specify multi-core processing.
+
+    | command       	| option    	|
+    |---------------	|-----------	|
+    | `bowtie2-build` 	| `--threads` 	|
+    | `hisat2-build`  	| `--threads` 	|
+    | `fastqc`       	| `--threads` 	|
+    | `cutadapt`      	| `--cores`   	|
+    | `bowtie2`       	| `--threads` 	|
+    | `hisat2`        	| `--threads` 	|
+    | `featureCounts`  	| `-T`        	|
+
+!!! hint "Example code `hisat2` and `featureCounts`"
+    Everything in between `<>` should be replaced with specific arguments.
+
+    Here's an example for `hisat2`:
+
+    ```sh
+    hisat2-build <reference_sequence_fasta> <index_basename>
+
+    hisat2 \
+    -x <index_basename> \
+    -1 <foward_reads.fastq.gz> \
+    -2 <reverse_reads.fastq.gz> \
+    -p <threads> \
+    | samtools sort \
+    | samtools view -bh \
+    > <alignment_file.bam>
+    ```
+
+    Example code `featureCounts`:
+
+    ```sh
+    featureCounts \
+    -p \
+    -T 2 \
+    -a <annotations.gtf> \
+    -o <output.counts.txt> \
+    <bowtie2_alignment.bam> <hisat2_alignment.bam>
+    ```
+
+!!! hint "Spliced alignments"
+    Have a look at IGV on a particular gene, e.g. Pisd
+
+!!! hint "Reading in the count data in R"
+    You can read in the count data table, and compare the log2 counts of the two aligners like this:
+
+    ```r
+    cts <- read.delim('project_work/project3/counts/counts.txt', comment.char = '#')
+    plot(log2(cts$..alignments.SRR7822040.chr5.bt2.bam), log2(cts$..alignments.SRR7822040.chr5.hs2.bam))
+    ```
