@@ -84,7 +84,7 @@ gunzip Araport11_GTF_genes_transposons.Mar202021.noChr.gtf.gz
 * How do the aligners handle splicing?
 * How are spliced alignments stored in the SAM file? (have a look at the CIGAR string)
 * Do you see differences in soft clipping?
-* What would be the effect of the aligner if you would be measuring gene expression? (To investigate this you'll need to run e.g. [featureCounts](http://bioinf.wehi.edu.au/featureCounts/)).
+* What would be the effect of the aligner if you would be measuring gene expression? (To investigate this you'll need to run [featureCounts](http://bioinf.wehi.edu.au/featureCounts/)).
 
 !!! hint "Run your processes on multiple cores!"
     We are now doing computations on a full genome, with full transcriptomic data. This is quite a bit more than we have used during the exercises. Therefore, computations take longer. However, most tools support parallel processing, in which you can specify how many cores you want to use to run in parallel. Your environment contains **four** cores, so this is also the maximum number of processes you can specify. Below you can find the options used in each command to specify multi-core processing.
@@ -251,7 +251,7 @@ gunzip Mus_musculus.GRCm38.102.chr5.gtf.gz
 * How do the aligners handle splicing?
 * How are spliced alignments stored in the SAM file?
 * Do you see differences in soft clipping?
-* What would be the effect of the aligner if you would be measuring gene expression? (To investigate this you'll need to run e.g. [featureCounts](http://bioinf.wehi.edu.au/featureCounts/)).
+* What would be the effect of the aligner if you would be measuring gene expression? (To investigate this you'll need to run [featureCounts](http://bioinf.wehi.edu.au/featureCounts/)).
 
 !!! hint "Run your processes on multiple cores!"
     We are now doing computations on a full genome, with full transcriptomic data. This is quite a bit more than we have used during the exercises. Therefore, computations take longer. However, most tools support parallel processing, in which you can specify how many cores you want to use to run in parallel. Your environment contains **four** cores, so this is also the maximum number of processes you can specify. Below you can find the options used in each command to specify multi-core processing.
