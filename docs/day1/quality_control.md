@@ -2,6 +2,10 @@
 
 **After having completed this chapter you will be able to:**
 
+- Find information about a sequence run on the Sequence Read Archive
+- Run `fastqc` on sequence reads and interpret the results
+- Trim adapters and low quality bases using `cutadapt`
+
 ## Material
 
 [:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/quality_control.pdf){: .md-button }
