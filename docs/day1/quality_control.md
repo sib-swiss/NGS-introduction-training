@@ -47,7 +47,7 @@ Check out the dataset at [SRA](https://www.ncbi.nlm.nih.gov/sra/?term=SRR519926)
 
     B. Illumina MiSeq
 
-    C. 2 x 252 bp
+    C. 2 x 251 bp
 
     D. 400596
 
