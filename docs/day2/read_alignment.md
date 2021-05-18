@@ -1,3 +1,12 @@
+## Learning outcomes
+
+**After having completed this chapter you will be able to:**
+
+- Explain what a sequence aligner does
+- Explain why in some cases the aligner needs to be 'splice-aware'
+- Calculate mapping quality out of the probability that a mapping position is wrong
+- Build an index of the reference and perform an alignment of paired-end reads with `bowtie2`
+
 ## Material
 
 [:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/read_alignment.pdf){: .md-button }
@@ -6,8 +15,6 @@
 * `bowtie2` [manual](http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#command-line)
 
 ## Exercises
-
-
 
 ### Prepare the reference sequence
 

@@ -1,3 +1,18 @@
+## Learning outcomes
+
+**After having completed this chapter you will be able to:**
+
+- Use `samtools flagstat` to get general statistics on the flags stored in a sam/bam file
+- Use `samtools view` to:
+    - compress a sam file into a bam file
+    - filter on sam flags
+    - count alignments
+    - filter out a region
+- Use `samtools sort` to sort an alignment file based on coordinate
+- Use `samtools index` to create an index of a sorted sam/bam file
+- Use the pipe (`|`) symbol to pipe alignments directly to `samtools` to perform sorting and filtering
+
+
 ## Material
 
 * `samtools` [documentation](http://www.htslib.org/doc/samtools.html)
