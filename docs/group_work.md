@@ -238,7 +238,7 @@ gunzip Mus_musculus.GRCm38.102.chr5.gtf.gz
 
 ### Tasks:
 
-* Check out the project page, and download one or two samples that interest you (download both the forward and reverse reads from the same sample).
+* Download the reads, reference and gtf file.
 * Do a QC on the data with `fastqc`
 * Trim adapters and low quality bases with `cutadapt` (the adapter sequences are the same as in the exercises).
 * Check which options to use, and align with `bowtie2`
