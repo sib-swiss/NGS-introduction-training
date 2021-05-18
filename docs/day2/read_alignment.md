@@ -70,4 +70,4 @@ bowtie2 \
 > $ALIGNED_DIR/SRR519926.sam
 ```
 
-We'll go deeper into alignment statistics tomorrow, but `bowtie2` writes already some statistics to stdout. General alignment rates seem okay, but there are quite some non-concordant alignments. That doesn't sound good. Check out the explanation about concordance at the [bowtie2 manual](http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#concordant-pairs-match-pair-expectations-discordant-pairs-dont). Can you guess what the reason could be?
+We'll go deeper into alignment statistics later on, but `bowtie2` writes already some statistics to stdout. General alignment rates seem okay, but there are quite some non-concordant alignments. That doesn't sound good. Check out the explanation about concordance at the [bowtie2 manual](http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#concordant-pairs-match-pair-expectations-discordant-pairs-dont). Can you guess what the reason could be?
