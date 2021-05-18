@@ -1,3 +1,14 @@
+## Learning outcomes
+
+**After having completed this chapter you will be able to:**
+
+- Prepare a bam file for loading it into IGV
+- Use IGV to:
+    - Navigate through a reference genome and alignments
+    - Retrieve information on a specific alignment
+    - Investigate (possible) variants
+    - Identify repeats and large INDELs 
+
 ## Material
 
 The exercises below are partly based on [this tutorial](https://github.com/griffithlab/rnaseq_tutorial/wiki/IGV-Tutorial) from the [Griffith lab](https://griffithlab.org/).
