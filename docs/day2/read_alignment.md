@@ -30,7 +30,7 @@ esearch -db nuccore -query 'U00096' \
 | efetch -format fasta > ecoli-strK12-MG1655.fasta
 ```
 
-**Exercise:** Check out the [documentation of `bowtie2-build`](http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#the-bowtie2-build-indexer), and build a index for bowtie2 using default options.
+**Exercise:** Check out the [documentation of `bowtie2-build`](http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#the-bowtie2-build-indexer), and build the indexed reference genome with bowtie2 using default options.
 
 ??? done "Answer"
     ```sh
