@@ -16,6 +16,7 @@
 ## Material
 
 * `samtools` [documentation](http://www.htslib.org/doc/samtools.html)
+* Explain sam flags [tool](https://broadinstitute.github.io/picard/explain-flags.html)
 
 ## Exercises
 
