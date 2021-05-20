@@ -758,18 +758,21 @@ gunzip Araport11_GTF_genes_transposons.Mar202021.noChr.gtf.gz
 <li>Check which options to use, and align with <code>bowtie2</code></li>
 <li>Check which options to use, and align with <code>hisat2</code></li>
 <li>Evaluate the alignment quality (e.g. alignment rates, mapping quality)</li>
-<li>Compare the bam files of the two aligners in IGV. For this, download only a part of the bam file (e.g. the region <code>1:22145-42561</code>).</li>
+<li>Compare the bam files of the two aligners in IGV. You can use the built-in reference genome (<em>A. thaliana (TAIR10)</em>)</li>
 <li>Compare different samples in read quality, alignment rates, depth, etc.</li>
 <li>Run <code>featureCounts</code> on both alignments</li>
 <li>Compare the count matrices in <code>R</code> or <code>python</code> (Rstudio server is running on the same machine. Approach it with your credentials and username <code>rstudio</code>)</li>
 </ul>
 <h3 id="questions">Questions:</h3>
 <ul>
+<li>How does the quality of the reads look? Anything special about the overrepresented sequences? (Hint: <a href="https://blast.ncbi.nlm.nih.gov/">blast</a> some overrepresented sequences, and see what they are)</li>
+<li>Did trimming improve the QC results? What could be the cause of the warnings/errors in the <code>fastqc</code> reports?</li>
+<li>How do the two aligners report multi-mapping reads?</li>
 <li>What are the alignment rates?</li>
 <li>How do the aligners handle splicing?</li>
 <li>How are spliced alignments stored in the SAM file? (have a look at the CIGAR string)</li>
-<li>Do you see differences in soft clipping?</li>
 <li>What would be the effect of the aligner if you would be measuring gene expression? (To investigate this you&rsquo;ll need to run <a href="http://bioinf.wehi.edu.au/featureCounts/">featureCounts</a>).</li>
+<li>What is the effect of setting the option <code>-Q</code> in <code>featureCounts</code> on the comparison between the aligners?</li>
 </ul>
 <div class="admonition hint">
 <p class="admonition-title">Run your processes on multiple cores!</p>
@@ -942,9 +945,9 @@ gunzip Mus_musculus.GRCm38.102.chr5.gtf.gz
 <li>Check which options to use, and align with <code>bowtie2</code></li>
 <li>Check which options to use, and align with <code>hisat2</code></li>
 <li>Evaluate the alignment quality (e.g. alignment rates, mapping quality)</li>
-<li>Compare the bam files of the two aligners in IGV. For this, download only a part of the bam file (e.g. the region <code>5:32592000-32999545</code>).</li>
+<li>Compare the bam files of the two aligners in IGV. For this, you can use the built-in genome (<em>Mouse (mm10)</em>). For easy navigation, load the provided gtf file (<code>Mus_musculus.GRCm38.102.chr5.gtf</code>) as a track</li>
 <li>Compare different samples in read quality, alignment rates, depth, etc.</li>
-<li>Run <code>featureCounts</code> on both alignments</li>
+<li>Run <code>featureCounts</code> on both alignments. Have a look at the option <code>-Q</code>.</li>
 <li>Compare the count matrices in <code>R</code> or <code>python</code> (Rstudio server is running on the same machine. Approach it with your credentials and username <code>rstudio</code>)</li>
 </ul>
 <h3 id="questions_2">Questions:</h3>
@@ -952,11 +955,12 @@ gunzip Mus_musculus.GRCm38.102.chr5.gtf.gz
 <li>Check the description at the SRA sample page. What kind of sample is this?</li>
 <li>How does the quality of the reads look? Anything special about the overrepresented sequences? (Hint: <a href="https://blast.ncbi.nlm.nih.gov/">blast</a> some overrepresented sequences, and see what they are)</li>
 <li>Did trimming improve the QC results? What could be the cause of the warnings/errors in the <code>fastqc</code> reports?</li>
+<li>How do the two aligners report multi-mapping reads?</li>
 <li>What are the alignment rates?</li>
 <li>How do the aligners handle splicing?</li>
 <li>How are spliced alignments stored in the SAM file?</li>
-<li>Do you see differences in soft clipping?</li>
 <li>What would be the effect of the aligner if you would be measuring gene expression? (To investigate this you&rsquo;ll need to run <a href="http://bioinf.wehi.edu.au/featureCounts/">featureCounts</a>).</li>
+<li>What is the effect of setting the option <code>-Q</code> in <code>featureCounts</code> on the comparison between the aligners?</li>
 </ul>
 <div class="admonition hint">
 <p class="admonition-title">Run your processes on multiple cores!</p>
