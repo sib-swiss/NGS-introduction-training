@@ -73,18 +73,21 @@ gunzip Araport11_GTF_genes_transposons.Mar202021.noChr.gtf.gz
 * Check which options to use, and align with `bowtie2`
 * Check which options to use, and align with `hisat2`
 * Evaluate the alignment quality (e.g. alignment rates, mapping quality)
-* Compare the bam files of the two aligners in IGV. For this, download only a part of the bam file (e.g. the region `1:22145-42561`).
+* Compare the bam files of the two aligners in IGV. You can use the built-in reference genome (*A. thaliana (TAIR10)*)
 * Compare different samples in read quality, alignment rates, depth, etc.
 * Run `featureCounts` on both alignments
 * Compare the count matrices in `R` or `python` (Rstudio server is running on the same machine. Approach it with your credentials and username `rstudio`)
 
 ### Questions:
 
+* How does the quality of the reads look? Anything special about the overrepresented sequences? (Hint: [blast](https://blast.ncbi.nlm.nih.gov/) some overrepresented sequences, and see what they are)
+* Did trimming improve the QC results? What could be the cause of the warnings/errors in the `fastqc` reports?
+* How do the two aligners report multi-mapping reads?
 * What are the alignment rates?
 * How do the aligners handle splicing?
 * How are spliced alignments stored in the SAM file? (have a look at the CIGAR string)
-* Do you see differences in soft clipping?
 * What would be the effect of the aligner if you would be measuring gene expression? (To investigate this you'll need to run [featureCounts](http://bioinf.wehi.edu.au/featureCounts/)).
+* What is the effect of setting the option `-Q` in `featureCounts` on the comparison between the aligners?
 
 !!! hint "Run your processes on multiple cores!"
     We are now doing computations on a full genome, with full transcriptomic data. This is quite a bit more than we have used during the exercises. Therefore, computations take longer. However, most tools support parallel processing, in which you can specify how many cores you want to use to run in parallel. Your environment contains **four** cores, so this is also the maximum number of processes you can specify. Below you can find the options used in each command to specify multi-core processing.
@@ -244,9 +247,9 @@ gunzip Mus_musculus.GRCm38.102.chr5.gtf.gz
 * Check which options to use, and align with `bowtie2`
 * Check which options to use, and align with `hisat2`
 * Evaluate the alignment quality (e.g. alignment rates, mapping quality)
-* Compare the bam files of the two aligners in IGV. For this, download only a part of the bam file (e.g. the region `5:32592000-32999545`).
+* Compare the bam files of the two aligners in IGV. For this, you can use the built-in genome (*Mouse (mm10)*). For easy navigation, load the provided gtf file (`Mus_musculus.GRCm38.102.chr5.gtf`) as a track
 * Compare different samples in read quality, alignment rates, depth, etc.
-* Run `featureCounts` on both alignments
+* Run `featureCounts` on both alignments. Have a look at the option `-Q`.
 * Compare the count matrices in `R` or `python` (Rstudio server is running on the same machine. Approach it with your credentials and username `rstudio`)
 
 ### Questions:
@@ -254,11 +257,12 @@ gunzip Mus_musculus.GRCm38.102.chr5.gtf.gz
 * Check the description at the SRA sample page. What kind of sample is this?
 * How does the quality of the reads look? Anything special about the overrepresented sequences? (Hint: [blast](https://blast.ncbi.nlm.nih.gov/) some overrepresented sequences, and see what they are)
 * Did trimming improve the QC results? What could be the cause of the warnings/errors in the `fastqc` reports?
+* How do the two aligners report multi-mapping reads?
 * What are the alignment rates?
 * How do the aligners handle splicing?
 * How are spliced alignments stored in the SAM file?
-* Do you see differences in soft clipping?
 * What would be the effect of the aligner if you would be measuring gene expression? (To investigate this you'll need to run [featureCounts](http://bioinf.wehi.edu.au/featureCounts/)).
+* What is the effect of setting the option `-Q` in `featureCounts` on the comparison between the aligners?
 
 !!! hint "Run your processes on multiple cores!"
     We are now doing computations on a full genome, with full transcriptomic data. This is quite a bit more than we have used during the exercises. Therefore, computations take longer. However, most tools support parallel processing, in which you can specify how many cores you want to use to run in parallel. Your environment contains **four** cores, so this is also the maximum number of processes you can specify. Below you can find the options used in each command to specify multi-core processing.
