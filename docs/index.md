@@ -18,7 +18,7 @@ This course can be done both enrolled (with a teacher) and independently (in you
     * Understand the basics of the different NGS technologies
     * Perform quality control for better downstream analysis
     * Align reads to a reference genome
-    * Visualize the output
+    * Visualise the output
 
     ## Learning experiences
 
