@@ -1,0 +1,846 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="shortcut icon" href="../../assets/images/SIB_logo.svg">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.8">
+    
+    
+      
+        <title>Samtools - NGS - Quality control, Alignment, Visualisation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.cb6bc1d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.39b8e14a.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YX61LNKWGY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YX61LNKWGY');
+</script>
+
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#learning-outcomes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../.." title="NGS - Quality control, Alignment, Visualisation" class="md-header-nav__button md-logo" aria-label="NGS - Quality control, Alignment, Visualisation">
+      
+  <img src="../../assets/images/SIB_logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      <div class="md-header-nav__ellipsis">
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            NGS - Quality control, Alignment, Visualisation
+          </span>
+        </div>
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            
+              Samtools
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/sib-swiss/NGS-introduction-training" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/NGS-introduction-training
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="NGS - Quality control, Alignment, Visualisation" class="md-nav__button md-logo" aria-label="NGS - Quality control, Alignment, Visualisation">
+      
+  <img src="../../assets/images/SIB_logo.svg" alt="logo">
+
+    </a>
+    NGS - Quality control, Alignment, Visualisation
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/sib-swiss/NGS-introduction-training" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/NGS-introduction-training
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../precourse/" class="md-nav__link">
+        Precourse preparations
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../course_schedule/" class="md-nav__link">
+        Course schedule
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" >
+      
+      <label class="md-nav__link" for="nav-4">
+        Day 1
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Day 1" data-md-level="1">
+        <label class="md-nav__title" for="nav-4">
+          <span class="md-nav__icon md-icon"></span>
+          Day 1
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day1/intro/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day1/sequencing_technologies/" class="md-nav__link">
+        Sequencing technologies
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day1/server_login/" class="md-nav__link">
+        Setup + UNIX refresher
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day1/quality_control/" class="md-nav__link">
+        Quality control
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+      
+      <label class="md-nav__link" for="nav-5">
+        Day 2
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Day 2" data-md-level="1">
+        <label class="md-nav__title" for="nav-5">
+          <span class="md-nav__icon md-icon"></span>
+          Day 2
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../read_alignment/" class="md-nav__link">
+        Read alignment
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../file_types/" class="md-nav__link">
+        File types
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Samtools
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Samtools
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    Learning outcomes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#material" class="md-nav__link">
+    Material
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alignment-statistics" class="md-nav__link">
+    Alignment statistics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compression-sorting-and-indexing" class="md-nav__link">
+    Compression, sorting and indexing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtering" class="md-nav__link">
+    Filtering
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#redirection" class="md-nav__link">
+    Redirection
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" >
+      
+      <label class="md-nav__link" for="nav-6">
+        Day 3
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Day 3" data-md-level="1">
+        <label class="md-nav__title" for="nav-6">
+          <span class="md-nav__icon md-icon"></span>
+          Day 3
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day3/igv_visualisation/" class="md-nav__link">
+        IGV and visualisation
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../group_work/" class="md-nav__link">
+        Group work
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    Learning outcomes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#material" class="md-nav__link">
+    Material
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alignment-statistics" class="md-nav__link">
+    Alignment statistics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compression-sorting-and-indexing" class="md-nav__link">
+    Compression, sorting and indexing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtering" class="md-nav__link">
+    Filtering
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#redirection" class="md-nav__link">
+    Redirection
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Samtools</h1>
+                
+                <h2 id="learning-outcomes">Learning outcomes</h2>
+<p><strong>After having completed this chapter you will be able to:</strong></p>
+<ul>
+<li>Use <code>samtools flagstat</code> to get general statistics on the flags stored in a sam/bam file</li>
+<li>Use <code>samtools view</code> to:<ul>
+<li>compress a sam file into a bam file</li>
+<li>filter on sam flags</li>
+<li>count alignments</li>
+<li>filter out a region</li>
+</ul>
+</li>
+<li>Use <code>samtools sort</code> to sort an alignment file based on coordinate</li>
+<li>Use <code>samtools index</code> to create an index of a sorted sam/bam file</li>
+<li>Use the pipe (<code>|</code>) symbol to pipe alignments directly to <code>samtools</code> to perform sorting and filtering</li>
+</ul>
+<h2 id="material">Material</h2>
+<ul>
+<li><code>samtools</code> <a href="http://www.htslib.org/doc/samtools.html">documentation</a></li>
+<li>Explain sam flags <a href="https://broadinstitute.github.io/picard/explain-flags.html">tool</a></li>
+</ul>
+<h2 id="exercises">Exercises</h2>
+<h3 id="alignment-statistics">Alignment statistics</h3>
+<p><strong>Exercise:</strong> Check out the statistics of the E. coli alignment by using <code>samtools flagstat</code>. Find the documentation <a href="http://www.htslib.org/doc/samtools-flagstat.html">here</a>. Anything that draws your attention?</p>
+<details class="done"><summary>Answer</summary><p>Code:
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir/alignment_output/
+samtools flagstat SRR519926.sam
+</code></pre></div></p>
+<p>resulting in:</p>
+<div class="highlight"><pre><span></span><code>631808 + 0 in total (QC-passed reads + QC-failed reads)
+0 + 0 secondary
+0 + 0 supplementary
+0 + 0 duplicates
+627753 + 0 mapped (99.36% : N/A)
+631808 + 0 paired in sequencing
+315904 + 0 read1
+315904 + 0 read2
+302430 + 0 properly paired (47.87% : N/A)
+624508 + 0 with itself and mate mapped
+3245 + 0 singletons (0.51% : N/A)
+0 + 0 with mate mapped to a different chr
+0 + 0 with mate mapped to a different chr (mapQ&gt;=5)
+</code></pre></div>
+
+<p>Of the reads, 38.44% is properly paired. The rest isn&rsquo;t. Proper pairing is quite hard to interpret. It usually means that the 0x2 flag (each segment properly aligned according to the aligner) is false. In this case it means that the insert size is high for a lot of sequences. That is because the insert size distribution is very wide. You can find info on insert size distribution like this:</p>
+<div class="highlight"><pre><span></span><code>samtools stats SRR519926.sam | grep ^SN | cut -f 2,3
+</code></pre></div>
+
+<p>Now look at <code>insert size average</code> and <code>insert size standard deviation</code>. You can see the standard deviation is higher than the average, suggesting a wide distribution.</p>
+</details>
+<h3 id="compression-sorting-and-indexing">Compression, sorting and indexing</h3>
+<p>The command <code>samtools view</code> is very versatile. It takes an alignment file and writes a filtered or processed alignment to the output. You can for example use it to compress your SAM file into a BAM file. Let&rsquo;s start with that.</p>
+<p><strong>Exercise</strong>: compress our SAM file into a BAM file and include the header in the output. For this, use the <code>-b</code> and <code>-h</code> options. Find the required documentation <a href="http://www.htslib.org/doc/samtools-view.html">here</a>. How much was the disk space reduced by compressing the file?</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip: Samtools writes to stdout</p>
+<p>By default, samtools writes it&rsquo;s output to stdout. This means that you need to redirect your output to a file with <code>&gt;</code> or use the the output option <code>-o</code>.</p>
+</div>
+<details class="done"><summary>Answer</summary><p><div class="highlight"><pre><span></span><code>samtools view -bh SRR519926.sam &gt; SRR519926.bam
+</code></pre></div>
+By using <code>ls -lh</code>, you can find out that <code>SRR519926.sam</code> has a size of 223 Mb, while <code>SRR519926.bam</code> is only 67 Mb.  </p>
+</details>
+<p>To look up specific alignments, it is convenient to have your alignment file indexed. An indexing can be compared to a kind of &lsquo;phonebook&rsquo; of your sequence alignment file. Indexing can be done with <code>samtools</code> as well, but it first needs to be sorted on coordinate (i.e. the alignment location). You can do it like this:</p>
+<div class="highlight"><pre><span></span><code>samtools sort SRR519926.bam &gt; SRR519926.sorted.bam
+samtools index SRR519926.sorted.bam
+</code></pre></div>
+
+<h3 id="filtering">Filtering</h3>
+<p>With <code>samtools view</code> you can easily filter your alignment file based on flags. One thing that might be sensible to do at some point is to filter out unmapped reads.</p>
+<p><strong>Exercise:</strong> Check out the flag that you would need to filter for mapped reads. It&rsquo;s at page 7 of the <a href="https://samtools.github.io/hts-specs/SAMv1.pdf">SAM documentation</a>.</p>
+<details class="done"><summary>Answer</summary><p>You will need the 0x4 flag.</p>
+</details>
+<p>Filtering against unmapped reads (leaving only mapped reads) with <code>samtools view</code> would look like this:</p>
+<div class="highlight"><pre><span></span><code>samtools view -bh -F 0x4 SRR519926.sorted.bam &gt; SRR519926.sorted.mapped.bam
+</code></pre></div>
+
+<p>or:</p>
+<div class="highlight"><pre><span></span><code>samtools view -bh -F <span class="m">4</span> SRR519926.sorted.bam &gt; SRR519926.sorted.mapped.bam
+</code></pre></div>
+
+<p><strong>Exercise:</strong> Write a command that outputs only the unmapped reads (so the opposite of the example). How many reads are in there? Is that the same as what we expect based on the output of <code>samtools flagstat</code>?</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Check out the <code>-f</code> and <code>-c</code> options of <code>samtools view</code></p>
+</div>
+<details class="done"><summary>Answer</summary><p>Filter like this:
+<div class="highlight"><pre><span></span><code>samtools view -bh -f 0x4 SRR519926.sorted.bam &gt; SRR519926.sorted.unmapped.bam
+</code></pre></div></p>
+<p>Counting like this:
+<div class="highlight"><pre><span></span><code>samtools view -c SRR519926.sorted.unmapped.bam
+</code></pre></div>
+This should correspond to the output of <code>samtools flagstat</code> (631808 - 627753 = 4055)</p>
+</details>
+<p><code>samtools view</code> also enables you to filter alignments in a specific region. This can be convenient if you don&rsquo;t want to work with huge alignment files and if you&rsquo;re only interested in alignments in a particular region. Region filtering only works for sorted and indexed alignment files.</p>
+<p><strong>Exercise:</strong> Filter our sorted and indexed BAM file for the region between 2000 and 2500 kb, and output it as a BAM file with a header.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip: Specifying a region</p>
+<p>Our E. coli genome has only one chromosome, because only one line starts with <code>&gt;</code> in the fasta file</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir/ref_genome
+grep <span class="s2">&quot;&gt;&quot;</span> ecoli-strK12-MG1655.fasta
+</code></pre></div>
+
+<p>gives:</p>
+<div class="highlight"><pre><span></span><code>&gt;U00096.3 Escherichia coli str. K-12 substr. MG1655, complete genome
+</code></pre></div>
+
+<p>The part after the first space in the title is cut off for the alignment reference. So the code for specifying a region would be: <code>U00096.3:START-END</code></p>
+</div>
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code>cd ~/workdir/alignment_output
+samtools view -bh SRR519926.sorted.bam U00096.3:2000000-2500000 &gt; SRR519926.sorted.region.bam
+</code></pre></div>
+
+</details>
+<h3 id="redirection">Redirection</h3>
+<p>Samtools is easy to use in a pipe. In this case you can replace the input file with a <code>-</code>. For example, you can sort and compress the output of your alignment software in a pipe like this:</p>
+<div class="highlight"><pre><span></span><code>my_alignment_command <span class="se">\</span>
+<span class="p">|</span> samtools sort - <span class="se">\</span>
+<span class="p">|</span> samtools view -bh - <span class="se">\</span>
+&gt; alignment.bam
+</code></pre></div>
+
+<div class="admonition note">
+<p class="admonition-title">The use of <code>-</code></p>
+<p>In the modern versions of samtools, the use of <code>-</code> is not needed for most cases, so without an input file it reads from stdin. However, if you&rsquo;re not sure, it&rsquo;s better to be safe than sorry.</p>
+</div>
+<p><strong>Exercise:</strong> Write a script that maps the reads with bowtie2 (see chapter 2 of <a href="../read_alignment/">read alignment</a>), sorts them, takes only the mapped reads, and outputs them as a BAM file with a header.</p>
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code>##!/usr/bin/env bash
+
+TRIMMED_DIR=~/workdir/trimmed_data
+REFERENCE_DIR=~/workdir/ref_genome
+ALIGNED_DIR=~/workdir/alignment_output
+
+bowtie2 \
+-x $REFERENCE_DIR/ecoli-strK12-MG1655.fasta \
+-1 $TRIMMED_DIR/paired_trimmed_SRR519926_1.fastq \
+-2 $TRIMMED_DIR/paired_trimmed_SRR519926_2.fastq \
+| samtools sort - \
+| samtools view -F 0x4 -bh - \
+&gt; $ALIGNED_DIR/SRR519926.sorted.mapped.frompipe.bam
+</code></pre></div>
+
+</details>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../file_types/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                File types
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../../day3/igv_visualisation/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                IGV and visualisation
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.18f0862e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.994580cf.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.9c0e82ba.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
