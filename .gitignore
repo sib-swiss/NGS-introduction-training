@@ -3,3 +3,5 @@
 project_work/*
 .Rhistory
 .Rproj.user
+.config
+.local
