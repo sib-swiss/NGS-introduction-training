@@ -13,6 +13,7 @@
 
 * Unix command line [E-utilities documentation](https://www.ncbi.nlm.nih.gov/books/NBK179288/)
 * `bowtie2` [manual](http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#command-line)
+* Ben Langmead's [youtube channel](https://www.youtube.com/channel/UCrDmN9uRVJR7KM8aRE_58Zw) for excellent lectures on e.g. BWT, suffix matrixes/trees, and binary search. 
 
 ## Exercises
 
