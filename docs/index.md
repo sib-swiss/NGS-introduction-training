@@ -1,6 +1,15 @@
 # NGS - Quality control, Alignment, Visualisation
 
-This course can be done both enrolled (with a teacher) and independently (in your own time). Choose below what applies to you.  
+## Authors
+
+- Walid Gharib
+- Geert van Geest
+
+## License & copyright
+
+**License:** [CC BY-SA 4.0](https://raw.githubusercontent.com/sib-swiss/single-cell-training/master/LICENCE)
+
+**Copyright:** [SIB Swiss Institute of Bioinformatics](https://www.sib.swiss/)
 
 === "Enrolled to the course"
 
