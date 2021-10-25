@@ -3,7 +3,7 @@
 ## Authors
 
 - Walid Gharib
-- Geert van Geest
+- Geert van Geest | [ORCiD](https://orcid.org/0000-0002-1561-078X)
 
 ## License & copyright
 
