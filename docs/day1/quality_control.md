@@ -113,7 +113,7 @@ We will use [cutadapt](https://cutadapt.readthedocs.io/en/stable/index.html) for
 
 **Exercise:** The script below will trim the sequence reads. However, some parts are missing. We want to:
 
-* trim the reads based on a base quality of 10 both on the 3' and 5' end of the reads,
+* trim bases with a quality lower then 10 from the 3' and 5' end of the reads,
 * keep only reads with a read length not shorter than 25 base pairs.
 
 Fill in the missing options and execute the script to trim the data.
