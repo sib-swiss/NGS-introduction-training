@@ -696,7 +696,7 @@ fastq-dump --split-files SRR519926
 <p>We will use <a href="https://cutadapt.readthedocs.io/en/stable/index.html">cutadapt</a> for trimming adapters and low quality bases from our reads. The most used adapters for Illumina are TruSeq adapters. To run <code>cutadapt</code> you need to specify the adapter sequences with options <code>-a</code> (or <code>--adapter</code>) and <code>-A</code>. A reference for the adapter sequences can be found <a href="https://support.illumina.com/bulletins/2016/12/what-sequences-do-i-use-for-adapter-trimming.html">here</a>.</p>
 <p><strong>Exercise:</strong> The script below will trim the sequence reads. However, some parts are missing. We want to:</p>
 <ul>
-<li>trim the reads based on a base quality of 10 both on the 3&rsquo; and 5&rsquo; end of the reads,</li>
+<li>trim bases with a quality lower then 10 from the 3&rsquo; and 5&rsquo; end of the reads,</li>
 <li>keep only reads with a read length not shorter than 25 base pairs.</li>
 </ul>
 <p>Fill in the missing options and execute the script to trim the data.</p>
