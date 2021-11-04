@@ -49,7 +49,7 @@
     0 + 0 with mate mapped to a different chr (mapQ>=5)
     ```
 
-    Of the reads, 38.44% is properly paired. The rest isn't. Proper pairing is quite hard to interpret. It usually means that the 0x2 flag (each segment properly aligned according to the aligner) is false. In this case it means that the insert size is high for a lot of sequences. That is because the insert size distribution is very wide. You can find info on insert size distribution like this:
+    Of the reads, 47.87% is properly paired. The rest isn't. Proper pairing is quite hard to interpret. It usually means that the 0x2 flag (each segment properly aligned according to the aligner) is false. In this case it means that the insert size is high for a lot of sequences. That is because the insert size distribution is very wide. You can find info on insert size distribution like this:
 
     ```
     samtools stats SRR519926.sam | grep ^SN | cut -f 2,3
