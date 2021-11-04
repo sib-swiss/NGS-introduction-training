@@ -681,7 +681,7 @@ samtools flagstat SRR519926.sam
 </div>
 <details class="done"><summary>Answer</summary><p><div class="highlight"><pre><span></span><code>samtools view -bh SRR519926.sam &gt; SRR519926.bam
 </code></pre></div>
-By using <code>ls -lh</code>, you can find out that <code>SRR519926.sam</code> has a size of 223 Mb, while <code>SRR519926.bam</code> is only 67 Mb.  </p>
+By using <code>ls -lh</code>, you can find out that <code>SRR519926.sam</code> has a size of 264 Mb, while <code>SRR519926.bam</code> is only 77 Mb.  </p>
 </details>
 <p>To look up specific alignments, it is convenient to have your alignment file indexed. An indexing can be compared to a kind of &lsquo;phonebook&rsquo; of your sequence alignment file. Indexing can be done with <code>samtools</code> as well, but it first needs to be sorted on coordinate (i.e. the alignment location). You can do it like this:</p>
 <div class="highlight"><pre><span></span><code>samtools sort SRR519926.bam &gt; SRR519926.sorted.bam
