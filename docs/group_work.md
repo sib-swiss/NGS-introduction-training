@@ -82,7 +82,6 @@ gunzip Araport11_GTF_genes_transposons.Mar202021.noChr.gtf.gz
 
 * How does the quality of the reads look? Anything special about the overrepresented sequences? (Hint: [blast](https://blast.ncbi.nlm.nih.gov/) some overrepresented sequences, and see what they are)
 * Did trimming improve the QC results? What could be the cause of the warnings/errors in the `fastqc` reports?
-* How do the two aligners report multi-mapping reads?
 * What are the alignment rates?
 * How do the aligners handle splicing?
 * How are spliced alignments stored in the SAM file? (have a look at the CIGAR string)
@@ -257,7 +256,6 @@ gunzip Mus_musculus.GRCm38.102.chr5.gtf.gz
 * Check the description at the SRA sample page. What kind of sample is this?
 * How does the quality of the reads look? Anything special about the overrepresented sequences? (Hint: [blast](https://blast.ncbi.nlm.nih.gov/) some overrepresented sequences, and see what they are)
 * Did trimming improve the QC results? What could be the cause of the warnings/errors in the `fastqc` reports?
-* How do the two aligners report multi-mapping reads?
 * What are the alignment rates?
 * How do the aligners handle splicing?
 * How are spliced alignments stored in the SAM file?
