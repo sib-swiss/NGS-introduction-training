@@ -70,7 +70,7 @@ The command `samtools view` is very versatile. It takes an alignment file and wr
     ```sh
     samtools view -bh SRR519926.sam > SRR519926.bam
     ```
-    By using `ls -lh`, you can find out that `SRR519926.sam` has a size of 223 Mb, while `SRR519926.bam` is only 67 Mb.  
+    By using `ls -lh`, you can find out that `SRR519926.sam` has a size of 264 Mb, while `SRR519926.bam` is only 77 Mb.  
 
 To look up specific alignments, it is convenient to have your alignment file indexed. An indexing can be compared to a kind of 'phonebook' of your sequence alignment file. Indexing can be done with `samtools` as well, but it first needs to be sorted on coordinate (i.e. the alignment location). You can do it like this:
 
