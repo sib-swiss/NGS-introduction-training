@@ -85,7 +85,7 @@ gunzip Araport11_GTF_genes_transposons.Mar202021.noChr.gtf.gz
 * What are the alignment rates?
 * How do the aligners handle splicing?
 * How are spliced alignments stored in the SAM file? (have a look at the CIGAR string)
-* What would be the effect of the aligner if you would be measuring gene expression? (To investigate this you'll need to run [featureCounts](http://bioinf.wehi.edu.au/featureCounts/)).
+* What would be the effect of the aligner if you would be measuring gene expression? (To investigate this you'll need to run [featureCounts](http://subread.sourceforge.net/featureCounts.html)).
 * What is the effect of setting the option `-Q` in `featureCounts` on the comparison between the aligners?
 
 !!! hint "Run your processes on multiple cores!"
@@ -259,7 +259,7 @@ gunzip Mus_musculus.GRCm38.102.chr5.gtf.gz
 * What are the alignment rates?
 * How do the aligners handle splicing?
 * How are spliced alignments stored in the SAM file?
-* What would be the effect of the aligner if you would be measuring gene expression? (To investigate this you'll need to run [featureCounts](http://bioinf.wehi.edu.au/featureCounts/)).
+* What would be the effect of the aligner if you would be measuring gene expression? (To investigate this you'll need to run [featureCounts](http://subread.sourceforge.net/featureCounts.html)).
 * What is the effect of setting the option `-Q` in `featureCounts` on the comparison between the aligners?
 
 !!! hint "Run your processes on multiple cores!"
