@@ -706,12 +706,12 @@ fastq-dump --split-files SRR519926
 <div class="highlight"><pre><span></span><code>cutadapt --help
 </code></pre></div></p>
 </div>
-<div class="highlight"><pre><span></span><code><span class="c1">##!/usr/bin/env bash</span>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
-<span class="nv">TRIMMED_DIR</span><span class="o">=</span>trimmed_data
-<span class="nv">READS_DIR</span><span class="o">=</span>reads
+<span class="nv">TRIMMED_DIR</span><span class="o">=</span>~/workdir/trimmed_data
+<span class="nv">READS_DIR</span><span class="o">=</span>~/workdir/reads
 
-mkdir <span class="nv">$TRIMMED_DIR</span>
+mkdir -p <span class="nv">$TRIMMED_DIR</span>
 
 cutadapt <span class="se">\</span>
 --adapter AGATCGGAAGAGCACACGTCTGAACTCCAGTCA <span class="se">\</span>
@@ -724,12 +724,12 @@ cutadapt <span class="se">\</span>
 <span class="nv">$READS_DIR</span>/SRR519926_2.fastq
 </code></pre></div>
 <details class="done"><summary>Answer</summary><p>Your script should look like this:</p>
-<div class="highlight"><pre><span></span><code><span class="c1">##!/usr/bin/env bash</span>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
-<span class="nv">TRIMMED_DIR</span><span class="o">=</span>trimmed_data
-<span class="nv">READS_DIR</span><span class="o">=</span>reads
+<span class="nv">TRIMMED_DIR</span><span class="o">=</span>~/workdir/trimmed_data
+<span class="nv">READS_DIR</span><span class="o">=</span>~/workdir/reads
 
-mkdir <span class="nv">$TRIMMED_DIR</span>
+mkdir -p <span class="nv">$TRIMMED_DIR</span>
 
 cutadapt <span class="se">\</span>
 --adapter AGATCGGAAGAGCACACGTCTGAACTCCAGTCA <span class="se">\</span>
@@ -737,7 +737,7 @@ cutadapt <span class="se">\</span>
 --quality-cutoff <span class="m">10</span>,10 <span class="se">\</span>
 --minimum-length <span class="m">25</span> <span class="se">\</span>
 --output <span class="nv">$TRIMMED_DIR</span>/paired_trimmed_SRR519926_1.fastq <span class="se">\</span>
---paired-output  <span class="nv">$TRIMMED_DIR</span>/paired_trimmed_SRR519926_2.fastq <span class="se">\</span>
+--paired-output <span class="nv">$TRIMMED_DIR</span>/paired_trimmed_SRR519926_2.fastq <span class="se">\</span>
 <span class="nv">$READS_DIR</span>/SRR519926_1.fastq <span class="se">\</span>
 <span class="nv">$READS_DIR</span>/SRR519926_2.fastq
 </code></pre></div>
