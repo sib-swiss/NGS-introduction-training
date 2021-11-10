@@ -2,15 +2,15 @@ name: build and push CI
 
 on:
   workflow_dispatch:
-  release:
-    types: [published]
-    tags:
-      - '*.*'
+#   release:
+#     types: [published]
+#     tags:
+      - 'v*.*'
   push:
     tags:
-      - '*.*'
-  schedule:
-      - cron: '0 10 * * 0' 
+      - 'v*.*'
+#   schedule:
+#       - cron: '0 10 * * 0' 
   
 jobs:
   docker:
@@ -26,12 +26,7 @@ jobs:
             geertvangeest/ngs-introduction-jupyter
           # generate Docker tags based on the following events/attributes
           tags: |
-            type=schedule
-            type=ref,event=branch
-            type=ref,event=pr
-            type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
             type=sha
       -
         name: Checkout
