@@ -2,15 +2,9 @@ name: build and push CI
 
 on:
   workflow_dispatch:
-#   release:
-#     types: [published]
-#     tags:
-      - 'v*.*'
   push:
     tags:
       - 'v*.*'
-#   schedule:
-#       - cron: '0 10 * * 0' 
   
 jobs:
   docker:
