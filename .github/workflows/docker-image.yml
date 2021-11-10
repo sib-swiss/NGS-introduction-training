@@ -4,7 +4,7 @@ on:
   release:
     types: [published]
     tags:
-      - 'v*.*.*'
+      - '*.*'
   schedule:
       - cron: '0 10 * * 0' 
   
@@ -12,7 +12,7 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-    -
+      -
         name: Docker meta
         id: meta
         uses: docker/metadata-action@v3
