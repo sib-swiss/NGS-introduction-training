@@ -1,6 +1,7 @@
 name: build and push CI
 
 on:
+  workflow_dispatch:
   release:
     types: [published]
     tags:
