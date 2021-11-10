@@ -83,7 +83,7 @@
       -e JUPYTER_ENABLE_LAB=yes \
       -v /path/to/local/workdir:/home/jovyan \
       -p 8888:8888 \
-      geertvangeest/ngs-introduction-jupyter:2021.5 \
+      geertvangeest/ngs-introduction-jupyter:latest \
       start-notebook.sh
       ```
 
@@ -101,7 +101,7 @@
         Don't directly mount your local directory to the home directory (`/root`). This will lead to unexpected behaviour.
 
 
-    The part `geertvangeest/ngs-introduction-jupyter:2021.5` is the image we are going to load into the container. The image contains all the information about software and dependencies needed for this course. When you run this command for the first time it will download the image. Once it's on your computer, it will start immediately.
+    The part `geertvangeest/ngs-introduction-jupyter:latest` is the image we are going to load into the container. The image contains all the information about software and dependencies needed for this course. When you run this command for the first time it will download the image. Once it's on your computer, it will start immediately.
 
 
 === "conda"
