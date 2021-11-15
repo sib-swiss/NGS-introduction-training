@@ -1,4 +1,5 @@
 ![build workflow](https://github.com/sib-swiss/NGS-introduction-training/actions/workflows/docker-image.yml/badge.svg)
+![GitHub Release Date](https://img.shields.io/github/release-date/sib-swiss/ngs-introduction-training)
 [![DOI](https://zenodo.org/badge/306026370.svg)](https://zenodo.org/badge/latestdoi/306026370)
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC_BY--SA_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
 
