@@ -1,9 +1,13 @@
 # NGS - Quality control, Alignment, Visualisation
 
+## Teachers
+
+- Geert van Geest [:custom-orcid:](https://orcid.org/0000-0002-1561-078X)
+
 ## Authors
 
-- Walid Gharib
 - Geert van Geest [:custom-orcid:](https://orcid.org/0000-0002-1561-078X)
+- Patricia Palagi [:custom-orcid:](https://orcid.org/0000-0001-9062-6303)
 
 ## License & copyright
 
@@ -39,13 +43,7 @@
 
     ### Asking questions
 
-    During lectures, you are encouraged to raise your hand if you have questions (if in-person), or use the Zoom functionality (if online). Find the buttons in the participants list ('Participants' button):
-
-    <figure>
-      <img src="assets/images/zoom_icons.png" width="300"/>
-    </figure>
-
-    Alternatively, (depending on your zoom version or OS) use the 'Reactions' button:
+    During lectures, you are encouraged to raise your hand if you have questions (if in-person), or use the Zoom functionality (if online). Use the 'Reactions' button:
 
     <figure>
       <img src="assets/images/reactions_zoom.png" width="200"/>

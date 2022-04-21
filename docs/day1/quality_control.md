@@ -18,18 +18,6 @@
 
 ### Download and evaluate an E. coli dataset
 
-**Exercise:** If you haven't already done so, create a directory called `workdir` in your home directory and make the directory your current directory.
-
-!!! note "If working with Docker"
-    If you have mounted your local directory to `/root/workdir`, this directory should already exist.
-
-??? done "Answer"
-    ```sh
-    cd ~
-    mkdir workdir
-    cd workdir
-    ```
-
 Check out the dataset at [SRA](https://www.ncbi.nlm.nih.gov/sra/?term=SRR519926).
 
 **Exercise:** Browse around the SRA entry and answer these questions:
@@ -51,17 +39,18 @@ Check out the dataset at [SRA](https://www.ncbi.nlm.nih.gov/sra/?term=SRR519926)
 
     D. 400596
 
-Make a directory `reads` in `~/workdir` and download the reads from the SRA database using `prefetch` and `fastq-dump` from [SRA-Tools](https://ncbi.github.io/sra-tools/) into the `reads` directory:
-
-!!! note "Running `sra-tools` for the first time"
-    If you run `sra-tools` for the first time, you have to set a config file. We'll be just using a minimal file for now. To do that run:
-
-    ```sh
-    vdb-config --interactive
-    ```
-    When the GUI pops up, press the key ++x++. The config file will be created in `~/.ncbi/user-settings.mkfg`.
+Now we will use some bioinformatics tools to do download reads and perform quality control. The tools are pre-installed in a conda environment called `ngs-tools`. Every time you open a new terminal, you will have to load the environment:
 
 ```sh
+conda activate ngs-tools
+```
+
+Make a directory `reads` in `~/workdir` and download the reads from the SRA database using `prefetch` and `fastq-dump` from [SRA-Tools](https://ncbi.github.io/sra-tools/) into the `reads` directory. Use the code snippet below to create a scripts called `01_download_reads.sh`. Store it in `~/workdir/scripts/`, and run it.
+
+```sh
+#!/usr/bin/env bash
+
+cd ~/workdir
 mkdir reads
 cd reads
 prefetch SRR519926
@@ -86,17 +75,29 @@ fastq-dump --split-files SRR519926
 
 ### Run fastqc
 
-**Exercise:** Run fastqc on the fastq files.
+**Exercise:** Create a script to run `fastqc` and call it `02_run_fastqc.sh`. After that, run it.
 
 !!! tip "Tip"
     `fastqc` accepts multiple files as input, so you can use a [wildcard](https://en.wikipedia.org/wiki/Glob_(programming)) to run `fastqc` on all the files in one line of code. Use it like this: `*.fastq`.  
 
 ??? done "Answer"
+    Your script `~/workdir/scripts/02_run_fastqc.sh` should look like:
+
     ```sh
+    #!/usr/bin/env bash
+    cd ~/workdir/reads
+
     fastqc *.fastq
     ```
 
 **Exercise:** Download the html files to your local computer, and view the results. How is the quality? Where are the problems?
+
+!!! info "Downloading files"
+    You can download files by right-click the file and after that select **Download**:
+
+    <figure>
+      <img src="../../assets/images/download_file.gif" width="500"/>
+    </figure>
 
 ??? done "Answer"
     There seems to be:
@@ -116,7 +117,7 @@ We will use [cutadapt](https://cutadapt.readthedocs.io/en/stable/index.html) for
 * trim bases with a quality lower then 10 from the 3' and 5' end of the reads,
 * keep only reads with a read length not shorter than 25 base pairs.
 
-Fill in the missing options and execute the script to trim the data.
+Copy the code below to a script in your scripts directory (`~/workdir/scripts`) and call it `trim_reads.sh`. Fill in the missing options. After that execute the script to trim the data.
 
 !!! hint
     Check out the helper of `cutadapt` with:
@@ -144,7 +145,7 @@ $READS_DIR/SRR519926_2.fastq
 ```
 
 ??? done "Answer"
-    Your script should look like this:
+    Your script (`~/workdir/scripts/03_trim_reads.sh`) should look like this:
 
     ```sh
 
@@ -169,7 +170,7 @@ $READS_DIR/SRR519926_2.fastq
 !!! note "The use of `\`"
     In the script above you see that we're using `\` at the end of many lines. We use it to tell bash to ignore the newlines. If we would not do it, the `cutadapt` command would become a very long line, and the script would become very difficult to read. It is in general good practice to put every option of a long command on a newline in your script and use `\` to ignore the newlines when executing.
 
-**Exercise:** Run `fastqc` on the trimmed fastq files and answer these questions:
+**Exercise:** Create a script to run `fastqc` on the trimmed fastq files called `04_run_fastqc_trimmed.sh`, and answer these questions:
 
 **A.** Has the quality improved?
 
@@ -177,8 +178,10 @@ $READS_DIR/SRR519926_2.fastq
 
 
 ??? done "Answers"
-    Running `fastqc`:
+    Your script `04_run_fastqc_trimmed.sh` should look like:
     ```
+    #!/usr/bin/env bash
+
     cd ~/workdir/trimmed_data
     fastqc paired_trimmed*.fastq
     ```
