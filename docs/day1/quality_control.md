@@ -16,6 +16,41 @@
 
 ## Exercises
 
+### Some good practices for reproducibility
+
+During today and tomorrow we will work with a small E. coli dataset to practice quality control, alignment and alignment filtering. You can consider this as a small project. During the exercise you will be guided to adhere to the following basic principles for reproducibility:
+
+1. **Execute the commands from a script** in order to be able to trace back your steps
+2. All **output files and directories** should be created from **within a script**
+3. **Number scripts** based on their order of execution (e.g. `01_download_reads.sh`)
+4. Give your scripts a **descriptive and active name**, e.g. `06_build_bowtie_index.sh`
+5. Make your scripts **specific**, i.e. do not combine many different commands in the same script
+6. Refer to **directories and variables on top** of the script
+
+By adhering to these simple principles it will be relatively straightforward to re-do your analysis steps only based on the scripts, and will get you started to adhere to the [Ten Simple Rules for Reproducible Computational Research](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003285). 
+
+By the end of day 2 `~/workdir` should look (something) like this:
+
+```
+.
+├── alignment_output
+├── reads
+├── ref_genome
+├── scripts
+│   ├── 01_download_reads.sh
+│   ├── 02_run_fastqc.sh
+│   ├── 03_trim_reads.sh
+│   ├── 04_run_fastqc_trimmed.sh
+│   ├── 05_download_ecoli_reference.sh
+│   ├── 06_build_bowtie_index.sh
+│   ├── 07_align_reads.sh
+│   ├── 08_compress_sort.sh
+│   ├── 09_extract_unmapped.sh
+│   ├── 10_extract_region.sh
+│   └── 11_align_sort_filter.sh
+└── trimmed_data
+```
+
 ### Download and evaluate an E. coli dataset
 
 Check out the dataset at [SRA](https://www.ncbi.nlm.nih.gov/sra/?term=SRR519926).
@@ -47,7 +82,7 @@ conda activate ngs-tools
 
 Make a directory `reads` in `~/workdir` and download the reads from the SRA database using `prefetch` and `fastq-dump` from [SRA-Tools](https://ncbi.github.io/sra-tools/) into the `reads` directory. Use the code snippet below to create a scripts called `01_download_reads.sh`. Store it in `~/workdir/scripts/`, and run it.
 
-```sh
+```sh title="01_download_reads.sh"
 #!/usr/bin/env bash
 
 cd ~/workdir
@@ -83,7 +118,7 @@ fastq-dump --split-files SRR519926
 ??? done "Answer"
     Your script `~/workdir/scripts/02_run_fastqc.sh` should look like:
 
-    ```sh
+    ```sh title="02_run_fastqc.sh"
     #!/usr/bin/env bash
     cd ~/workdir/reads
 
@@ -117,7 +152,7 @@ We will use [cutadapt](https://cutadapt.readthedocs.io/en/stable/index.html) for
 * trim bases with a quality lower then 10 from the 3' and 5' end of the reads,
 * keep only reads with a read length not shorter than 25 base pairs.
 
-Copy the code below to a script in your scripts directory (`~/workdir/scripts`) and call it `trim_reads.sh`. Fill in the missing options. After that execute the script to trim the data.
+Copy the code below to a script in your scripts directory (`~/workdir/scripts`) and call it `03_trim_reads.sh`. Fill in the missing options that in between `[]`. After that execute the script to trim the data.
 
 !!! hint
     Check out the helper of `cutadapt` with:
@@ -125,7 +160,7 @@ Copy the code below to a script in your scripts directory (`~/workdir/scripts`) 
     cutadapt --help
     ```
 
-```sh
+```sh title="03_trim_reads.sh"
 #!/usr/bin/env bash
 
 TRIMMED_DIR=~/workdir/trimmed_data
@@ -147,7 +182,7 @@ $READS_DIR/SRR519926_2.fastq
 ??? done "Answer"
     Your script (`~/workdir/scripts/03_trim_reads.sh`) should look like this:
 
-    ```sh
+    ```sh title="03_trim_reads.sh"
 
     #!/usr/bin/env bash
 
@@ -179,7 +214,8 @@ $READS_DIR/SRR519926_2.fastq
 
 ??? done "Answers"
     Your script `04_run_fastqc_trimmed.sh` should look like:
-    ```
+
+    ```sh title="04_run_fastqc_trimmed.sh"
     #!/usr/bin/env bash
 
     cd ~/workdir/trimmed_data

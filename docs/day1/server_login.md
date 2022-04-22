@@ -32,6 +32,9 @@
       <img src="../../assets/images/vscode_login_page.png" width="300"/>
     </figure>
 
+    !!! info
+        The link gives you access to a web version of [Visual Studio Code](https://code.visualstudio.com). This is a powerful code editor that you can also use a local application on your computer. 
+
     Type in the password that was provided to you by the teacher. Now let's open the terminal. You can do that with ++ctrl+grave++. Or by clicking **Application menu** > **Terminal** > **New Terminal**:
 
     <figure>

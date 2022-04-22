@@ -61,23 +61,72 @@
 
 The command `samtools view` is very versatile. It takes an alignment file and writes a filtered or processed alignment to the output. You can for example use it to compress your SAM file into a BAM file. Let's start with that.
 
-**Exercise**: compress our SAM file into a BAM file and include the header in the output. For this, use the `-b` and `-h` options. Find the required documentation [here](http://www.htslib.org/doc/samtools-view.html). How much was the disk space reduced by compressing the file?
+**Exercise**: Create a script called `08_compress_sort.sh`. Add a `samtools view` command to compress our SAM file into a BAM file and include the header in the output. For this, use the `-b` and `-h` options. Find the required documentation [here](http://www.htslib.org/doc/samtools-view.html). How much was the disk space reduced by compressing the file?
 
 !!! tip "Tip: Samtools writes to stdout"
     By default, samtools writes it's output to stdout. This means that you need to redirect your output to a file with `>` or use the the output option `-o`.
 
 ??? done "Answer"
-    ```sh
+
+    ```sh title="08_compress_sort.sh"
+    #!/usr/bin/env bash
+
+    cd ~/workdir/alignment_output
+
     samtools view -bh SRR519926.sam > SRR519926.bam
     ```
     By using `ls -lh`, you can find out that `SRR519926.sam` has a size of 264 Mb, while `SRR519926.bam` is only 77 Mb.  
 
-To look up specific alignments, it is convenient to have your alignment file indexed. An indexing can be compared to a kind of 'phonebook' of your sequence alignment file. Indexing can be done with `samtools` as well, but it first needs to be sorted on coordinate (i.e. the alignment location). You can do it like this:
+To look up specific alignments, it is convenient to have your alignment file indexed. An indexing can be compared to a kind of 'phonebook' of your sequence alignment file. Indexing is done with `samtools` as well, but it first needs to be sorted on coordinate (i.e. the alignment location). You can do it like this:
 
 ```sh
 samtools sort SRR519926.bam > SRR519926.sorted.bam
 samtools index SRR519926.sorted.bam
 ```
+
+**Exercise**: Add these lines to `08_compress_sort.sh`, and re-run te script in order to generate the sorted bam file. After that checkout the headers of the unsorted bam file (`SRR519926.bam`) and the sorted bam file (`SRR519926.sorted.bam`) with `samtools view -H`. What are the differences?
+
+??? done "Answer"
+
+    Your script should like like this:
+
+    ```sh title="08_compress_sort.sh"
+    #!/usr/bin/env bash
+
+    cd ~/workdir/alignment_output
+
+    samtools view -bh SRR519926.sam > SRR519926.bam
+    samtools sort SRR519926.bam > SRR519926.sorted.bam
+    samtools index SRR519926.sorted.bam
+    ```
+
+    `samtools view -H SRR519926.bam` returns:
+
+    ```
+    @HD     VN:1.0  SO:unsorted
+    @SQ     SN:U00096.3     LN:4641652
+    @PG     ID:bowtie2      PN:bowtie2      VN:2.4.2        CL:"/opt/conda/envs/ngs-tools/bin/bowtie2-align-s --wrapper basic-0 -x /config/workdir/ref_genome//ecoli-strK12-MG1655.fasta -1 /config/workdir/trimmed_data/paired_trimmed_SRR519926_1.fastq -2 /config/workdir/trimmed_data/paired_trimmed_SRR519926_2.fastq"
+    @PG     ID:samtools     PN:samtools     PP:bowtie2      VN:1.12 CL:samtools view -bh SRR519926.sam
+    @PG     ID:samtools.1   PN:samtools     PP:samtools     VN:1.12 CL:samtools view -H SRR519926.bam
+    ```
+
+    And `samtools view -H SRR519926.sorted.bam` returns:
+
+    ```
+    @HD     VN:1.0  SO:coordinate
+    @SQ     SN:U00096.3     LN:4641652
+    @PG     ID:bowtie2      PN:bowtie2      VN:2.4.2        CL:"/opt/conda/envs/ngs-tools/bin/bowtie2-align-s --wrapper basic-0 -x /config/workdir/ref_genome//ecoli-strK12-MG1655.fasta -1 /config/workdir/trimmed_data/paired_trimmed_SRR519926_1.fastq -2 /config/workdir/trimmed_data/paired_trimmed_SRR519926_2.fastq"
+    @PG     ID:samtools     PN:samtools     PP:bowtie2      VN:1.12 CL:samtools view -bh SRR519926.sam
+    @PG     ID:samtools.1   PN:samtools     PP:samtools     VN:1.12 CL:samtools sort SRR519926.bam
+    @PG     ID:samtools.2   PN:samtools     PP:samtools.1   VN:1.12 CL:samtools view -H SRR519926.sorted.bam
+    ```
+
+    There are two main differences: 
+    
+    - The `SO` tag at `@HD` type code has changed from `unsorted` to `coordinate`.
+    - A line with the `@PG` type code for the sorting was added.
+
+    Note that the command to view the header (`samtools -H`) is also added to the header for both runs.
 
 ### Filtering
 
@@ -100,14 +149,19 @@ or:
 samtools view -bh -F 4 SRR519926.sorted.bam > SRR519926.sorted.mapped.bam
 ```
 
-**Exercise:** Write a command that outputs only the unmapped reads (so the opposite of the example). How many reads are in there? Is that the same as what we expect based on the output of `samtools flagstat`?
+**Exercise:** Generate a script called `09_extract_unmapped.sh` to get only the unmapped reads (so the opposite of the example). How many reads are in there? Is that the same as what we expect based on the output of `samtools flagstat`?
 
 !!! tip "Tip"
     Check out the `-f` and `-c` options of `samtools view`
 
 ??? Done "Answer"
-    Filter like this:
-    ```sh
+    Your script `09_extract_unmapped.sh` should look like this:
+
+    ```sh title="09_extract_unmapped.sh"
+    #!/usr/bin/env bash
+
+    cd ~/workdir/alignment_output
+
     samtools view -bh -f 0x4 SRR519926.sorted.bam > SRR519926.sorted.unmapped.bam
     ```
 
@@ -115,11 +169,12 @@ samtools view -bh -F 4 SRR519926.sorted.bam > SRR519926.sorted.mapped.bam
     ```sh
     samtools view -c SRR519926.sorted.unmapped.bam
     ```
+
     This should correspond to the output of `samtools flagstat` (631808 - 627753 = 4055)
 
 `samtools view` also enables you to filter alignments in a specific region. This can be convenient if you don't want to work with huge alignment files and if you're only interested in alignments in a particular region. Region filtering only works for sorted and indexed alignment files.
 
-**Exercise:** Filter our sorted and indexed BAM file for the region between 2000 and 2500 kb, and output it as a BAM file with a header.
+**Exercise:** Generate a script called `10_extract_region.sh` to filter our sorted and indexed BAM file for the region between 2000 and 2500 kb, and output it as a BAM file with a header.
 
 !!! tip "Tip: Specifying a region"
     Our E. coli genome has only one chromosome, because only one line starts with `>` in the fasta file
@@ -138,9 +193,16 @@ samtools view -bh -F 4 SRR519926.sorted.bam > SRR519926.sorted.mapped.bam
     The part after the first space in the title is cut off for the alignment reference. So the code for specifying a region would be: `U00096.3:START-END`
 
 ??? done "Answer"
-    ```
+
+    ```sh title="10_extract_region.sh"
+    #!/usr/bin/env bash
+
     cd ~/workdir/alignment_output
-    samtools view -bh SRR519926.sorted.bam U00096.3:2000000-2500000 > SRR519926.sorted.region.bam
+
+    samtools view -bh \
+    SRR519926.sorted.bam \
+    U00096.3:2000000-2500000 \
+    > SRR519926.sorted.region.bam
     ```
 
 ### Redirection
@@ -157,11 +219,12 @@ my_alignment_command \
 !!! note "The use of `-`"
     In the modern versions of samtools, the use of `-` is not needed for most cases, so without an input file it reads from stdin. However, if you're not sure, it's better to be safe than sorry.
 
-**Exercise:** Write a script that maps the reads with bowtie2 (see chapter 2 of [read alignment](../day2/read_alignment.md)), sorts them, takes only the mapped reads, and outputs them as a BAM file with a header.
+**Exercise:** Write a script called `11_align_sort_filter.sh` that maps the reads with bowtie2 (see chapter 2 of [read alignment](../day2/read_alignment.md)), sorts them, and outputs them as a BAM file with a header.
 
 ??? done "Answer"
-    ```
-    ##!/usr/bin/env bash
+
+    ```sh title="11_align_sort_filter.sh"
+    #!/usr/bin/env bash
 
     TRIMMED_DIR=~/workdir/trimmed_data
     REFERENCE_DIR=~/workdir/ref_genome
@@ -172,6 +235,6 @@ my_alignment_command \
     -1 $TRIMMED_DIR/paired_trimmed_SRR519926_1.fastq \
     -2 $TRIMMED_DIR/paired_trimmed_SRR519926_2.fastq \
     | samtools sort - \
-    | samtools view -F 0x4 -bh - \
+    | samtools view -bh - \
     > $ALIGNED_DIR/SRR519926.sorted.mapped.frompipe.bam
     ```

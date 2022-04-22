@@ -19,9 +19,9 @@
 
 ### Prepare the reference sequence
 
-Make a script called `05_ecoli_reference.sh`, and paste in the code snippet below. Use it to retrieve the reference sequence using `esearch` and `efetch`:
+Make a script called `05_download_ecoli_reference.sh`, and paste in the code snippet below. Use it to retrieve the reference sequence using `esearch` and `efetch`:
 
-```sh
+```sh title="05_download_ecoli_reference.sh"
 #!/usr/bin/env bash
 
 REFERENCE_DIR=~/workdir/ref_genome/
@@ -36,7 +36,7 @@ esearch -db nuccore -query 'U00096' \
 **Exercise:** Check out the [documentation of `bowtie2-build`](http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#the-bowtie2-build-indexer), and build the indexed reference genome with bowtie2 using default options. Do that with a script called `06_build_bowtie_index.sh`.
 
 ??? done "Answer"
-    ```sh
+    ```sh title="06_build_bowtie_index.sh"
     #!/usr/bin/env bash
 
     cd ~/workdir/ref_genome
@@ -61,14 +61,14 @@ Align the reads with `bowtie2`
 
 **Exercise:** Try to understand what the script below does. After that copy it to a script called `07_align_reads.sh`, and run it.
 
-```sh
-##!/usr/bin/env bash
+```sh title="07_align_reads.sh"
+#!/usr/bin/env bash
 
 TRIMMED_DIR=~/workdir/trimmed_data
 REFERENCE_DIR=~/workdir/ref_genome/
 ALIGNED_DIR=~/workdir/alignment_output
 
-mkdir $ALIGNED_DIR
+mkdir -p $ALIGNED_DIR
 
 bowtie2 \
 -x $REFERENCE_DIR/ecoli-strK12-MG1655.fasta \

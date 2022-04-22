@@ -29,6 +29,7 @@ Now you can find your group directory at `~/<group name>`. Use this to share fil
 !!! warning
     Do not remove the soft link with `rm -r`, this will delete the entire source directory. If you want to remove only the softlink, use `rm` (without `-r`), or `unlink`. More info [here](https://linuxize.com/post/how-to-remove-symbolic-links-in-linux/).
 
+
 ## :fontawesome-solid-seedling: Project 1: Short-read RNA-seq data of *Arabidopsis thaliana* grown in space
 
 **Aim:** Compare `hisat2` (splice-aware) with `bowtie2` (splice unaware) while aligning an Arabidopsis RNA-seq dataset.
@@ -65,7 +66,10 @@ wget https://ngs-introduction-training.s3.eu-central-1.amazonaws.com/Araport11_G
 gunzip Araport11_GTF_genes_transposons.Mar202021.noChr.gtf.gz
 ```
 
-### Tasks:
+### Tasks
+
+!!! warning "Important!"
+    **Stick to the principles for reproducible analysis** described [at the beginning of the exercises](day1/quality_control.md#some-good-practices-for-reproducibility).
 
 * Check out the project page, and download one or two samples that interest you (download both the forward and reverse reads from the same sample).
 * Do a QC on the data with `fastqc`
@@ -78,7 +82,7 @@ gunzip Araport11_GTF_genes_transposons.Mar202021.noChr.gtf.gz
 * Run `featureCounts` on both alignments
 * Compare the count matrices in `R` or `python` (Rstudio server is running on the same machine. Approach it with your credentials and username `rstudio`)
 
-### Questions:
+### Questions
 
 * How does the quality of the reads look? Anything special about the overrepresented sequences? (Hint: [blast](https://blast.ncbi.nlm.nih.gov/) some overrepresented sequences, and see what they are)
 * Did trimming improve the QC results? What could be the cause of the warnings/errors in the `fastqc` reports?
@@ -156,7 +160,10 @@ Download the human reference genome like this:
 wget ftp://ftp.ensembl.org/pub/release-101/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
 ```
 
-### Tasks:
+### Tasks
+
+!!! warning "Important!"
+    **Stick to the principles for reproducible analysis** described [at the beginning of the exercises](day1/quality_control.md#some-good-practices-for-reproducibility).
 
 * Check out the BioProject, and download two samples that interest you.
 * Perform QC with `fastqc`
@@ -166,7 +173,7 @@ wget ftp://ftp.ensembl.org/pub/release-101/fasta/homo_sapiens/dna/Homo_sapiens.G
 * Evaluate the alignment quality (e.g. alignment rates, mapping quality)
 * Compare different samples in read quality, alignment rates, depth, etc.
 
-### Questions:
+### Questions
 
 * Have a look at the quality report. What are the average read lengths? Is that expected?
 * What is the average read quality? What kind of accuracy would you expect?
@@ -238,7 +245,10 @@ wget https://ngs-introduction-training.s3.eu-central-1.amazonaws.com/project3/Mu
 gunzip Mus_musculus.GRCm38.102.chr5.gtf.gz
 ```
 
-### Tasks:
+### Tasks
+
+!!! warning "Important!"
+    **Stick to the principles for reproducible analysis** described [at the beginning of the exercises](day1/quality_control.md#some-good-practices-for-reproducibility).
 
 * Download the reads, reference and gtf file
 * Do a QC on the data with `fastqc`
@@ -251,7 +261,7 @@ gunzip Mus_musculus.GRCm38.102.chr5.gtf.gz
 * Run `featureCounts` on both alignments. Have a look at the option `-Q`.
 * Compare the count matrices in `R` or `python` (Rstudio server is running on the same machine. Approach it with your credentials and username `rstudio`)
 
-### Questions:
+### Questions
 
 * Check the description at the SRA sample page. What kind of sample is this?
 * How does the quality of the reads look? Anything special about the overrepresented sequences? (Hint: [blast](https://blast.ncbi.nlm.nih.gov/) some overrepresented sequences, and see what they are)
