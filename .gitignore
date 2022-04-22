@@ -5,3 +5,4 @@ project_work/*
 .Rproj.user
 .config
 .local
+workdir/

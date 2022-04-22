@@ -1,30 +1,33 @@
-FROM jupyter/minimal-notebook:9fe5186aba96
+FROM linuxserver/code-server:4.3.0
 
-# change user to root to modify .bashrc for e.g. highlighting in the console
-USER root
-RUN cat /etc/skel/.bashrc >> /etc/bash.bashrc
+# Install base utilities
+RUN apt-get update && \
+    apt-get install -y wget && \
+    apt-get install -y bc && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-# install bc for counting reads
-RUN apt-get update && apt-get install -y bc
+# Install miniconda
+ENV CONDA_DIR /opt/conda
+RUN wget -O ~/miniconda.sh --quiet \
+    https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
+    /bin/bash ~/miniconda.sh -b -p /opt/conda && \
+    rm ~/miniconda.sh
 
-# change back to notebook user
-USER $NB_UID
+# Put conda in path so we can use conda activate
+ENV PATH=$CONDA_DIR/bin:$PATH
 
-# remove auto-generated work directory
-RUN rm -r /home/jovyan/work
+# RUN cat /etc/skel/.bashrc >> /etc/bash.bashrc
 
 # intall required software with conda
-RUN /opt/conda/bin/conda install -y --quiet -c bioconda \
-python=3.8 \
-samtools=1.12 \
-bwa=0.7.17 \
-fastqc=0.11.8 \
-sra-tools=2.11.0 \
-cutadapt=3.4 \
-bowtie2=2.4.2 \
-hisat2=2.2.1 \
-subread=2.0.1 \
-entrez-direct=13.9 \
-minimap2=2.18
+COPY environment.yml ./
 
-RUN pip install NanoPlot
+RUN conda env create \
+    -n ngs-tools \
+    -f environment.yml
+
+RUN conda init 
+
+COPY settings.json /config/data/User/
+COPY keybindings.json /config/data/User/
+RUN mkdir -p /config/workdir
