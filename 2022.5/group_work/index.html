@@ -528,14 +528,14 @@
         
           <li class="md-nav__item">
   <a href="#tasks" class="md-nav__link">
-    Tasks:
+    Tasks
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#questions" class="md-nav__link">
-    Questions:
+    Questions
   </a>
   
 </li>
@@ -555,14 +555,14 @@
         
           <li class="md-nav__item">
   <a href="#tasks_1" class="md-nav__link">
-    Tasks:
+    Tasks
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#questions_1" class="md-nav__link">
-    Questions:
+    Questions
   </a>
   
 </li>
@@ -582,14 +582,14 @@
         
           <li class="md-nav__item">
   <a href="#tasks_2" class="md-nav__link">
-    Tasks:
+    Tasks
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#questions_2" class="md-nav__link">
-    Questions:
+    Questions
   </a>
   
 </li>
@@ -655,14 +655,14 @@
         
           <li class="md-nav__item">
   <a href="#tasks" class="md-nav__link">
-    Tasks:
+    Tasks
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#questions" class="md-nav__link">
-    Questions:
+    Questions
   </a>
   
 </li>
@@ -682,14 +682,14 @@
         
           <li class="md-nav__item">
   <a href="#tasks_1" class="md-nav__link">
-    Tasks:
+    Tasks
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#questions_1" class="md-nav__link">
-    Questions:
+    Questions
   </a>
   
 </li>
@@ -709,14 +709,14 @@
         
           <li class="md-nav__item">
   <a href="#tasks_2" class="md-nav__link">
-    Tasks:
+    Tasks
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#questions_2" class="md-nav__link">
-    Questions:
+    Questions
   </a>
   
 </li>
@@ -788,7 +788,11 @@ gunzip Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz
 <div class="highlight"><pre><span></span><code>wget https://ngs-introduction-training.s3.eu-central-1.amazonaws.com/Araport11_GTF_genes_transposons.Mar202021.noChr.gtf.gz
 gunzip Araport11_GTF_genes_transposons.Mar202021.noChr.gtf.gz
 </code></pre></div>
-<h3 id="tasks">Tasks:</h3>
+<h3 id="tasks">Tasks</h3>
+<div class="admonition warning">
+<p class="admonition-title">Important!</p>
+<p><strong>Stick to the principles for reproducible analysis</strong> described <a href="../day1/quality_control/#some-good-practices-for-reproducibility">at the beginning of the exercises</a>.</p>
+</div>
 <ul>
 <li>Check out the project page, and download one or two samples that interest you (download both the forward and reverse reads from the same sample).</li>
 <li>Do a QC on the data with <code>fastqc</code></li>
@@ -801,7 +805,7 @@ gunzip Araport11_GTF_genes_transposons.Mar202021.noChr.gtf.gz
 <li>Run <code>featureCounts</code> on both alignments</li>
 <li>Compare the count matrices in <code>R</code> or <code>python</code> (Rstudio server is running on the same machine. Approach it with your credentials and username <code>rstudio</code>)</li>
 </ul>
-<h3 id="questions">Questions:</h3>
+<h3 id="questions">Questions</h3>
 <ul>
 <li>How does the quality of the reads look? Anything special about the overrepresented sequences? (Hint: <a href="https://blast.ncbi.nlm.nih.gov/">blast</a> some overrepresented sequences, and see what they are)</li>
 <li>Did trimming improve the QC results? What could be the cause of the warnings/errors in the <code>fastqc</code> reports?</li>
@@ -893,7 +897,11 @@ hisat2 <span class="se">\</span>
 <p>Download the human reference genome like this:</p>
 <div class="highlight"><pre><span></span><code>wget ftp://ftp.ensembl.org/pub/release-101/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
 </code></pre></div>
-<h3 id="tasks_1">Tasks:</h3>
+<h3 id="tasks_1">Tasks</h3>
+<div class="admonition warning">
+<p class="admonition-title">Important!</p>
+<p><strong>Stick to the principles for reproducible analysis</strong> described <a href="../day1/quality_control/#some-good-practices-for-reproducibility">at the beginning of the exercises</a>.</p>
+</div>
 <ul>
 <li>Check out the BioProject, and download two samples that interest you.</li>
 <li>Perform QC with <code>fastqc</code></li>
@@ -903,7 +911,7 @@ hisat2 <span class="se">\</span>
 <li>Evaluate the alignment quality (e.g. alignment rates, mapping quality)</li>
 <li>Compare different samples in read quality, alignment rates, depth, etc.</li>
 </ul>
-<h3 id="questions_1">Questions:</h3>
+<h3 id="questions_1">Questions</h3>
 <ul>
 <li>Have a look at the quality report. What are the average read lengths? Is that expected?</li>
 <li>What is the average read quality? What kind of accuracy would you expect?</li>
@@ -965,7 +973,11 @@ gunzip Mus_musculus.GRCm38.dna.primary_assembly.chr5.fa.gz
 <div class="highlight"><pre><span></span><code>wget https://ngs-introduction-training.s3.eu-central-1.amazonaws.com/project3/Mus_musculus.GRCm38.102.chr5.gtf.gz
 gunzip Mus_musculus.GRCm38.102.chr5.gtf.gz
 </code></pre></div>
-<h3 id="tasks_2">Tasks:</h3>
+<h3 id="tasks_2">Tasks</h3>
+<div class="admonition warning">
+<p class="admonition-title">Important!</p>
+<p><strong>Stick to the principles for reproducible analysis</strong> described <a href="../day1/quality_control/#some-good-practices-for-reproducibility">at the beginning of the exercises</a>.</p>
+</div>
 <ul>
 <li>Download the reads, reference and gtf file</li>
 <li>Do a QC on the data with <code>fastqc</code></li>
@@ -978,7 +990,7 @@ gunzip Mus_musculus.GRCm38.102.chr5.gtf.gz
 <li>Run <code>featureCounts</code> on both alignments. Have a look at the option <code>-Q</code>.</li>
 <li>Compare the count matrices in <code>R</code> or <code>python</code> (Rstudio server is running on the same machine. Approach it with your credentials and username <code>rstudio</code>)</li>
 </ul>
-<h3 id="questions_2">Questions:</h3>
+<h3 id="questions_2">Questions</h3>
 <ul>
 <li>Check the description at the SRA sample page. What kind of sample is this?</li>
 <li>How does the quality of the reads look? Anything special about the overrepresented sequences? (Hint: <a href="https://blast.ncbi.nlm.nih.gov/">blast</a> some overrepresented sequences, and see what they are)</li>

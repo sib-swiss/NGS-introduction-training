@@ -383,6 +383,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#some-good-practices-for-reproducibility" class="md-nav__link">
+    Some good practices for reproducibility
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#download-and-evaluate-an-e-coli-dataset" class="md-nav__link">
     Download and evaluate an E. coli dataset
   </a>
@@ -609,6 +616,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#some-good-practices-for-reproducibility" class="md-nav__link">
+    Some good practices for reproducibility
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#download-and-evaluate-an-e-coli-dataset" class="md-nav__link">
     Download and evaluate an E. coli dataset
   </a>
@@ -665,6 +679,36 @@
 <li>Unix command line <a href="https://www.ncbi.nlm.nih.gov/books/NBK179288/">E-utilities documentation</a></li>
 </ul>
 <h2 id="exercises">Exercises</h2>
+<h3 id="some-good-practices-for-reproducibility">Some good practices for reproducibility</h3>
+<p>During today and tomorrow we will work with a small E. coli dataset to practice quality control, alignment and alignment filtering. You can consider this as a small project. During the exercise you will be guided to adhere to the following basic principles for reproducibility:</p>
+<ol>
+<li><strong>Execute the commands from a script</strong> in order to be able to trace back your steps</li>
+<li>All <strong>output files and directories</strong> should be created from <strong>within a script</strong></li>
+<li><strong>Number scripts</strong> based on their order of execution (e.g. <code>01_download_reads.sh</code>)</li>
+<li>Give your scripts a <strong>descriptive and active name</strong>, e.g. <code>06_build_bowtie_index.sh</code></li>
+<li>Make your scripts <strong>specific</strong>, i.e. do not combine many different commands in the same script</li>
+<li>Refer to <strong>directories and variables on top</strong> of the script</li>
+</ol>
+<p>By adhering to these simple principles it will be relatively straightforward to re-do your analysis steps only based on the scripts, and will get you started to adhere to the <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003285">Ten Simple Rules for Reproducible Computational Research</a>. </p>
+<p>By the end of day 2 <code>~/workdir</code> should look (something) like this:</p>
+<div class="highlight"><pre><span></span><code>.
+├── alignment_output
+├── reads
+├── ref_genome
+├── scripts
+│   ├── 01_download_reads.sh
+│   ├── 02_run_fastqc.sh
+│   ├── 03_trim_reads.sh
+│   ├── 04_run_fastqc_trimmed.sh
+│   ├── 05_download_ecoli_reference.sh
+│   ├── 06_build_bowtie_index.sh
+│   ├── 07_align_reads.sh
+│   ├── 08_compress_sort.sh
+│   ├── 09_extract_unmapped.sh
+│   ├── 10_extract_region.sh
+│   └── 11_align_sort_filter.sh
+└── trimmed_data
+</code></pre></div>
 <h3 id="download-and-evaluate-an-e-coli-dataset">Download and evaluate an E. coli dataset</h3>
 <p>Check out the dataset at <a href="https://www.ncbi.nlm.nih.gov/sra/?term=SRR519926">SRA</a>.</p>
 <p><strong>Exercise:</strong> Browse around the SRA entry and answer these questions:</p>
@@ -681,7 +725,7 @@
 <div class="highlight"><pre><span></span><code>conda activate ngs-tools
 </code></pre></div>
 <p>Make a directory <code>reads</code> in <code>~/workdir</code> and download the reads from the SRA database using <code>prefetch</code> and <code>fastq-dump</code> from <a href="https://ncbi.github.io/sra-tools/">SRA-Tools</a> into the <code>reads</code> directory. Use the code snippet below to create a scripts called <code>01_download_reads.sh</code>. Store it in <code>~/workdir/scripts/</code>, and run it.</p>
-<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<div class="highlight"><span class="filename">01_download_reads.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
 <span class="nb">cd</span> ~/workdir
 mkdir reads
@@ -709,7 +753,7 @@ fastq-dump --split-files SRR519926
 <p><code>fastqc</code> accepts multiple files as input, so you can use a <a href="https://en.wikipedia.org/wiki/Glob_(programming)">wildcard</a> to run <code>fastqc</code> on all the files in one line of code. Use it like this: <code>*.fastq</code>.  </p>
 </div>
 <details class="done"><summary>Answer</summary><p>Your script <code>~/workdir/scripts/02_run_fastqc.sh</code> should look like:</p>
-<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<div class="highlight"><span class="filename">02_run_fastqc.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 <span class="nb">cd</span> ~/workdir/reads
 
 fastqc *.fastq
@@ -738,14 +782,14 @@ fastqc *.fastq
 <li>trim bases with a quality lower then 10 from the 3&rsquo; and 5&rsquo; end of the reads,</li>
 <li>keep only reads with a read length not shorter than 25 base pairs.</li>
 </ul>
-<p>Copy the code below to a script in your scripts directory (<code>~/workdir/scripts</code>) and call it <code>trim_reads.sh</code>. Fill in the missing options. After that execute the script to trim the data.</p>
+<p>Copy the code below to a script in your scripts directory (<code>~/workdir/scripts</code>) and call it <code>03_trim_reads.sh</code>. Fill in the missing options that in between <code>[]</code>. After that execute the script to trim the data.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>Check out the helper of <code>cutadapt</code> with:
 <div class="highlight"><pre><span></span><code>cutadapt --help
 </code></pre></div></p>
 </div>
-<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<div class="highlight"><span class="filename">03_trim_reads.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
 <span class="nv">TRIMMED_DIR</span><span class="o">=</span>~/workdir/trimmed_data
 <span class="nv">READS_DIR</span><span class="o">=</span>~/workdir/reads
@@ -763,7 +807,7 @@ cutadapt <span class="se">\</span>
 <span class="nv">$READS_DIR</span>/SRR519926_2.fastq
 </code></pre></div>
 <details class="done"><summary>Answer</summary><p>Your script (<code>~/workdir/scripts/03_trim_reads.sh</code>) should look like this:</p>
-<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<div class="highlight"><span class="filename">03_trim_reads.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
 <span class="nv">TRIMMED_DIR</span><span class="o">=</span>~/workdir/trimmed_data
 <span class="nv">READS_DIR</span><span class="o">=</span>~/workdir/reads
@@ -788,12 +832,12 @@ cutadapt <span class="se">\</span>
 <p><strong>Exercise:</strong> Create a script to run <code>fastqc</code> on the trimmed fastq files called <code>04_run_fastqc_trimmed.sh</code>, and answer these questions:</p>
 <p><strong>A.</strong> Has the quality improved?</p>
 <p><strong>B.</strong> How many reads do we have left?</p>
-<details class="done"><summary>Answers</summary><p>Your script <code>04_run_fastqc_trimmed.sh</code> should look like:
-<div class="highlight"><pre><span></span><code>#!/usr/bin/env bash
+<details class="done"><summary>Answers</summary><p>Your script <code>04_run_fastqc_trimmed.sh</code> should look like:</p>
+<div class="highlight"><span class="filename">04_run_fastqc_trimmed.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
-cd ~/workdir/trimmed_data
+<span class="nb">cd</span> ~/workdir/trimmed_data
 fastqc paired_trimmed*.fastq
-</code></pre></div></p>
+</code></pre></div>
 <p>A. Yes, low quality 3&rsquo; end, per sequence quality and adapter sequences have improved.</p>
 <p>B. 315904</p>
 </details>

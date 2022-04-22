@@ -639,8 +639,8 @@
 </ul>
 <h2 id="exercises">Exercises</h2>
 <h3 id="prepare-the-reference-sequence">Prepare the reference sequence</h3>
-<p>Make a script called <code>05_ecoli_reference.sh</code>, and paste in the code snippet below. Use it to retrieve the reference sequence using <code>esearch</code> and <code>efetch</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<p>Make a script called <code>05_download_ecoli_reference.sh</code>, and paste in the code snippet below. Use it to retrieve the reference sequence using <code>esearch</code> and <code>efetch</code>:</p>
+<div class="highlight"><span class="filename">05_download_ecoli_reference.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
 <span class="nv">REFERENCE_DIR</span><span class="o">=</span>~/workdir/ref_genome/
 
@@ -651,7 +651,7 @@ esearch -db nuccore -query <span class="s1">&#39;U00096&#39;</span> <span class=
 <span class="p">|</span> efetch -format fasta &gt; ecoli-strK12-MG1655.fasta
 </code></pre></div>
 <p><strong>Exercise:</strong> Check out the <a href="http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#the-bowtie2-build-indexer">documentation of <code>bowtie2-build</code></a>, and build the indexed reference genome with bowtie2 using default options. Do that with a script called <code>06_build_bowtie_index.sh</code>.</p>
-<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<details class="done"><summary>Answer</summary><div class="highlight"><span class="filename">06_build_bowtie_index.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
 <span class="nb">cd</span> ~/workdir/ref_genome
 
@@ -670,13 +670,13 @@ bowtie2-build ecoli-strK12-MG1655.fasta ecoli-strK12-MG1655.fasta
 </ul>
 </details>
 <p><strong>Exercise:</strong> Try to understand what the script below does. After that copy it to a script called <code>07_align_reads.sh</code>, and run it.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">##!/usr/bin/env bash</span>
+<div class="highlight"><span class="filename">07_align_reads.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
 <span class="nv">TRIMMED_DIR</span><span class="o">=</span>~/workdir/trimmed_data
 <span class="nv">REFERENCE_DIR</span><span class="o">=</span>~/workdir/ref_genome/
 <span class="nv">ALIGNED_DIR</span><span class="o">=</span>~/workdir/alignment_output
 
-mkdir <span class="nv">$ALIGNED_DIR</span>
+mkdir -p <span class="nv">$ALIGNED_DIR</span>
 
 bowtie2 <span class="se">\</span>
 -x <span class="nv">$REFERENCE_DIR</span>/ecoli-strK12-MG1655.fasta <span class="se">\</span>
