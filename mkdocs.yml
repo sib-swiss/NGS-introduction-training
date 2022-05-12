@@ -6,7 +6,7 @@ nav:
     - Day 1:
       - Introduction: day1/intro.md
       - Sequencing technologies: day1/sequencing_technologies.md
-      - Setup + UNIX refresher: day1/server_login.md
+      - Setup: day1/server_login.md
       - Quality control: day1/quality_control.md
     - Day 2:
       - Read alignment: day2/read_alignment.md
@@ -25,7 +25,7 @@ theme:
 # Repository
 repo_name: sib-swiss/NGS-introduction-training
 repo_url: https://github.com/sib-swiss/NGS-introduction-training
-edit_uri: ""
+edit_uri: edit/main/docs/
 
 markdown_extensions:
   - abbr
