@@ -7,6 +7,7 @@ nav:
       - Introduction: day1/intro.md
       - Sequencing technologies: day1/sequencing_technologies.md
       - Setup: day1/server_login.md
+      - Reproducibility: day1/reproducibility.md
       - Quality control: day1/quality_control.md
     - Day 2:
       - Read alignment: day2/read_alignment.md

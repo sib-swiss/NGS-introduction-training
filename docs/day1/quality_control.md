@@ -16,41 +16,6 @@
 
 ## Exercises
 
-### Some good practices for reproducibility
-
-During today and tomorrow we will work with a small E. coli dataset to practice quality control, alignment and alignment filtering. You can consider this as a small project. During the exercise you will be guided to adhere to the following basic principles for reproducibility:
-
-1. **Execute the commands from a script** in order to be able to trace back your steps
-2. All **output files and directories** should be created from **within a script**
-3. **Number scripts** based on their order of execution (e.g. `01_download_reads.sh`)
-4. Give your scripts a **descriptive and active name**, e.g. `06_build_bowtie_index.sh`
-5. Make your scripts **specific**, i.e. do not combine many different commands in the same script
-6. Refer to **directories and variables on top** of the script
-
-By adhering to these simple principles it will be relatively straightforward to re-do your analysis steps only based on the scripts, and will get you started to adhere to the [Ten Simple Rules for Reproducible Computational Research](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003285). 
-
-By the end of day 2 `~/workdir` should look (something) like this:
-
-```
-.
-├── alignment_output
-├── reads
-├── ref_genome
-├── scripts
-│   ├── 01_download_reads.sh
-│   ├── 02_run_fastqc.sh
-│   ├── 03_trim_reads.sh
-│   ├── 04_run_fastqc_trimmed.sh
-│   ├── 05_download_ecoli_reference.sh
-│   ├── 06_build_bowtie_index.sh
-│   ├── 07_align_reads.sh
-│   ├── 08_compress_sort.sh
-│   ├── 09_extract_unmapped.sh
-│   ├── 10_extract_region.sh
-│   └── 11_align_sort_filter.sh
-└── trimmed_data
-```
-
 ### Download and evaluate an E. coli dataset
 
 Check out the dataset at [SRA](https://www.ncbi.nlm.nih.gov/sra/?term=SRR519926).

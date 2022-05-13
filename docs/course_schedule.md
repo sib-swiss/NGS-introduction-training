@@ -10,7 +10,7 @@
 | introduction 	| 9:15 AM  	| 9:30 AM 	| [Introduction](day1/intro.md) |
 | block 1 	| 9:30 AM  	| 10:30 AM 	| [Sequencing technologies](day1/sequencing_technologies.md) |
 |         	| 10:30 AM 	| 11:00 AM 	| BREAK                          	|
-| block 2 	| 11:00 AM 	| 12:30 PM 	| [Server login + unix fresh up](day1/server_login.md) 	     |
+| block 2 	| 11:00 AM 	| 12:30 PM 	| [Setup](day1/server_login.md) + [Reproducibility](day1/reproducibility.md)	     |
 |         	| 12:30 PM 	| 1:30 PM  	| BREAK                          	|
 | block 3 	| 1:30 PM  	| 3:00 PM  	| [Quality control](day1/quality_control.md)              	 |
 |         	| 3:00 PM  	| 3:30 PM  	| BREAK                          	|

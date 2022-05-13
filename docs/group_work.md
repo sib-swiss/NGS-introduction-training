@@ -7,6 +7,10 @@ The last part of this course will consist of project-based-learning. This means 
 !!! note "If online"
     If the course takes place online, we will use break-out rooms to communicate within groups. Please stay in the break-out room during the day, also if you are working individually.
 
+## Material
+
+[:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/group_work.pdf){: .md-button }
+
 ## Roles & organisation
 
 Project based learning is about learning by doing, but also about *peer instruction*. This means that you will be both a learner and a teacher. There will be differences in levels among participants, but because of that, some will learn efficiently from people that have just learned, and others will teach and increase their understanding.
@@ -69,7 +73,7 @@ gunzip Araport11_GTF_genes_transposons.Mar202021.noChr.gtf.gz
 ### Tasks
 
 !!! warning "Important!"
-    **Stick to the principles for reproducible analysis** described [at the beginning of the exercises](day1/quality_control.md#some-good-practices-for-reproducibility).
+    **Stick to the principles for reproducible analysis** described [here](day1/reproducibility.md)
 
 * Check out the project page, and download one or two samples that interest you (download both the forward and reverse reads from the same sample).
 * Do a QC on the data with `fastqc`
@@ -163,7 +167,7 @@ wget ftp://ftp.ensembl.org/pub/release-101/fasta/homo_sapiens/dna/Homo_sapiens.G
 ### Tasks
 
 !!! warning "Important!"
-    **Stick to the principles for reproducible analysis** described [at the beginning of the exercises](day1/quality_control.md#some-good-practices-for-reproducibility).
+    **Stick to the principles for reproducible analysis** described [here](day1/reproducibility.md)
 
 * Check out the BioProject, and download two samples that interest you.
 * Perform QC with `fastqc`
@@ -248,7 +252,7 @@ gunzip Mus_musculus.GRCm38.102.chr5.gtf.gz
 ### Tasks
 
 !!! warning "Important!"
-    **Stick to the principles for reproducible analysis** described [at the beginning of the exercises](day1/quality_control.md#some-good-practices-for-reproducibility).
+    **Stick to the principles for reproducible analysis** described [here](day1/reproducibility.md)
 
 * Download the reads, reference and gtf file
 * Do a QC on the data with `fastqc`
