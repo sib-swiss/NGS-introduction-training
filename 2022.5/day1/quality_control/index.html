@@ -318,7 +318,21 @@
   
     <li class="md-nav__item">
       <a href="../server_login/" class="md-nav__link">
-        Setup + UNIX refresher
+        Setup
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reproducibility/" class="md-nav__link">
+        Reproducibility
       </a>
     </li>
   
@@ -381,13 +395,6 @@
   
     <nav class="md-nav" aria-label="Exercises">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#some-good-practices-for-reproducibility" class="md-nav__link">
-    Some good practices for reproducibility
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#download-and-evaluate-an-e-coli-dataset" class="md-nav__link">
@@ -616,13 +623,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#some-good-practices-for-reproducibility" class="md-nav__link">
-    Some good practices for reproducibility
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#download-and-evaluate-an-e-coli-dataset" class="md-nav__link">
     Download and evaluate an E. coli dataset
   </a>
@@ -660,6 +660,10 @@
             <article class="md-content__inner md-typeset">
               
                 
+<a href="https://github.com/sib-swiss/NGS-introduction-training/edit/main/docs/day1/quality_control.md" title="Edit this page" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
 
 
   <h1>Quality control</h1>
@@ -679,36 +683,6 @@
 <li>Unix command line <a href="https://www.ncbi.nlm.nih.gov/books/NBK179288/">E-utilities documentation</a></li>
 </ul>
 <h2 id="exercises">Exercises</h2>
-<h3 id="some-good-practices-for-reproducibility">Some good practices for reproducibility</h3>
-<p>During today and tomorrow we will work with a small E. coli dataset to practice quality control, alignment and alignment filtering. You can consider this as a small project. During the exercise you will be guided to adhere to the following basic principles for reproducibility:</p>
-<ol>
-<li><strong>Execute the commands from a script</strong> in order to be able to trace back your steps</li>
-<li>All <strong>output files and directories</strong> should be created from <strong>within a script</strong></li>
-<li><strong>Number scripts</strong> based on their order of execution (e.g. <code>01_download_reads.sh</code>)</li>
-<li>Give your scripts a <strong>descriptive and active name</strong>, e.g. <code>06_build_bowtie_index.sh</code></li>
-<li>Make your scripts <strong>specific</strong>, i.e. do not combine many different commands in the same script</li>
-<li>Refer to <strong>directories and variables on top</strong> of the script</li>
-</ol>
-<p>By adhering to these simple principles it will be relatively straightforward to re-do your analysis steps only based on the scripts, and will get you started to adhere to the <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003285">Ten Simple Rules for Reproducible Computational Research</a>. </p>
-<p>By the end of day 2 <code>~/workdir</code> should look (something) like this:</p>
-<div class="highlight"><pre><span></span><code>.
-├── alignment_output
-├── reads
-├── ref_genome
-├── scripts
-│   ├── 01_download_reads.sh
-│   ├── 02_run_fastqc.sh
-│   ├── 03_trim_reads.sh
-│   ├── 04_run_fastqc_trimmed.sh
-│   ├── 05_download_ecoli_reference.sh
-│   ├── 06_build_bowtie_index.sh
-│   ├── 07_align_reads.sh
-│   ├── 08_compress_sort.sh
-│   ├── 09_extract_unmapped.sh
-│   ├── 10_extract_region.sh
-│   └── 11_align_sort_filter.sh
-└── trimmed_data
-</code></pre></div>
 <h3 id="download-and-evaluate-an-e-coli-dataset">Download and evaluate an E. coli dataset</h3>
 <p>Check out the dataset at <a href="https://www.ncbi.nlm.nih.gov/sra/?term=SRR519926">SRA</a>.</p>
 <p><strong>Exercise:</strong> Browse around the SRA entry and answer these questions:</p>
@@ -854,7 +828,7 @@ fastqc paired_trimmed*.fastq
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../server_login/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Setup + UNIX refresher" rel="prev">
+        <a href="../reproducibility/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Reproducibility" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -863,7 +837,7 @@ fastqc paired_trimmed*.fastq
               <span class="md-footer__direction">
                 Previous
               </span>
-              Setup + UNIX refresher
+              Reproducibility
             </div>
           </div>
         </a>
