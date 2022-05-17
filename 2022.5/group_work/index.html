@@ -791,8 +791,9 @@
 <p>In the afternoon of day 1, you will start on the project. On day 3, you can work on the project in the morning and in the first part of the afternoon. We will conclude the projects with a <strong>10-minute presentation</strong> of each group.</p>
 <h2 id="working-directories">Working directories</h2>
 <p>Each group has access to a shared working directory. It is mounted in the root directory (<code>/</code>). Make a soft link in your home directory:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~
-ln -s /group_work/&lt;group name&gt; ./
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir
+ln -s /group_work/GROUP_NAME/ ./
+<span class="c1"># replace [GROUP_NAME] with your group directory</span>
 </code></pre></div>
 <p>Now you can find your group directory at <code>~/&lt;group name&gt;</code>. Use this to share files.</p>
 <div class="admonition warning">
