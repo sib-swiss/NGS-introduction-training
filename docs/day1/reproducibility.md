@@ -39,6 +39,6 @@ By the end of day 2 `~/workdir` should look (something) like this:
 │   ├── 08_compress_sort.sh
 │   ├── 09_extract_unmapped.sh
 │   ├── 10_extract_region.sh
-│   └── 11_align_sort_filter.sh
+│   └── 11_align_sort.sh
 └── trimmed_data
 ```

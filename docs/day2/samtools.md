@@ -219,11 +219,11 @@ my_alignment_command \
 !!! note "The use of `-`"
     In the modern versions of samtools, the use of `-` is not needed for most cases, so without an input file it reads from stdin. However, if you're not sure, it's better to be safe than sorry.
 
-**Exercise:** Write a script called `11_align_sort_filter.sh` that maps the reads with bowtie2 (see chapter 2 of [read alignment](../day2/read_alignment.md)), sorts them, and outputs them as a BAM file with a header.
+**Exercise:** Write a script called `11_align_sort.sh` that maps the reads with bowtie2 (see chapter 2 of [read alignment](../day2/read_alignment.md)), sorts them, and outputs them as a BAM file with a header.
 
 ??? done "Answer"
 
-    ```sh title="11_align_sort_filter.sh"
+    ```sh title="11_align_sort.sh"
     #!/usr/bin/env bash
 
     TRIMMED_DIR=~/workdir/trimmed_data
