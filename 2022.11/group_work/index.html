@@ -1,0 +1,1184 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../assets/images/SIB_logo.svg">
+      <meta name="generator" content="mkdocs-1.4.1, mkdocs-material-8.5.7">
+    
+    
+      
+        <title>Group work - NGS - Quality control, Alignment, Visualisation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.20d9efc8.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YX61LNKWGY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YX61LNKWGY');
+</script>
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#material" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="NGS - Quality control, Alignment, Visualisation" class="md-header__button md-logo" aria-label="NGS - Quality control, Alignment, Visualisation" data-md-component="logo">
+      
+  <img src="../assets/images/SIB_logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            NGS - Quality control, Alignment, Visualisation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Group work
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/sib-swiss/NGS-introduction-training" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/NGS-introduction-training
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="NGS - Quality control, Alignment, Visualisation" class="md-nav__button md-logo" aria-label="NGS - Quality control, Alignment, Visualisation" data-md-component="logo">
+      
+  <img src="../assets/images/SIB_logo.svg" alt="logo">
+
+    </a>
+    NGS - Quality control, Alignment, Visualisation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/sib-swiss/NGS-introduction-training" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/NGS-introduction-training
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../precourse/" class="md-nav__link">
+        Precourse preparations
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../course_schedule/" class="md-nav__link">
+        Course schedule
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Day 1
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Day 1" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Day 1
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day1/intro/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day1/sequencing_technologies/" class="md-nav__link">
+        Sequencing technologies
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day1/server_login/" class="md-nav__link">
+        Setup
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day1/reproducibility/" class="md-nav__link">
+        Reproducibility
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day1/quality_control/" class="md-nav__link">
+        Quality control
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Day 2
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Day 2" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Day 2
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day2/read_alignment/" class="md-nav__link">
+        Read alignment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day2/file_types/" class="md-nav__link">
+        File types
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day2/samtools/" class="md-nav__link">
+        Samtools
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          Day 3
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Day 3" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Day 3
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day3/igv_visualisation/" class="md-nav__link">
+        IGV and visualisation
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Group work
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Group work
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#material" class="md-nav__link">
+    Material
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roles-organisation" class="md-nav__link">
+    Roles &amp; organisation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#working-directories" class="md-nav__link">
+    Working directories
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project-1-short-read-rna-seq-data-of-arabidopsis-thaliana-grown-in-space" class="md-nav__link">
+     Project 1: Short-read RNA-seq data of Arabidopsis thaliana grown in space
+  </a>
+  
+    <nav class="md-nav" aria-label=" Project 1: Short-read RNA-seq data of Arabidopsis thaliana grown in space">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tasks" class="md-nav__link">
+    Tasks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#questions" class="md-nav__link">
+    Questions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project-2-long-read-genome-sequencing" class="md-nav__link">
+     Project 2: Long-read genome sequencing
+  </a>
+  
+    <nav class="md-nav" aria-label=" Project 2: Long-read genome sequencing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tasks_1" class="md-nav__link">
+    Tasks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#questions_1" class="md-nav__link">
+    Questions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project-3-short-read-rna-seq-of-mice" class="md-nav__link">
+     Project 3: Short-read RNA-seq of mice.
+  </a>
+  
+    <nav class="md-nav" aria-label=" Project 3: Short-read RNA-seq of mice.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tasks_2" class="md-nav__link">
+    Tasks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#questions_2" class="md-nav__link">
+    Questions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#material" class="md-nav__link">
+    Material
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roles-organisation" class="md-nav__link">
+    Roles &amp; organisation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#working-directories" class="md-nav__link">
+    Working directories
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project-1-short-read-rna-seq-data-of-arabidopsis-thaliana-grown-in-space" class="md-nav__link">
+     Project 1: Short-read RNA-seq data of Arabidopsis thaliana grown in space
+  </a>
+  
+    <nav class="md-nav" aria-label=" Project 1: Short-read RNA-seq data of Arabidopsis thaliana grown in space">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tasks" class="md-nav__link">
+    Tasks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#questions" class="md-nav__link">
+    Questions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project-2-long-read-genome-sequencing" class="md-nav__link">
+     Project 2: Long-read genome sequencing
+  </a>
+  
+    <nav class="md-nav" aria-label=" Project 2: Long-read genome sequencing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tasks_1" class="md-nav__link">
+    Tasks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#questions_1" class="md-nav__link">
+    Questions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project-3-short-read-rna-seq-of-mice" class="md-nav__link">
+     Project 3: Short-read RNA-seq of mice.
+  </a>
+  
+    <nav class="md-nav" aria-label=" Project 3: Short-read RNA-seq of mice.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tasks_2" class="md-nav__link">
+    Tasks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#questions_2" class="md-nav__link">
+    Questions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <a href="https://github.com/sib-swiss/NGS-introduction-training/edit/main/docs/group_work.md" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+  <h1>Group work</h1>
+
+<p>The last part of this course will consist of project-based-learning. This means that you will work in groups on a single question. We will split up into groups of five people.</p>
+<div class="admonition note">
+<p class="admonition-title">If working with Docker</p>
+<p>If you are working with Docker, I assume you are working independently and therefore can not work in a group. However, you can test your skills with these real biological datasets. Realize that the datasets and calculations are (much) bigger compared to the exercises, so check if your computer is up for it. You&rsquo;ll probably need around 4 cores, 16G of RAM and 50G of harddisk.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">If online</p>
+<p>If the course takes place online, we will use break-out rooms to communicate within groups. Please stay in the break-out room during the day, also if you are working individually.</p>
+</div>
+<h2 id="material">Material</h2>
+<p><a class="md-button" href="../assets/pdf/group_work.pdf"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M64 0C28.7 0 0 28.7 0 64v384c0 35.3 28.7 64 64 64h256c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zm192 0v128h128L256 0zM64 224h24c30.9 0 56 25.1 56 56s-25.1 56-56 56h-8v32c0 8.8-7.2 16-16 16s-16-7.2-16-16V240c0-8.8 7.2-16 16-16zm24 80c13.3 0 24-10.7 24-24s-10.7-24-24-24h-8v48h8zm72-64c0-8.8 7.2-16 16-16h24c26.5 0 48 21.5 48 48v64c0 26.5-21.5 48-48 48h-24c-8.8 0-16-7.2-16-16V240zm32 112h8c8.8 0 16-7.2 16-16v-64c0-8.8-7.2-16-16-16h-8v96zm96-128h48c8.8 0 16 7.2 16 16s-7.2 16-16 16h-32v32h32c8.8 0 16 7.2 16 16s-7.2 16-16 16h-32v48c0 8.8-7.2 16-16 16s-16-7.2-16-16V240c0-8.8 7.2-16 16-16z"/></svg></span> Download the presentation</a></p>
+<h2 id="roles-organisation">Roles &amp; organisation</h2>
+<p>Project based learning is about learning by doing, but also about <em>peer instruction</em>. This means that you will be both a learner and a teacher. There will be differences in levels among participants, but because of that, some will learn efficiently from people that have just learned, and others will teach and increase their understanding.</p>
+<p>Each project has <strong>tasks</strong> and <strong>questions</strong>. By performing the tasks, you should be able to answer the questions. You should consider the tasks and questions as a guidance. If interesting questions pop up during the project, you are <strong>encouraged</strong> to work on those. Also, you don&rsquo;t have to perform all the tasks and answer all the questions.</p>
+<p>In the afternoon of day 1, you will start on the project. On day 3, you can work on the project in the morning and in the first part of the afternoon. We will conclude the projects with a <strong>10-minute presentation</strong> of each group.</p>
+<h2 id="working-directories">Working directories</h2>
+<p>Each group has access to a shared working directory. It is mounted in the root directory (<code>/</code>). Make a soft link in your home directory:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir
+ln -s /group_work/GROUP_NAME/ ./
+<span class="c1"># replace [GROUP_NAME] with your group directory</span>
+</code></pre></div>
+<p>Now you can find your group directory at <code>~/&lt;group name&gt;</code>. Use this to share files.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not remove the soft link with <code>rm -r</code>, this will delete the entire source directory. If you want to remove only the softlink, use <code>rm</code> (without <code>-r</code>), or <code>unlink</code>. More info <a href="https://linuxize.com/post/how-to-remove-symbolic-links-in-linux/">here</a>.</p>
+</div>
+<h2 id="project-1-short-read-rna-seq-data-of-arabidopsis-thaliana-grown-in-space"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M512 64c0 113.6-84.6 207.5-194.2 222-7.1-53.4-30.6-101.6-65.3-139.3C290.8 78.3 364 32 448 32h32c17.7 0 32 14.3 32 32zM0 128c0-17.7 14.3-32 32-32h32c123.7 0 224 100.3 224 224v128c0 17.7-14.3 32-32 32s-32-14.3-32-32v-96C100.3 352 0 251.7 0 128z"/></svg></span> Project 1: Short-read RNA-seq data of <em>Arabidopsis thaliana</em> grown in space</h2>
+<p><strong>Aim:</strong> Compare <code>hisat2</code> (splice-aware) with <code>bowtie2</code> (splice unaware) while aligning an Arabidopsis RNA-seq dataset.</p>
+<p>The analysis of this dataset is reported in this paper:</p>
+<p>Vandenbrink JP, Herranz R, Poehlman WL, Alex Feltus F, Villacampa A, Ciska M, et al. (2019) <em>RNA-seq analyses of Arabidopsis thaliana seedlings after exposure to blue-light phototropic stimuli in microgravity </em>. Am J Bot. 106:1466–76.</p>
+<p>Reads can be found on the NASA repository <a href="https://genelab-data.ndc.nasa.gov/genelab/accession/GLDS-251/">here</a>. You can download data with <code>wget</code>. Here is an example for downloading the forward and reverse reads for sample 131:</p>
+<div class="highlight"><pre><span></span><code>wget -O sample_131_R1.fastq.gz <span class="se">\</span>
+https://genelab-data.ndc.nasa.gov/genelab/static/media/dataset/GLDS-251_rna-seq_13JUN2017HiSeq_Run_Sample_131_UMISS_Hoeksema_ACAGTG_L001_R1_001.fastq.gz?version<span class="o">=</span><span class="m">1</span>
+
+wget -O sample_131_R2.fastq.gz <span class="se">\</span>
+https://genelab-data.ndc.nasa.gov/genelab/static/media/dataset/GLDS-251_rna-seq_13JUN2017HiSeq_Run_Sample_131_UMISS_Hoeksema_ACAGTG_L001_R2_001.fastq.gz?version<span class="o">=</span><span class="m">1</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Use of <code>-O</code></p>
+<p>The name of the file is very long we use the option <code>-O</code> here to give it a shorter name.</p>
+</div>
+<p>Download the reference genome sequence like this:</p>
+<div class="highlight"><pre><span></span><code>wget ftp://ftp.ensemblgenomes.org/pub/plants/release-48/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz
+gunzip Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz
+</code></pre></div>
+<p>You can download the gtf like this:</p>
+<div class="highlight"><pre><span></span><code>wget https://ngs-introduction-training.s3.eu-central-1.amazonaws.com/Araport11_GTF_genes_transposons.Mar202021.noChr.gtf.gz
+gunzip Araport11_GTF_genes_transposons.Mar202021.noChr.gtf.gz
+</code></pre></div>
+<h3 id="tasks">Tasks</h3>
+<div class="admonition warning">
+<p class="admonition-title">Important!</p>
+<p><strong>Stick to the principles for reproducible analysis</strong> described <a href="../day1/reproducibility/">here</a></p>
+</div>
+<ul>
+<li>Check out the project page, and download one or two samples that interest you (download both the forward and reverse reads from the same sample).</li>
+<li>Do a QC on the data with <code>fastqc</code></li>
+<li>Trim adapters and low quality bases with <code>cutadapt</code> (the adapter sequences are the same as in the exercises).</li>
+<li>Check which options to use, and align with <code>bowtie2</code></li>
+<li>Check which options to use, and align with <code>hisat2</code></li>
+<li>Evaluate the alignment quality (e.g. alignment rates, mapping quality)</li>
+<li>Compare the bam files of the two aligners in IGV. You can use the built-in reference genome (<em>A. thaliana (TAIR10)</em>)</li>
+<li>Compare different samples in read quality, alignment rates, depth, etc.</li>
+<li>Run <code>featureCounts</code> on both alignments</li>
+<li>Compare the count matrices in <code>R</code> or <code>python</code> (Rstudio server is running on the same machine. Approach it with your credentials and username <code>rstudio</code>)</li>
+</ul>
+<h3 id="questions">Questions</h3>
+<ul>
+<li>How does the quality of the reads look? Anything special about the overrepresented sequences? (Hint: <a href="https://blast.ncbi.nlm.nih.gov/">blast</a> some overrepresented sequences, and see what they are)</li>
+<li>Did trimming improve the QC results? What could be the cause of the warnings/errors in the <code>fastqc</code> reports?</li>
+<li>What are the alignment rates?</li>
+<li>How do the aligners handle splicing?</li>
+<li>How are spliced alignments stored in the SAM file? (have a look at the CIGAR string)</li>
+<li>What would be the effect of the aligner if you would be measuring gene expression? (To investigate this you&rsquo;ll need to run <a href="http://subread.sourceforge.net/featureCounts.html">featureCounts</a>).</li>
+<li>What is the effect of setting the option <code>-Q</code> in <code>featureCounts</code> on the comparison between the aligners?</li>
+</ul>
+<div class="admonition hint">
+<p class="admonition-title">Run your processes on multiple cores!</p>
+<p>We are now doing computations on a full genome, with full transcriptomic data. This is quite a bit more than we have used during the exercises. Therefore, computations take longer. However, most tools support parallel processing, in which you can specify how many cores you want to use to run in parallel. Your environment contains <strong>four</strong> cores, so this is also the maximum number of processes you can specify. Below you can find the options used in each command to specify multi-core processing.</p>
+<table>
+<thead>
+<tr>
+<th>command</th>
+<th>option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bowtie2-build</code></td>
+<td><code>--threads</code></td>
+</tr>
+<tr>
+<td><code>hisat2-build</code></td>
+<td><code>--threads</code></td>
+</tr>
+<tr>
+<td><code>fastqc</code></td>
+<td><code>--threads</code></td>
+</tr>
+<tr>
+<td><code>cutadapt</code></td>
+<td><code>--cores</code></td>
+</tr>
+<tr>
+<td><code>bowtie2</code></td>
+<td><code>--threads</code></td>
+</tr>
+<tr>
+<td><code>hisat2</code></td>
+<td><code>--threads</code></td>
+</tr>
+<tr>
+<td><code>featureCounts</code></td>
+<td><code>-T</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Example code <code>hisat2</code> and <code>featureCounts</code></p>
+<p>Everything in between <code>&lt;&gt;</code> should be replaced with specific arguments.</p>
+<p>Here&rsquo;s an example for <code>hisat2</code>:</p>
+<div class="highlight"><pre><span></span><code>hisat2-build &lt;reference_sequence_fasta&gt; &lt;index_basename&gt;
+
+hisat2 <span class="se">\</span>
+-x &lt;index_basename&gt; <span class="se">\</span>
+-1 &lt;foward_reads.fastq.gz&gt; <span class="se">\</span>
+-2 &lt;reverse_reads.fastq.gz&gt; <span class="se">\</span>
+-p &lt;threads&gt; <span class="se">\</span>
+<span class="p">|</span> samtools sort <span class="se">\</span>
+<span class="p">|</span> samtools view -bh <span class="se">\</span>
+&gt; &lt;alignment_file.bam&gt;
+</code></pre></div>
+<p>Example code <code>featureCounts</code>:</p>
+<div class="highlight"><pre><span></span><code>featureCounts <span class="se">\</span>
+-p <span class="se">\</span>
+-T <span class="m">2</span> <span class="se">\</span>
+-a &lt;annotations.gtf&gt; <span class="se">\</span>
+-o &lt;output.counts.txt&gt; <span class="se">\</span>
+&lt;bowtie2_alignment.bam&gt; &lt;hisat2_alignment.bam&gt;
+</code></pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Reading in the count data in R</p>
+<p>You can read in the count data table, and compare the log2 counts of the two aligners like this:</p>
+<div class="highlight"><pre><span></span><code><span class="n">cts</span> <span class="o">&lt;-</span> <span class="nf">read.delim</span><span class="p">(</span><span class="s">&#39;project_work/project3/counts/counts.txt&#39;</span><span class="p">,</span> <span class="n">comment.char</span> <span class="o">=</span> <span class="s">&#39;#&#39;</span><span class="p">)</span>
+<span class="nf">plot</span><span class="p">(</span><span class="nf">log2</span><span class="p">(</span><span class="n">cts</span><span class="o">$</span><span class="n">..alignments.SRR7822040.chr5.bt2.bam</span><span class="p">),</span> <span class="nf">log2</span><span class="p">(</span><span class="n">cts</span><span class="o">$</span><span class="n">..alignments.SRR7822040.chr5.hs2.bam</span><span class="p">))</span>
+</code></pre></div>
+</div>
+<h2 id="project-2-long-read-genome-sequencing"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M184 0c30.9 0 56 25.1 56 56v400c0 30.9-25.1 56-56 56-28.9 0-52.7-21.9-55.7-50.1-5.2 1.4-10.7 2.1-16.3 2.1-35.3 0-64-28.7-64-64 0-7.4 1.3-14.6 3.6-21.2C21.4 367.4 0 338.2 0 304c0-31.9 18.7-59.5 45.8-72.3C37.1 220.8 32 207 32 192c0-30.7 21.6-56.3 50.4-62.6C80.8 123.9 80 118 80 112c0-29.9 20.6-55.1 48.3-62.1 3-28 26.8-49.9 55.7-49.9zm144 0c28.9 0 52.6 21.9 55.7 49.9C411.5 56.9 432 82 432 112c0 6-.8 11.9-2.4 17.4 28.8 6.2 50.4 31.9 50.4 62.6 0 15-5.1 28.8-13.8 39.7 27.1 12.8 45.8 40.4 45.8 72.3 0 34.2-21.4 63.4-51.6 74.8 2.3 6.6 3.6 13.8 3.6 21.2 0 35.3-28.7 64-64 64-5.6 0-11.1-.7-16.3-2.1-3 28.2-26.8 50.1-55.7 50.1-30.9 0-56-25.1-56-56V56c0-30.9 25.1-56 56-56z"/></svg></span> Project 2: Long-read genome sequencing</h2>
+<p><strong>Aim</strong>: Align long reads from RNA-seq data to a reference genome.</p>
+<p>In this project, you will be working with data from:</p>
+<p>Clark, M. B. et al (2020). <em>Long-read sequencing reveals the complex splicing profile of the psychiatric risk gene CACNA1C in human brain</em>. Molecular Psychiatry, 25(1), 37–47. <a href="https://doi.org/10.1038/s41380-019-0583-1">https://doi.org/10.1038/s41380-019-0583-1</a>.</p>
+<p>Here you can find the <a href="https://www.ncbi.nlm.nih.gov/bioproject/PRJEB34660">BioProject page</a>.</p>
+<p>It is Oxford Nanopore Technology sequencing data of amplicons of the gene CACNA1C. It is primarily used to discover new splice variants. In this project, we will align a few of the samples to the reference genome, and assess the quality of reads and the alignment.</p>
+<p>Download the human reference genome like this:</p>
+<div class="highlight"><pre><span></span><code>wget ftp://ftp.ensembl.org/pub/release-101/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
+</code></pre></div>
+<h3 id="tasks_1">Tasks</h3>
+<div class="admonition warning">
+<p class="admonition-title">Important!</p>
+<p><strong>Stick to the principles for reproducible analysis</strong> described <a href="../day1/reproducibility/">here</a></p>
+</div>
+<ul>
+<li>Check out the BioProject, and download two samples that interest you.</li>
+<li>Perform QC with <code>fastqc</code></li>
+<li>Perform QC with <code>NanoPlot</code></li>
+<li>Align with <code>minimap2</code> with default parameters</li>
+<li>Figure how you should set parameters <code>-x</code> and <code>-G</code></li>
+<li>Evaluate the alignment quality (e.g. alignment rates, mapping quality)</li>
+<li>Compare different samples in read quality, alignment rates, depth, etc.</li>
+</ul>
+<h3 id="questions_1">Questions</h3>
+<ul>
+<li>Have a look at the quality report. What are the average read lengths? Is that expected?</li>
+<li>What is the average read quality? What kind of accuracy would you expect?</li>
+<li>Note any differences between <code>fastqc</code> and <code>NanoPlot</code>? How is that compared to the publication?</li>
+<li>Check out the options <code>-x</code> and <code>-G</code> of <code>minimap2</code>. Are the defaults appropriate?</li>
+<li>You might consider using <code>-x map-ont</code> or <code>-x splice</code>. Do you see differences in the alignment in e.g. IGV?</li>
+<li>How are spliced alignments stored in the SAM file with the different settings of <code>-x</code>?</li>
+<li>How deep is the gene sequenced?</li>
+<li>Do you already see evidence for splice variants in the alignments?</li>
+</ul>
+<div class="admonition hint">
+<p class="admonition-title">Downloading from SRA</p>
+<div class="highlight"><pre><span></span><code>prefetch <span class="o">[</span>SRR number<span class="o">]</span>
+fastq-dump --gzip <span class="o">[</span>SRR number<span class="o">]</span>
+</code></pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Accuracy from quality scores</p>
+<p>Find the equation to calculate error probability from quality score on <a href="https://en.wikipedia.org/wiki/Phred_quality_score">Wikipedia</a>.</p>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Comparing <code>fastqc</code> and <code>Nanoplot</code></p>
+<p>For comparing <code>fastqc</code> and <code>NanoPlot</code>, check out this <a href="https://gigabaseorgigabyte.wordpress.com/2017/06/26/averaging-basecall-quality-scores-the-right-way/">blog</a> of the author of NanoPlot, and this <a href="https://github.com/wdecoster/NanoPlot/issues/191">thread</a>.</p>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Running <code>minimap2</code></p>
+<p>Here&rsquo;s an example command for <code>minimap2</code>:</p>
+<div class="highlight"><pre><span></span><code>minimap2 <span class="se">\</span>
+-a <span class="se">\</span>
+-x <span class="o">[</span>PARAMETER<span class="o">]</span> <span class="se">\</span>
+-G <span class="o">[</span>PARAMETER<span class="o">]</span> <span class="se">\</span>
+<span class="o">[</span>REFERENCE<span class="o">]</span>.fa <span class="se">\</span>
+<span class="o">[</span>FASTQFILE<span class="o">]</span>.fastq.gz <span class="se">\</span>
+<span class="p">|</span> samtools sort <span class="se">\</span>
+<span class="p">|</span> samtools view -bh &gt; <span class="o">[</span>OUTPUT<span class="o">]</span>.bam
+</code></pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Intron sizes</p>
+<p>Check out the the intron sizes of CACNA1C in e.g. IGV or UCSC genome browser. How does that relate to the parameter <code>-G</code>?</p>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">More resources</p>
+<p>Need e.g. a gtf file? Here&rsquo;s the <a href="https://www.ensembl.org/Homo_sapiens/Info/Index">ensembl page</a></p>
+</div>
+<h2 id="project-3-short-read-rna-seq-of-mice"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M238.5 53.1C251 39.6 268.6 32 287 32c28.9 0 54.5 18.7 63.2 46.3l15.8 50.3c7.3 23 25.2 41 48.2 48.3l62.2 19.9c21.2 6.8 35.6 26.5 35.6 48.7 0 17.5-8.9 33.7-23.6 43.1l-85.9 54.8c-10.6 6.8-16.6 18.8-15.7 31.3l2.5 33.9c2.8 38.5-27.7 71.4-66.4 71.4-13.6 0-26.9-4.2-38.1-12l-48.2-33.6c-14.8-10.3-32.3-15.8-50.3-15.8h-16.1c-4.9 0-9.9.4-14.8 1.2l-71.5 12.3c-21.3 3.6-42.8-5.7-54.6-23.9-11.8-18.1-11.8-41.4 0-59.4L56.5 307c4.9-7.5 7.5-16.3 7.5-25.3 0-9.9-3.2-19.5-9-27.4l-43.7-59.7c-17.8-24.3-12-58.4 12.9-75.4 9.7-6.6 21.2-9.8 32.9-9.1l80.6 4.6c26.1 1.5 51.5-8.7 69.4-27.9L238.6 53zM160 256c17.7 0 32-14.3 32-32s-14.3-32-32-32-32 14.3-32 32 14.3 32 32 32zm160-48c0-8.8-7.2-16-16-16s-16 7.2-16 16 7.2 16 16 16 16-7.2 16-16zm-32 144c17.7 0 32-14.3 32-32s-14.3-32-32-32-32 14.3-32 32 14.3 32 32 32z"/></svg></span> Project 3: Short-read RNA-seq of mice.</h2>
+<p><strong>Aim:</strong> Compare <code>hisat2</code> (splice-aware) with <code>bowtie2</code> (splice unaware) while aligning a mouse RNA-seq dataset.</p>
+<p>In this project you will be working with data from:</p>
+<p>Singhania A, Graham CM, Gabryšová L, Moreira-Teixeira L, Stavropoulos E, Pitt JM, et al (2019). <em>Transcriptional profiling unveils type I and II interferon networks in blood and tissues across diseases</em>. Nat Commun. 10:1–21. <a href="https://doi.org/10.1038/s41467-019-10601-6">https://doi.org/10.1038/s41467-019-10601-6</a></p>
+<p>Here&rsquo;s the <a href="https://www.ncbi.nlm.nih.gov/bioproject/PRJNA490485">BioProject page</a>. We&rsquo;ll be working with a single sample of this project found <a href="https://www.ncbi.nlm.nih.gov/sra/?term=SRR7822040">here</a>. Since the mouse genome is rather large, we have prepared reads for you that originate from chromosome 5. Use those for the project. Download them like this:</p>
+<div class="highlight"><pre><span></span><code>wget https://ngs-introduction-training.s3.eu-central-1.amazonaws.com/project3/SRR7822040.chr5_R1.fastq.gz
+wget https://ngs-introduction-training.s3.eu-central-1.amazonaws.com/project3/SRR7822040.chr5_R2.fastq.gz
+</code></pre></div>
+<p>Download the mouse reference of chromosome 5 like this:</p>
+<div class="highlight"><pre><span></span><code>wget https://ngs-introduction-training.s3.eu-central-1.amazonaws.com/project3/Mus_musculus.GRCm38.dna.primary_assembly.chr5.fa.gz
+gunzip Mus_musculus.GRCm38.dna.primary_assembly.chr5.fa.gz
+</code></pre></div>
+<p>And download the gtf file for chromosome 5 like this:</p>
+<div class="highlight"><pre><span></span><code>wget https://ngs-introduction-training.s3.eu-central-1.amazonaws.com/project3/Mus_musculus.GRCm38.102.chr5.gtf.gz
+gunzip Mus_musculus.GRCm38.102.chr5.gtf.gz
+</code></pre></div>
+<h3 id="tasks_2">Tasks</h3>
+<div class="admonition warning">
+<p class="admonition-title">Important!</p>
+<p><strong>Stick to the principles for reproducible analysis</strong> described <a href="../day1/reproducibility/">here</a></p>
+</div>
+<ul>
+<li>Download the reads, reference and gtf file</li>
+<li>Do a QC on the data with <code>fastqc</code></li>
+<li>Trim adapters and low quality bases with <code>cutadapt</code> (the adapter sequences are the same as in the exercises).</li>
+<li>Check which options to use, and align with <code>bowtie2</code></li>
+<li>Check which options to use, and align with <code>hisat2</code></li>
+<li>Evaluate the alignment quality (e.g. alignment rates, mapping quality)</li>
+<li>Compare the bam files of the two aligners in IGV. For this, you can use the built-in genome (<em>Mouse (mm10)</em>). For easy navigation, load the provided gtf file (<code>Mus_musculus.GRCm38.102.chr5.gtf</code>) as a track</li>
+<li>Compare different samples in read quality, alignment rates, depth, etc.</li>
+<li>Run <code>featureCounts</code> on both alignments. Have a look at the option <code>-Q</code>.</li>
+<li>Compare the count matrices in <code>R</code> or <code>python</code> (Rstudio server is running on the same machine. Approach it with your credentials and username <code>rstudio</code>)</li>
+</ul>
+<h3 id="questions_2">Questions</h3>
+<ul>
+<li>Check the description at the SRA sample page. What kind of sample is this?</li>
+<li>How does the quality of the reads look? Anything special about the overrepresented sequences? (Hint: <a href="https://blast.ncbi.nlm.nih.gov/">blast</a> some overrepresented sequences, and see what they are)</li>
+<li>Did trimming improve the QC results? What could be the cause of the warnings/errors in the <code>fastqc</code> reports?</li>
+<li>What are the alignment rates?</li>
+<li>How do the aligners handle splicing?</li>
+<li>How are spliced alignments stored in the SAM file?</li>
+<li>What would be the effect of the aligner if you would be measuring gene expression? (To investigate this you&rsquo;ll need to run <a href="http://subread.sourceforge.net/featureCounts.html">featureCounts</a>).</li>
+<li>What is the effect of setting the option <code>-Q</code> in <code>featureCounts</code> on the comparison between the aligners?</li>
+</ul>
+<div class="admonition hint">
+<p class="admonition-title">Run your processes on multiple cores!</p>
+<p>We are now doing computations on a full genome, with full transcriptomic data. This is quite a bit more than we have used during the exercises. Therefore, computations take longer. However, most tools support parallel processing, in which you can specify how many cores you want to use to run in parallel. Your environment contains <strong>four</strong> cores, so this is also the maximum number of processes you can specify. Below you can find the options used in each command to specify multi-core processing.</p>
+<table>
+<thead>
+<tr>
+<th>command</th>
+<th>option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bowtie2-build</code></td>
+<td><code>--threads</code></td>
+</tr>
+<tr>
+<td><code>hisat2-build</code></td>
+<td><code>--threads</code></td>
+</tr>
+<tr>
+<td><code>fastqc</code></td>
+<td><code>--threads</code></td>
+</tr>
+<tr>
+<td><code>cutadapt</code></td>
+<td><code>--cores</code></td>
+</tr>
+<tr>
+<td><code>bowtie2</code></td>
+<td><code>--threads</code></td>
+</tr>
+<tr>
+<td><code>hisat2</code></td>
+<td><code>--threads</code></td>
+</tr>
+<tr>
+<td><code>featureCounts</code></td>
+<td><code>-T</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Example code <code>hisat2</code> and <code>featureCounts</code></p>
+<p>Everything in between <code>&lt;&gt;</code> should be replaced with specific arguments.</p>
+<p>Here&rsquo;s an example for <code>hisat2</code>:</p>
+<div class="highlight"><pre><span></span><code>hisat2-build &lt;reference_sequence_fasta&gt; &lt;index_basename&gt;
+
+hisat2 <span class="se">\</span>
+-x &lt;index_basename&gt; <span class="se">\</span>
+-1 &lt;foward_reads.fastq.gz&gt; <span class="se">\</span>
+-2 &lt;reverse_reads.fastq.gz&gt; <span class="se">\</span>
+-p &lt;threads&gt; <span class="se">\</span>
+<span class="p">|</span> samtools sort <span class="se">\</span>
+<span class="p">|</span> samtools view -bh <span class="se">\</span>
+&gt; &lt;alignment_file.bam&gt;
+</code></pre></div>
+<p>Example code <code>featureCounts</code>:</p>
+<div class="highlight"><pre><span></span><code>featureCounts <span class="se">\</span>
+-p <span class="se">\</span>
+-T <span class="m">2</span> <span class="se">\</span>
+-a &lt;annotations.gtf&gt; <span class="se">\</span>
+-o &lt;output.counts.txt&gt; <span class="se">\</span>
+&lt;bowtie2_alignment.bam&gt; &lt;hisat2_alignment.bam&gt;
+</code></pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Spliced alignments</p>
+<p>Have a look at IGV on a particular gene, e.g. Pisd</p>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Reading in the count data in R</p>
+<p>You can read in the count data table, and compare the log2 counts of the two aligners like this:</p>
+<div class="highlight"><pre><span></span><code><span class="n">cts</span> <span class="o">&lt;-</span> <span class="nf">read.delim</span><span class="p">(</span><span class="s">&#39;project_work/project3/counts/counts.txt&#39;</span><span class="p">,</span> <span class="n">comment.char</span> <span class="o">=</span> <span class="s">&#39;#&#39;</span><span class="p">)</span>
+<span class="nf">plot</span><span class="p">(</span><span class="nf">log2</span><span class="p">(</span><span class="n">cts</span><span class="o">$</span><span class="n">..alignments.SRR7822040.chr5.bt2.bam</span><span class="p">),</span> <span class="nf">log2</span><span class="p">(</span><span class="n">cts</span><span class="o">$</span><span class="n">..alignments.SRR7822040.chr5.hs2.bam</span><span class="p">))</span>
+</code></pre></div>
+</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../day3/igv_visualisation/" class="md-footer__link md-footer__link--prev" aria-label="Previous: IGV and visualisation" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              IGV and visualisation
+            </div>
+          </div>
+        </a>
+      
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.8492ddcf.min.js"></script>
+      
+    
+  </body>
+</html>
