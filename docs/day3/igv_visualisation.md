@@ -48,6 +48,9 @@ Download it together with it's index file (`SRR519926.sorted.region.bam.bai`) an
 
 **Exercise:** There are lot of reads that are coloured red. Why is that?
 
+!!! note "If you don't find any red reads.."
+    The default setting is to color reads by insert size. However, if you've used IGV before, that might have changed. To color according to insert size: right click on the reads, and select: **Color alignments by > insert size**
+
 ??? done "Answer"
     According to [IGV](https://software.broadinstitute.org/software/igv/interpreting_insert_size), reads are coloured red if the insert size is larger than expected. As you remember, this dataset has a very large variation in insert size.
 
