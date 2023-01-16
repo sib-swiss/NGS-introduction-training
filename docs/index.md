@@ -1,4 +1,17 @@
-# NGS - Quality control, Alignment, Visualisation
+# 
+
+Here you can find the course material for the [SIB](https://www.sib.swiss/) course 'NGS - Quality control, Alignment, Visualisation'. You can follow this course enrolled (check out [upcoming training courses](https://www.sib.swiss/training/upcoming-training-courses)) or in your own time. 
+
+After this course, you will be able to:
+
+* Understand the basics of the different NGS technologies
+* Perform quality control for better downstream analysis
+* Align reads to a reference genome
+* Visualize the output
+
+<figure>
+    <img src="assets/images/alignment_infograph.png" width="600"/>
+</figure>
 
 ## Teachers
 
