@@ -9,6 +9,8 @@ The last part of this course will consist of project-based-learning. This means 
 
 ## Material
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/t2yCLmLAi0A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 [:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/group_work.pdf){: .md-button }
 
 ## Roles & organisation

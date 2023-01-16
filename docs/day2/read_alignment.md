@@ -9,6 +9,8 @@
 
 ## Material
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/552Rv-HrV6Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 [:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/read_alignment.pdf){: .md-button }
 
 * Unix command line [E-utilities documentation](https://www.ncbi.nlm.nih.gov/books/NBK179288/)
