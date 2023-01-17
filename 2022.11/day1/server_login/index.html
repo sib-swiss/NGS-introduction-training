@@ -875,14 +875,34 @@ geertvangeest/ngs-introduction-vscode:latest
 <p>The part <code>geertvangeest/ngs-introduction-vscode:latest</code> is the image we are going to load into the container. The image contains all the information about software and dependencies needed for this course. When you run this command for the first time it will download the image. Once it&rsquo;s on your computer, it will start immediately.</p>
 </div>
 <div class="tabbed-block">
-<p>If you have a conda installation on your local computer, you can install the required software using conda.</p>
-<p>You can build the environment from <a href="../../assets/yaml/ngs-introduction.yml">ngs-introduction.yml</a></p>
-<p>Generate the conda environment like this:</p>
-<div class="highlight"><pre><span></span><code>conda env create --name ngs-introduction -f ngs-introduction.yml
-</code></pre></div>
-<div class="admonition note">
-<p class="admonition-title">The <code>yaml</code> file probably only works for Linux systems</p>
-<p>If you want to use the conda environment on a different OS, use:</p>
+<p>If you have a conda installation on your local computer, you can install the required software using conda. If not, you can <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html">install Miniconda</a> like this:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Windows</label><label for="__tabbed_2_2">Mac/Linux</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ul>
+<li>Get the <code>.exe</code> file <a href="https://docs.conda.io/en/latest/miniconda.html#latest-miniconda-installer-links">here</a></li>
+<li>Double click the file</li>
+<li>Follow the instructions on the screen (defaults are usually fine)</li>
+<li>Run the command <code>conda list</code> in the Ananconda prompt or terminal to check whether your installation has succeeded.</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li>Get the installation (<code>.sh</code>) script <a href="https://docs.conda.io/en/latest/miniconda.html#latest-miniconda-installer-links">here</a></li>
+<li>Run in your terminal:
+    <div class="highlight"><pre><span></span><code>bash Miniconda3-latest-Linux-x86_64.sh
+</code></pre></div></li>
+<li>Follow the prompts</li>
+<li>Close and reopen your terminal for changes to have effect</li>
+<li>Run the command <code>conda list</code> in the Ananconda prompt or terminal to check whether your installation has succeeded.</li>
+</ul>
+</div>
+</div>
+</div>
+<p>After installation, you can install the required software:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Windows/MacOS</label><label for="__tabbed_3_2">Linux</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code>conda create -n ngs-introduction <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.8
 
 conda activate ngs-introduction
@@ -899,6 +919,17 @@ subread <span class="se">\</span>
 entrez-direct <span class="se">\</span>
 minimap2
 </code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>Download <a href="../../assets/yaml/ngs-introduction.yml">ngs-introduction.yml</a>, and generate the conda environment like this:</p>
+<div class="highlight"><pre><span></span><code>conda env create --name ngs-introduction -f ngs-introduction.yml
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If that did not succeed, follow the instructions for Windows/MacOS.</p>
+</div>
+</div>
+</div>
 </div>
 <p>This will create the conda environment <code>ngs-introduction</code></p>
 <p>Activate it like so:</p>
