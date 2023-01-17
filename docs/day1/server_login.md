@@ -98,18 +98,27 @@
 
 === "conda"
 
-    If you have a conda installation on your local computer, you can install the required software using conda.
+    If you have a conda installation on your local computer, you can install the required software using conda. If not, you can [install Miniconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html) like this:
 
-    You can build the environment from [ngs-introduction.yml](../assets/yaml/ngs-introduction.yml)
+    === "Windows"
+        - Get the `.exe` file [here](https://docs.conda.io/en/latest/miniconda.html#latest-miniconda-installer-links)
+        - Double click the file
+        - Follow the instructions on the screen (defaults are usually fine)
+        - Run the command `conda list` in the Ananconda prompt or terminal to check whether your installation has succeeded.
+    === "Mac/Linux"
+        - Get the installation (`.sh`) script [here](https://docs.conda.io/en/latest/miniconda.html#latest-miniconda-installer-links)
+        - Run in your terminal:
+            ```sh
+            bash Miniconda3-latest-Linux-x86_64.sh
+            ```
+        - Follow the prompts
+        - Close and reopen your terminal for changes to have effect
+        - Run the command `conda list` in the Ananconda prompt or terminal to check whether your installation has succeeded.
 
-    Generate the conda environment like this:
 
-    ```sh
-    conda env create --name ngs-introduction -f ngs-introduction.yml
-    ```
-
-    !!! note "The `yaml` file probably only works for Linux systems"
-        If you want to use the conda environment on a different OS, use:
+    After installation, you can install the required software:
+    
+    === "Windows/MacOS"
 
         ```sh
         conda create -n ngs-introduction python=3.8
@@ -128,6 +137,14 @@
         entrez-direct \
         minimap2
         ```
+    === "Linux"
+        Download [ngs-introduction.yml](../assets/yaml/ngs-introduction.yml), and generate the conda environment like this:
+
+        ```sh
+        conda env create --name ngs-introduction -f ngs-introduction.yml
+        ```
+        !!! note 
+            If that did not succeed, follow the instructions for Windows/MacOS.
 
     This will create the conda environment `ngs-introduction`
 
