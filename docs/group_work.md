@@ -37,40 +37,18 @@ Now you can find your group directory at `~/<group name>`. Use this to share fil
     Do not remove the soft link with `rm -r`, this will delete the entire source directory. If you want to remove only the softlink, use `rm` (without `-r`), or `unlink`. More info [here](https://linuxize.com/post/how-to-remove-symbolic-links-in-linux/).
 
 
-## :fontawesome-solid-seedling: Project 1: Short-read RNA-seq data of *Arabidopsis thaliana* grown in space
+## Project 1: Variant analysis of human data
 
-**Aim:** Compare `hisat2` (splice-aware) with `bowtie2` (splice unaware) while aligning an Arabidopsis RNA-seq dataset.
+**Aim**: Find variants on chromosome 20 from three samples
 
-The analysis of this dataset is reported in this paper:
+In this project you will be working with Illumina reads from three samples: a father, mother and a child. You will perform quality control, align the reads, mark duplicates, detect variants and visualize them. 
 
-Vandenbrink JP, Herranz R, Poehlman WL, Alex Feltus F, Villacampa A, Ciska M, et al. (2019) *RNA-seq analyses of Arabidopsis thaliana seedlings after exposure to blue-light phototropic stimuli in microgravity *. Am J Bot. 106:1466–76.
-
-Reads can be found on the NASA repository [here](https://genelab-data.ndc.nasa.gov/genelab/accession/GLDS-251/). You can download data with `wget`. Here is an example for downloading the forward and reverse reads for sample 131:
+You can get the data by running these commands:
 
 ```sh
-wget -O sample_131_R1.fastq.gz \
-https://genelab-data.ndc.nasa.gov/genelab/static/media/dataset/GLDS-251_rna-seq_13JUN2017HiSeq_Run_Sample_131_UMISS_Hoeksema_ACAGTG_L001_R1_001.fastq.gz?version=1
-
-wget -O sample_131_R2.fastq.gz \
-https://genelab-data.ndc.nasa.gov/genelab/static/media/dataset/GLDS-251_rna-seq_13JUN2017HiSeq_Run_Sample_131_UMISS_Hoeksema_ACAGTG_L001_R2_001.fastq.gz?version=1
-
-```
-
-!!! note "Use of `-O`"
-    The name of the file is very long we use the option `-O` here to give it a shorter name.
-
-Download the reference genome sequence like this:
-
-```sh
-wget ftp://ftp.ensemblgenomes.org/pub/plants/release-48/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz
-gunzip Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz
-```
-
-You can download the gtf like this:
-
-```sh
-wget https://ngs-introduction-training.s3.eu-central-1.amazonaws.com/Araport11_GTF_genes_transposons.Mar202021.noChr.gtf.gz
-gunzip Araport11_GTF_genes_transposons.Mar202021.noChr.gtf.gz
+wget https://ngs-variants-training.s3.eu-central-1.amazonaws.com/ngs-variants-training.tar.gz
+tar -xvf ngs-variants-training.tar.gz
+rm ngs-variants-training.tar.gz
 ```
 
 ### Tasks
@@ -78,76 +56,23 @@ gunzip Araport11_GTF_genes_transposons.Mar202021.noChr.gtf.gz
 !!! warning "Important!"
     **Stick to the principles for reproducible analysis** described [here](day1/reproducibility.md)
 
-* Check out the project page, and download one or two samples that interest you (download both the forward and reverse reads from the same sample).
+* Download the required data
 * Do a QC on the data with `fastqc`
 * Trim adapters and low quality bases with `cutadapt` (the adapter sequences are the same as in the exercises).
-* Check which options to use, and align with `bowtie2`
-* Check which options to use, and align with `hisat2`
-* Evaluate the alignment quality (e.g. alignment rates, mapping quality)
-* Compare the bam files of the two aligners in IGV. You can use the built-in reference genome (*A. thaliana (TAIR10)*)
-* Compare different samples in read quality, alignment rates, depth, etc.
-* Run `featureCounts` on both alignments
-* Compare the count matrices in `R` or `python` (Rstudio server is running on the same machine. Approach it with your credentials and username `rstudio`)
+* Create an index for bowtie2. At the same time create a fasta index (`.fai` file) with `samtools faidx`. 
+* Check which options to use, and align with `bowtie2`. At the same time add readgroups to the aligned reads (see hints below). Make sure you end up with an indexed and sorted bam file. 
+* Mark duplicates on the individual bam files with `gatk MarkDuplicates` (see hints below).
+* Merge the three bam files with `samtools merge`. Index the bam file afterwards. 
+* Run `freebayes` to call variants
+* Load your alignments together with the vcf containing the variants in IGV. Check out e.g. `chr20:10,026,397-10,026,638`. 
 
 ### Questions
 
-* How does the quality of the reads look? Anything special about the overrepresented sequences? (Hint: [blast](https://blast.ncbi.nlm.nih.gov/) some overrepresented sequences, and see what they are)
-* Did trimming improve the QC results? What could be the cause of the warnings/errors in the `fastqc` reports?
-* What are the alignment rates?
-* How do the aligners handle splicing?
-* How are spliced alignments stored in the SAM file? (have a look at the CIGAR string)
-* What would be the effect of the aligner if you would be measuring gene expression? (To investigate this you'll need to run [featureCounts](http://subread.sourceforge.net/featureCounts.html)).
-* What is the effect of setting the option `-Q` in `featureCounts` on the comparison between the aligners?
-
-!!! hint "Run your processes on multiple cores!"
-    We are now doing computations on a full genome, with full transcriptomic data. This is quite a bit more than we have used during the exercises. Therefore, computations take longer. However, most tools support parallel processing, in which you can specify how many cores you want to use to run in parallel. Your environment contains **four** cores, so this is also the maximum number of processes you can specify. Below you can find the options used in each command to specify multi-core processing.
-
-    | command       	| option    	|
-    |---------------	|-----------	|
-    | `bowtie2-build` 	| `--threads` 	|
-    | `hisat2-build`  	| `--threads` 	|
-    | `fastqc`       	| `--threads` 	|
-    | `cutadapt`      	| `--cores`   	|
-    | `bowtie2`       	| `--threads` 	|
-    | `hisat2`        	| `--threads` 	|
-    | `featureCounts`  	| `-T`        	|
-
-!!! hint "Example code `hisat2` and `featureCounts`"
-    Everything in between `<>` should be replaced with specific arguments.
-
-    Here's an example for `hisat2`:
-
-    ```sh
-    hisat2-build <reference_sequence_fasta> <index_basename>
-
-    hisat2 \
-    -x <index_basename> \
-    -1 <foward_reads.fastq.gz> \
-    -2 <reverse_reads.fastq.gz> \
-    -p <threads> \
-    | samtools sort \
-    | samtools view -bh \
-    > <alignment_file.bam>
-    ```
-
-    Example code `featureCounts`:
-
-    ```sh
-    featureCounts \
-    -p \
-    -T 2 \
-    -a <annotations.gtf> \
-    -o <output.counts.txt> \
-    <bowtie2_alignment.bam> <hisat2_alignment.bam>
-    ```
-
-!!! hint "Reading in the count data in R"
-    You can read in the count data table, and compare the log2 counts of the two aligners like this:
-
-    ```r
-    cts <- read.delim('project_work/project3/counts/counts.txt', comment.char = '#')
-    plot(log2(cts$..alignments.SRR7822040.chr5.bt2.bam), log2(cts$..alignments.SRR7822040.chr5.hs2.bam))
-    ```
+* Have a look at the quality of the reads. Are there any adapters in there? Did adapter trimming change that? How is the base quality? Could you improve that?
+* How many duplicates were in the different samples? Why is it important to remove them for variant analysis?
+* Why did you add read groups to the bam files? Where is this information added in the bam file? 
+* Are there variants that look spurious? What could be the cause of that? What information in the vcf can you use to evaluate variant quality? 
+* There are two high quality variants in `chr20:10,026,397-10,026,638`. What are the genotypes of the three samples according to freebayes? Is this according to what you see in the alignments? If the alternative alleles are present in the same individual, are they in phase or in repulsion? 
 
 ## :fontawesome-solid-brain: Project 2: Long-read genome sequencing
 
