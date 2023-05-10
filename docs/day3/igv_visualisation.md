@@ -20,7 +20,7 @@ The exercises below are partly based on [this tutorial](https://github.com/griff
 Index the alignment that was filtered for the region between 2000 and 2500 kb:
 
 ```sh
-cd ~/workdir/alignment_output
+cd ~/workdir/results/alignments
 samtools index SRR519926.sorted.region.bam
 ```
 Download it together with it's index file (`SRR519926.sorted.region.bam.bai`) and the reference genome (`ecoli-strK12-MG1655.fasta`) to your desktop.

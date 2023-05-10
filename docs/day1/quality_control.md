@@ -116,86 +116,81 @@ We will use [fastp](https://github.com/OpenGene/fastp) for trimming adapters and
 
 **Exercise:** Check out the [documentation of fastp](https://github.com/OpenGene/fastp), and the option defaults by running `fastp --help`. 
 - What is the default for the minimum base quality for a qualified base? ( option `--qualified_quality_phred`)
+- What is the default for the maximum percentage of unqualified bases in a read? (option `--unqualified_percent_limit`)
 - What is the default for the minimum required read length? (option `--length_required`)
 - What happens if one read in the pair does not meet the required length after trimming? (it can be specified with the options `--unpaired1` and `--unpaired2`)
 
 ??? done "Answer"
+
     - The minimum base quality is 15: `Default 15 means phred quality >=Q15 is qualified. (int [=15])`
     - The minimum required length is also 15: `reads shorter than length_required will be discarded, default is 15. (int [=15])`
     - If one of the reads does not meet the required length, the pair is discarded if `--unpaired1` and/or `--unpaired2` are not specified: `for PE input, if read1 passed QC but read2 not, it will be written to unpaired1. Default is to discard it. (string [=])`. 
 
-**Exercise:** Run fastp to trim the data.  
-
-Copy the code below to a script in your scripts directory (`~/workdir/scripts`) and call it `03_trim_reads.sh`. Fill in the missing options that in between `[]`. After that execute the script to trim the data.
-
-!!! hint
-    Check out the helper of `cutadapt` with:
-    ```sh
-    cutadapt --help
-    ```
+**Exercise:** Complete the script below called `03_trim_reads.sh` (replace everything in between brackets `[]`) to run `fastp` to trim the data.  The quality of our dataset is not great, so we will overwrite the defaults.  Use a a minimum qualified base quality of 10, set the maximum percentage of unqalified bases to 80% and a minimum read length of 25. Note that a new directory called `~/workdir/results/trimmed/` is created to write the trimmed reads.
 
 ```sh title="03_trim_reads.sh"
 #!/usr/bin/env bash
 
-TRIMMED_DIR=~/workdir/trimmed_data
+TRIMMED_DIR=~/workdir/results/trimmed
 READS_DIR=~/workdir/reads
 
 mkdir -p $TRIMMED_DIR
 
-cutadapt \
---adapter AGATCGGAAGAGCACACGTCTGAACTCCAGTCA \
--A AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT \
-[QUALITY CUTOFF OPTION] \
-[MINIMUM LENGTH OPTION] \
---output $TRIMMED_DIR/trimmed_SRR519926_1.fastq \
---paired-output $TRIMMED_DIR/trimmed_SRR519926_2.fastq \
-$READS_DIR/SRR519926_1.fastq \
-$READS_DIR/SRR519926_2.fastq
+cd $TRIMMED_DIR
+
+fastp \
+-i $READS_DIR/SRR519926_1.fastq \
+-I $READS_DIR/SRR519926_2.fastq \
+-o $TRIMMED_DIR/trimmed_SRR519926_1.fastq \
+-O $TRIMMED_DIR/trimmed_SRR519926_2.fastq \
+[QUALIFIED BASE THRESHOLD] \
+[MINIMUM LENGTH THRESHOLD] \
+[UNQUALIFIED PERCENTAGE LIMIT] \
+--cut_front \
+--cut_tail \
+--detect_adapter_for_pe
 ```
+
+!!! note "Additional options"
+    Note that we have set the options `--cut_front` and `--cut_tail` that will ensure low quality bases are trimmed in a sliding window from both the 5' and 3' ends. Also `--detect_adapter_for_pe` is set, which ensures that adapters are detected automatically for both R1 and R2. 
 
 ??? done "Answer"
     Your script (`~/workdir/scripts/03_trim_reads.sh`) should look like this:
 
     ```sh title="03_trim_reads.sh"
-
     #!/usr/bin/env bash
 
-    TRIMMED_DIR=~/workdir/trimmed_data
+    TRIMMED_DIR=~/workdir/results/trimmed
     READS_DIR=~/workdir/reads
 
     mkdir -p $TRIMMED_DIR
 
-    cutadapt \
-    --adapter AGATCGGAAGAGCACACGTCTGAACTCCAGTCA \
-    -A AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT \
-    --quality-cutoff 10,10 \
-    --minimum-length 25 \
-    --output $TRIMMED_DIR/trimmed_SRR519926_1.fastq \
-    --paired-output $TRIMMED_DIR/trimmed_SRR519926_2.fastq \
-    $READS_DIR/SRR519926_1.fastq \
-    $READS_DIR/SRR519926_2.fastq
+    cd $TRIMMED_DIR
+
+    fastp \
+    -i $READS_DIR/SRR519926_1.fastq \
+    -I $READS_DIR/SRR519926_2.fastq \
+    -o $TRIMMED_DIR/trimmed_SRR519926_1.fastq \
+    -O $TRIMMED_DIR/trimmed_SRR519926_2.fastq \
+    --qualified_quality_phred 10 \
+    --length_required 25 \
+    --unqualified_percent_limit 80 \
+    --cut_front \
+    --cut_tail \
+    --detect_adapter_for_pe
     ```
 
 !!! note "The use of `\`"
-    In the script above you see that we're using `\` at the end of many lines. We use it to tell bash to ignore the newlines. If we would not do it, the `cutadapt` command would become a very long line, and the script would become very difficult to read. It is in general good practice to put every option of a long command on a newline in your script and use `\` to ignore the newlines when executing.
+    In the script above you see that we're using `\` at the end of many lines. We use it to tell bash to ignore the newlines. If we would not do it, the `fastp` command would become a very long line, and the script would become very difficult to read. It is in general good practice to put every option of a long command on a newline in your script and use `\` to ignore the newlines when executing.
 
-**Exercise:** Create a script to run `fastqc` on the trimmed fastq files called `04_run_fastqc_trimmed.sh`, and answer these questions:
+**Exercise:** Check out the report in `fastp.thml`. 
 
-**A.** Has the quality improved?
-
-**B.** How many reads do we have left?
+- Has the quality improved?
+- How many reads do we have left?
+- *Bonus*: Although there were adapters in R2 according to `fastqc`,  `fastp` has trouble finding adapters in R2. Also, after running `fastp` there doesn't seem to be much adapter left (you can double check by running `fastqc` on `trimmed_SRR519926_2.fastq`). How could that be? 
 
 
 ??? done "Answers"
-    Your script `04_run_fastqc_trimmed.sh` should look like:
-
-    ```sh title="04_run_fastqc_trimmed.sh"
-    #!/usr/bin/env bash
-
-    cd ~/workdir/trimmed_data
-    fastqc trimmed*.fastq
-    ```
-
-    A. Yes, low quality 3' end, per sequence quality and adapter sequences have improved.
-
-    B. 315904
+    - Yes, low quality 3' end, per sequence quality and adapter sequences have improved. Also the percentages >20 and >30 are higher. 
+    - 624724 reads, so 312362 pairs (78.0%)
+    - The 3' end of R2 has very low quality on average, this means that trimming for low quality removes almost all bases from the original 3' end, including any adapter.  

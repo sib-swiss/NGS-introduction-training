@@ -66,9 +66,9 @@ esearch -db nuccore -query 'U00096' \
 ```sh title="07_align_reads.sh"
 #!/usr/bin/env bash
 
-TRIMMED_DIR=~/workdir/trimmed_data
+TRIMMED_DIR=~/workdir/results/trimmed
 REFERENCE_DIR=~/workdir/ref_genome/
-ALIGNED_DIR=~/workdir/alignment_output
+ALIGNED_DIR=~/workdir/results/alignments
 
 mkdir -p $ALIGNED_DIR
 

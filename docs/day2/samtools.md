@@ -22,29 +22,32 @@
 
 ### Alignment statistics
 
-**Exercise:** Check out the statistics of the E. coli alignment by using `samtools flagstat`. Find the documentation [here](http://www.htslib.org/doc/samtools-flagstat.html). Anything that draws your attention?
+**Exercise:** Write the statistics of the E. coli alignment to file called `SRR519926.sam.stats` by using `samtools flagstat`. Find the documentation [here](http://www.htslib.org/doc/samtools-flagstat.html). Anything that draws your attention?
 
 ??? done "Answer"
     Code:
     ```sh
-    cd ~/workdir/alignment_output/
-    samtools flagstat SRR519926.sam
+    cd ~/workdir/results/alignments/
+    samtools flagstat SRR519926.sam > SRR519926.sam.stats
     ```
 
     resulting in:
 
     ```
-    631808 + 0 in total (QC-passed reads + QC-failed reads)
+    624724 + 0 in total (QC-passed reads + QC-failed reads)
+    624724 + 0 primary
     0 + 0 secondary
     0 + 0 supplementary
     0 + 0 duplicates
-    627753 + 0 mapped (99.36% : N/A)
-    631808 + 0 paired in sequencing
-    315904 + 0 read1
-    315904 + 0 read2
-    302430 + 0 properly paired (47.87% : N/A)
-    624508 + 0 with itself and mate mapped
-    3245 + 0 singletons (0.51% : N/A)
+    0 + 0 primary duplicates
+    621624 + 0 mapped (99.50% : N/A)
+    621624 + 0 primary mapped (99.50% : N/A)
+    624724 + 0 paired in sequencing
+    312362 + 0 read1
+    312362 + 0 read2
+    300442 + 0 properly paired (48.09% : N/A)
+    619200 + 0 with itself and mate mapped
+    2424 + 0 singletons (0.39% : N/A)
     0 + 0 with mate mapped to a different chr
     0 + 0 with mate mapped to a different chr (mapQ>=5)
     ```
@@ -71,7 +74,7 @@ The command `samtools view` is very versatile. It takes an alignment file and wr
     ```sh title="08_compress_sort.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir/alignment_output
+    cd ~/workdir/results/alignments
 
     samtools view -bh SRR519926.sam > SRR519926.bam
     ```
@@ -93,7 +96,7 @@ samtools index SRR519926.sorted.bam
     ```sh title="08_compress_sort.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir/alignment_output
+    cd ~/workdir/results/alignments
 
     samtools view -bh SRR519926.sam > SRR519926.bam
     samtools sort SRR519926.bam > SRR519926.sorted.bam
@@ -160,7 +163,7 @@ samtools view -bh -F 4 SRR519926.sorted.bam > SRR519926.sorted.mapped.bam
     ```sh title="09_extract_unmapped.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir/alignment_output
+    cd ~/workdir/results/alignments
 
     samtools view -bh -f 0x4 SRR519926.sorted.bam > SRR519926.sorted.unmapped.bam
     ```
@@ -170,7 +173,7 @@ samtools view -bh -F 4 SRR519926.sorted.bam > SRR519926.sorted.mapped.bam
     samtools view -c SRR519926.sorted.unmapped.bam
     ```
 
-    This should correspond to the output of `samtools flagstat` (631808 - 627753 = 4055)
+    This should correspond to the output of `samtools flagstat` (624724 - 621624 = 3100)
 
 `samtools view` also enables you to filter alignments in a specific region. This can be convenient if you don't want to work with huge alignment files and if you're only interested in alignments in a particular region. Region filtering only works for sorted and indexed alignment files.
 
@@ -197,7 +200,7 @@ samtools view -bh -F 4 SRR519926.sorted.bam > SRR519926.sorted.mapped.bam
     ```sh title="10_extract_region.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir/alignment_output
+    cd ~/workdir/results/alignments
 
     samtools view -bh \
     SRR519926.sorted.bam \
@@ -226,15 +229,25 @@ my_alignment_command \
     ```sh title="11_align_sort.sh"
     #!/usr/bin/env bash
 
-    TRIMMED_DIR=~/workdir/trimmed_data
+    TRIMMED_DIR=~/workdir/results/trimmed
     REFERENCE_DIR=~/workdir/ref_genome
-    ALIGNED_DIR=~/workdir/alignment_output
+    ALIGNED_DIR=~/workdir/results/alignments
 
     bowtie2 \
     -x $REFERENCE_DIR/ecoli-strK12-MG1655.fasta \
     -1 $TRIMMED_DIR/trimmed_SRR519926_1.fastq \
     -2 $TRIMMED_DIR/trimmed_SRR519926_2.fastq \
+    2> $ALIGNED_DIR/bowtie2_SRR519926.log \
     | samtools sort - \
     | samtools view -bh - \
     > $ALIGNED_DIR/SRR519926.sorted.mapped.frompipe.bam
     ```
+
+    !!! note "Redirecting `stderr`"
+        Notice the line starting with `2>`. This redirects standard error to a file: `$ALIGNED_DIR/bowtie2_SRR519926.log`. This file now contains the bowtie2 logs, that can later be re-read or used in e.g. `multiqc`. 
+
+### QC summary
+
+The software [MultiQC](https://multiqc.info/) is great for creating summaries out of log files and reports from many different bioinformatic tools (including `fastqc`, `fastp`, `samtools` and `bowtie2`). You can specify a directory that contains any log files, and it will automatically search it for you. 
+
+**Exercise**: Run the command `multiqc .` in `~/workdir` and checkout the generated report. 

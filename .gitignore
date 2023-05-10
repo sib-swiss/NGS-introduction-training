@@ -7,3 +7,14 @@ project_work/*
 .local
 workdir/
 slurm-*
+reads/
+ref_genome/
+results/
+.bashrc
+.cache/
+.java/
+.ncbi/
+.profile
+data/
+extensions/
+multiqc*
