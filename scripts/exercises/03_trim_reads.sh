@@ -5,6 +5,9 @@ READS_DIR=~/workdir/reads
 
 mkdir -p $TRIMMED_DIR
 
+fastp \
+
+
 cutadapt \
 --adapter AGATCGGAAGAGCACACGTCTGAACTCCAGTCA \
 -A AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT \

@@ -4,7 +4,7 @@
 
 - Find information about a sequence run on the Sequence Read Archive
 - Run `fastqc` on sequence reads and interpret the results
-- Trim adapters and low quality bases using `cutadapt`
+- Trim adapters and low quality bases using `fastp`
 
 ## Material
 
@@ -112,12 +112,19 @@ fastq-dump --split-files SRR519926
 
 ### Trim the reads
 
-We will use [cutadapt](https://cutadapt.readthedocs.io/en/stable/index.html) for trimming adapters and low quality bases from our reads. The most used adapters for Illumina are TruSeq adapters. To run `cutadapt` you need to specify the adapter sequences with options `-a` (or `--adapter`) and `-A`. A reference for the adapter sequences can be found [here](https://support.illumina.com/bulletins/2016/12/what-sequences-do-i-use-for-adapter-trimming.html).
+We will use [fastp](https://github.com/OpenGene/fastp) for trimming adapters and low quality bases from our reads. The most used adapters for Illumina are TruSeq adapters, and `fastp` will use those by default. A reference for the adapter sequences can be found [here](https://support.illumina.com/bulletins/2016/12/what-sequences-do-i-use-for-adapter-trimming.html).
 
-**Exercise:** The script below will trim the sequence reads. However, some parts are missing. We want to:
+**Exercise:** Check out the [documentation of fastp](https://github.com/OpenGene/fastp), and the option defaults by running `fastp --help`. 
+- What is the default for the minimum base quality for a qualified base? ( option `--qualified_quality_phred`)
+- What is the default for the minimum required read length? (option `--length_required`)
+- What happens if one read in the pair does not meet the required length after trimming? (it can be specified with the options `--unpaired1` and `--unpaired2`)
 
-* trim bases with a quality lower then 10 from the 3' and 5' end of the reads,
-* keep only reads with a read length not shorter than 25 base pairs.
+??? done "Answer"
+    - The minimum base quality is 15: `Default 15 means phred quality >=Q15 is qualified. (int [=15])`
+    - The minimum required length is also 15: `reads shorter than length_required will be discarded, default is 15. (int [=15])`
+    - If one of the reads does not meet the required length, the pair is discarded if `--unpaired1` and/or `--unpaired2` are not specified: `for PE input, if read1 passed QC but read2 not, it will be written to unpaired1. Default is to discard it. (string [=])`. 
+
+**Exercise:** Run fastp to trim the data.  
 
 Copy the code below to a script in your scripts directory (`~/workdir/scripts`) and call it `03_trim_reads.sh`. Fill in the missing options that in between `[]`. After that execute the script to trim the data.
 

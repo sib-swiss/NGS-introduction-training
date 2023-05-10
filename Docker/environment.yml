@@ -17,6 +17,7 @@ dependencies:
   - gatk4
   - freebayes=1.3.6
   - multiqc
+  - fastp
   - pip:
     - NanoPlot
 
