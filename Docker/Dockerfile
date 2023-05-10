@@ -1,4 +1,4 @@
-FROM linuxserver/code-server:4.8.3
+FROM linuxserver/code-server:4.12.0
 
 # Install base utilities
 RUN apt-get update && \
