@@ -6,3 +6,4 @@ project_work/*
 .config
 .local
 workdir/
+slurm-*
