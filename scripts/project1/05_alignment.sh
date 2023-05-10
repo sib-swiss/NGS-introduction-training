@@ -5,6 +5,8 @@ REFDIR="$WORKDIR"/data/reference/
 FASTQDIR="$WORKDIR"/data/fastq/
 ALIGNDIR="$WORKDIR"/data/alignments/
 
+mkdir -p "$WORKDIR"/log/
+
 mkdir -p "$ALIGNDIR"
 
 cd "$REFDIR"

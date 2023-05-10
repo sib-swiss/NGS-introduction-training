@@ -9,8 +9,6 @@ The last part of this course will consist of project-based-learning. This means 
 
 ## Material
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/t2yCLmLAi0A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
 [:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/group_work.pdf){: .md-button }
 
 ## Roles & organisation
@@ -58,21 +56,45 @@ rm ngs-variants-training.tar.gz
 
 * Download the required data
 * Do a QC on the data with `fastqc`
-* Trim adapters and low quality bases with `cutadapt` (the adapter sequences are the same as in the exercises).
+* Trim adapters and low quality bases with `fastp`. Make sure to include the option `--detect_adapter_for_pe`. To prevent overwriting `fastp.html`, specify a report filename for each sample with the option `--html`. 
 * Create an index for bowtie2. At the same time create a fasta index (`.fai` file) with `samtools faidx`. 
 * Check which options to use, and align with `bowtie2`. At the same time add readgroups to the aligned reads (see hints below). Make sure you end up with an indexed and sorted bam file. 
 * Mark duplicates on the individual bam files with `gatk MarkDuplicates` (see hints below).
 * Merge the three bam files with `samtools merge`. Index the bam file afterwards. 
-* Run `freebayes` to call variants
+* Run `freebayes` to call variants. Only call variants on the region `chr20:10018000-10220000` by specifying the `-r` option. 
 * Load your alignments together with the vcf containing the variants in IGV. Check out e.g. `chr20:10,026,397-10,026,638`. 
+* Run `multiqc` to get an overall quality report.
 
 ### Questions
 
 * Have a look at the quality of the reads. Are there any adapters in there? Did adapter trimming change that? How is the base quality? Could you improve that?
-* How many duplicates were in the different samples? Why is it important to remove them for variant analysis?
+* How many duplicates were in the different samples (hint: use `samtools flagstat`)? Why is it important to remove them for variant analysis?
 * Why did you add read groups to the bam files? Where is this information added in the bam file? 
 * Are there variants that look spurious? What could be the cause of that? What information in the vcf can you use to evaluate variant quality? 
 * There are two high quality variants in `chr20:10,026,397-10,026,638`. What are the genotypes of the three samples according to freebayes? Is this according to what you see in the alignments? If the alternative alleles are present in the same individual, are they in phase or in repulsion? 
+
+### Hints
+
+You can add readgroups to the alignment file with `bowtie2` with the options `--rg-id` and `--rg`, e.g. (`$SAMPLE` is a variable containing a sample identifier):
+
+```sh
+bowtie2 \
+-x ref.fa \
+-1 r1.fastq.gz \
+-2 r2.fastq.gz \
+--rg-id $SAMPLE \
+--rg SM:$SAMPLE \
+```
+
+To run `gatk MarkDuplicates` you will only need to specify `--INPUT` and `--OUTPUT`, e.g.:
+
+```sh
+gatk MarkDuplicates \
+--INPUT sample.bam \
+--OUTPUT sample.md.bam \
+--METRICS_FILE sample.metrics.txt 
+```
+
 
 ## :fontawesome-solid-brain: Project 2: Long-read genome sequencing
 
