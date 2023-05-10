@@ -140,8 +140,8 @@ cutadapt \
 -A AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT \
 [QUALITY CUTOFF OPTION] \
 [MINIMUM LENGTH OPTION] \
---output $TRIMMED_DIR/paired_trimmed_SRR519926_1.fastq \
---paired-output $TRIMMED_DIR/paired_trimmed_SRR519926_2.fastq \
+--output $TRIMMED_DIR/trimmed_SRR519926_1.fastq \
+--paired-output $TRIMMED_DIR/trimmed_SRR519926_2.fastq \
 $READS_DIR/SRR519926_1.fastq \
 $READS_DIR/SRR519926_2.fastq
 ```
@@ -163,8 +163,8 @@ $READS_DIR/SRR519926_2.fastq
     -A AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT \
     --quality-cutoff 10,10 \
     --minimum-length 25 \
-    --output $TRIMMED_DIR/paired_trimmed_SRR519926_1.fastq \
-    --paired-output $TRIMMED_DIR/paired_trimmed_SRR519926_2.fastq \
+    --output $TRIMMED_DIR/trimmed_SRR519926_1.fastq \
+    --paired-output $TRIMMED_DIR/trimmed_SRR519926_2.fastq \
     $READS_DIR/SRR519926_1.fastq \
     $READS_DIR/SRR519926_2.fastq
     ```
@@ -186,7 +186,7 @@ $READS_DIR/SRR519926_2.fastq
     #!/usr/bin/env bash
 
     cd ~/workdir/trimmed_data
-    fastqc paired_trimmed*.fastq
+    fastqc trimmed*.fastq
     ```
 
     A. Yes, low quality 3' end, per sequence quality and adapter sequences have improved.

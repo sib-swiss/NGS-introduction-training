@@ -105,7 +105,7 @@ samtools index SRR519926.sorted.bam
     ```
     @HD     VN:1.0  SO:unsorted
     @SQ     SN:U00096.3     LN:4641652
-    @PG     ID:bowtie2      PN:bowtie2      VN:2.4.2        CL:"/opt/conda/envs/ngs-tools/bin/bowtie2-align-s --wrapper basic-0 -x /config/workdir/ref_genome//ecoli-strK12-MG1655.fasta -1 /config/workdir/trimmed_data/paired_trimmed_SRR519926_1.fastq -2 /config/workdir/trimmed_data/paired_trimmed_SRR519926_2.fastq"
+    @PG     ID:bowtie2      PN:bowtie2      VN:2.4.2        CL:"/opt/conda/envs/ngs-tools/bin/bowtie2-align-s --wrapper basic-0 -x /config/workdir/ref_genome//ecoli-strK12-MG1655.fasta -1 /config/workdir/trimmed_data/trimmed_SRR519926_1.fastq -2 /config/workdir/trimmed_data/trimmed_SRR519926_2.fastq"
     @PG     ID:samtools     PN:samtools     PP:bowtie2      VN:1.12 CL:samtools view -bh SRR519926.sam
     @PG     ID:samtools.1   PN:samtools     PP:samtools     VN:1.12 CL:samtools view -H SRR519926.bam
     ```
@@ -115,7 +115,7 @@ samtools index SRR519926.sorted.bam
     ```
     @HD     VN:1.0  SO:coordinate
     @SQ     SN:U00096.3     LN:4641652
-    @PG     ID:bowtie2      PN:bowtie2      VN:2.4.2        CL:"/opt/conda/envs/ngs-tools/bin/bowtie2-align-s --wrapper basic-0 -x /config/workdir/ref_genome//ecoli-strK12-MG1655.fasta -1 /config/workdir/trimmed_data/paired_trimmed_SRR519926_1.fastq -2 /config/workdir/trimmed_data/paired_trimmed_SRR519926_2.fastq"
+    @PG     ID:bowtie2      PN:bowtie2      VN:2.4.2        CL:"/opt/conda/envs/ngs-tools/bin/bowtie2-align-s --wrapper basic-0 -x /config/workdir/ref_genome//ecoli-strK12-MG1655.fasta -1 /config/workdir/trimmed_data/trimmed_SRR519926_1.fastq -2 /config/workdir/trimmed_data/trimmed_SRR519926_2.fastq"
     @PG     ID:samtools     PN:samtools     PP:bowtie2      VN:1.12 CL:samtools view -bh SRR519926.sam
     @PG     ID:samtools.1   PN:samtools     PP:samtools     VN:1.12 CL:samtools sort SRR519926.bam
     @PG     ID:samtools.2   PN:samtools     PP:samtools.1   VN:1.12 CL:samtools view -H SRR519926.sorted.bam
@@ -232,8 +232,8 @@ my_alignment_command \
 
     bowtie2 \
     -x $REFERENCE_DIR/ecoli-strK12-MG1655.fasta \
-    -1 $TRIMMED_DIR/paired_trimmed_SRR519926_1.fastq \
-    -2 $TRIMMED_DIR/paired_trimmed_SRR519926_2.fastq \
+    -1 $TRIMMED_DIR/trimmed_SRR519926_1.fastq \
+    -2 $TRIMMED_DIR/trimmed_SRR519926_2.fastq \
     | samtools sort - \
     | samtools view -bh - \
     > $ALIGNED_DIR/SRR519926.sorted.mapped.frompipe.bam

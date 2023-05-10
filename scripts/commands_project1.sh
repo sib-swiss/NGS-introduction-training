@@ -49,8 +49,8 @@ cutadapt \
 --cores 4 \
 --quality-cutoff 10,10 \
 --minimum-length 25 \
---output $TRIMMED_DIR/paired_trimmed_sample_131_R1.fastq.gz \
---paired-output  $TRIMMED_DIR/paired_trimmed_sample_131_R2.fastq.gz \
+--output $TRIMMED_DIR/trimmed_sample_131_R1.fastq.gz \
+--paired-output  $TRIMMED_DIR/trimmed_sample_131_R2.fastq.gz \
 $READS_DIR/sample_131_R1.fastq.gz \
 $READS_DIR/sample_131_R2.fastq.gz
 
@@ -73,8 +73,8 @@ mkdir -p $ALIGNED_DIR
 # takes about 40 minutes
 bowtie2 \
 -x $REFERENCE_DIR/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa \
--1 $TRIMMED_DIR/paired_trimmed_sample_131_R1.fastq.gz  \
--2 $TRIMMED_DIR/paired_trimmed_sample_131_R2.fastq.gz  \
+-1 $TRIMMED_DIR/trimmed_sample_131_R1.fastq.gz  \
+-2 $TRIMMED_DIR/trimmed_sample_131_R2.fastq.gz  \
 --threads 4 \
 | samtools sort - \
 | samtools view -bh - \
@@ -89,8 +89,8 @@ samtools index $ALIGNED_DIR/sample_131.bt2.subset.bam
 # takes about 20 minutes:
 hisat2 \
 -x $REFERENCE_DIR/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa \
--1 $TRIMMED_DIR/paired_trimmed_sample_131_R1.fastq.gz  \
--2 $TRIMMED_DIR/paired_trimmed_sample_131_R2.fastq.gz  \
+-1 $TRIMMED_DIR/trimmed_sample_131_R1.fastq.gz  \
+-2 $TRIMMED_DIR/trimmed_sample_131_R2.fastq.gz  \
 --threads 4 \
 | samtools sort \
 | samtools view -bh \

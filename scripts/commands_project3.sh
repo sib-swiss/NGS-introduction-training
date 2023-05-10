@@ -48,8 +48,8 @@ cutadapt \
 --cores 4 \
 --quality-cutoff 10,10 \
 --minimum-length 25 \
---output $TRIMMED_DIR/paired_trimmed_SRR7822040.chr5_R1.fastq.gz \
---paired-output  $TRIMMED_DIR/paired_trimmed_SRR7822040.chr5_R2.fastq.gz \
+--output $TRIMMED_DIR/trimmed_SRR7822040.chr5_R1.fastq.gz \
+--paired-output  $TRIMMED_DIR/trimmed_SRR7822040.chr5_R2.fastq.gz \
 $READS_DIR/SRR7822040.chr5_R1.fastq.gz \
 $READS_DIR/SRR7822040.chr5_R2.fastq.gz
 
@@ -72,8 +72,8 @@ mkdir -p $ALIGNED_DIR
 # takes about 40 minutes
 bowtie2 \
 -x $REFERENCE_DIR/Mus_musculus.GRCm38.dna.primary_assembly.chr5.fa \
--1 $TRIMMED_DIR/paired_trimmed_SRR7822040.chr5_R1.fastq.gz  \
--2 $TRIMMED_DIR/paired_trimmed_SRR7822040.chr5_R2.fastq.gz  \
+-1 $TRIMMED_DIR/trimmed_SRR7822040.chr5_R1.fastq.gz  \
+-2 $TRIMMED_DIR/trimmed_SRR7822040.chr5_R2.fastq.gz  \
 --threads 4 \
 | samtools sort - \
 | samtools view -bh - \
@@ -88,8 +88,8 @@ samtools index $ALIGNED_DIR/SRR7822040.chr5.bt2.subset.bam
 # takes about 20 minutes:
 hisat2 \
 -x $REFERENCE_DIR/Mus_musculus.GRCm38.dna.primary_assembly.chr5.fa \
--1 $TRIMMED_DIR/paired_trimmed_SRR7822040.chr5_R1.fastq.gz  \
--2 $TRIMMED_DIR/paired_trimmed_SRR7822040.chr5_R2.fastq.gz  \
+-1 $TRIMMED_DIR/trimmed_SRR7822040.chr5_R1.fastq.gz  \
+-2 $TRIMMED_DIR/trimmed_SRR7822040.chr5_R2.fastq.gz  \
 --threads 4 \
 | samtools sort \
 | samtools view -bh \
