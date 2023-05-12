@@ -17,7 +17,7 @@ cd "$PROJDIR"/raw_data/
 SAMPLE=`sed "${SLURM_ARRAY_TASK_ID}q;d" sample_names.txt`
 
 samtools view -bh "$PROJDIR"/results/alignments/"$SAMPLE".bam \
-5:1-151758149 \
+5:100000000-120000000 \
 > "$PROJDIR"/results/alignments/"$SAMPLE"_chr5.bam
 
 samtools collate \
