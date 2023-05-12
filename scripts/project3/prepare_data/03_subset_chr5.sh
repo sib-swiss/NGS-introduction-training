@@ -31,3 +31,9 @@ samtools collate \
 -2 "$PROJDIR"/results/reads/"$SAMPLE"_R2.fastq.gz \
 -s "$PROJDIR"/results/reads/"$SAMPLE"_S.fastq.gz \
 -0 "$PROJDIR"/results/reads/"$SAMPLE"_U.fastq.gz
+
+cat filename_conversions.txt | while read OLD NEW
+do
+    mv "$OLD"_R1.fastq.gz "$NEW"_R1.fastq.gz
+    mv "$OLD"_R2.fastq.gz "$NEW"_R2.fastq.gz
+done
