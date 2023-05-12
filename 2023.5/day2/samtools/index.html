@@ -512,6 +512,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#qc-summary" class="md-nav__link">
+    QC summary
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -669,6 +676,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#qc-summary" class="md-nav__link">
+    QC summary
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -718,25 +732,28 @@
 </ul>
 <h2 id="exercises">Exercises</h2>
 <h3 id="alignment-statistics">Alignment statistics</h3>
-<p><strong>Exercise:</strong> Check out the statistics of the E. coli alignment by using <code>samtools flagstat</code>. Find the documentation <a href="http://www.htslib.org/doc/samtools-flagstat.html">here</a>. Anything that draws your attention?</p>
+<p><strong>Exercise:</strong> Write the statistics of the E. coli alignment to file called <code>SRR519926.sam.stats</code> by using <code>samtools flagstat</code>. Find the documentation <a href="http://www.htslib.org/doc/samtools-flagstat.html">here</a>. Anything that draws your attention?</p>
 <details class="done">
 <summary>Answer</summary>
 <p>Code:
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>~/workdir/alignment_output/
-samtools<span class="w"> </span>flagstat<span class="w"> </span>SRR519926.sam
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>~/workdir/results/alignments/
+samtools<span class="w"> </span>flagstat<span class="w"> </span>SRR519926.sam<span class="w"> </span>&gt;<span class="w"> </span>SRR519926.sam.stats
 </code></pre></div></p>
 <p>resulting in:</p>
-<div class="highlight"><pre><span></span><code>631808 + 0 in total (QC-passed reads + QC-failed reads)
+<div class="highlight"><pre><span></span><code>624724 + 0 in total (QC-passed reads + QC-failed reads)
+624724 + 0 primary
 0 + 0 secondary
 0 + 0 supplementary
 0 + 0 duplicates
-627753 + 0 mapped (99.36% : N/A)
-631808 + 0 paired in sequencing
-315904 + 0 read1
-315904 + 0 read2
-302430 + 0 properly paired (47.87% : N/A)
-624508 + 0 with itself and mate mapped
-3245 + 0 singletons (0.51% : N/A)
+0 + 0 primary duplicates
+621624 + 0 mapped (99.50% : N/A)
+621624 + 0 primary mapped (99.50% : N/A)
+624724 + 0 paired in sequencing
+312362 + 0 read1
+312362 + 0 read2
+300442 + 0 properly paired (48.09% : N/A)
+619200 + 0 with itself and mate mapped
+2424 + 0 singletons (0.39% : N/A)
 0 + 0 with mate mapped to a different chr
 0 + 0 with mate mapped to a different chr (mapQ&gt;=5)
 </code></pre></div>
@@ -756,7 +773,7 @@ samtools<span class="w"> </span>flagstat<span class="w"> </span>SRR519926.sam
 <summary>Answer</summary>
 <p><div class="highlight"><span class="filename">08_compress_sort.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
-<span class="nb">cd</span><span class="w"> </span>~/workdir/alignment_output
+<span class="nb">cd</span><span class="w"> </span>~/workdir/results/alignments
 
 samtools<span class="w"> </span>view<span class="w"> </span>-bh<span class="w"> </span>SRR519926.sam<span class="w"> </span>&gt;<span class="w"> </span>SRR519926.bam
 </code></pre></div>
@@ -772,7 +789,7 @@ samtools<span class="w"> </span>index<span class="w"> </span>SRR519926.sorted.ba
 <p>Your script should like like this:</p>
 <div class="highlight"><span class="filename">08_compress_sort.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
-<span class="nb">cd</span><span class="w"> </span>~/workdir/alignment_output
+<span class="nb">cd</span><span class="w"> </span>~/workdir/results/alignments
 
 samtools<span class="w"> </span>view<span class="w"> </span>-bh<span class="w"> </span>SRR519926.sam<span class="w"> </span>&gt;<span class="w"> </span>SRR519926.bam
 samtools<span class="w"> </span>sort<span class="w"> </span>SRR519926.bam<span class="w"> </span>&gt;<span class="w"> </span>SRR519926.sorted.bam
@@ -781,14 +798,14 @@ samtools<span class="w"> </span>index<span class="w"> </span>SRR519926.sorted.ba
 <p><code>samtools view -H SRR519926.bam</code> returns:</p>
 <div class="highlight"><pre><span></span><code>@HD     VN:1.0  SO:unsorted
 @SQ     SN:U00096.3     LN:4641652
-@PG     ID:bowtie2      PN:bowtie2      VN:2.4.2        CL:&quot;/opt/conda/envs/ngs-tools/bin/bowtie2-align-s --wrapper basic-0 -x /config/workdir/ref_genome//ecoli-strK12-MG1655.fasta -1 /config/workdir/trimmed_data/paired_trimmed_SRR519926_1.fastq -2 /config/workdir/trimmed_data/paired_trimmed_SRR519926_2.fastq&quot;
+@PG     ID:bowtie2      PN:bowtie2      VN:2.4.2        CL:&quot;/opt/conda/envs/ngs-tools/bin/bowtie2-align-s --wrapper basic-0 -x /config/workdir/ref_genome//ecoli-strK12-MG1655.fasta -1 /config/workdir/trimmed_data/trimmed_SRR519926_1.fastq -2 /config/workdir/trimmed_data/trimmed_SRR519926_2.fastq&quot;
 @PG     ID:samtools     PN:samtools     PP:bowtie2      VN:1.12 CL:samtools view -bh SRR519926.sam
 @PG     ID:samtools.1   PN:samtools     PP:samtools     VN:1.12 CL:samtools view -H SRR519926.bam
 </code></pre></div>
 <p>And <code>samtools view -H SRR519926.sorted.bam</code> returns:</p>
 <div class="highlight"><pre><span></span><code>@HD     VN:1.0  SO:coordinate
 @SQ     SN:U00096.3     LN:4641652
-@PG     ID:bowtie2      PN:bowtie2      VN:2.4.2        CL:&quot;/opt/conda/envs/ngs-tools/bin/bowtie2-align-s --wrapper basic-0 -x /config/workdir/ref_genome//ecoli-strK12-MG1655.fasta -1 /config/workdir/trimmed_data/paired_trimmed_SRR519926_1.fastq -2 /config/workdir/trimmed_data/paired_trimmed_SRR519926_2.fastq&quot;
+@PG     ID:bowtie2      PN:bowtie2      VN:2.4.2        CL:&quot;/opt/conda/envs/ngs-tools/bin/bowtie2-align-s --wrapper basic-0 -x /config/workdir/ref_genome//ecoli-strK12-MG1655.fasta -1 /config/workdir/trimmed_data/trimmed_SRR519926_1.fastq -2 /config/workdir/trimmed_data/trimmed_SRR519926_2.fastq&quot;
 @PG     ID:samtools     PN:samtools     PP:bowtie2      VN:1.12 CL:samtools view -bh SRR519926.sam
 @PG     ID:samtools.1   PN:samtools     PP:samtools     VN:1.12 CL:samtools sort SRR519926.bam
 @PG     ID:samtools.2   PN:samtools     PP:samtools.1   VN:1.12 CL:samtools view -H SRR519926.sorted.bam
@@ -823,14 +840,14 @@ samtools<span class="w"> </span>index<span class="w"> </span>SRR519926.sorted.ba
 <p>Your script <code>09_extract_unmapped.sh</code> should look like this:</p>
 <div class="highlight"><span class="filename">09_extract_unmapped.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
-<span class="nb">cd</span><span class="w"> </span>~/workdir/alignment_output
+<span class="nb">cd</span><span class="w"> </span>~/workdir/results/alignments
 
 samtools<span class="w"> </span>view<span class="w"> </span>-bh<span class="w"> </span>-f<span class="w"> </span>0x4<span class="w"> </span>SRR519926.sorted.bam<span class="w"> </span>&gt;<span class="w"> </span>SRR519926.sorted.unmapped.bam
 </code></pre></div>
 <p>Counting like this:
 <div class="highlight"><pre><span></span><code>samtools<span class="w"> </span>view<span class="w"> </span>-c<span class="w"> </span>SRR519926.sorted.unmapped.bam
 </code></pre></div></p>
-<p>This should correspond to the output of <code>samtools flagstat</code> (631808 - 627753 = 4055)</p>
+<p>This should correspond to the output of <code>samtools flagstat</code> (624724 - 621624 = 3100)</p>
 </details>
 <p><code>samtools view</code> also enables you to filter alignments in a specific region. This can be convenient if you don&rsquo;t want to work with huge alignment files and if you&rsquo;re only interested in alignments in a particular region. Region filtering only works for sorted and indexed alignment files.</p>
 <p><strong>Exercise:</strong> Generate a script called <code>10_extract_region.sh</code> to filter our sorted and indexed BAM file for the region between 2000 and 2500 kb, and output it as a BAM file with a header.</p>
@@ -849,7 +866,7 @@ grep<span class="w"> </span><span class="s2">&quot;&gt;&quot;</span><span class=
 <summary>Answer</summary>
 <div class="highlight"><span class="filename">10_extract_region.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
-<span class="nb">cd</span><span class="w"> </span>~/workdir/alignment_output
+<span class="nb">cd</span><span class="w"> </span>~/workdir/results/alignments
 
 samtools<span class="w"> </span>view<span class="w"> </span>-bh<span class="w"> </span><span class="se">\</span>
 SRR519926.sorted.bam<span class="w"> </span><span class="se">\</span>
@@ -873,19 +890,27 @@ U00096.3:2000000-2500000<span class="w"> </span><span class="se">\</span>
 <summary>Answer</summary>
 <div class="highlight"><span class="filename">11_align_sort.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
-<span class="nv">TRIMMED_DIR</span><span class="o">=</span>~/workdir/trimmed_data
+<span class="nv">TRIMMED_DIR</span><span class="o">=</span>~/workdir/results/trimmed
 <span class="nv">REFERENCE_DIR</span><span class="o">=</span>~/workdir/ref_genome
-<span class="nv">ALIGNED_DIR</span><span class="o">=</span>~/workdir/alignment_output
+<span class="nv">ALIGNED_DIR</span><span class="o">=</span>~/workdir/results/alignments
 
 bowtie2<span class="w"> </span><span class="se">\</span>
 -x<span class="w"> </span><span class="nv">$REFERENCE_DIR</span>/ecoli-strK12-MG1655.fasta<span class="w"> </span><span class="se">\</span>
--1<span class="w"> </span><span class="nv">$TRIMMED_DIR</span>/paired_trimmed_SRR519926_1.fastq<span class="w"> </span><span class="se">\</span>
--2<span class="w"> </span><span class="nv">$TRIMMED_DIR</span>/paired_trimmed_SRR519926_2.fastq<span class="w"> </span><span class="se">\</span>
+-1<span class="w"> </span><span class="nv">$TRIMMED_DIR</span>/trimmed_SRR519926_1.fastq<span class="w"> </span><span class="se">\</span>
+-2<span class="w"> </span><span class="nv">$TRIMMED_DIR</span>/trimmed_SRR519926_2.fastq<span class="w"> </span><span class="se">\</span>
+<span class="m">2</span>&gt;<span class="w"> </span><span class="nv">$ALIGNED_DIR</span>/bowtie2_SRR519926.log<span class="w"> </span><span class="se">\</span>
 <span class="p">|</span><span class="w"> </span>samtools<span class="w"> </span>sort<span class="w"> </span>-<span class="w"> </span><span class="se">\</span>
 <span class="p">|</span><span class="w"> </span>samtools<span class="w"> </span>view<span class="w"> </span>-bh<span class="w"> </span>-<span class="w"> </span><span class="se">\</span>
 &gt;<span class="w"> </span><span class="nv">$ALIGNED_DIR</span>/SRR519926.sorted.mapped.frompipe.bam
 </code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Redirecting <code>stderr</code></p>
+<p>Notice the line starting with <code>2&gt;</code>. This redirects standard error to a file: <code>$ALIGNED_DIR/bowtie2_SRR519926.log</code>. This file now contains the bowtie2 logs, that can later be re-read or used in e.g. <code>multiqc</code>. </p>
+</div>
 </details>
+<h3 id="qc-summary">QC summary</h3>
+<p>The software <a href="https://multiqc.info/">MultiQC</a> is great for creating summaries out of log files and reports from many different bioinformatic tools (including <code>fastqc</code>, <code>fastp</code>, <code>samtools</code> and <code>bowtie2</code>). You can specify a directory that contains any log files, and it will automatically search it for you. </p>
+<p><strong>Exercise</strong>: Run the command <code>multiqc .</code> in <code>~/workdir</code> and checkout the generated report. </p>
 
 
 

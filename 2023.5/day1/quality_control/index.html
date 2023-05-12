@@ -687,7 +687,7 @@
 <ul>
 <li>Find information about a sequence run on the Sequence Read Archive</li>
 <li>Run <code>fastqc</code> on sequence reads and interpret the results</li>
-<li>Trim adapters and low quality bases using <code>cutadapt</code></li>
+<li>Trim adapters and low quality bases using <code>fastp</code></li>
 </ul>
 <h2 id="material">Material</h2>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/iCOF6yaQFPE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -774,74 +774,88 @@ fastqc<span class="w"> </span>*.fastq
 <p>We can probably fix most of these issues by trimming.</p>
 </details>
 <h3 id="trim-the-reads">Trim the reads</h3>
-<p>We will use <a href="https://cutadapt.readthedocs.io/en/stable/index.html">cutadapt</a> for trimming adapters and low quality bases from our reads. The most used adapters for Illumina are TruSeq adapters. To run <code>cutadapt</code> you need to specify the adapter sequences with options <code>-a</code> (or <code>--adapter</code>) and <code>-A</code>. A reference for the adapter sequences can be found <a href="https://support.illumina.com/bulletins/2016/12/what-sequences-do-i-use-for-adapter-trimming.html">here</a>.</p>
-<p><strong>Exercise:</strong> The script below will trim the sequence reads. However, some parts are missing. We want to:</p>
+<p>We will use <a href="https://github.com/OpenGene/fastp">fastp</a> for trimming adapters and low quality bases from our reads. The most used adapters for Illumina are TruSeq adapters, and <code>fastp</code> will use those by default. A reference for the adapter sequences can be found <a href="https://support.illumina.com/bulletins/2016/12/what-sequences-do-i-use-for-adapter-trimming.html">here</a>.</p>
+<p><strong>Exercise:</strong> Check out the <a href="https://github.com/OpenGene/fastp">documentation of fastp</a>, and the option defaults by running <code>fastp --help</code>. 
+- What is the default for the minimum base quality for a qualified base? ( option <code>--qualified_quality_phred</code>)
+- What is the default for the maximum percentage of unqualified bases in a read? (option <code>--unqualified_percent_limit</code>)
+- What is the default for the minimum required read length? (option <code>--length_required</code>)
+- What happens if one read in the pair does not meet the required length after trimming? (it can be specified with the options <code>--unpaired1</code> and <code>--unpaired2</code>)</p>
+<details class="done">
+<summary>Answer</summary>
 <ul>
-<li>trim bases with a quality lower then 10 from the 3&rsquo; and 5&rsquo; end of the reads,</li>
-<li>keep only reads with a read length not shorter than 25 base pairs.</li>
+<li>The minimum base quality is 15: <code>Default 15 means phred quality &gt;=Q15 is qualified. (int [=15])</code></li>
+<li>The minimum required length is also 15: <code>reads shorter than length_required will be discarded, default is 15. (int [=15])</code></li>
+<li>If one of the reads does not meet the required length, the pair is discarded if <code>--unpaired1</code> and/or <code>--unpaired2</code> are not specified: <code>for PE input, if read1 passed QC but read2 not, it will be written to unpaired1. Default is to discard it. (string [=])</code>. </li>
 </ul>
-<p>Copy the code below to a script in your scripts directory (<code>~/workdir/scripts</code>) and call it <code>03_trim_reads.sh</code>. Fill in the missing options that in between <code>[]</code>. After that execute the script to trim the data.</p>
-<div class="admonition hint">
-<p class="admonition-title">Hint</p>
-<p>Check out the helper of <code>cutadapt</code> with:
-<div class="highlight"><pre><span></span><code>cutadapt<span class="w"> </span>--help
-</code></pre></div></p>
-</div>
+</details>
+<p><strong>Exercise:</strong> Complete the script below called <code>03_trim_reads.sh</code> (replace everything in between brackets <code>[]</code>) to run <code>fastp</code> to trim the data.  The quality of our dataset is not great, so we will overwrite the defaults.  Use a a minimum qualified base quality of 10, set the maximum percentage of unqalified bases to 80% and a minimum read length of 25. Note that a new directory called <code>~/workdir/results/trimmed/</code> is created to write the trimmed reads.</p>
 <div class="highlight"><span class="filename">03_trim_reads.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
-<span class="nv">TRIMMED_DIR</span><span class="o">=</span>~/workdir/trimmed_data
+<span class="nv">TRIMMED_DIR</span><span class="o">=</span>~/workdir/results/trimmed
 <span class="nv">READS_DIR</span><span class="o">=</span>~/workdir/reads
 
 mkdir<span class="w"> </span>-p<span class="w"> </span><span class="nv">$TRIMMED_DIR</span>
 
-cutadapt<span class="w"> </span><span class="se">\</span>
---adapter<span class="w"> </span>AGATCGGAAGAGCACACGTCTGAACTCCAGTCA<span class="w"> </span><span class="se">\</span>
--A<span class="w"> </span>AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT<span class="w"> </span><span class="se">\</span>
-<span class="o">[</span>QUALITY<span class="w"> </span>CUTOFF<span class="w"> </span>OPTION<span class="o">]</span><span class="w"> </span><span class="se">\</span>
-<span class="o">[</span>MINIMUM<span class="w"> </span>LENGTH<span class="w"> </span>OPTION<span class="o">]</span><span class="w"> </span><span class="se">\</span>
---output<span class="w"> </span><span class="nv">$TRIMMED_DIR</span>/paired_trimmed_SRR519926_1.fastq<span class="w"> </span><span class="se">\</span>
---paired-output<span class="w"> </span><span class="nv">$TRIMMED_DIR</span>/paired_trimmed_SRR519926_2.fastq<span class="w"> </span><span class="se">\</span>
-<span class="nv">$READS_DIR</span>/SRR519926_1.fastq<span class="w"> </span><span class="se">\</span>
-<span class="nv">$READS_DIR</span>/SRR519926_2.fastq
+<span class="nb">cd</span><span class="w"> </span><span class="nv">$TRIMMED_DIR</span>
+
+fastp<span class="w"> </span><span class="se">\</span>
+-i<span class="w"> </span><span class="nv">$READS_DIR</span>/SRR519926_1.fastq<span class="w"> </span><span class="se">\</span>
+-I<span class="w"> </span><span class="nv">$READS_DIR</span>/SRR519926_2.fastq<span class="w"> </span><span class="se">\</span>
+-o<span class="w"> </span><span class="nv">$TRIMMED_DIR</span>/trimmed_SRR519926_1.fastq<span class="w"> </span><span class="se">\</span>
+-O<span class="w"> </span><span class="nv">$TRIMMED_DIR</span>/trimmed_SRR519926_2.fastq<span class="w"> </span><span class="se">\</span>
+<span class="o">[</span>QUALIFIED<span class="w"> </span>BASE<span class="w"> </span>THRESHOLD<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+<span class="o">[</span>MINIMUM<span class="w"> </span>LENGTH<span class="w"> </span>THRESHOLD<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+<span class="o">[</span>UNQUALIFIED<span class="w"> </span>PERCENTAGE<span class="w"> </span>LIMIT<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+--cut_front<span class="w"> </span><span class="se">\</span>
+--cut_tail<span class="w"> </span><span class="se">\</span>
+--detect_adapter_for_pe
 </code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Additional options</p>
+<p>Note that we have set the options <code>--cut_front</code> and <code>--cut_tail</code> that will ensure low quality bases are trimmed in a sliding window from both the 5&rsquo; and 3&rsquo; ends. Also <code>--detect_adapter_for_pe</code> is set, which ensures that adapters are detected automatically for both R1 and R2. </p>
+</div>
 <details class="done">
 <summary>Answer</summary>
 <p>Your script (<code>~/workdir/scripts/03_trim_reads.sh</code>) should look like this:</p>
 <div class="highlight"><span class="filename">03_trim_reads.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
-<span class="nv">TRIMMED_DIR</span><span class="o">=</span>~/workdir/trimmed_data
+<span class="nv">TRIMMED_DIR</span><span class="o">=</span>~/workdir/results/trimmed
 <span class="nv">READS_DIR</span><span class="o">=</span>~/workdir/reads
 
 mkdir<span class="w"> </span>-p<span class="w"> </span><span class="nv">$TRIMMED_DIR</span>
 
-cutadapt<span class="w"> </span><span class="se">\</span>
---adapter<span class="w"> </span>AGATCGGAAGAGCACACGTCTGAACTCCAGTCA<span class="w"> </span><span class="se">\</span>
--A<span class="w"> </span>AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT<span class="w"> </span><span class="se">\</span>
---quality-cutoff<span class="w"> </span><span class="m">10</span>,10<span class="w"> </span><span class="se">\</span>
---minimum-length<span class="w"> </span><span class="m">25</span><span class="w"> </span><span class="se">\</span>
---output<span class="w"> </span><span class="nv">$TRIMMED_DIR</span>/paired_trimmed_SRR519926_1.fastq<span class="w"> </span><span class="se">\</span>
---paired-output<span class="w"> </span><span class="nv">$TRIMMED_DIR</span>/paired_trimmed_SRR519926_2.fastq<span class="w"> </span><span class="se">\</span>
-<span class="nv">$READS_DIR</span>/SRR519926_1.fastq<span class="w"> </span><span class="se">\</span>
-<span class="nv">$READS_DIR</span>/SRR519926_2.fastq
+<span class="nb">cd</span><span class="w"> </span><span class="nv">$TRIMMED_DIR</span>
+
+fastp<span class="w"> </span><span class="se">\</span>
+-i<span class="w"> </span><span class="nv">$READS_DIR</span>/SRR519926_1.fastq<span class="w"> </span><span class="se">\</span>
+-I<span class="w"> </span><span class="nv">$READS_DIR</span>/SRR519926_2.fastq<span class="w"> </span><span class="se">\</span>
+-o<span class="w"> </span><span class="nv">$TRIMMED_DIR</span>/trimmed_SRR519926_1.fastq<span class="w"> </span><span class="se">\</span>
+-O<span class="w"> </span><span class="nv">$TRIMMED_DIR</span>/trimmed_SRR519926_2.fastq<span class="w"> </span><span class="se">\</span>
+--qualified_quality_phred<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="se">\</span>
+--length_required<span class="w"> </span><span class="m">25</span><span class="w"> </span><span class="se">\</span>
+--unqualified_percent_limit<span class="w"> </span><span class="m">80</span><span class="w"> </span><span class="se">\</span>
+--cut_front<span class="w"> </span><span class="se">\</span>
+--cut_tail<span class="w"> </span><span class="se">\</span>
+--detect_adapter_for_pe
 </code></pre></div>
 </details>
 <div class="admonition note">
 <p class="admonition-title">The use of <code>\</code></p>
-<p>In the script above you see that we&rsquo;re using <code>\</code> at the end of many lines. We use it to tell bash to ignore the newlines. If we would not do it, the <code>cutadapt</code> command would become a very long line, and the script would become very difficult to read. It is in general good practice to put every option of a long command on a newline in your script and use <code>\</code> to ignore the newlines when executing.</p>
+<p>In the script above you see that we&rsquo;re using <code>\</code> at the end of many lines. We use it to tell bash to ignore the newlines. If we would not do it, the <code>fastp</code> command would become a very long line, and the script would become very difficult to read. It is in general good practice to put every option of a long command on a newline in your script and use <code>\</code> to ignore the newlines when executing.</p>
 </div>
-<p><strong>Exercise:</strong> Create a script to run <code>fastqc</code> on the trimmed fastq files called <code>04_run_fastqc_trimmed.sh</code>, and answer these questions:</p>
-<p><strong>A.</strong> Has the quality improved?</p>
-<p><strong>B.</strong> How many reads do we have left?</p>
+<p><strong>Exercise:</strong> Check out the report in <code>fastp.thml</code>. </p>
+<ul>
+<li>Has the quality improved?</li>
+<li>How many reads do we have left?</li>
+<li><em>Bonus</em>: Although there were adapters in R2 according to <code>fastqc</code>,  <code>fastp</code> has trouble finding adapters in R2. Also, after running <code>fastp</code> there doesn&rsquo;t seem to be much adapter left (you can double check by running <code>fastqc</code> on <code>trimmed_SRR519926_2.fastq</code>). How could that be? </li>
+</ul>
 <details class="done">
 <summary>Answers</summary>
-<p>Your script <code>04_run_fastqc_trimmed.sh</code> should look like:</p>
-<div class="highlight"><span class="filename">04_run_fastqc_trimmed.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
-
-<span class="nb">cd</span><span class="w"> </span>~/workdir/trimmed_data
-fastqc<span class="w"> </span>paired_trimmed*.fastq
-</code></pre></div>
-<p>A. Yes, low quality 3&rsquo; end, per sequence quality and adapter sequences have improved.</p>
-<p>B. 315904</p>
+<ul>
+<li>Yes, low quality 3&rsquo; end, per sequence quality and adapter sequences have improved. Also the percentages &gt;20 and &gt;30 are higher. </li>
+<li>624724 reads, so 312362 pairs (78.0%)</li>
+<li>The 3&rsquo; end of R2 has very low quality on average, this means that trimming for low quality removes almost all bases from the original 3&rsquo; end, including any adapter.  </li>
+</ul>
 </details>
 
 

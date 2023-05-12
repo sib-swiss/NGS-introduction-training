@@ -573,6 +573,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#hints" class="md-nav__link">
+    Hints
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -707,6 +714,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#hints" class="md-nav__link">
+    Hints
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -798,8 +812,6 @@
 <p>If the course takes place online, we will use break-out rooms to communicate within groups. Please stay in the break-out room during the day, also if you are working individually.</p>
 </div>
 <h2 id="material">Material</h2>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/t2yCLmLAi0A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
 <p><a class="md-button" href="../assets/pdf/group_work.pdf"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M64 0C28.7 0 0 28.7 0 64v384c0 35.3 28.7 64 64 64h256c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zm192 0v128h128L256 0zM64 224h24c30.9 0 56 25.1 56 56s-25.1 56-56 56h-8v32c0 8.8-7.2 16-16 16s-16-7.2-16-16V240c0-8.8 7.2-16 16-16zm24 80c13.3 0 24-10.7 24-24s-10.7-24-24-24h-8v48h8zm72-64c0-8.8 7.2-16 16-16h24c26.5 0 48 21.5 48 48v64c0 26.5-21.5 48-48 48h-24c-8.8 0-16-7.2-16-16V240zm32 112h8c8.8 0 16-7.2 16-16v-64c0-8.8-7.2-16-16-16h-8v96zm96-128h48c8.8 0 16 7.2 16 16s-7.2 16-16 16h-32v32h32c8.8 0 16 7.2 16 16s-7.2 16-16 16h-32v48c0 8.8-7.2 16-16 16s-16-7.2-16-16V240c0-8.8 7.2-16 16-16z"/></svg></span> Download the presentation</a></p>
 <h2 id="roles-organisation">Roles &amp; organisation</h2>
 <p>Project based learning is about learning by doing, but also about <em>peer instruction</em>. This means that you will be both a learner and a teacher. There will be differences in levels among participants, but because of that, some will learn efficiently from people that have just learned, and others will teach and increase their understanding.</p>
@@ -832,22 +844,38 @@ rm<span class="w"> </span>ngs-variants-training.tar.gz
 <ul>
 <li>Download the required data</li>
 <li>Do a QC on the data with <code>fastqc</code></li>
-<li>Trim adapters and low quality bases with <code>cutadapt</code> (the adapter sequences are the same as in the exercises).</li>
+<li>Trim adapters and low quality bases with <code>fastp</code>. Make sure to include the option <code>--detect_adapter_for_pe</code>. To prevent overwriting <code>fastp.html</code>, specify a report filename for each sample with the option <code>--html</code>. </li>
 <li>Create an index for bowtie2. At the same time create a fasta index (<code>.fai</code> file) with <code>samtools faidx</code>. </li>
 <li>Check which options to use, and align with <code>bowtie2</code>. At the same time add readgroups to the aligned reads (see hints below). Make sure you end up with an indexed and sorted bam file. </li>
 <li>Mark duplicates on the individual bam files with <code>gatk MarkDuplicates</code> (see hints below).</li>
 <li>Merge the three bam files with <code>samtools merge</code>. Index the bam file afterwards. </li>
-<li>Run <code>freebayes</code> to call variants</li>
+<li>Run <code>freebayes</code> to call variants. Only call variants on the region <code>chr20:10018000-10220000</code> by specifying the <code>-r</code> option. </li>
 <li>Load your alignments together with the vcf containing the variants in IGV. Check out e.g. <code>chr20:10,026,397-10,026,638</code>. </li>
+<li>Run <code>multiqc</code> to get an overall quality report.</li>
 </ul>
 <h3 id="questions">Questions</h3>
 <ul>
 <li>Have a look at the quality of the reads. Are there any adapters in there? Did adapter trimming change that? How is the base quality? Could you improve that?</li>
-<li>How many duplicates were in the different samples? Why is it important to remove them for variant analysis?</li>
+<li>How many duplicates were in the different samples (hint: use <code>samtools flagstat</code>)? Why is it important to remove them for variant analysis?</li>
 <li>Why did you add read groups to the bam files? Where is this information added in the bam file? </li>
 <li>Are there variants that look spurious? What could be the cause of that? What information in the vcf can you use to evaluate variant quality? </li>
 <li>There are two high quality variants in <code>chr20:10,026,397-10,026,638</code>. What are the genotypes of the three samples according to freebayes? Is this according to what you see in the alignments? If the alternative alleles are present in the same individual, are they in phase or in repulsion? </li>
 </ul>
+<h3 id="hints">Hints</h3>
+<p>You can add readgroups to the alignment file with <code>bowtie2</code> with the options <code>--rg-id</code> and <code>--rg</code>, e.g. (<code>$SAMPLE</code> is a variable containing a sample identifier):</p>
+<div class="highlight"><pre><span></span><code>bowtie2<span class="w"> </span><span class="se">\</span>
+-x<span class="w"> </span>ref.fa<span class="w"> </span><span class="se">\</span>
+-1<span class="w"> </span>r1.fastq.gz<span class="w"> </span><span class="se">\</span>
+-2<span class="w"> </span>r2.fastq.gz<span class="w"> </span><span class="se">\</span>
+--rg-id<span class="w"> </span><span class="nv">$SAMPLE</span><span class="w"> </span><span class="se">\</span>
+--rg<span class="w"> </span>SM:<span class="nv">$SAMPLE</span><span class="w"> </span><span class="se">\</span>
+</code></pre></div>
+<p>To run <code>gatk MarkDuplicates</code> you will only need to specify <code>--INPUT</code> and <code>--OUTPUT</code>, e.g.:</p>
+<div class="highlight"><pre><span></span><code>gatk<span class="w"> </span>MarkDuplicates<span class="w"> </span><span class="se">\</span>
+--INPUT<span class="w"> </span>sample.bam<span class="w"> </span><span class="se">\</span>
+--OUTPUT<span class="w"> </span>sample.md.bam<span class="w"> </span><span class="se">\</span>
+--METRICS_FILE<span class="w"> </span>sample.metrics.txt<span class="w"> </span>
+</code></pre></div>
 <h2 id="project-2-long-read-genome-sequencing"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M184 0c30.9 0 56 25.1 56 56v400c0 30.9-25.1 56-56 56-28.9 0-52.7-21.9-55.7-50.1-5.2 1.4-10.7 2.1-16.3 2.1-35.3 0-64-28.7-64-64 0-7.4 1.3-14.6 3.6-21.2C21.4 367.4 0 338.2 0 304c0-31.9 18.7-59.5 45.8-72.3C37.1 220.8 32 207 32 192c0-30.7 21.6-56.3 50.4-62.6C80.8 123.9 80 118 80 112c0-29.9 20.6-55.1 48.3-62.1 3-28 26.8-49.9 55.7-49.9zm144 0c28.9 0 52.6 21.9 55.7 49.9C411.5 56.9 432 82 432 112c0 6-.8 11.9-2.4 17.4 28.8 6.2 50.4 31.9 50.4 62.6 0 15-5.1 28.8-13.8 39.7 27.1 12.8 45.8 40.4 45.8 72.3 0 34.2-21.4 63.4-51.6 74.8 2.3 6.6 3.6 13.8 3.6 21.2 0 35.3-28.7 64-64 64-5.6 0-11.1-.7-16.3-2.1-3 28.2-26.8 50.1-55.7 50.1-30.9 0-56-25.1-56-56V56c0-30.9 25.1-56 56-56z"/></svg></span> Project 2: Long-read genome sequencing</h2>
 <p><strong>Aim</strong>: Align long reads from RNA-seq data to a reference genome.</p>
 <p>In this project, you will be working with data from:</p>
@@ -941,14 +969,14 @@ gunzip<span class="w"> </span>Mus_musculus.GRCm38.102.chr5.gtf.gz
 <ul>
 <li>Download the reads, reference and gtf file</li>
 <li>Do a QC on the data with <code>fastqc</code></li>
-<li>Trim adapters and low quality bases with <code>cutadapt</code> (the adapter sequences are the same as in the exercises).</li>
+<li>Trim adapters and low quality bases with <code>fastp</code></li>
 <li>Check which options to use, and align with <code>bowtie2</code></li>
 <li>Check which options to use, and align with <code>hisat2</code></li>
 <li>Evaluate the alignment quality (e.g. alignment rates, mapping quality)</li>
 <li>Compare the bam files of the two aligners in IGV. For this, you can use the built-in genome (<em>Mouse (mm10)</em>). For easy navigation, load the provided gtf file (<code>Mus_musculus.GRCm38.102.chr5.gtf</code>) as a track</li>
 <li>Compare different samples in read quality, alignment rates, depth, etc.</li>
 <li>Run <code>featureCounts</code> on both alignments. Have a look at the option <code>-Q</code>.</li>
-<li>Compare the count matrices in <code>R</code> or <code>python</code> (Rstudio server is running on the same machine. Approach it with your credentials and username <code>rstudio</code>)</li>
+<li>Compare the count matrices in <code>R</code> (Rstudio server is running on the same machine. Approach it with your credentials and username <code>rstudio</code>)</li>
 </ul>
 <h3 id="questions_2">Questions</h3>
 <ul>

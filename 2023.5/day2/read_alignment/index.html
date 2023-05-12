@@ -724,16 +724,16 @@ bowtie2-build<span class="w"> </span>ecoli-strK12-MG1655.fasta<span class="w"> <
 <p><strong>Exercise:</strong> Try to understand what the script below does. After that copy it to a script called <code>07_align_reads.sh</code>, and run it.</p>
 <div class="highlight"><span class="filename">07_align_reads.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
-<span class="nv">TRIMMED_DIR</span><span class="o">=</span>~/workdir/trimmed_data
+<span class="nv">TRIMMED_DIR</span><span class="o">=</span>~/workdir/results/trimmed
 <span class="nv">REFERENCE_DIR</span><span class="o">=</span>~/workdir/ref_genome/
-<span class="nv">ALIGNED_DIR</span><span class="o">=</span>~/workdir/alignment_output
+<span class="nv">ALIGNED_DIR</span><span class="o">=</span>~/workdir/results/alignments
 
 mkdir<span class="w"> </span>-p<span class="w"> </span><span class="nv">$ALIGNED_DIR</span>
 
 bowtie2<span class="w"> </span><span class="se">\</span>
 -x<span class="w"> </span><span class="nv">$REFERENCE_DIR</span>/ecoli-strK12-MG1655.fasta<span class="w"> </span><span class="se">\</span>
--1<span class="w"> </span><span class="nv">$TRIMMED_DIR</span>/paired_trimmed_SRR519926_1.fastq<span class="w"> </span><span class="se">\</span>
--2<span class="w"> </span><span class="nv">$TRIMMED_DIR</span>/paired_trimmed_SRR519926_2.fastq<span class="w"> </span><span class="se">\</span>
+-1<span class="w"> </span><span class="nv">$TRIMMED_DIR</span>/trimmed_SRR519926_1.fastq<span class="w"> </span><span class="se">\</span>
+-2<span class="w"> </span><span class="nv">$TRIMMED_DIR</span>/trimmed_SRR519926_2.fastq<span class="w"> </span><span class="se">\</span>
 &gt;<span class="w"> </span><span class="nv">$ALIGNED_DIR</span>/SRR519926.sam
 </code></pre></div>
 <p>We&rsquo;ll go deeper into alignment statistics later on, but <code>bowtie2</code> writes already some statistics to stdout. General alignment rates seem okay, but there are quite some non-concordant alignments. That doesn&rsquo;t sound good. Check out the explanation about concordance at the <a href="http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#concordant-pairs-match-pair-expectations-discordant-pairs-dont">bowtie2 manual</a>. Can you guess what the reason could be?</p>
