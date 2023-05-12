@@ -206,14 +206,14 @@ gunzip Mus_musculus.GRCm38.102.chr5.gtf.gz
 
 * Download the reads, reference and gtf file
 * Do a QC on the data with `fastqc`
-* Trim adapters and low quality bases with `cutadapt` (the adapter sequences are the same as in the exercises).
+* Trim adapters and low quality bases with `fastp`
 * Check which options to use, and align with `bowtie2`
 * Check which options to use, and align with `hisat2`
 * Evaluate the alignment quality (e.g. alignment rates, mapping quality)
 * Compare the bam files of the two aligners in IGV. For this, you can use the built-in genome (*Mouse (mm10)*). For easy navigation, load the provided gtf file (`Mus_musculus.GRCm38.102.chr5.gtf`) as a track
 * Compare different samples in read quality, alignment rates, depth, etc.
 * Run `featureCounts` on both alignments. Have a look at the option `-Q`.
-* Compare the count matrices in `R` or `python` (Rstudio server is running on the same machine. Approach it with your credentials and username `rstudio`)
+* Compare the count matrices in `R` (Rstudio server is running on the same machine. Approach it with your credentials and username `rstudio`)
 
 ### Questions
 
