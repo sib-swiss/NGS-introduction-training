@@ -44,9 +44,9 @@ In this project you will be working with Illumina reads from three samples: a fa
 You can get the data by running these commands:
 
 ```sh
-wget https://ngs-variants-training.s3.eu-central-1.amazonaws.com/ngs-variants-training.tar.gz
-tar -xvf ngs-variants-training.tar.gz
-rm ngs-variants-training.tar.gz
+wget https://ngs-introduction-training.s3.eu-central-1.amazonaws.com/project1.tar.gz
+tar -xvf project1.tar.gz
+rm project1.tar.gz
 ```
 
 ### Tasks
@@ -172,31 +172,18 @@ wget ftp://ftp.ensembl.org/pub/release-101/fasta/homo_sapiens/dna/Homo_sapiens.G
 
 ## :fontawesome-solid-disease: Project 3: Short-read RNA-seq of mice.
 
-**Aim:** Compare `hisat2` (splice-aware) with `bowtie2` (splice unaware) while aligning a mouse RNA-seq dataset.
+**Aim:** Generate a count matrix to estimate differential gene expression. 
 
 In this project you will be working with data from:
 
 Singhania A, Graham CM, Gabryšová L, Moreira-Teixeira L, Stavropoulos E, Pitt JM, et al (2019). *Transcriptional profiling unveils type I and II interferon networks in blood and tissues across diseases*. Nat Commun. 10:1–21. [https://doi.org/10.1038/s41467-019-10601-6](https://doi.org/10.1038/s41467-019-10601-6)
 
-Here's the [BioProject page](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA490485). We'll be working with a single sample of this project found [here](https://www.ncbi.nlm.nih.gov/sra/?term=SRR7822040). Since the mouse genome is rather large, we have prepared reads for you that originate from chromosome 5. Use those for the project. Download them like this:
+Here's the [BioProject page](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA490485). Since the mouse genome is rather large, we have prepared reads for you that originate from chromosome 5. Use those for the project. Download them like this:
 
 ```sh
-wget https://ngs-introduction-training.s3.eu-central-1.amazonaws.com/project3/SRR7822040.chr5_R1.fastq.gz
-wget https://ngs-introduction-training.s3.eu-central-1.amazonaws.com/project3/SRR7822040.chr5_R2.fastq.gz
-```
-
-Download the mouse reference of chromosome 5 like this:
-
-```sh
-wget https://ngs-introduction-training.s3.eu-central-1.amazonaws.com/project3/Mus_musculus.GRCm38.dna.primary_assembly.chr5.fa.gz
-gunzip Mus_musculus.GRCm38.dna.primary_assembly.chr5.fa.gz
-```
-
-And download the gtf file for chromosome 5 like this:
-
-```sh
-wget https://ngs-introduction-training.s3.eu-central-1.amazonaws.com/project3/Mus_musculus.GRCm38.102.chr5.gtf.gz
-gunzip Mus_musculus.GRCm38.102.chr5.gtf.gz
+wget https://ngs-introduction-training.s3.eu-central-1.amazonaws.com/project3.tar.gz
+tar -xvf project3.tar.gz
+rm project3.tar.gz
 ```
 
 ### Tasks
@@ -204,16 +191,14 @@ gunzip Mus_musculus.GRCm38.102.chr5.gtf.gz
 !!! warning "Important!"
     **Stick to the principles for reproducible analysis** described [here](day1/reproducibility.md)
 
-* Download the reads, reference and gtf file
-* Do a QC on the data with `fastqc`
+* Download the tar file, and find out what's in the data folder
+* Do a QC on the fastq files with `fastqc`
 * Trim adapters and low quality bases with `fastp`
-* Check which options to use, and align with `bowtie2`
 * Check which options to use, and align with `hisat2`
 * Evaluate the alignment quality (e.g. alignment rates, mapping quality)
-* Compare the bam files of the two aligners in IGV. For this, you can use the built-in genome (*Mouse (mm10)*). For easy navigation, load the provided gtf file (`Mus_musculus.GRCm38.102.chr5.gtf`) as a track
-* Compare different samples in read quality, alignment rates, depth, etc.
-* Run `featureCounts` on both alignments. Have a look at the option `-Q`.
-* Compare the count matrices in `R` (Rstudio server is running on the same machine. Approach it with your credentials and username `rstudio`)
+* Have a look at the alignments in IGV, e.g. check out `Sparcl1`. For this, you can use the built-in genome (*Mouse (mm10)*). Do you see any evidence for differential splicing?
+* Run `featureCounts` on both alignments. Have a look at the option `-Q`, and make sure you specify `-g Name`. For further suggestions, see the hints below. 
+* Compare the count matrices in `R` (find a script to get started [here](https://github.com/sib-swiss/NGS-introduction-training/blob/main/scripts/project3/07_run_DESeq2.R); Rstudio server is running on the same machine. Approach it with your credentials and username `rstudio`)
 
 ### Questions
 
@@ -226,55 +211,46 @@ gunzip Mus_musculus.GRCm38.102.chr5.gtf.gz
 * What would be the effect of the aligner if you would be measuring gene expression? (To investigate this you'll need to run [featureCounts](http://subread.sourceforge.net/featureCounts.html)).
 * What is the effect of setting the option `-Q` in `featureCounts` on the comparison between the aligners?
 
-!!! hint "Run your processes on multiple cores!"
-    We are now doing computations on a full genome, with full transcriptomic data. This is quite a bit more than we have used during the exercises. Therefore, computations take longer. However, most tools support parallel processing, in which you can specify how many cores you want to use to run in parallel. Your environment contains **four** cores, so this is also the maximum number of processes you can specify. Below you can find the options used in each command to specify multi-core processing.
+### Hints
 
-    | command       	| option    	|
-    |---------------	|-----------	|
-    | `bowtie2-build` 	| `--threads` 	|
-    | `hisat2-build`  	| `--threads` 	|
-    | `fastqc`       	| `--threads` 	|
-    | `cutadapt`      	| `--cores`   	|
-    | `bowtie2`       	| `--threads` 	|
-    | `hisat2`        	| `--threads` 	|
-    | `featureCounts`  	| `-T`        	|
+We are now doing computations on a full genome, with full transcriptomic data. This is quite a bit more than we have used during the exercises. Therefore, computations take longer. However, most tools support parallel processing, in which you can specify how many cores you want to use to run in parallel. Your environment contains **four** cores, so this is also the maximum number of processes you can specify. Below you can find the options used in each command to specify multi-core processing.
 
-!!! hint "Example code `hisat2` and `featureCounts`"
-    Everything in between `<>` should be replaced with specific arguments.
+| command       	| option    	|
+|---------------	|-----------	|
+| `bowtie2-build` 	| `--threads` 	|
+| `hisat2-build`  	| `--threads` 	|
+| `fastqc`       	| `--threads` 	|
+| `cutadapt`      	| `--cores`   	|
+| `bowtie2`       	| `--threads` 	|
+| `hisat2`        	| `--threads` 	|
+| `featureCounts`  	| `-T`        	|
 
-    Here's an example for `hisat2`:
+Here's some example code for `hisat2` and `featureCounts`. Everything in between `<>` should be replaced with specific arguments.
 
-    ```sh
-    hisat2-build <reference_sequence_fasta> <index_basename>
+Here's an example for `hisat2`:
 
-    hisat2 \
-    -x <index_basename> \
-    -1 <foward_reads.fastq.gz> \
-    -2 <reverse_reads.fastq.gz> \
-    -p <threads> \
-    | samtools sort \
-    | samtools view -bh \
-    > <alignment_file.bam>
-    ```
+```sh
+hisat2-build <reference_sequence_fasta> <index_basename>
 
-    Example code `featureCounts`:
+hisat2 \
+-x <index_basename> \
+-1 <foward_reads.fastq.gz> \
+-2 <reverse_reads.fastq.gz> \
+-p <threads> \
+| samtools sort \
+| samtools view -bh \
+> <alignment_file.bam>
+```
 
-    ```sh
-    featureCounts \
-    -p \
-    -T 2 \
-    -a <annotations.gtf> \
-    -o <output.counts.txt> \
-    <bowtie2_alignment.bam> <hisat2_alignment.bam>
-    ```
+Example code `featureCounts`:
 
-!!! hint "Spliced alignments"
-    Have a look at IGV on a particular gene, e.g. Pisd
+```sh
+featureCounts \
+-p \
+-T 2 \
+-g Name \
+-a <annotations.gtf> \
+-o <output.counts.txt> \
+<bowtie2_alignment.bam> <hisat2_alignment.bam>
+```
 
-!!! hint "Reading in the count data in R"
-    You can read in the count data table, and compare the log2 counts of the two aligners like this:
-
-    ```r
-    cts <- read.delim('project_work/project3/counts/counts.txt', comment.char = '#')
-    plot(log2(cts$..alignments.SRR7822040.chr5.bt2.bam), log2(cts$..alignments.SRR7822040.chr5.hs2.bam))
-    ```
