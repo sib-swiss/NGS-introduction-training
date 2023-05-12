@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
-WORKDIR=/config/workdir/project1
+WORKDIR=/config/workdir/projects/project1
 REFDIR="$WORKDIR"/data/reference/
-ALIGNDIR="$WORKDIR"/data/alignments/
-VCFDIR="$WORKDIR"/data/variants
+ALIGNDIR="$WORKDIR"/alignments/
+VCFDIR="$WORKDIR"/variants
+
+mkdir -p "$VCFDIR"
 
 samtools faidx "$REFDIR"/Homo_sapiens.GRCh38.dna.chromosome.20.fa
 

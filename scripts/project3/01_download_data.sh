@@ -1,3 +1,9 @@
+#!/usr/bin/env bash
 
-wget ftp://ftp.ensembl.org/pub/release-102/fasta/mus_musculus/dna/Mus_musculus.GRCm38.dna.chromosome.5.fa.gz
-gunzip Mus_musculus.GRCm38.dna.chromosome.5.fa.gz
+WORKDIR=/config/workdir/projects/project3
+mkdir -p "$WORKDIR"
+cd "$WORKDIR"
+
+wget https://ngs-introduction-training.s3.eu-central-1.amazonaws.com/project3.tar.gz
+tar -xvf project3.tar.gz
+rm project3.tar.gz

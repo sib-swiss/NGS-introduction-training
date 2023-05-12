@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-WORKDIR=/config/workdir/project1
+WORKDIR=/config/workdir/projects/project1
 REFDIR="$WORKDIR"/data/reference/
 FASTQDIR="$WORKDIR"/data/fastq/
-ALIGNDIR="$WORKDIR"/data/alignments/
+ALIGNDIR="$WORKDIR"/alignments/
 
 mkdir -p "$ALIGNDIR"
 

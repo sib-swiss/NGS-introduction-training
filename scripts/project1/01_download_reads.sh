@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-WORKDIR=/config/workdir/project1
+WORKDIR=/config/workdir/projects/project1
 mkdir -p "$WORKDIR"
 cd "$WORKDIR"
 
-wget https://ngs-variants-training.s3.eu-central-1.amazonaws.com/ngs-variants-training.tar.gz
-tar -xvf ngs-variants-training.tar.gz
-rm ngs-variants-training.tar.gz
+wget https://ngs-introduction-training.s3.eu-central-1.amazonaws.com/project1.tar.gz
+tar -xvf project1.tar.gz
+rm project1.tar.gz
