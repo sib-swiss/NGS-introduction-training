@@ -775,11 +775,13 @@ fastqc<span class="w"> </span>*.fastq
 </details>
 <h3 id="trim-the-reads">Trim the reads</h3>
 <p>We will use <a href="https://github.com/OpenGene/fastp">fastp</a> for trimming adapters and low quality bases from our reads. The most used adapters for Illumina are TruSeq adapters, and <code>fastp</code> will use those by default. A reference for the adapter sequences can be found <a href="https://support.illumina.com/bulletins/2016/12/what-sequences-do-i-use-for-adapter-trimming.html">here</a>.</p>
-<p><strong>Exercise:</strong> Check out the <a href="https://github.com/OpenGene/fastp">documentation of fastp</a>, and the option defaults by running <code>fastp --help</code>. 
-- What is the default for the minimum base quality for a qualified base? ( option <code>--qualified_quality_phred</code>)
-- What is the default for the maximum percentage of unqualified bases in a read? (option <code>--unqualified_percent_limit</code>)
-- What is the default for the minimum required read length? (option <code>--length_required</code>)
-- What happens if one read in the pair does not meet the required length after trimming? (it can be specified with the options <code>--unpaired1</code> and <code>--unpaired2</code>)</p>
+<p><strong>Exercise:</strong> Check out the <a href="https://github.com/OpenGene/fastp">documentation of fastp</a>, and the option defaults by running <code>fastp --help</code>. </p>
+<ul>
+<li>What is the default for the minimum base quality for a qualified base? ( option <code>--qualified_quality_phred</code>)</li>
+<li>What is the default for the maximum percentage of unqualified bases in a read? (option <code>--unqualified_percent_limit</code>)</li>
+<li>What is the default for the minimum required read length? (option <code>--length_required</code>)</li>
+<li>What happens if one read in the pair does not meet the required length after trimming? (it can be specified with the options <code>--unpaired1</code> and <code>--unpaired2</code>)</li>
+</ul>
 <details class="done">
 <summary>Answer</summary>
 <ul>
