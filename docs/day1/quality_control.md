@@ -184,7 +184,7 @@ fastp \
 !!! note "The use of `\`"
     In the script above you see that we're using `\` at the end of many lines. We use it to tell bash to ignore the newlines. If we would not do it, the `fastp` command would become a very long line, and the script would become very difficult to read. It is in general good practice to put every option of a long command on a newline in your script and use `\` to ignore the newlines when executing.
 
-**Exercise:** Check out the report in `fastp.thml`. 
+**Exercise:** Check out the report in `fastp.html`. 
 
 - Has the quality improved?
 - How many reads do we have left?
