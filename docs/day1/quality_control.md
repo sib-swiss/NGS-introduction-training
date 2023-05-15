@@ -115,6 +115,7 @@ fastq-dump --split-files SRR519926
 We will use [fastp](https://github.com/OpenGene/fastp) for trimming adapters and low quality bases from our reads. The most used adapters for Illumina are TruSeq adapters, and `fastp` will use those by default. A reference for the adapter sequences can be found [here](https://support.illumina.com/bulletins/2016/12/what-sequences-do-i-use-for-adapter-trimming.html).
 
 **Exercise:** Check out the [documentation of fastp](https://github.com/OpenGene/fastp), and the option defaults by running `fastp --help`. 
+
 - What is the default for the minimum base quality for a qualified base? ( option `--qualified_quality_phred`)
 - What is the default for the maximum percentage of unqualified bases in a read? (option `--unqualified_percent_limit`)
 - What is the default for the minimum required read length? (option `--length_required`)
