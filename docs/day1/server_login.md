@@ -121,37 +121,40 @@
     === "Windows/MacOS"
 
         ```sh
-        conda create -n ngs-introduction python=3.8
+        conda create -n ngs-tools
 
-        conda activate ngs-introduction
+        conda activate ngs-tools
 
         conda install -y -c bioconda \
-        samtools \
-        bwa \
-        fastqc \
-        sra-tools \
-        cutadapt \
-        bowtie2 \
-        hisat2 \
-        subread \
-        entrez-direct \
-        minimap2
+            samtools \
+            bwa \
+            fastqc \
+            sra-tools \
+            bowtie2=2.4.2 \
+            hisat2=2.2.1 \
+            subread=2.0.1 \
+            entrez-direct \
+            minimap2 \
+            gatk4 \
+            freebayes \
+            multiqc \
+            fastp
         ```
     === "Linux"
-        Download [ngs-introduction.yml](../assets/yaml/ngs-introduction.yml), and generate the conda environment like this:
+        Download [ngs-tools.yml](../assets/yaml/ngs-tools.yml), and generate the conda environment like this:
 
         ```sh
-        conda env create --name ngs-introduction -f ngs-introduction.yml
+        conda env create --name ngs-tools -f ngs-tools.yml
         ```
         !!! note 
             If that did not succeed, follow the instructions for Windows/MacOS.
 
-    This will create the conda environment `ngs-introduction`
+    This will create the conda environment `ngs-tools`
 
     Activate it like so:
 
     ```sh
-    conda activate ngs-introduction
+    conda activate ngs-tools
     ```
 
     After successful installation and activating the environment all the software required to do the exercises should be available.
