@@ -903,26 +903,29 @@ geertvangeest/ngs-introduction-vscode:latest
 <div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Windows/MacOS</label><label for="__tabbed_3_2">Linux</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>ngs-introduction<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.8
+<div class="highlight"><pre><span></span><code>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>ngs-tools
 
-conda<span class="w"> </span>activate<span class="w"> </span>ngs-introduction
+conda<span class="w"> </span>activate<span class="w"> </span>ngs-tools
 
 conda<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>-c<span class="w"> </span>bioconda<span class="w"> </span><span class="se">\</span>
-samtools<span class="w"> </span><span class="se">\</span>
-bwa<span class="w"> </span><span class="se">\</span>
-fastqc<span class="w"> </span><span class="se">\</span>
-sra-tools<span class="w"> </span><span class="se">\</span>
-cutadapt<span class="w"> </span><span class="se">\</span>
-bowtie2<span class="w"> </span><span class="se">\</span>
-hisat2<span class="w"> </span><span class="se">\</span>
-subread<span class="w"> </span><span class="se">\</span>
-entrez-direct<span class="w"> </span><span class="se">\</span>
-minimap2
+<span class="w">    </span>samtools<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>bwa<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>fastqc<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>sra-tools<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">bowtie2</span><span class="o">=</span><span class="m">2</span>.4.2<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">hisat2</span><span class="o">=</span><span class="m">2</span>.2.1<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">subread</span><span class="o">=</span><span class="m">2</span>.0.1<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>entrez-direct<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>minimap2<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>gatk4<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>freebayes<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>multiqc<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>fastp
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<p>Download <a href="../../assets/yaml/ngs-introduction.yml">ngs-introduction.yml</a>, and generate the conda environment like this:</p>
-<div class="highlight"><pre><span></span><code>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>ngs-introduction<span class="w"> </span>-f<span class="w"> </span>ngs-introduction.yml
+<p>Download <a href="../../assets/yaml/ngs-tools.yml">ngs-tools.yml</a>, and generate the conda environment like this:</p>
+<div class="highlight"><pre><span></span><code>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>ngs-tools<span class="w"> </span>-f<span class="w"> </span>ngs-tools.yml
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -931,9 +934,9 @@ minimap2
 </div>
 </div>
 </div>
-<p>This will create the conda environment <code>ngs-introduction</code></p>
+<p>This will create the conda environment <code>ngs-tools</code></p>
 <p>Activate it like so:</p>
-<div class="highlight"><pre><span></span><code>conda<span class="w"> </span>activate<span class="w"> </span>ngs-introduction
+<div class="highlight"><pre><span></span><code>conda<span class="w"> </span>activate<span class="w"> </span>ngs-tools
 </code></pre></div>
 <p>After successful installation and activating the environment all the software required to do the exercises should be available.</p>
 <div class="admonition note">
