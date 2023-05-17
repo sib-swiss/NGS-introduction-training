@@ -206,10 +206,9 @@ rm project3.tar.gz
 * How does the quality of the reads look? Anything special about the overrepresented sequences? (Hint: [blast](https://blast.ncbi.nlm.nih.gov/) some overrepresented sequences, and see what they are)
 * Did trimming improve the QC results? What could be the cause of the warnings/errors in the `fastqc` reports?
 * What are the alignment rates?
-* How do the aligners handle splicing?
 * How are spliced alignments stored in the SAM file?
-* What would be the effect of the aligner if you would be measuring gene expression? (To investigate this you'll need to run [featureCounts](http://subread.sourceforge.net/featureCounts.html)).
-* What is the effect of setting the option `-Q` in `featureCounts` on the comparison between the aligners?
+* Can you find any genes that seem to be differentially expressed? (To investigate this you'll need to run [featureCounts](http://subread.sourceforge.net/featureCounts.html)).
+* What is the effect of setting the option `-Q` in `featureCounts`?
 
 ### Hints
 
@@ -251,6 +250,6 @@ featureCounts \
 -g Name \
 -a <annotations.gtf> \
 -o <output.counts.txt> \
-<bowtie2_alignment.bam> <hisat2_alignment.bam>
+*.bam
 ```
 
