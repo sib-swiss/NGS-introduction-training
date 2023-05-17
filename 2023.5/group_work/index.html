@@ -989,10 +989,9 @@ rm<span class="w"> </span>project3.tar.gz
 <li>How does the quality of the reads look? Anything special about the overrepresented sequences? (Hint: <a href="https://blast.ncbi.nlm.nih.gov/">blast</a> some overrepresented sequences, and see what they are)</li>
 <li>Did trimming improve the QC results? What could be the cause of the warnings/errors in the <code>fastqc</code> reports?</li>
 <li>What are the alignment rates?</li>
-<li>How do the aligners handle splicing?</li>
 <li>How are spliced alignments stored in the SAM file?</li>
-<li>What would be the effect of the aligner if you would be measuring gene expression? (To investigate this you&rsquo;ll need to run <a href="http://subread.sourceforge.net/featureCounts.html">featureCounts</a>).</li>
-<li>What is the effect of setting the option <code>-Q</code> in <code>featureCounts</code> on the comparison between the aligners?</li>
+<li>Can you find any genes that seem to be differentially expressed? (To investigate this you&rsquo;ll need to run <a href="http://subread.sourceforge.net/featureCounts.html">featureCounts</a>).</li>
+<li>What is the effect of setting the option <code>-Q</code> in <code>featureCounts</code>?</li>
 </ul>
 <h3 id="hints_1">Hints</h3>
 <p>We are now doing computations on a full genome, with full transcriptomic data. This is quite a bit more than we have used during the exercises. Therefore, computations take longer. However, most tools support parallel processing, in which you can specify how many cores you want to use to run in parallel. Your environment contains <strong>four</strong> cores, so this is also the maximum number of processes you can specify. Below you can find the options used in each command to specify multi-core processing.</p>
@@ -1054,7 +1053,7 @@ hisat2<span class="w"> </span><span class="se">\</span>
 -g<span class="w"> </span>Name<span class="w"> </span><span class="se">\</span>
 -a<span class="w"> </span>&lt;annotations.gtf&gt;<span class="w"> </span><span class="se">\</span>
 -o<span class="w"> </span>&lt;output.counts.txt&gt;<span class="w"> </span><span class="se">\</span>
-&lt;bowtie2_alignment.bam&gt;<span class="w"> </span>&lt;hisat2_alignment.bam&gt;
+*.bam
 </code></pre></div>
 
 
