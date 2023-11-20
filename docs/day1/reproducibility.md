@@ -21,7 +21,7 @@ During today and tomorrow we will work with a small *E. coli* dataset to practic
 
 By adhering to these simple principles it will be relatively straightforward to re-do your analysis steps only based on the scripts, and will get you started to adhere to the [Ten Simple Rules for Reproducible Computational Research](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003285). 
 
-By the end of day 2 `~/workdir` should look (something) like this:
+By the end of day 2 `~/project` should look (something) like this:
 
 ```
 .

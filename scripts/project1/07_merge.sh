@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-WORKDIR=/config/workdir/projects/project1
+PROJDIR=/config/project/projects/project1
 
-cd "$WORKDIR"/alignments/
+cd "$PROJDIR"/alignments/
 
 samtools merge -o merged.bam mother.md.bam father.md.bam son.md.bam
 

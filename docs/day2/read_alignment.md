@@ -26,7 +26,7 @@ Make a script called `05_download_ecoli_reference.sh`, and paste in the code sni
 ```sh title="05_download_ecoli_reference.sh"
 #!/usr/bin/env bash
 
-REFERENCE_DIR=~/workdir/ref_genome/
+REFERENCE_DIR=~/project/ref_genome/
 
 mkdir $REFERENCE_DIR
 cd $REFERENCE_DIR
@@ -41,7 +41,7 @@ esearch -db nuccore -query 'U00096' \
     ```sh title="06_build_bowtie_index.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir/ref_genome
+    cd ~/project/ref_genome
 
     bowtie2-build ecoli-strK12-MG1655.fasta ecoli-strK12-MG1655.fasta
     ```
@@ -66,9 +66,9 @@ esearch -db nuccore -query 'U00096' \
 ```sh title="07_align_reads.sh"
 #!/usr/bin/env bash
 
-TRIMMED_DIR=~/workdir/results/trimmed
-REFERENCE_DIR=~/workdir/ref_genome/
-ALIGNED_DIR=~/workdir/results/alignments
+TRIMMED_DIR=~/project/results/trimmed
+REFERENCE_DIR=~/project/ref_genome/
+ALIGNED_DIR=~/project/results/alignments
 
 mkdir -p $ALIGNED_DIR
 

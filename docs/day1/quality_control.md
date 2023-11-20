@@ -47,12 +47,12 @@ Now we will use some bioinformatics tools to do download reads and perform quali
 conda activate ngs-tools
 ```
 
-Make a directory `reads` in `~/workdir` and download the reads from the SRA database using `prefetch` and `fastq-dump` from [SRA-Tools](https://ncbi.github.io/sra-tools/) into the `reads` directory. Use the code snippet below to create a scripts called `01_download_reads.sh`. Store it in `~/workdir/scripts/`, and run it.
+Make a directory `reads` in `~/project` and download the reads from the SRA database using `prefetch` and `fastq-dump` from [SRA-Tools](https://ncbi.github.io/sra-tools/) into the `reads` directory. Use the code snippet below to create a scripts called `01_download_reads.sh`. Store it in `~/project/scripts/`, and run it.
 
 ```sh title="01_download_reads.sh"
 #!/usr/bin/env bash
 
-cd ~/workdir
+cd ~/project
 mkdir reads
 cd reads
 prefetch SRR519926
@@ -83,11 +83,11 @@ fastq-dump --split-files SRR519926
     `fastqc` accepts multiple files as input, so you can use a [wildcard](https://en.wikipedia.org/wiki/Glob_(programming)) to run `fastqc` on all the files in one line of code. Use it like this: `*.fastq`.  
 
 ??? done "Answer"
-    Your script `~/workdir/scripts/02_run_fastqc.sh` should look like:
+    Your script `~/project/scripts/02_run_fastqc.sh` should look like:
 
     ```sh title="02_run_fastqc.sh"
     #!/usr/bin/env bash
-    cd ~/workdir/reads
+    cd ~/project/reads
 
     fastqc *.fastq
     ```
@@ -127,13 +127,13 @@ We will use [fastp](https://github.com/OpenGene/fastp) for trimming adapters and
     - The minimum required length is also 15: `reads shorter than length_required will be discarded, default is 15. (int [=15])`
     - If one of the reads does not meet the required length, the pair is discarded if `--unpaired1` and/or `--unpaired2` are not specified: `for PE input, if read1 passed QC but read2 not, it will be written to unpaired1. Default is to discard it. (string [=])`. 
 
-**Exercise:** Complete the script below called `03_trim_reads.sh` (replace everything in between brackets `[]`) to run `fastp` to trim the data.  The quality of our dataset is not great, so we will overwrite the defaults.  Use a a minimum qualified base quality of 10, set the maximum percentage of unqalified bases to 80% and a minimum read length of 25. Note that a new directory called `~/workdir/results/trimmed/` is created to write the trimmed reads.
+**Exercise:** Complete the script below called `03_trim_reads.sh` (replace everything in between brackets `[]`) to run `fastp` to trim the data.  The quality of our dataset is not great, so we will overwrite the defaults.  Use a a minimum qualified base quality of 10, set the maximum percentage of unqalified bases to 80% and a minimum read length of 25. Note that a new directory called `~/project/results/trimmed/` is created to write the trimmed reads.
 
 ```sh title="03_trim_reads.sh"
 #!/usr/bin/env bash
 
-TRIMMED_DIR=~/workdir/results/trimmed
-READS_DIR=~/workdir/reads
+TRIMMED_DIR=~/project/results/trimmed
+READS_DIR=~/project/reads
 
 mkdir -p $TRIMMED_DIR
 
@@ -156,13 +156,13 @@ fastp \
     Note that we have set the options `--cut_front` and `--cut_tail` that will ensure low quality bases are trimmed in a sliding window from both the 5' and 3' ends. Also `--detect_adapter_for_pe` is set, which ensures that adapters are detected automatically for both R1 and R2. 
 
 ??? done "Answer"
-    Your script (`~/workdir/scripts/03_trim_reads.sh`) should look like this:
+    Your script (`~/project/scripts/03_trim_reads.sh`) should look like this:
 
     ```sh title="03_trim_reads.sh"
     #!/usr/bin/env bash
 
-    TRIMMED_DIR=~/workdir/results/trimmed
-    READS_DIR=~/workdir/reads
+    TRIMMED_DIR=~/project/results/trimmed
+    READS_DIR=~/project/reads
 
     mkdir -p $TRIMMED_DIR
 

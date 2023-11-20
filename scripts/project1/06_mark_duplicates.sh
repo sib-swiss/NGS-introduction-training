@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-WORKDIR=/config/workdir/projects/project1
-REFDIR="$WORKDIR"/data/reference/
-FASTQDIR="$WORKDIR"/data/fastq/
-ALIGNDIR="$WORKDIR"/alignments/
+PROJDIR=/config/project/projects/project1
+REFDIR="$PROJDIR"/data/reference/
+FASTQDIR="$PROJDIR"/data/fastq/
+ALIGNDIR="$PROJDIR"/alignments/
 
 mkdir -p "$ALIGNDIR"
 
@@ -15,7 +15,7 @@ do
     --INPUT "$ALIGNDIR"/"$SAMPLE".bam \
     --OUTPUT "$ALIGNDIR"/"$SAMPLE".md.bam \
     --METRICS_FILE "$ALIGNDIR"/"$SAMPLE".metrics.txt \
-    2> "$WORKDIR"/log/markdup_"$SAMPLE".log
+    2> "$PROJDIR"/log/markdup_"$SAMPLE".log
 
     samtools index "$ALIGNDIR"/"$SAMPLE".md.bam
 done 

@@ -80,14 +80,14 @@
     -p 8443:8443 \
     -e PUID=1000 \
     -e PGID=1000 \
-    -e DEFAULT_WORKSPACE=/config/workdir \
-    -v $PWD:/config/workdir \
+    -e DEFAULT_WORKSPACE=/config/project \
+    -v $PWD:/config/project \
     geertvangeest/ngs-introduction-vscode:latest
     ```
 
     If this command has run successfully, navigate in your browser to [http://localhost:8443](http://localhost:8443).
 
-    The option `-v` mounts a local directory in your computer to the directory `/config/workdir` in the docker container. In that way, you have files available both in the container and on your computer. Use this directory on your computer to e.g. visualise data with IGV. Change the first path to a path on your computer that you want to use as a working directory.
+    The option `-v` mounts a local directory in your computer to the directory `/config/project` in the docker container. In that way, you have files available both in the container and on your computer. Use this directory on your computer to e.g. visualise data with IGV. Change the first path to a path on your computer that you want to use as a working directory.
 
     !!! note "Don't mount directly in the home dir"
         Don't directly mount your local directory to the home directory (`/root`). This will lead to unexpected behaviour.
@@ -177,18 +177,18 @@ If you need some reminders of the commands, here's a link to a UNIX command line
 
 #### Make a new directory
 
-Make a directory `scripts` within `~/workdir` and make it your current directory.
+Make a directory `scripts` within `~/project` and make it your current directory.
 
 ??? done "Answer"
     ```sh
-    cd ~/workdir
+    cd ~/project
     mkdir scripts
     cd scripts
     ```
 
 #### File permissions
 
-Generate an empty script in your newly made directory `~/workdir/scripts` like this:
+Generate an empty script in your newly made directory `~/project/scripts` like this:
 
 ```sh
 touch new_script.sh
@@ -266,7 +266,7 @@ In the root directory (go there like this: `cd /`) there are a range of system d
 
 ??? done "Answer"
     ```sh
-    ls / > ~/workdir/system_dirs.txt
+    ls / > ~/project/system_dirs.txt
     ```
 
 The command `wc -l` counts the number of lines, and can read from stdin. Make a one-liner with a pipe `|` symbol to find out how many system directories and files there are.
@@ -282,7 +282,7 @@ Store `system_dirs.txt` as variable (like this: `VAR=variable`), and use `wc -l`
 
 ??? done "Answer"
     ```sh
-    FILE=~/workdir/system_dirs.txt
+    FILE=~/project/system_dirs.txt
     wc -l $FILE
     ```
 

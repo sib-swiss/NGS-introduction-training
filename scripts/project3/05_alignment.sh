@@ -1,22 +1,22 @@
 #!/usr/bin/env bash
 
-WORKDIR=/config/workdir/projects/project3/
-cd "$WORKDIR"/data/
+PROJDIR=/config/project/projects/project3/
+cd "$PROJDIR"/data/
 
-mkdir -p "$WORKDIR"/results/alignments
+mkdir -p "$PROJDIR"/results/alignments
 
 hisat2-build --threads 4 Mus_musculus.GRCm38.dna.chromosome.5.fa Mus_musculus.GRCm38.dna.chromosome.5.fa
 
 for SAMPLE in Control1 Control2 Control3 Case1 Case2 Case3
 do
     hisat2 \
-    -x "$WORKDIR"/data/Mus_musculus.GRCm38.dna.chromosome.5.fa \
-    -1 "$WORKDIR"/results/trimmed/"$SAMPLE"_trimmed_R1.fastq.gz  \
-    -2 "$WORKDIR"/results/trimmed/"$SAMPLE"_trimmed_R2.fastq.gz  \
+    -x "$PROJDIR"/data/Mus_musculus.GRCm38.dna.chromosome.5.fa \
+    -1 "$PROJDIR"/results/trimmed/"$SAMPLE"_trimmed_R1.fastq.gz  \
+    -2 "$PROJDIR"/results/trimmed/"$SAMPLE"_trimmed_R2.fastq.gz  \
     --threads 4 \
     | samtools sort \
     | samtools view -bh \
-    > "$WORKDIR"/results/alignments/"$SAMPLE".bam
+    > "$PROJDIR"/results/alignments/"$SAMPLE".bam
 
-    samtools index "$WORKDIR"/results/alignments/"$SAMPLE".bam
+    samtools index "$PROJDIR"/results/alignments/"$SAMPLE".bam
 done

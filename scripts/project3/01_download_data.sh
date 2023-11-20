@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-WORKDIR=/config/workdir/projects/project3
-mkdir -p "$WORKDIR"
-cd "$WORKDIR"
+PROJDIR=/config/project/projects/project3
+mkdir -p "$PROJDIR"
+cd "$PROJDIR"
 
 wget https://ngs-introduction-training.s3.eu-central-1.amazonaws.com/project3.tar.gz
 tar -xvf project3.tar.gz

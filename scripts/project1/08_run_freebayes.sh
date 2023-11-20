@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-WORKDIR=/config/workdir/projects/project1
-REFDIR="$WORKDIR"/data/reference/
-ALIGNDIR="$WORKDIR"/alignments/
-VCFDIR="$WORKDIR"/variants
+PROJDIR=/config/project/projects/project1
+REFDIR="$PROJDIR"/data/reference/
+ALIGNDIR="$PROJDIR"/alignments/
+VCFDIR="$PROJDIR"/variants
 
 mkdir -p "$VCFDIR"
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd ~/workdir
+cd ~/project
 mkdir reads
 cd reads
 prefetch SRR519926
