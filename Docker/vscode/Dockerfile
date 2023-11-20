@@ -1,4 +1,4 @@
-FROM linuxserver/code-server:4.12.0
+FROM linuxserver/code-server:4.19.0
 
 # Install base utilities
 RUN apt-get update && \
@@ -30,4 +30,3 @@ RUN conda init
 
 COPY settings.json /config/data/User/
 COPY keybindings.json /config/data/User/
-RUN mkdir -p /config/workdir
