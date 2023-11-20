@@ -20,13 +20,13 @@ The exercises below are partly based on [this tutorial](https://github.com/griff
 Index the alignment that was filtered for the region between 2000 and 2500 kb:
 
 ```sh
-cd ~/workdir/results/alignments
+cd ~/project/results/alignments
 samtools index SRR519926.sorted.region.bam
 ```
 Download it together with it's index file (`SRR519926.sorted.region.bam.bai`) and the reference genome (`ecoli-strK12-MG1655.fasta`) to your desktop.
 
 !!! note "If working with Docker"
-    If you are working with Docker, you can find the files in the working directory that you mounted to the docker container (with the `-v` option). So if you have used `-v C:\Users\myusername\ngs-course:/root/workdir`, your files will be in `C:\Users\myusername\ngs-course`.
+    If you are working with Docker, you can find the files in the working directory that you mounted to the docker container (with the `-v` option). So if you have used `-v C:\Users\myusername\ngs-course:/root/project`, your files will be in `C:\Users\myusername\ngs-course`.
 
 * Load the genome (`.fasta`) into IGV: **Genomes > Load Genome from File...**
 * Load the alignment file (`.bam`): **File > Load from File...**

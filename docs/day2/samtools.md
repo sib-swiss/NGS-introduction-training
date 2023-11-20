@@ -27,7 +27,7 @@
 ??? done "Answer"
     Code:
     ```sh
-    cd ~/workdir/results/alignments/
+    cd ~/project/results/alignments/
     samtools flagstat SRR519926.sam > SRR519926.sam.stats
     ```
 
@@ -74,7 +74,7 @@ The command `samtools view` is very versatile. It takes an alignment file and wr
     ```sh title="08_compress_sort.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir/results/alignments
+    cd ~/project/results/alignments
 
     samtools view -bh SRR519926.sam > SRR519926.bam
     ```
@@ -96,7 +96,7 @@ samtools index SRR519926.sorted.bam
     ```sh title="08_compress_sort.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir/results/alignments
+    cd ~/project/results/alignments
 
     samtools view -bh SRR519926.sam > SRR519926.bam
     samtools sort SRR519926.bam > SRR519926.sorted.bam
@@ -108,7 +108,7 @@ samtools index SRR519926.sorted.bam
     ```
     @HD     VN:1.0  SO:unsorted
     @SQ     SN:U00096.3     LN:4641652
-    @PG     ID:bowtie2      PN:bowtie2      VN:2.4.2        CL:"/opt/conda/envs/ngs-tools/bin/bowtie2-align-s --wrapper basic-0 -x /config/workdir/ref_genome//ecoli-strK12-MG1655.fasta -1 /config/workdir/trimmed_data/trimmed_SRR519926_1.fastq -2 /config/workdir/trimmed_data/trimmed_SRR519926_2.fastq"
+    @PG     ID:bowtie2      PN:bowtie2      VN:2.4.2        CL:"/opt/conda/envs/ngs-tools/bin/bowtie2-align-s --wrapper basic-0 -x /config/project/ref_genome//ecoli-strK12-MG1655.fasta -1 /config/project/trimmed_data/trimmed_SRR519926_1.fastq -2 /config/project/trimmed_data/trimmed_SRR519926_2.fastq"
     @PG     ID:samtools     PN:samtools     PP:bowtie2      VN:1.12 CL:samtools view -bh SRR519926.sam
     @PG     ID:samtools.1   PN:samtools     PP:samtools     VN:1.12 CL:samtools view -H SRR519926.bam
     ```
@@ -118,7 +118,7 @@ samtools index SRR519926.sorted.bam
     ```
     @HD     VN:1.0  SO:coordinate
     @SQ     SN:U00096.3     LN:4641652
-    @PG     ID:bowtie2      PN:bowtie2      VN:2.4.2        CL:"/opt/conda/envs/ngs-tools/bin/bowtie2-align-s --wrapper basic-0 -x /config/workdir/ref_genome//ecoli-strK12-MG1655.fasta -1 /config/workdir/trimmed_data/trimmed_SRR519926_1.fastq -2 /config/workdir/trimmed_data/trimmed_SRR519926_2.fastq"
+    @PG     ID:bowtie2      PN:bowtie2      VN:2.4.2        CL:"/opt/conda/envs/ngs-tools/bin/bowtie2-align-s --wrapper basic-0 -x /config/project/ref_genome//ecoli-strK12-MG1655.fasta -1 /config/project/trimmed_data/trimmed_SRR519926_1.fastq -2 /config/project/trimmed_data/trimmed_SRR519926_2.fastq"
     @PG     ID:samtools     PN:samtools     PP:bowtie2      VN:1.12 CL:samtools view -bh SRR519926.sam
     @PG     ID:samtools.1   PN:samtools     PP:samtools     VN:1.12 CL:samtools sort SRR519926.bam
     @PG     ID:samtools.2   PN:samtools     PP:samtools.1   VN:1.12 CL:samtools view -H SRR519926.sorted.bam
@@ -163,7 +163,7 @@ samtools view -bh -F 4 SRR519926.sorted.bam > SRR519926.sorted.mapped.bam
     ```sh title="09_extract_unmapped.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir/results/alignments
+    cd ~/project/results/alignments
 
     samtools view -bh -f 0x4 SRR519926.sorted.bam > SRR519926.sorted.unmapped.bam
     ```
@@ -183,7 +183,7 @@ samtools view -bh -F 4 SRR519926.sorted.bam > SRR519926.sorted.mapped.bam
     Our E. coli genome has only one chromosome, because only one line starts with `>` in the fasta file
 
     ```sh
-    cd ~/workdir/ref_genome
+    cd ~/project/ref_genome
     grep ">" ecoli-strK12-MG1655.fasta
     ```
 
@@ -200,7 +200,7 @@ samtools view -bh -F 4 SRR519926.sorted.bam > SRR519926.sorted.mapped.bam
     ```sh title="10_extract_region.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir/results/alignments
+    cd ~/project/results/alignments
 
     samtools view -bh \
     SRR519926.sorted.bam \
@@ -229,9 +229,9 @@ my_alignment_command \
     ```sh title="11_align_sort.sh"
     #!/usr/bin/env bash
 
-    TRIMMED_DIR=~/workdir/results/trimmed
-    REFERENCE_DIR=~/workdir/ref_genome
-    ALIGNED_DIR=~/workdir/results/alignments
+    TRIMMED_DIR=~/project/results/trimmed
+    REFERENCE_DIR=~/project/ref_genome
+    ALIGNED_DIR=~/project/results/alignments
 
     bowtie2 \
     -x $REFERENCE_DIR/ecoli-strK12-MG1655.fasta \
@@ -250,4 +250,4 @@ my_alignment_command \
 
 The software [MultiQC](https://multiqc.info/) is great for creating summaries out of log files and reports from many different bioinformatic tools (including `fastqc`, `fastp`, `samtools` and `bowtie2`). You can specify a directory that contains any log files, and it will automatically search it for you. 
 
-**Exercise**: Run the command `multiqc .` in `~/workdir` and checkout the generated report. 
+**Exercise**: Run the command `multiqc .` in `~/project` and checkout the generated report. 

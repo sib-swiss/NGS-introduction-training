@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-WORKDIR=/config/workdir/projects/project3
-cd "$WORKDIR"/data/fastq
+PROJDIR=/config/project/projects/project3
+cd "$PROJDIR"/data/fastq
 
 fastqc *.fastq.gz

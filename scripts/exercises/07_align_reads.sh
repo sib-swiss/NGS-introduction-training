@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-TRIMMED_DIR=~/workdir/results/trimmed
-REFERENCE_DIR=~/workdir/ref_genome/
-ALIGNED_DIR=~/workdir/results/alignments
+TRIMMED_DIR=~/project/results/trimmed
+REFERENCE_DIR=~/project/ref_genome/
+ALIGNED_DIR=~/project/results/alignments
 
 mkdir -p $ALIGNED_DIR
 

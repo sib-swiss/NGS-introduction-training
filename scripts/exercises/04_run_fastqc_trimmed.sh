@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-cd ~/workdir/results/trimmed
+cd ~/project/results/trimmed
 fastqc trimmed*.fastq

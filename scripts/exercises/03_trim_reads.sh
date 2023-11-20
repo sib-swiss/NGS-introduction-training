@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-TRIMMED_DIR=~/workdir/results/trimmed
-READS_DIR=~/workdir/reads
+TRIMMED_DIR=~/project/results/trimmed
+READS_DIR=~/project/reads
 
 mkdir -p $TRIMMED_DIR
 

@@ -24,7 +24,7 @@ In the afternoon of day 1, you will start on the project. On day 3, you can work
 Each group has access to a shared working directory. It is mounted in the root directory (`/`). Make a soft link in your home directory:
 
 ```sh
-cd ~/workdir
+cd ~/project
 ln -s /group_work/GROUP_NAME/ ./
 # replace [GROUP_NAME] with your group directory
 ```

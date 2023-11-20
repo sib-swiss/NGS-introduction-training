@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-WORKDIR=/config/workdir/projects/project1
-REFDIR="$WORKDIR"/data/reference/
-FASTQDIR="$WORKDIR"/data/fastq/
-ALIGNDIR="$WORKDIR"/alignments/
+PROJDIR=/config/project/projects/project1
+REFDIR="$PROJDIR"/data/reference/
+FASTQDIR="$PROJDIR"/data/fastq/
+ALIGNDIR="$PROJDIR"/alignments/
 
-mkdir -p "$WORKDIR"/log/
+mkdir -p "$PROJDIR"/log/
 
 mkdir -p "$ALIGNDIR"
 
@@ -22,7 +22,7 @@ do
     -2 $FASTQDIR/"$SAMPLE"_trimmed_R2.fastq.gz \
     --rg-id "$SAMPLE" \
     --rg SM:"$SAMPLE" \
-    2> "$WORKDIR"/log/bowtie2_"$SAMPLE".log \
+    2> "$PROJDIR"/log/bowtie2_"$SAMPLE".log \
     | samtools sort - \
     | samtools view -bh - \
     > "$ALIGNDIR"/"$SAMPLE".bam

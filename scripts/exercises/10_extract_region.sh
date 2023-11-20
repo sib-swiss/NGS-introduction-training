@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd ~/workdir/results/alignments
+cd ~/project/results/alignments
 
 samtools view -bh \
 SRR519926.sorted.bam \

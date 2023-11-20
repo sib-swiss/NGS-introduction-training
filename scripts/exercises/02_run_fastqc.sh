@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-cd ~/workdir/reads
+cd ~/project/reads
 
 fastqc *.fastq
