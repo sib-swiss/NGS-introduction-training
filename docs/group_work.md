@@ -9,7 +9,7 @@ The last part of this course will consist of project-based-learning. This means 
 
 ## Material
 
-[:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/07_group_work.pdf){: .md-button }
+[:fontawesome-solid-file-pdf: Download the presentation](assets/pdf/07_group_work.pdf){: .md-button }
 
 ## Roles & organisation
 
