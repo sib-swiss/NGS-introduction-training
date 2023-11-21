@@ -13,7 +13,7 @@
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PLoCxWrRWjqB1VlFIdm0DCv9uKv7y-YuEE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-[:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/sequencing_technologies.pdf){: .md-button }
+[:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/02_sequencing_technologies.pdf){: .md-button }
 
 [Illumina sequencing by synthesis on YouTube](https://www.youtube.com/watch?v=fCd6B5HRaZ8)
 
