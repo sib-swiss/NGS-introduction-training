@@ -1,4 +1,5 @@
 library(DESeq2)
+library(dplyr)
 
 # function to read in and simplify column names of counts matrix
 read_count_matrix <- function(counts_file) {
@@ -37,5 +38,15 @@ dds <- DESeqDataSetFromMatrix(countData = count_matrix,
 
 dds <- DESeq(dds)
 res <- results(dds)
+
+# sort by adjusted p-value and view
+results_df <- as.data.frame(res) |> arrange(padj)
+View(results_df)
+
+# check out counts of most differentially expressed gene
+plotCounts(dds, gene = which.min(res$padj),
+           intgroup = "condition")
+
+# scale and plot a PCA
 vsd <- varianceStabilizingTransformation(dds)
 plotPCA(vsd)
