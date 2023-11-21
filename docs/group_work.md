@@ -57,6 +57,7 @@ rm project1.tar.gz
 * Download the required data
 * Do a QC on the data with `fastqc`
 * Trim adapters and low quality bases with `fastp`. Make sure to include the option `--detect_adapter_for_pe`. To prevent overwriting `fastp.html`, specify a report filename for each sample with the option `--html`. 
+* After trimming the adapters, run `fastqc` again to see whether all adapters are gone.
 * Create an index for bowtie2. At the same time create a fasta index (`.fai` file) with `samtools faidx`. 
 * Check which options to use, and align with `bowtie2`. At the same time add readgroups to the aligned reads (see hints below). Make sure you end up with an indexed and sorted bam file. 
 * Mark duplicates on the individual bam files with `gatk MarkDuplicates` (see hints below).
@@ -71,7 +72,7 @@ rm project1.tar.gz
 * How many duplicates were in the different samples (hint: use `samtools flagstat`)? Why is it important to remove them for variant analysis?
 * Why did you add read groups to the bam files? Where is this information added in the bam file? 
 * Are there variants that look spurious? What could be the cause of that? What information in the vcf can you use to evaluate variant quality? 
-* There are two high quality variants in `chr20:10,026,397-10,026,638`. What are the genotypes of the three samples according to freebayes? Is this according to what you see in the alignments? If the alternative alleles are present in the same individual, are they in phase or in repulsion? 
+* There are two high quality variants in `chr20:10,026,397-10,026,638`. What are the genotypes of the three samples according to freebayes? Is this according to what you see in the alignments? If the alternative alleles are present in the same individual, are they in phase or in repulsion? Note: you can also load vcf files in IGV. 
 
 ### Hints
 
@@ -194,10 +195,11 @@ rm project3.tar.gz
 * Download the tar file, and find out what's in the data folder
 * Do a QC on the fastq files with `fastqc`
 * Trim adapters and low quality bases with `fastp`
+* After trimming the adapters, run `fastqc` again to see whether all adapters are gone.
 * Check which options to use, and align with `hisat2`
 * Evaluate the alignment quality (e.g. alignment rates, mapping quality)
 * Have a look at the alignments in IGV, e.g. check out `Sparcl1`. For this, you can use the built-in genome (*Mouse (mm10)*). Do you see any evidence for differential splicing?
-* Run `featureCounts` on both alignments. Have a look at the option `-Q`, and make sure you specify `-g Name`. For further suggestions, see the hints below. 
+* Run `featureCounts` on both alignments. Have a look at the option `-Q`. For further suggestions, see the hints below. 
 * Compare the count matrices in `R` (find a script to get started [here](https://github.com/sib-swiss/NGS-introduction-training/blob/main/scripts/project3/07_run_DESeq2.R); Rstudio server is running on the same machine. Approach it with your credentials and username `rstudio`)
 
 ### Questions
@@ -207,7 +209,8 @@ rm project3.tar.gz
 * Did trimming improve the QC results? What could be the cause of the warnings/errors in the `fastqc` reports?
 * What are the alignment rates?
 * How are spliced alignments stored in the SAM file?
-* Can you find any genes that seem to be differentially expressed? (To investigate this you'll need to run [featureCounts](http://subread.sourceforge.net/featureCounts.html)).
+* Are there any differences between the treatments in the percentage of assigned alignments by `featureCounts`? What is the cause of this? 
+* Can you find any genes that seem to be differentially expressed? 
 * What is the effect of setting the option `-Q` in `featureCounts`?
 
 ### Hints
@@ -247,7 +250,6 @@ Example code `featureCounts`:
 featureCounts \
 -p \
 -T 2 \
--g Name \
 -a <annotations.gtf> \
 -o <output.counts.txt> \
 *.bam

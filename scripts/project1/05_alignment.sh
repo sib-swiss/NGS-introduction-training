@@ -2,7 +2,7 @@
 
 PROJDIR=/config/project/projects/project1
 REFDIR="$PROJDIR"/data/reference/
-FASTQDIR="$PROJDIR"/data/fastq/
+FASTQDIR="$PROJDIR"/results/trimmed/
 ALIGNDIR="$PROJDIR"/alignments/
 
 mkdir -p "$PROJDIR"/log/
