@@ -826,7 +826,7 @@
 <p>If the course takes place online, we will use break-out rooms to communicate within groups. Please stay in the break-out room during the day, also if you are working individually.</p>
 </div>
 <h2 id="material">Material</h2>
-<p><a class="md-button" href="../assets/pdf/group_work.pdf"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M64 0C28.7 0 0 28.7 0 64v384c0 35.3 28.7 64 64 64h256c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zm192 0v128h128L256 0zM64 224h24c30.9 0 56 25.1 56 56s-25.1 56-56 56h-8v32c0 8.8-7.2 16-16 16s-16-7.2-16-16V240c0-8.8 7.2-16 16-16zm24 80c13.3 0 24-10.7 24-24s-10.7-24-24-24h-8v48h8zm72-64c0-8.8 7.2-16 16-16h24c26.5 0 48 21.5 48 48v64c0 26.5-21.5 48-48 48h-24c-8.8 0-16-7.2-16-16V240zm32 112h8c8.8 0 16-7.2 16-16v-64c0-8.8-7.2-16-16-16h-8v96zm96-128h48c8.8 0 16 7.2 16 16s-7.2 16-16 16h-32v32h32c8.8 0 16 7.2 16 16s-7.2 16-16 16h-32v48c0 8.8-7.2 16-16 16s-16-7.2-16-16V240c0-8.8 7.2-16 16-16z"/></svg></span> Download the presentation</a></p>
+<p><a class="md-button" href="../assets/pdf/07_group_work.pdf"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M64 0C28.7 0 0 28.7 0 64v384c0 35.3 28.7 64 64 64h256c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zm192 0v128h128L256 0zM64 224h24c30.9 0 56 25.1 56 56s-25.1 56-56 56h-8v32c0 8.8-7.2 16-16 16s-16-7.2-16-16V240c0-8.8 7.2-16 16-16zm24 80c13.3 0 24-10.7 24-24s-10.7-24-24-24h-8v48h8zm72-64c0-8.8 7.2-16 16-16h24c26.5 0 48 21.5 48 48v64c0 26.5-21.5 48-48 48h-24c-8.8 0-16-7.2-16-16V240zm32 112h8c8.8 0 16-7.2 16-16v-64c0-8.8-7.2-16-16-16h-8v96zm96-128h48c8.8 0 16 7.2 16 16s-7.2 16-16 16h-32v32h32c8.8 0 16 7.2 16 16s-7.2 16-16 16h-32v48c0 8.8-7.2 16-16 16s-16-7.2-16-16V240c0-8.8 7.2-16 16-16z"/></svg></span> Download the presentation</a></p>
 <h2 id="roles-organisation">Roles &amp; organisation</h2>
 <p>Project based learning is about learning by doing, but also about <em>peer instruction</em>. This means that you will be both a learner and a teacher. There will be differences in levels among participants, but because of that, some will learn efficiently from people that have just learned, and others will teach and increase their understanding.</p>
 <p>Each project has <strong>tasks</strong> and <strong>questions</strong>. By performing the tasks, you should be able to answer the questions. You should consider the tasks and questions as a guidance. If interesting questions pop up during the project, you are <strong>encouraged</strong> to work on those. Also, you don&rsquo;t have to perform all the tasks and answer all the questions.</p>
@@ -859,6 +859,7 @@ rm<span class="w"> </span>project1.tar.gz
 <li>Download the required data</li>
 <li>Do a QC on the data with <code>fastqc</code></li>
 <li>Trim adapters and low quality bases with <code>fastp</code>. Make sure to include the option <code>--detect_adapter_for_pe</code>. To prevent overwriting <code>fastp.html</code>, specify a report filename for each sample with the option <code>--html</code>. </li>
+<li>After trimming the adapters, run <code>fastqc</code> again to see whether all adapters are gone.</li>
 <li>Create an index for bowtie2. At the same time create a fasta index (<code>.fai</code> file) with <code>samtools faidx</code>. </li>
 <li>Check which options to use, and align with <code>bowtie2</code>. At the same time add readgroups to the aligned reads (see hints below). Make sure you end up with an indexed and sorted bam file. </li>
 <li>Mark duplicates on the individual bam files with <code>gatk MarkDuplicates</code> (see hints below).</li>
@@ -873,7 +874,7 @@ rm<span class="w"> </span>project1.tar.gz
 <li>How many duplicates were in the different samples (hint: use <code>samtools flagstat</code>)? Why is it important to remove them for variant analysis?</li>
 <li>Why did you add read groups to the bam files? Where is this information added in the bam file? </li>
 <li>Are there variants that look spurious? What could be the cause of that? What information in the vcf can you use to evaluate variant quality? </li>
-<li>There are two high quality variants in <code>chr20:10,026,397-10,026,638</code>. What are the genotypes of the three samples according to freebayes? Is this according to what you see in the alignments? If the alternative alleles are present in the same individual, are they in phase or in repulsion? </li>
+<li>There are two high quality variants in <code>chr20:10,026,397-10,026,638</code>. What are the genotypes of the three samples according to freebayes? Is this according to what you see in the alignments? If the alternative alleles are present in the same individual, are they in phase or in repulsion? Note: you can also load vcf files in IGV. </li>
 </ul>
 <h3 id="hints">Hints</h3>
 <p>You can add readgroups to the alignment file with <code>bowtie2</code> with the options <code>--rg-id</code> and <code>--rg</code>, e.g. (<code>$SAMPLE</code> is a variable containing a sample identifier):</p>
@@ -977,10 +978,11 @@ rm<span class="w"> </span>project3.tar.gz
 <li>Download the tar file, and find out what&rsquo;s in the data folder</li>
 <li>Do a QC on the fastq files with <code>fastqc</code></li>
 <li>Trim adapters and low quality bases with <code>fastp</code></li>
+<li>After trimming the adapters, run <code>fastqc</code> again to see whether all adapters are gone.</li>
 <li>Check which options to use, and align with <code>hisat2</code></li>
 <li>Evaluate the alignment quality (e.g. alignment rates, mapping quality)</li>
 <li>Have a look at the alignments in IGV, e.g. check out <code>Sparcl1</code>. For this, you can use the built-in genome (<em>Mouse (mm10)</em>). Do you see any evidence for differential splicing?</li>
-<li>Run <code>featureCounts</code> on both alignments. Have a look at the option <code>-Q</code>, and make sure you specify <code>-g Name</code>. For further suggestions, see the hints below. </li>
+<li>Run <code>featureCounts</code> on both alignments. Have a look at the option <code>-Q</code>. For further suggestions, see the hints below. </li>
 <li>Compare the count matrices in <code>R</code> (find a script to get started <a href="https://github.com/sib-swiss/NGS-introduction-training/blob/main/scripts/project3/07_run_DESeq2.R">here</a>; Rstudio server is running on the same machine. Approach it with your credentials and username <code>rstudio</code>)</li>
 </ul>
 <h3 id="questions_2">Questions</h3>
@@ -990,7 +992,8 @@ rm<span class="w"> </span>project3.tar.gz
 <li>Did trimming improve the QC results? What could be the cause of the warnings/errors in the <code>fastqc</code> reports?</li>
 <li>What are the alignment rates?</li>
 <li>How are spliced alignments stored in the SAM file?</li>
-<li>Can you find any genes that seem to be differentially expressed? (To investigate this you&rsquo;ll need to run <a href="http://subread.sourceforge.net/featureCounts.html">featureCounts</a>).</li>
+<li>Are there any differences between the treatments in the percentage of assigned alignments by <code>featureCounts</code>? What is the cause of this? </li>
+<li>Can you find any genes that seem to be differentially expressed? </li>
 <li>What is the effect of setting the option <code>-Q</code> in <code>featureCounts</code>?</li>
 </ul>
 <h3 id="hints_1">Hints</h3>
@@ -1050,7 +1053,6 @@ hisat2<span class="w"> </span><span class="se">\</span>
 <div class="highlight"><pre><span></span><code>featureCounts<span class="w"> </span><span class="se">\</span>
 -p<span class="w"> </span><span class="se">\</span>
 -T<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
--g<span class="w"> </span>Name<span class="w"> </span><span class="se">\</span>
 -a<span class="w"> </span>&lt;annotations.gtf&gt;<span class="w"> </span><span class="se">\</span>
 -o<span class="w"> </span>&lt;output.counts.txt&gt;<span class="w"> </span><span class="se">\</span>
 *.bam
