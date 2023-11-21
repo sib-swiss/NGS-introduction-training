@@ -9,5 +9,5 @@ featureCounts \
 -p \
 -T 4 \
 -a Mus_musculus.GRCm38.102.chromosome.5.gtf \
--o "$PROJDIR"/results/counts/counts2.txt \
+-o "$PROJDIR"/results/counts/counts.txt \
 "$PROJDIR"/results/alignments/*.bam
