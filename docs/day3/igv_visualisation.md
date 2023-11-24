@@ -110,10 +110,10 @@ Click on the coverage track where the SNP is:
   <img src="../../assets/images/per_base.png" width="300"/>
 </figure>
 
-**Exercise:** What is the sequence coverage for that base? And the percentage T?
+**Exercise:** What is the sequence sequencing depth for that base? And the percentage T?
 
 ??? done "Answer"
-    The coverage is 62, and 25 reads (40%) T.
+    The depth is 62, and 25 reads (40%) T.
 
 Navigate to region `chr21:19,800,320-19,818,162`
 
