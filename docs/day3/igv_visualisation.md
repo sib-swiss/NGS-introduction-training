@@ -23,7 +23,7 @@ Index the alignment that was filtered for the region between 2000 and 2500 kb:
 cd ~/project/results/alignments
 samtools index SRR519926.sorted.region.bam
 ```
-Download it together with it's index file (`SRR519926.sorted.region.bam.bai`) and the reference genome (`ecoli-strK12-MG1655.fasta`) to your desktop.
+Download the alignment (`SRR519926.sorted.region.bam`) together with it's index file (`SRR519926.sorted.region.bam.bai`) and the reference genome (`ecoli-strK12-MG1655.fasta`) to your desktop.
 
 !!! note "If working with Docker"
     If you are working with Docker, you can find the files in the working directory that you mounted to the docker container (with the `-v` option). So if you have used `-v C:\Users\myusername\ngs-course:/root/project`, your files will be in `C:\Users\myusername\ngs-course`.
