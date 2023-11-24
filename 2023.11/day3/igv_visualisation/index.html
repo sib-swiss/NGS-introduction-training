@@ -688,7 +688,7 @@
 <p><div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>~/project/results/alignments
 samtools<span class="w"> </span>index<span class="w"> </span>SRR519926.sorted.region.bam
 </code></pre></div>
-Download it together with it&rsquo;s index file (<code>SRR519926.sorted.region.bam.bai</code>) and the reference genome (<code>ecoli-strK12-MG1655.fasta</code>) to your desktop.</p>
+Download the alignment (<code>SRR519926.sorted.region.bam</code>) together with it&rsquo;s index file (<code>SRR519926.sorted.region.bam.bai</code>) and the reference genome (<code>ecoli-strK12-MG1655.fasta</code>) to your desktop.</p>
 <div class="admonition note">
 <p class="admonition-title">If working with Docker</p>
 <p>If you are working with Docker, you can find the files in the working directory that you mounted to the docker container (with the <code>-v</code> option). So if you have used <code>-v C:\Users\myusername\ngs-course:/root/project</code>, your files will be in <code>C:\Users\myusername\ngs-course</code>.</p>
@@ -768,10 +768,10 @@ woman with breast cancer.</p>
   <img src="../../assets/images/per_base.png" width="300"/>
 </figure>
 
-<p><strong>Exercise:</strong> What is the sequence coverage for that base? And the percentage T?</p>
+<p><strong>Exercise:</strong> What is the sequence sequencing depth for that base? And the percentage T?</p>
 <details class="done">
 <summary>Answer</summary>
-<p>The coverage is 62, and 25 reads (40%) T.</p>
+<p>The depth is 62, and 25 reads (40%) T.</p>
 </details>
 <p>Navigate to region <code>chr21:19,800,320-19,818,162</code></p>
 <p>Load repeat tracks by selecting <strong>File &gt; Load from Server&hellip;</strong> from the main menu and then select <strong>Annotations &gt; Variation and Repeats &gt; Repeat Masker</strong></p>
