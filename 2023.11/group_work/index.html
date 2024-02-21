@@ -832,16 +832,7 @@
 <p>Each project has <strong>tasks</strong> and <strong>questions</strong>. By performing the tasks, you should be able to answer the questions. You should consider the tasks and questions as a guidance. If interesting questions pop up during the project, you are <strong>encouraged</strong> to work on those. Also, you don&rsquo;t have to perform all the tasks and answer all the questions.</p>
 <p>In the afternoon of day 1, you will start on the project. On day 3, you can work on the project in the morning and in the first part of the afternoon. We will conclude the projects with a <strong>10-minute presentation</strong> of each group.</p>
 <h2 id="working-directories">Working directories</h2>
-<p>Each group has access to a shared working directory. It is mounted in the root directory (<code>/</code>). Make a soft link in your home directory:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>~/project
-ln<span class="w"> </span>-s<span class="w"> </span>/group_work/GROUP_NAME/<span class="w"> </span>./
-<span class="c1"># replace [GROUP_NAME] with your group directory</span>
-</code></pre></div>
-<p>Now you can find your group directory at <code>~/&lt;group name&gt;</code>. Use this to share files.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Do not remove the soft link with <code>rm -r</code>, this will delete the entire source directory. If you want to remove only the softlink, use <code>rm</code> (without <code>-r</code>), or <code>unlink</code>. More info <a href="https://linuxize.com/post/how-to-remove-symbolic-links-in-linux/">here</a>.</p>
-</div>
+<p>Each group has access to a shared working directory. It is mounted in the root directory (<code>/</code>). You can add this directory to your working space by clicking: <strong>File &gt; Add Folder to Workspace&hellip;</strong>. Then, type the path to your group directory: <code>/group_work/groupX</code> (where <code>X</code> is your group number).</p>
 <h2 id="project-1-variant-analysis-of-human-data">Project 1: Variant analysis of human data</h2>
 <p><strong>Aim</strong>: Find variants on chromosome 20 from three samples</p>
 <p>In this project you will be working with Illumina reads from three samples: a father, mother and a child. You will perform quality control, align the reads, mark duplicates, detect variants and visualize them. </p>
