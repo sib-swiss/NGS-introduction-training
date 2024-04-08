@@ -21,19 +21,7 @@ In the afternoon of day 1, you will start on the project. On day 3, you can work
 
 ## Working directories
 
-Each group has access to a shared working directory. It is mounted in the root directory (`/`). Make a soft link in your home directory:
-
-```sh
-cd ~/project
-ln -s /group_work/GROUP_NAME/ ./
-# replace [GROUP_NAME] with your group directory
-```
-
-Now you can find your group directory at `~/<group name>`. Use this to share files.
-
-!!! warning
-    Do not remove the soft link with `rm -r`, this will delete the entire source directory. If you want to remove only the softlink, use `rm` (without `-r`), or `unlink`. More info [here](https://linuxize.com/post/how-to-remove-symbolic-links-in-linux/).
-
+Each group has access to a shared working directory. It is mounted in the root directory (`/`). You can add this directory to your working space by clicking: **File > Add Folder to Workspace...**. Then, type the path to your group directory: `/group_work/groupX` (where `X` is your group number).
 
 ## Project 1: Variant analysis of human data
 

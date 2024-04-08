@@ -11,7 +11,7 @@
 
 ## Material
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PLoCxWrRWjqB1VlFIdm0DCv9uKv7y-YuEE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/uqhbitgVBYg?si=PYnSCciL3nNRwleb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 [:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/02_sequencing_technologies.pdf){: .md-button }
 
