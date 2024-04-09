@@ -1061,43 +1061,41 @@ rm<span class="w"> </span>project1.tar.gz
 <h2 id="project-2-long-read-genome-sequencing"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M184 0c30.9 0 56 25.1 56 56v400c0 30.9-25.1 56-56 56-28.9 0-52.7-21.9-55.7-50.1-5.2 1.4-10.7 2.1-16.3 2.1-35.3 0-64-28.7-64-64 0-7.4 1.3-14.6 3.6-21.2C21.4 367.4 0 338.2 0 304c0-31.9 18.7-59.5 45.8-72.3C37.1 220.8 32 207 32 192c0-30.7 21.6-56.3 50.4-62.6C80.8 123.9 80 118 80 112c0-29.9 20.6-55.1 48.3-62.1 3-28 26.8-49.9 55.7-49.9zm144 0c28.9 0 52.6 21.9 55.7 49.9C411.5 56.9 432 82 432 112c0 6-.8 11.9-2.4 17.4 28.8 6.2 50.4 31.9 50.4 62.6 0 15-5.1 28.8-13.8 39.7 27.1 12.8 45.8 40.4 45.8 72.3 0 34.2-21.4 63.4-51.6 74.8 2.3 6.6 3.6 13.8 3.6 21.2 0 35.3-28.7 64-64 64-5.6 0-11.1-.7-16.3-2.1-3 28.2-26.8 50.1-55.7 50.1-30.9 0-56-25.1-56-56V56c0-30.9 25.1-56 56-56z"/></svg></span> Project 2: Long-read genome sequencing</h2>
 <p><strong>Aim</strong>: Align long reads from RNA-seq data to a reference genome.</p>
 <p>In this project, you will be working with data from:</p>
-<p>Clark, M. B. et al (2020). <em>Long-read sequencing reveals the complex splicing profile of the psychiatric risk gene CACNA1C in human brain</em>. Molecular Psychiatry, 25(1), 37–47. <a href="https://doi.org/10.1038/s41380-019-0583-1">https://doi.org/10.1038/s41380-019-0583-1</a>.</p>
-<p>Here you can find the <a href="https://www.ncbi.nlm.nih.gov/bioproject/PRJEB34660">BioProject page</a>.</p>
-<p>It is Oxford Nanopore Technology sequencing data of amplicons of the gene CACNA1C. It is primarily used to discover new splice variants. In this project, we will align a few of the samples to the reference genome, and assess the quality of reads and the alignment.</p>
+<blockquote>
+<p>Padilla, Juan-Carlos A., Seda Barutcu, Ludovic Malet, Gabrielle Deschamps-Francoeur, Virginie Calderon, Eunjeong Kwon, and Eric Lécuyer. “Profiling the Polyadenylated Transcriptome of Extracellular Vesicles with Long-Read Nanopore Sequencing.” BMC Genomics 24, no. 1 (September 22, 2023): 564. https://doi.org/10.1186/s12864-023-09552-6.</p>
+</blockquote>
+<p>The authors used RNA sequencing with Oxford Nanopore Technology of both extracellular vesicles and whole cells from cell culture. For this project, we will work with two samples of this study, <code>EV_2</code> (extracellular vesicle) and <code>Cell_2</code> (whole cell). Download and unpack the data files.</p>
 <p>Download the human reference genome like this:</p>
-<div class="highlight"><pre><span></span><code>wget<span class="w"> </span>ftp://ftp.ensembl.org/pub/release-101/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
+<div class="highlight"><pre><span></span><code>wget<span class="w"> </span>https://ngs-introduction-training.s3.eu-central-1.amazonaws.com/project2.tar.gz
+tar<span class="w"> </span>-xvf<span class="w"> </span>project2.tar.gz
+rm<span class="w"> </span>project2.tar.gz
 </code></pre></div>
+<p>You can find the fastq files in the <code>reads</code> folder and the reference genome and its annotation in the <code>reference</code> folder. To reduce computational times we work with a subset of the data on a subset of the genome (chromosome 5 and X).</p>
 <h3 id="tasks_1">Tasks</h3>
 <div class="admonition warning">
 <p class="admonition-title">Important!</p>
 <p><strong>Stick to the principles for reproducible analysis</strong> described <a href="../day1/reproducibility/">here</a></p>
 </div>
 <ul>
-<li>Check out the BioProject, and download two samples that interest you.</li>
 <li>Perform QC with <code>fastqc</code></li>
 <li>Perform QC with <code>NanoPlot</code></li>
 <li>Align with <code>minimap2</code> with default parameters</li>
-<li>Figure how you should set parameters <code>-x</code> and <code>-G</code></li>
+<li>Figure how you should set parameter <code>-x</code></li>
 <li>Evaluate the alignment quality (e.g. alignment rates, mapping quality)</li>
-<li>Compare different samples in read quality, alignment rates, depth, etc.</li>
+<li>Compare the two different samples in read quality, alignment rates, depth, etc.</li>
+<li>Check out the alignments in IGV. Check out e.g. <code>ELOVL5</code>.</li>
 </ul>
 <h3 id="questions_1">Questions</h3>
 <ul>
 <li>Have a look at the quality report. What are the average read lengths? Is that expected?</li>
 <li>What is the average read quality? What kind of accuracy would you expect?</li>
 <li>Note any differences between <code>fastqc</code> and <code>NanoPlot</code>? How is that compared to the publication?</li>
-<li>Check out the options <code>-x</code> and <code>-G</code> of <code>minimap2</code>. Are the defaults appropriate?</li>
+<li>Check out the option <code>-x</code> of <code>minimap2</code>. Are the defaults appropriate?</li>
 <li>You might consider using <code>-x map-ont</code> or <code>-x splice</code>. Do you see differences in the alignment in e.g. IGV?</li>
 <li>How are spliced alignments stored in the SAM file with the different settings of <code>-x</code>?</li>
-<li>How deep is the gene sequenced?</li>
+<li>How deep is the gene <code>ELOVL5</code> sequenced in both samples?</li>
 <li>Do you already see evidence for splice variants in the alignments?</li>
 </ul>
-<div class="admonition hint">
-<p class="admonition-title">Downloading from SRA</p>
-<div class="highlight"><pre><span></span><code>prefetch<span class="w"> </span><span class="o">[</span>SRR<span class="w"> </span>number<span class="o">]</span>
-fastq-dump<span class="w"> </span>--gzip<span class="w"> </span><span class="o">[</span>SRR<span class="w"> </span>number<span class="o">]</span>
-</code></pre></div>
-</div>
 <div class="admonition hint">
 <p class="admonition-title">Accuracy from quality scores</p>
 <p>Find the equation to calculate error probability from quality score on <a href="https://en.wikipedia.org/wiki/Phred_quality_score">Wikipedia</a>.</p>
@@ -1112,20 +1110,11 @@ fastq-dump<span class="w"> </span>--gzip<span class="w"> </span><span class="o">
 <div class="highlight"><pre><span></span><code>minimap2<span class="w"> </span><span class="se">\</span>
 -a<span class="w"> </span><span class="se">\</span>
 -x<span class="w"> </span><span class="o">[</span>PARAMETER<span class="o">]</span><span class="w"> </span><span class="se">\</span>
--G<span class="w"> </span><span class="o">[</span>PARAMETER<span class="o">]</span><span class="w"> </span><span class="se">\</span>
 <span class="o">[</span>REFERENCE<span class="o">]</span>.fa<span class="w"> </span><span class="se">\</span>
 <span class="o">[</span>FASTQFILE<span class="o">]</span>.fastq.gz<span class="w"> </span><span class="se">\</span>
 <span class="p">|</span><span class="w"> </span>samtools<span class="w"> </span>sort<span class="w"> </span><span class="se">\</span>
 <span class="p">|</span><span class="w"> </span>samtools<span class="w"> </span>view<span class="w"> </span>-bh<span class="w"> </span>&gt;<span class="w"> </span><span class="o">[</span>OUTPUT<span class="o">]</span>.bam
 </code></pre></div>
-</div>
-<div class="admonition hint">
-<p class="admonition-title">Intron sizes</p>
-<p>Check out the the intron sizes of CACNA1C in e.g. IGV or UCSC genome browser. How does that relate to the parameter <code>-G</code>?</p>
-</div>
-<div class="admonition hint">
-<p class="admonition-title">More resources</p>
-<p>Need e.g. a gtf file? Here&rsquo;s the <a href="https://www.ensembl.org/Homo_sapiens/Info/Index">ensembl page</a></p>
 </div>
 <h2 id="project-3-short-read-rna-seq-of-mice"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M236.4 61.4 227 75.5c-21.3 32-59.4 48.5-97.3 42.1l-59.6-9.9C33.4 101.6 0 129.9.1 167.1c0 15.9 6.4 31.2 17.6 42.5l29.2 29.2c11 11 17.2 25.9 17.2 41.5 0 15.8-6.4 30.9-17.7 42l-13.1 12.8C22.2 345.9 16 360.7 16 376.2c0 36.8 34.1 64.2 70.1 56.2l62.3-13.8c7.7-1.7 15.7-2.6 23.6-2.6h10c27.2 0 53.7 9.3 75 26.3l30.8 24.7c10.5 8.4 23.6 13 37 13 32.7 0 59.3-26.5 59.3-59.3v-25.2c0-34.9 21.4-66.2 53.9-78.8l36.9-14.3c22.4-8.7 37.2-30.3 37.2-54.3 0-28.1-20.1-52.3-47.8-57.3l-28-5.1c-36.5-6.7-65.4-34.5-73.6-70.7l-7.1-31.5C348.9 53.4 322.1 32 291.3 32c-22 0-42.6 11-54.9 29.4zM160 192a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm128 16a16 16 0 1 1 32 0 16 16 0 1 1-32 0zm0 80a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg></span> Project 3: Short-read RNA-seq of mice.</h2>
 <p><strong>Aim:</strong> Generate a count matrix to estimate differential gene expression. </p>
