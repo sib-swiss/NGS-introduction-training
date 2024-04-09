@@ -1,0 +1,566 @@
+[
+    {
+        "@type": "MultipleChoiceQuestion",
+        "splitPercentageQuestion": false,
+        "lowerCaseAlias": "",
+        "id": "2004843",
+        "alias": "",
+        "text": "How comfortable are you with bioinformatic analyses?",
+        "image": null,
+        "imageAltText": null,
+        "choices": [
+            {
+                "id": "7746934",
+                "alias": null,
+                "text": "I had some introduction in unix and/or R/python and ready to get started!",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            },
+            {
+                "id": "7746935",
+                "alias": null,
+                "text": "I analyzed some datasets for which I used the command line",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            },
+            {
+                "id": "7746936",
+                "alias": null,
+                "text": "I regularly analyze datasets with the command line",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            },
+            {
+                "id": "7746937",
+                "alias": null,
+                "text": "I’m a bioinformatician",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            }
+        ],
+        "minNumberSelections": 1,
+        "maxNumberSelections": 1,
+        "resultFormat": "%",
+        "distributableWeight": null,
+        "weightingSetting": null,
+        "weightingFactor": null,
+        "correctAnswerExplanation": null,
+        "resultSorting": null
+    },
+    {
+        "@type": "MultipleChoiceQuestion",
+        "splitPercentageQuestion": false,
+        "lowerCaseAlias": "",
+        "id": "2004844",
+        "alias": "",
+        "text": "In which stage of working with NGS data are you?",
+        "image": null,
+        "imageAltText": null,
+        "choices": [
+            {
+                "id": "7746938",
+                "alias": null,
+                "text": "I might be performing an analysis in the future",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            },
+            {
+                "id": "7746939",
+                "alias": null,
+                "text": "I will probably perform an analysis in one of my current research projects",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            },
+            {
+                "id": "7746940",
+                "alias": null,
+                "text": "There is a dataset waiting to be analyzed",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            },
+            {
+                "id": "7746941",
+                "alias": null,
+                "text": "I already performed one or more analyses",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            }
+        ],
+        "minNumberSelections": 1,
+        "maxNumberSelections": 1,
+        "resultFormat": "%",
+        "distributableWeight": null,
+        "weightingSetting": null,
+        "weightingFactor": null,
+        "correctAnswerExplanation": null,
+        "resultSorting": null
+    },
+    {
+        "@type": "MultipleChoiceQuestion",
+        "splitPercentageQuestion": false,
+        "lowerCaseAlias": "",
+        "id": "2004845",
+        "alias": "",
+        "text": "What kind of organism are you primarily working with?",
+        "image": null,
+        "imageAltText": null,
+        "choices": [
+            {
+                "id": "7746942",
+                "alias": null,
+                "text": "Human",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            },
+            {
+                "id": "7746943",
+                "alias": null,
+                "text": "Mouse",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            },
+            {
+                "id": "7746944",
+                "alias": null,
+                "text": "Other vertebrates",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            },
+            {
+                "id": "7746945",
+                "alias": null,
+                "text": "Invertebrates",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            },
+            {
+                "id": "7746946",
+                "alias": null,
+                "text": "Plants",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            },
+            {
+                "id": "7746947",
+                "alias": null,
+                "text": "Fungi",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            },
+            {
+                "id": "7746948",
+                "alias": null,
+                "text": "Bacteria",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            },
+            {
+                "id": "14421557",
+                "alias": null,
+                "text": "Viruses",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            },
+            {
+                "id": "10835220",
+                "alias": null,
+                "text": "The other 95% of the tree of life",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            }
+        ],
+        "minNumberSelections": 1,
+        "maxNumberSelections": 1,
+        "resultFormat": "%",
+        "distributableWeight": null,
+        "weightingSetting": null,
+        "weightingFactor": null,
+        "correctAnswerExplanation": null,
+        "resultSorting": null
+    },
+    {
+        "@type": "MultipleChoiceQuestion",
+        "splitPercentageQuestion": false,
+        "lowerCaseAlias": "",
+        "id": "2004847",
+        "alias": "",
+        "text": "Altough Sanger sequencing has been around since the 70s, it’s still used by a lot of labs. Why is that?",
+        "image": null,
+        "imageAltText": null,
+        "choices": [
+            {
+                "id": "7746953",
+                "alias": null,
+                "text": "Because the per-base sequence costs are always very low",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            },
+            {
+                "id": "7746954",
+                "alias": null,
+                "text": "Because it’s scalable to low throughput",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": true
+            },
+            {
+                "id": "7746955",
+                "alias": null,
+                "text": "Because it’s output quality is still unchallenged",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            }
+        ],
+        "minNumberSelections": 1,
+        "maxNumberSelections": 1,
+        "resultFormat": "%",
+        "distributableWeight": null,
+        "weightingSetting": null,
+        "weightingFactor": null,
+        "correctAnswerExplanation": null,
+        "resultSorting": null
+    },
+    {
+        "@type": "MultipleChoiceQuestion",
+        "splitPercentageQuestion": false,
+        "lowerCaseAlias": "",
+        "id": "2004849",
+        "alias": "",
+        "text": "What is the purpose of barcodes for Illumina sequencing?",
+        "image": null,
+        "imageAltText": null,
+        "choices": [
+            {
+                "id": "7746959",
+                "alias": null,
+                "text": "With barcodes, the fragment can anneal to the flow cell",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            },
+            {
+                "id": "7746960",
+                "alias": null,
+                "text": "The barcodes are used to add universal sequencing primers with PCR",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            },
+            {
+                "id": "7746961",
+                "alias": null,
+                "text": "With barcodes it is possible to sequence multiple samples in one flow cell",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": true
+            }
+        ],
+        "minNumberSelections": 1,
+        "maxNumberSelections": 1,
+        "resultFormat": "%",
+        "distributableWeight": null,
+        "weightingSetting": null,
+        "weightingFactor": null,
+        "correctAnswerExplanation": null,
+        "resultSorting": null
+    },
+    {
+        "@type": "MultipleChoiceQuestion",
+        "splitPercentageQuestion": false,
+        "lowerCaseAlias": "",
+        "id": "2004850",
+        "alias": "",
+        "text": "What kind of invention led to the ability to sequence (very) long reads?",
+        "image": null,
+        "imageAltText": null,
+        "choices": [
+            {
+                "id": "7746962",
+                "alias": null,
+                "text": "Base incorporation that doesn’t get exhausted",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            },
+            {
+                "id": "7746963",
+                "alias": null,
+                "text": "Differentiating between bases at a single-molecule scale",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": true
+            },
+            {
+                "id": "7746964",
+                "alias": null,
+                "text": "PCR with unlimited amplicon length",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            }
+        ],
+        "minNumberSelections": 1,
+        "maxNumberSelections": 1,
+        "resultFormat": "%",
+        "distributableWeight": null,
+        "weightingSetting": null,
+        "weightingFactor": null,
+        "correctAnswerExplanation": null,
+        "resultSorting": null
+    },
+    {
+        "@type": "MultipleChoiceQuestion",
+        "splitPercentageQuestion": false,
+        "lowerCaseAlias": "",
+        "id": "2004851",
+        "alias": "",
+        "text": "Why are error rates for long read sequencing relatively high?",
+        "image": null,
+        "imageAltText": null,
+        "choices": [
+            {
+                "id": "7746965",
+                "alias": null,
+                "text": "Differentiating between nucleotides at a single-molecule scale is challenging",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": true
+            },
+            {
+                "id": "7746966",
+                "alias": null,
+                "text": "The out-of-phase signal results in low base quality",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            },
+            {
+                "id": "7746967",
+                "alias": null,
+                "text": "Longer sequences have a larger chance on PCR error",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            }
+        ],
+        "minNumberSelections": 1,
+        "maxNumberSelections": 1,
+        "resultFormat": "%",
+        "distributableWeight": null,
+        "weightingSetting": null,
+        "weightingFactor": null,
+        "correctAnswerExplanation": null,
+        "resultSorting": null
+    },
+    {
+        "@type": "MultipleChoiceQuestion",
+        "splitPercentageQuestion": false,
+        "lowerCaseAlias": "",
+        "id": "2004852",
+        "alias": "",
+        "text": "Suppose you want to align reads to a reference. In which cases would you use a global aligner and when a local aligner?",
+        "image": null,
+        "imageAltText": null,
+        "choices": [
+            {
+                "id": "7746968",
+                "alias": null,
+                "text": "Global alignment if query and reference are similar local if unsimilar",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": true
+            },
+            {
+                "id": "7746969",
+                "alias": null,
+                "text": "Local alignment if query and reference are similar global if unsimilar",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            },
+            {
+                "id": "7746970",
+                "alias": null,
+                "text": "Always global irrespective of similarity",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            },
+            {
+                "id": "7746971",
+                "alias": null,
+                "text": "Always local irrespective of similarity",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            }
+        ],
+        "minNumberSelections": 1,
+        "maxNumberSelections": 1,
+        "resultFormat": "%",
+        "distributableWeight": null,
+        "weightingSetting": null,
+        "weightingFactor": null,
+        "correctAnswerExplanation": null,
+        "resultSorting": null
+    },
+    {
+        "@type": "MultipleChoiceQuestion",
+        "splitPercentageQuestion": false,
+        "lowerCaseAlias": "",
+        "id": "2004854",
+        "alias": "",
+        "text": "With grep -c \"^>\" it is easy to count the number of sequences in a fasta file. Why doesn’t grep -c \"^@\" work for fastq sequences?",
+        "image": null,
+        "imageAltText": null,
+        "choices": [
+            {
+                "id": "7746972",
+                "alias": null,
+                "text": "@ is a special character for regular expressions",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            },
+            {
+                "id": "7746973",
+                "alias": null,
+                "text": "The @ can also occur elsewhere in a fastq file",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": true
+            },
+            {
+                "id": "7746974",
+                "alias": null,
+                "text": "There is no specific title start symbol for fastq files",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            }
+        ],
+        "minNumberSelections": 1,
+        "maxNumberSelections": 1,
+        "resultFormat": "%",
+        "distributableWeight": null,
+        "weightingSetting": null,
+        "weightingFactor": null,
+        "correctAnswerExplanation": null,
+        "resultSorting": null
+    },
+    {
+        "@type": "MultipleChoiceQuestion",
+        "splitPercentageQuestion": false,
+        "lowerCaseAlias": "",
+        "id": "2004855",
+        "alias": "",
+        "text": "Can you technically regenerate the fastq file out of the SAM file? And can you regenerate the reference sequence (fasta) file from the SAM file?",
+        "image": null,
+        "imageAltText": null,
+        "choices": [
+            {
+                "id": "7746975",
+                "alias": null,
+                "text": "Only the fastq file",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": true
+            },
+            {
+                "id": "7746976",
+                "alias": null,
+                "text": "Only the fasta file",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            },
+            {
+                "id": "7746977",
+                "alias": null,
+                "text": "Both files",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            },
+            {
+                "id": "7746978",
+                "alias": null,
+                "text": "None of those",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            }
+        ],
+        "minNumberSelections": 1,
+        "maxNumberSelections": 1,
+        "resultFormat": "%",
+        "distributableWeight": null,
+        "weightingSetting": null,
+        "weightingFactor": null,
+        "correctAnswerExplanation": null,
+        "resultSorting": null
+    },
+    {
+        "@type": "MultipleChoiceQuestion",
+        "splitPercentageQuestion": false,
+        "lowerCaseAlias": "",
+        "id": "2004856",
+        "alias": "",
+        "text": "A read gets a flag of 5. What are the characteristics?",
+        "image": null,
+        "imageAltText": null,
+        "choices": [
+            {
+                "id": "7746979",
+                "alias": null,
+                "text": "Read is paired an properly aligned",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            },
+            {
+                "id": "7746980",
+                "alias": null,
+                "text": "Properly aligned and but unmapped",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            },
+            {
+                "id": "7746981",
+                "alias": null,
+                "text": "Read is paired and unmapped",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            }
+        ],
+        "minNumberSelections": 1,
+        "maxNumberSelections": 1,
+        "resultFormat": "%",
+        "distributableWeight": null,
+        "weightingSetting": null,
+        "weightingFactor": null,
+        "correctAnswerExplanation": null,
+        "resultSorting": null
+    }
+]
