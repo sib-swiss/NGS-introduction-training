@@ -91,47 +91,43 @@ gatk MarkDuplicates \
 
 In this project, you will be working with data from:
 
-Clark, M. B. et al (2020). *Long-read sequencing reveals the complex splicing profile of the psychiatric risk gene CACNA1C in human brain*. Molecular Psychiatry, 25(1), 37–47. [https://doi.org/10.1038/s41380-019-0583-1](https://doi.org/10.1038/s41380-019-0583-1).
+> Padilla, Juan-Carlos A., Seda Barutcu, Ludovic Malet, Gabrielle Deschamps-Francoeur, Virginie Calderon, Eunjeong Kwon, and Eric Lécuyer. “Profiling the Polyadenylated Transcriptome of Extracellular Vesicles with Long-Read Nanopore Sequencing.” BMC Genomics 24, no. 1 (September 22, 2023): 564. https://doi.org/10.1186/s12864-023-09552-6.
 
-Here you can find the [BioProject page](https://www.ncbi.nlm.nih.gov/bioproject/PRJEB34660).
-
-It is Oxford Nanopore Technology sequencing data of amplicons of the gene CACNA1C. It is primarily used to discover new splice variants. In this project, we will align a few of the samples to the reference genome, and assess the quality of reads and the alignment.
+The authors used RNA sequencing with Oxford Nanopore Technology of both extracellular vesicles and whole cells from cell culture. For this project, we will work with two samples of this study, `EV_2` (extracellular vesicle) and `Cell_2` (whole cell). Download and unpack the data files.
 
 Download the human reference genome like this:
 
 ```sh
-wget ftp://ftp.ensembl.org/pub/release-101/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
+wget https://ngs-introduction-training.s3.eu-central-1.amazonaws.com/project2.tar.gz
+tar -xvf project2.tar.gz
+rm project2.tar.gz
 ```
+
+You can find the fastq files in the `reads` folder and the reference genome and its annotation in the `reference` folder. To reduce computational times we work with a subset of the data on a subset of the genome (chromosome 5 and X).
 
 ### Tasks
 
 !!! warning "Important!"
     **Stick to the principles for reproducible analysis** described [here](day1/reproducibility.md)
 
-* Check out the BioProject, and download two samples that interest you.
 * Perform QC with `fastqc`
 * Perform QC with `NanoPlot`
 * Align with `minimap2` with default parameters
-* Figure how you should set parameters `-x` and `-G`
+* Figure how you should set parameter `-x`
 * Evaluate the alignment quality (e.g. alignment rates, mapping quality)
-* Compare different samples in read quality, alignment rates, depth, etc.
+* Compare the two different samples in read quality, alignment rates, depth, etc.
+* Check out the alignments in IGV. Check out e.g. `ELOVL5`.
 
 ### Questions
 
 * Have a look at the quality report. What are the average read lengths? Is that expected?
 * What is the average read quality? What kind of accuracy would you expect?
 * Note any differences between `fastqc` and `NanoPlot`? How is that compared to the publication?
-* Check out the options `-x` and `-G` of `minimap2`. Are the defaults appropriate?
+* Check out the option `-x` of `minimap2`. Are the defaults appropriate?
 * You might consider using `-x map-ont` or `-x splice`. Do you see differences in the alignment in e.g. IGV?
 * How are spliced alignments stored in the SAM file with the different settings of `-x`?
-* How deep is the gene sequenced?
+* How deep is the gene `ELOVL5` sequenced in both samples?
 * Do you already see evidence for splice variants in the alignments?
-
-!!! hint "Downloading from SRA"
-    ```sh
-    prefetch [SRR number]
-    fastq-dump --gzip [SRR number]
-    ```
 
 !!! hint "Accuracy from quality scores"
     Find the equation to calculate error probability from quality score on [Wikipedia](https://en.wikipedia.org/wiki/Phred_quality_score).
@@ -146,18 +142,11 @@ wget ftp://ftp.ensembl.org/pub/release-101/fasta/homo_sapiens/dna/Homo_sapiens.G
     minimap2 \
     -a \
     -x [PARAMETER] \
-    -G [PARAMETER] \
     [REFERENCE].fa \
     [FASTQFILE].fastq.gz \
     | samtools sort \
     | samtools view -bh > [OUTPUT].bam
     ```
-
-!!! hint "Intron sizes"
-    Check out the the intron sizes of CACNA1C in e.g. IGV or UCSC genome browser. How does that relate to the parameter `-G`?
-
-!!! hint "More resources"
-    Need e.g. a gtf file? Here's the [ensembl page](https://www.ensembl.org/Homo_sapiens/Info/Index)
 
 ## :fontawesome-solid-disease: Project 3: Short-read RNA-seq of mice.
 
