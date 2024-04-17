@@ -11,6 +11,10 @@
 
 ## Material
 
+Presentation on the UCSC genome browser (after the exercises):
+
+[:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/08_UCSC_genome_browser.pdf){: .md-button }
+
 The exercises below are partly based on [this tutorial](https://github.com/griffithlab/rnaseq_tutorial/wiki/IGV-Tutorial) from the [Griffith lab](https://griffithlab.org/).
 
 ## Exercises
