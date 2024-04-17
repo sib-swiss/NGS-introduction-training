@@ -16,6 +16,7 @@ After this course, you will be able to:
 ## Teachers
 
 - Geert van Geest [:custom-orcid:](https://orcid.org/0000-0002-1561-078X)
+- Frédéric Burdet [:custom-orcid:](https://orcid.org/0000-0002-2923-827X)
 
 ## Authors
 
