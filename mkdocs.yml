@@ -58,3 +58,7 @@ extra_css:
 extra:
   version:
     provider: mike
+  analytics:
+    provider: matomo
+    base_url: https://matomo.sib.swiss/
+    site_id: 220
