@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>quality_control.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h2 id="learning-outcomes">Learning outcomes</h2>
+<p><strong>After having completed this chapter you will be able to:</strong></p>
+<ul>
+<li>Find information about a sequence run on the Sequence Read Archive</li>
+<li>Run <code>fastqc</code> on sequence reads and interpret the results</li>
+<li>Trim adapters and low quality bases using <code>fastp</code></li>
+</ul>
+<h2 id="material">Material</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/iCOF6yaQFPE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<p><a href="../assets/pdf/04_quality_control.pdf">:fontawesome-solid-file-pdf: Download the presentation</a>{: .md-button }</p>
+<ul>
+<li><code>fastqc</code> command line <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/INSTALL.txt">documentation</a></li>
+<li><code>cutadapt</code> <a href="https://cutadapt.readthedocs.io/en/stable/">manual</a></li>
+<li>Unix command line <a href="https://www.ncbi.nlm.nih.gov/books/NBK179288/">E-utilities documentation</a></li>
+</ul>
+<h2 id="exercises">Exercises</h2>
+<h3 id="download-and-evaluate-an-e-coli-dataset">Download and evaluate an E. coli dataset</h3>
+<p>Check out the dataset at <a href="https://www.ncbi.nlm.nih.gov/sra/?term=SRR519926">SRA</a>.</p>
+<p><strong>Exercise:</strong> Browse around the SRA entry and answer these questions:</p>
+<p><strong>A.</strong> Is the dataset paired-end or single end?</p>
+<p><strong>B.</strong> Which instrument was used for sequencing?</p>
+<p><strong>C.</strong> What is the read length?</p>
+<p><strong>D.</strong> How many reads do we have?</p>
+<p>??? done &quot;Answers&quot;
+A. paired-end</p>
+<pre><code>B. Illumina MiSeq
+
+C. 2 x 251 bp
+
+D. 400596
+</code></pre>
+<p>Now we will use some bioinformatics tools to do download reads and perform quality control. The tools are pre-installed in a conda environment called <code>ngs-tools</code>. Every time you open a new terminal, you will have to load the environment:</p>
+<pre class="hljs"><code><div>conda activate ngs-tools
+</div></code></pre>
+<p>Make a directory <code>reads</code> in <code>~/project</code> and download the reads from the SRA database using <code>prefetch</code> and <code>fastq-dump</code> from <a href="https://ncbi.github.io/sra-tools/">SRA-Tools</a> into the <code>reads</code> directory. Use the code snippet below to create a scripts called <code>01_download_reads.sh</code>. Store it in <code>~/project/scripts/</code>, and run it.</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#!/usr/bin/env bash
+</span>
+<span class="hljs-built_in">cd</span> ~/project
+mkdir reads
+<span class="hljs-built_in">cd</span> reads
+prefetch SRR519926
+fastq-dump --split-files SRR519926
+</div></code></pre>
+<p><strong>Exercise:</strong> Check whether the download was successful by counting the number of reads in the fastq files and compare it to the SRA entry.</p>
+<p>!!! tip &quot;Tip&quot;
+A read in a fastq file consists of four lines (more on that at <a href="../day2/file_types.md">file types</a>). Use Google to figure out how to count the number of reads in a fastq file.</p>
+<p>??? done &quot;Answer&quot;
+e.g. from <a href="https://www.biostars.org/p/139006/">this</a> thread on Biostars:</p>
+<pre><code>```sh
+## forward read
+echo $(cat SRR519926_1.fastq | wc -l)/4 | bc
+
+## reverse read
+echo $(cat SRR519926_2.fastq | wc -l)/4 | bc
+```
+</code></pre>
+<h3 id="run-fastqc">Run fastqc</h3>
+<p><strong>Exercise:</strong> Create a script to run <code>fastqc</code> and call it <code>02_run_fastqc.sh</code>. After that, run it.</p>
+<p>!!! tip &quot;Tip&quot;
+<code>fastqc</code> accepts multiple files as input, so you can use a <a href="https://en.wikipedia.org/wiki/Glob_(programming)">wildcard</a> to run <code>fastqc</code> on all the files in one line of code. Use it like this: <code>*.fastq</code>.</p>
+<p>??? done &quot;Answer&quot;
+Your script <code>~/project/scripts/02_run_fastqc.sh</code> should look like:</p>
+<pre><code>```sh title=&quot;02_run_fastqc.sh&quot;
+#!/usr/bin/env bash
+cd ~/project/reads
+
+fastqc *.fastq
+```
+</code></pre>
+<p><strong>Exercise:</strong> Download the html files to your local computer, and view the results. How is the quality? Where are the problems?</p>
+<p>!!! info &quot;Downloading files&quot;
+You can download files by right-click the file and after that select <strong>Download</strong>:</p>
+<pre><code>&lt;figure&gt;
+  &lt;img src=&quot;../../assets/images/download_file.gif&quot; width=&quot;500&quot;/&gt;
+&lt;/figure&gt;
+</code></pre>
+<p>??? done &quot;Answer&quot;
+There seems to be:</p>
+<pre><code>* Low quality towards the 3' end (per base sequence quality)
+* Full sequence reads with low quality (per sequence quality scores)
+* Adapters in the sequences (adapter content)
+
+We can probably fix most of these issues by trimming.
+</code></pre>
+<h3 id="trim-the-reads">Trim the reads</h3>
+<p>We will use <a href="https://github.com/OpenGene/fastp">fastp</a> for trimming adapters and low quality bases from our reads. The most used adapters for Illumina are TruSeq adapters, and <code>fastp</code> will use those by default. A reference for the adapter sequences can be found <a href="https://support.illumina.com/bulletins/2016/12/what-sequences-do-i-use-for-adapter-trimming.html">here</a>.</p>
+<p><strong>Exercise:</strong> Check out the <a href="https://github.com/OpenGene/fastp">documentation of fastp</a>, and the option defaults by running <code>fastp --help</code>.</p>
+<ul>
+<li>What is the default for the minimum base quality for a qualified base? ( option <code>--qualified_quality_phred</code>)</li>
+<li>What is the default for the maximum percentage of unqualified bases in a read? (option <code>--unqualified_percent_limit</code>)</li>
+<li>What is the default for the minimum required read length? (option <code>--length_required</code>)</li>
+<li>What happens if one read in the pair does not meet the required length after trimming? (it can be specified with the options <code>--unpaired1</code> and <code>--unpaired2</code>)</li>
+</ul>
+<p>??? done &quot;Answer&quot;</p>
+<pre><code>- The minimum base quality is 15: `Default 15 means phred quality &gt;=Q15 is qualified. (int [=15])`
+- The minimum required length is also 15: `reads shorter than length_required will be discarded, default is 15. (int [=15])`
+- If one of the reads does not meet the required length, the pair is discarded if `--unpaired1` and/or `--unpaired2` are not specified: `for PE input, if read1 passed QC but read2 not, it will be written to unpaired1. Default is to discard it. (string [=])`. 
+</code></pre>
+<p><strong>Exercise:</strong> Complete the script below called <code>03_trim_reads.sh</code> (replace everything in between brackets <code>[]</code>) to run <code>fastp</code> to trim the data.  The quality of our dataset is not great, so we will overwrite the defaults.  Use a a minimum qualified base quality of 10, set the maximum percentage of unqalified bases to 80% and a minimum read length of 25. Note that a new directory called <code>~/project/results/trimmed/</code> is created to write the trimmed reads.</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#!/usr/bin/env bash
+</span>
+TRIMMED_DIR=~/project/results/trimmed
+READS_DIR=~/project/reads
+
+mkdir -p <span class="hljs-variable">$TRIMMED_DIR</span>
+
+<span class="hljs-built_in">cd</span> <span class="hljs-variable">$TRIMMED_DIR</span>
+
+fastp \
+-i <span class="hljs-variable">$READS_DIR</span>/SRR519926_1.fastq \
+-I <span class="hljs-variable">$READS_DIR</span>/SRR519926_2.fastq \
+-o <span class="hljs-variable">$TRIMMED_DIR</span>/trimmed_SRR519926_1.fastq \
+-O <span class="hljs-variable">$TRIMMED_DIR</span>/trimmed_SRR519926_2.fastq \
+[QUALIFIED BASE THRESHOLD] \
+[MINIMUM LENGTH THRESHOLD] \
+[UNQUALIFIED PERCENTAGE LIMIT] \
+--cut_front \
+--cut_tail \
+--detect_adapter_for_pe
+</div></code></pre>
+<p>!!! note &quot;Additional options&quot;
+Note that we have set the options <code>--cut_front</code> and <code>--cut_tail</code> that will ensure low quality bases are trimmed in a sliding window from both the 5' and 3' ends. Also <code>--detect_adapter_for_pe</code> is set, which ensures that adapters are detected automatically for both R1 and R2.</p>
+<p>??? done &quot;Answer&quot;
+Your script (<code>~/project/scripts/03_trim_reads.sh</code>) should look like this:</p>
+<pre><code>```sh title=&quot;03_trim_reads.sh&quot;
+#!/usr/bin/env bash
+
+TRIMMED_DIR=~/project/results/trimmed
+READS_DIR=~/project/reads
+
+mkdir -p $TRIMMED_DIR
+
+cd $TRIMMED_DIR
+
+fastp \
+-i $READS_DIR/SRR519926_1.fastq \
+-I $READS_DIR/SRR519926_2.fastq \
+-o $TRIMMED_DIR/trimmed_SRR519926_1.fastq \
+-O $TRIMMED_DIR/trimmed_SRR519926_2.fastq \
+--qualified_quality_phred 10 \
+--length_required 25 \
+--unqualified_percent_limit 80 \
+--cut_front \
+--cut_tail \
+--detect_adapter_for_pe
+```
+</code></pre>
+<p>!!! note &quot;The use of <code>\</code>&quot;
+In the script above you see that we're using <code>\</code> at the end of many lines. We use it to tell bash to ignore the newlines. If we would not do it, the <code>fastp</code> command would become a very long line, and the script would become very difficult to read. It is in general good practice to put every option of a long command on a newline in your script and use <code>\</code> to ignore the newlines when executing.</p>
+<p><strong>Exercise:</strong> Check out the report in <code>fastp.html</code>.</p>
+<ul>
+<li>Has the quality improved?</li>
+<li>How many reads do we have left?</li>
+<li><em>Bonus</em>: Although there were adapters in R2 according to <code>fastqc</code>,  <code>fastp</code> has trouble finding adapters in R2. Also, after running <code>fastp</code> there doesn't seem to be much adapter left (you can double check by running <code>fastqc</code> on <code>trimmed_SRR519926_2.fastq</code>). How could that be?</li>
+</ul>
+<p>??? done &quot;Answers&quot;
+- Yes, low quality 3' end, per sequence quality and adapter sequences have improved. Also the percentages &gt;20 and &gt;30 are higher.
+- 624724 reads, so 312362 pairs (78.0%)
+- The 3' end of R2 has very low quality on average, this means that trimming for low quality removes almost all bases from the original 3' end, including any adapter.</p>
+
+</body>
+</html>
