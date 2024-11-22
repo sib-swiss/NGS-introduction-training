@@ -56,7 +56,7 @@ Download the alignment (`SRR519926.sorted.region.bam`) together with it's index 
     The default setting is to color reads by insert size. However, if you've used IGV before, that might have changed. To color according to insert size: right click on the reads, and select: **Color alignments by > insert size**
 
 ??? done "Answer"
-    According to [IGV](https://software.broadinstitute.org/software/igv/interpreting_insert_size), reads are coloured red if the insert size is larger than expected. As you remember, this dataset has a very large variation in insert size.
+    According to [IGV](https://igv.org/doc/desktop/#UserGuide/tracks/alignments/paired_end_alignments/#insert-size), reads are coloured red if the insert size is larger than expected. As you remember, this dataset has a very large variation in insert size.
 
 Modify the popup text behaviour by clicking on the yellow balloon to **Show Details on Click**:
 
