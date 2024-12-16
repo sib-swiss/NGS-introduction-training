@@ -1,5 +1,7 @@
 {
-    "title": "Course material NGS - Quality control, Alignment, Visualisation",
+  "upload_type": "lesson",  
+  "title": "Course material NGS - Quality control, Alignment, Visualisation",
+    "license": "cc-by-4.0",
     "keywords": [
       "NGS",
       "alignment",
@@ -12,10 +14,6 @@
         "name": "Geert van Geest",
         "affiliation": "SIB Swiss Institute of Bioinformatics",
         "orcid": "0000-0002-1561-078X"
-      },
-      {
-        "name": "Walid Gharib",
-        "affiliation": "SIB Swiss Institute of Bioinformatics"
       }
     ]
   }
